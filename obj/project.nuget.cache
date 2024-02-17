@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4R+JRNIyxMP5aXC62FqMd9U22aj9H5H31KDOJ02WUzXdwIFoDadJt6Jzf6p2BbxIInl+qM77h6Si9L5GsN4DVg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jonas\\OneDrive - Danmarks Tekniske Universitet\\DTU\\Bachelorprojekt\\main\\main.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jonas\\.nuget\\packages\\fsharp.core\\7.0.400\\fsharp.core.7.0.400.nupkg.sha512"
+  ],
+  "logs": []
+}

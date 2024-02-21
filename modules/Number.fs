@@ -14,18 +14,31 @@ let sub a b =
     match a, b with
     | Int a, Int b -> Int (a - b)
     | Rational a, Rational b -> Rational (a - b)
-    | _, _ -> failwith "failled in Number sub"
+    | _, _ -> failwith "failed in Number sub"
 
 let mul a b =
     match a, b with
     | Int a, Int b -> Int (a*b)
     | Rational a, Rational b -> Rational (a*b)
-    | _, _ -> failwith "failled in Number mul"
+    | _, _ -> failwith "failed in Number mul"
+
+let neg a =
+    match a with
+    | Int a -> Int -a
+    | Rational a -> Rational -a
+
+let div a b =
+    match a, b with
+    | Int a, Int b -> Int (a/b)
+    | Rational a, Rational b -> Rational (a/b)
+    | _, _ -> failwith "failed in Number div"
 
 type Number with
     static member (+)  (a, b)       = add a b
     static member (-)  (a, b)       = sub a b
-    static member (*)  (a, b)       = mul a b 
+    static member (*)  (a, b)       = mul a b
+    static member (~-) (a)          = neg a 
+    static member (/)  (a, b)       = div a b 
 
 
 let isZero n =

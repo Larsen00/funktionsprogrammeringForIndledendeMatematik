@@ -5,6 +5,8 @@ type Number =
     static member ( + )  : Number * Number -> Number
     static member ( - )  : Number * Number -> Number 
     static member ( * )  : Number * Number -> Number 
+    static member ( ~- ) : Number -> Number
+    static member ( / )  : Number * Number -> Number
     
 val isZero : Number -> bool
 val getZero : Number -> Number

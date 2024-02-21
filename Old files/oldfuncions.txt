@@ -1,0 +1,27 @@
+// #ToDo: Mangler regler til håndtering af parrenteser
+// Overvej om det nemmer at lave en bool som er sand hvis man skal komme parenses om Add og Sub
+let rec ExpressionToInfix e =
+    match e with
+    | N a -> toString a
+    | X a -> string a
+    | Neg a -> "-" + ExpressionToInfix a
+    | Add(a, b) -> (ExpressionToInfix a) + "+" + (ExpressionToInfix b)
+    | Sub(a, b) -> (ExpressionToInfix a) + "-" + (ExpressionToInfix b)
+
+    // Multiplication cases
+    | Mul(Mul(a, b), Mul(c, d)) ->(ExpressionToInfix (Mul(a, b))) + "*" + (ExpressionToInfix (Mul(c, d)))
+    | Mul(Mul(a, b), N c) ->(ExpressionToInfix (Mul(a, b))) + "*" + (ExpressionToInfix (N c))
+    | Mul(Mul(a, b), X c) ->(ExpressionToInfix (Mul(a, b))) + "*" + (ExpressionToInfix (X c))
+    | Mul(Mul(a, b), c) ->(ExpressionToInfix (Mul(a, b))) + "*" + "(" + (ExpressionToInfix c) + ")"
+    | Mul(N a, Mul(c, d)) ->(ExpressionToInfix (N a)) + "*" + (ExpressionToInfix (Mul(c, d)))
+    | Mul(N a, N b) ->(ExpressionToInfix (N a)) + "*" + (ExpressionToInfix (N b))
+    | Mul(N a, X b) ->(ExpressionToInfix (N a)) + "*" + (ExpressionToInfix (X b))
+    | Mul(X a, Mul(c, d)) -> (ExpressionToInfix (X a)) + "*" + (ExpressionToInfix (Mul(c, d)))
+    | Mul(X a, X b) ->(ExpressionToInfix (X a)) + "*" + (ExpressionToInfix (X b))
+    | Mul(X a, N b) ->(ExpressionToInfix (X a)) + "*" + (ExpressionToInfix (N b))
+    | Mul(a, Mul(b, c)) -> "(" + (ExpressionToInfix a) + ")"+ "*" + (ExpressionToInfix (Mul(b, c)))
+    | Mul(a, b) -> "(" + (ExpressionToInfix a) + ")" + "*" + "(" + (ExpressionToInfix b) + ")"
+    
+
+    // Division cases
+    | Div(a, b) -> "(" + (ExpressionToInfix a) + ")" + "/" + "(" + (ExpressionToInfix b) + ")"

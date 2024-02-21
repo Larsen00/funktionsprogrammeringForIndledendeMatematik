@@ -1,0 +1,69 @@
+dotnet build -c Release
+
+
+# Møde 1
+
+cross/bag proprication
+kædereglen
+med hensyn til machine learning
+induktive regler (slå op)
+
+srepr i sympy
+x = symbol( "x", real = true)
+mat 1 har ikke kendskab til floating, derfor mat 1 ungår man det.
+
+
+symbolsk manipulation på lister
+
+
+generalt skal ikke følge mat 1 men finde områder som er gost represnitivt af f#
+mat1 studere vandskeligheder:
+    symbolsk manipolation
+    brøk regning
+    induktions beviser
+    lignære afbildnininger
+
+
+1. Begynd med symbolske beregninger på lister
+2 kan også tage kig på diffrenation symbolsk
+
+rationelle ligger på bogens hjemme side
+
+# Møde 2
+
+lav E polymooh
+
+lav modul complex bygget på rationel adskilt
+modul bygger på diff ved udtryk 
+tænk på simplifications regler ved diff
+
+Overvej at lave mappet fra string til liste som et hash map, deredter brug den jeg har nu som et legal check
+
+# Møde 3
+Før møde:
+#Todo Number mangler nogle math oprationer 
+Spørgsmål
+*Comparison mellem elementer i mit mondule
+
+IDE: 
+* Til devision er det en ide at lave en funktion som laver en list af alt som ganges sammen eller divs, så skubbe alle N frem, så X, så divs. der efter gang alle Numbers sammen.
+=> den kan burges til reducering af Mul.
+=> Den kan bruges til reducering af DIV
+
+* Lave en fukntion der vudere kompleksiteten af et udtryk
+=> kan bruges til at vudre om noget er simplere eller ej
+
+Til møde:
+
+normal form, studerne de vil gerne vide om man har det reigtige facit.
+lav: can be reduced!
+til næste gang:
+* hvad er del 
+* hvad skal være med / over ordnet fokus punkter
+* hvad ønsker der at opnå med opgaven
+* introducer property based testing
+
+Sider: 30-40 sider + billag
+
+
+OBS: Ligner ikke neg bliver skubbet ud foran div

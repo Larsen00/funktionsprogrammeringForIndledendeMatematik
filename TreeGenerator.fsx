@@ -85,12 +85,15 @@ let tree s =
     |tree::_ -> tree
 
 
-let rec ExpressionToInfix e =
+
+let rec ExpressionToInfix e p =
     match e with
     | N a -> toString a
     | X a -> string a
-    | Neg a -> "-" + ExpressionToInfix a
-    | Add(a, b) -> (ExpressionToInfix a) + "+" + (ExpressionToInfix b)
-    | Sub(a, b) -> (ExpressionToInfix a) + "-" + (ExpressionToInfix b)
-    | Mul(a, b) -> (ExpressionToInfix a) + "*" + (ExpressionToInfix b)
-    | Div(a, b) -> (ExpressionToInfix a) + "/" + (ExpressionToInfix b)
+    | Neg a -> "-" + ExpressionToInfix a true
+    | Add(a, b) when p -> "(" + (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false) + ")"
+    | Add(a, b) -> (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false)
+    | Sub(a, b) when p -> "(" + (ExpressionToInfix a false) + "-" + (ExpressionToInfix b false) + ")"
+    | Sub(a, b) -> (ExpressionToInfix a false) + "-" + (ExpressionToInfix b false)
+    | Mul(a, b) -> (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) 
+    | Div(a, b) -> (ExpressionToInfix a true)  + "/" + (ExpressionToInfix b true)

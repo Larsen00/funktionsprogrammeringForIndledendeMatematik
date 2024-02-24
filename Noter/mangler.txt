@@ -1,0 +1,6 @@
+1. 
+Add (Sub (Mul (N (Int 4), X 'x'), N (Int 10)), N (Rational (R (3, 2))))
+"4*x-10+3/2"
+
+Bør simpfliceres bedre
+

@@ -1,0 +1,6 @@
+* Valg af rationel skives med småt
+    => Dette er gjort da int og float også skives med småt, dermed kunne skelne modulet rationel fra contructoren Rationel under Number
+
+* Til devision er det en ide at lave en funktion som laver en list af alt som ganges sammen eller divs, så skubbe alle N frem, så X, så divs. der efter gang alle Numbers sammen.
+    => den kan burges til reducering af Mul.
+    => Den kan bruges til reducering af DIV

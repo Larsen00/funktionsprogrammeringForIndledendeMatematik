@@ -1,95 +1,81 @@
 #load "Differentiation.fsx"
+#load "AssociationForMulDiv.fs"
 open Expression
 open Number
+open rational
 
 // rank when sorting a assoative expression
 let expressionSortRank e1 =
     match e1 with
-    | Neg _ -> 1
-    | N _ -> 2
-    | X _ -> 3
+    | N _ -> 1
+    | Neg (N _) -> 2
+    | X _ -> failwith "Variables should not be in the list" // all veriables are multiplied with 1
     | Add _ -> 4
     | Sub _ -> 5
     | Mul _ -> 6
     | Div _ -> 7
- 
-// flattens the tree to a assoative list
-let rec flatTree e =
-    match e with 
-    | N _ | X _ | Add _ | Sub _ -> [e]
-    | Neg a -> Neg (N one) :: flatTree a
-    | Mul (a, b) -> flatTree a @ flatTree b
-    | Div (a, b) -> Div (N one, b) :: flatTree a 
+    | Neg _ -> 8
 
-// sorts the assoative list
+let rec flatTree e =
+    match e with
+    | Add (a, b) -> flatTree a @ flatTree b
+    | Sub (a, b) -> flatTree a @ flatTree (Neg b)
+    | Neg (Add(a, b)) -> flatTree (Neg a) @ flatTree (Neg b)
+    | Neg (Sub(a, b)) -> flatTree (Neg a) @ flatTree b
+    | X a -> [Mul(N one, X a)]
+    | N _ | Div _ | Mul _ | Neg _-> [e]
+
 let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
 
-
-// determines the sign of a assoative list
-let rec signList l s =
-    match l with
-    | [] -> s
-    | Neg _::tail -> signList tail (-1*s)
-    | _::tail -> signList tail s
-
-// multiplys all Div elements in a assoative list
-let rec multiplyDivaInAssList l =
-    // division will always be in the end of a sorted list, and numarator will be 1
+// Reduces a sorted assoative list for addition
+let rec reduceNumbers l =
+    printfn "rn %A" l
     match l with
     | [] -> []
-    | Div (_, b) :: Div (_, c) :: tail -> multiplyDivaInAssList (Div(N one, Mul(b, c)) :: tail)
-    | x::tail -> x :: multiplyDivaInAssList tail
-
-// reduces a assoative list
-let rec reduceAss l =
-    let sorted = divCancelling (sortAss l)
-    if signList sorted 1 > 0 then rebuildTree sorted else Neg (rebuildTree sorted)
-
-// initiates the division cancelling
-and divCancelling l = 
-    match List.rev l with
-    | [] -> l
-    | Div(_, b)::tail -> 
-                        let (numerator, denominator) = cancelEquality  (List.rev tail) (sortAss (flatTree b))
-                        sortAss (flatTree (rebuildTree numerator / rebuildTree denominator))
+    | N a :: N b :: tail -> reduceNumbers (N a + N b :: tail)
+    | N a :: Neg (N b) :: tail  -> reduceNumbers (N a - Neg (N b) :: tail)
+    | Neg (N a) :: Neg (N b) :: tail -> reduceNumbers (Neg (N a + N b) :: tail)
+    | Neg (N a) :: tail -> Neg (N a) :: tail
+    | N a :: tail -> N a :: tail
     | _ -> l
 
-// cancels out equal elements in the numerator and denominator
-and cancelEquality nu de =
-    match nu with
-    | [] -> ([], [])
-    | n::ntail -> 
-                match checkElementInNumerator n de with
-                | false, _ ->  
-                            let (numerator, denominator) = cancelEquality ntail de
-                            (n::numerator, denominator)
-                | true, de_new -> cancelEquality ntail de_new
 
-// determines if a element is in the numerator
-and checkElementInNumerator e de =
-    match de with
-    | [] -> false , []
-    | d::tail when d = e -> true, tail
-    | _::tail -> checkElementInNumerator e tail
+let rec findAllInstancesOfVariableInAss x l =
+    match x, l with
+    | _, [] -> ([] ,x)
+    | Mul(N n1, X x1), Mul(N n2, X x2) :: tail 
+    | Mul(N n1, X x1), Mul(X x2, N n2) :: tail
+    | Mul(X x1, N n1), Mul(N n2, X x2) :: tail
+    | Mul(X x1, N n1), Mul(X x2, N n2) :: tail
+        when x1 = x2    -> findAllInstancesOfVariableInAss (Mul(N (n1 + n2), X x1)) tail
+    | _, head :: tail   -> 
+                        let (l_new, x_new) = findAllInstancesOfVariableInAss x tail
+                        (head :: l_new, x_new)
+    
 
-// rebuilds a assoative list to a tree
-and rebuildTree l =
+
+
+let rec reduceVariables l = 
+    printfn "%A" l
     match l with
-    | [] -> N one
-    | Neg _::tail -> rebuildTree tail
-    | N a::N b::tail -> rebuildTree (N (a * b) :: tail)
-    | N a :: Add(b, c) :: tail -> rebuildTree (Add(reduceAss (flatTree (Mul(N a, b))), reduceAss (flatTree (Mul(N a, c)))) :: tail)
-    | N a :: Sub(b, c) :: tail -> rebuildTree (Sub(reduceAss (flatTree (Mul(N a, b))), reduceAss (flatTree (Mul(N a, c)))) :: tail)
-    | a::tail -> a * rebuildTree tail
+    | [] -> []
+    | Mul(N a, X b) :: tail
+    | Mul(X b, N a) :: tail 
+        -> 
+        let (l_new, x_new) = findAllInstancesOfVariableInAss (Mul(N a, X b)) tail
+        x_new :: reduceVariables l_new
+    | head :: tail -> head :: reduceVariables tail
+    
+let rec rebuldTree l =
+    match l with
+    | [] -> N zero
+    | Neg x::tail -> (rebuldTree tail) - x
+    | x::tail -> (rebuldTree tail) + x
 
-
-// applies the assoation rules to a tree    
 let applyAssociation e =
-    match e with
-    | Mul _ | Div _ -> reduceAss (flatTree e)
+    match e with 
+    | Sub _ | Add _ -> rebuldTree (reduceVariables (reduceNumbers(sortAss (flatTree e))))
     | _ -> e
-
-
 
 
 ////////////////////////////////////////
@@ -97,65 +83,69 @@ let applyAssociation e =
 ////////////////////////////////////////
 
 // simplifies a negation expression
-let neg e =
+let neg e:Expr<Number> =
     match e with
     | Neg a -> a
     | _ -> Neg e
 
 // simplifies a subtraction expression
-let rec sub e1 e2 =
+let rec sub e1 e2:Expr<Number>=
+    printfn "%A - %A" e1 e2
     match e1, e2 with
     | _, _ when e1 = e2 -> N zero
-    | N a, _ when isZero a -> neg e2
-    | _, N a when isZero a -> e1
+    | N a, _ when Number.isZero a -> neg e2
+    | _, N a when Number.isZero a -> e1
     | N a, N b -> N (a - b)
-    | Neg a, Neg b -> neg (sub a b) 
-    | a, Neg b -> neg (a + b) 
-    | _, _ -> Sub(e1, e2)
+    | Neg a, Neg b -> neg (sub a b)
+    | a, Neg b -> Expression.add a b 
+    | Mul(a, X b), Mul(c, X d) when b = d -> Mul(sub a c, X b)
+    | _, _ -> applyAssociation (Sub(e1, e2))
 
 // simplifies a addition expression
-let rec add e1 e2 = 
+let rec add e1 e2:Expr<Number> = 
     match e1, e2 with
-    | N a, _ | _, N a when isZero a -> e2
+    | N a, _ | _, N a when Number.isZero a -> e2
     | N a, N b -> N (a + b)
     | a, b when a = b -> Mul (N two, b)
     | Neg a, Neg b -> neg (add a b) 
-    | a, Neg b -> sub a b 
-    | _, _ -> Add (e1, e2)
+    | a, Neg b -> sub a b
+    | Mul(a, X b), Mul(c, X d) when b = d -> Mul(add a c, X b)
+    | _, _ -> applyAssociation (Add(e1, e2))
 
 // simplifies a multiplication expression
-let rec mul e1 e2 =
+let rec mul e1 e2:Expr<Number> =
     //printfn "\n 81 - %A" (ExpressionToInfix (Mul (e1, e2)) false)
     match e1 ,e2 with
     | N _, N _ -> e1 * e2
-    | N a, _ when isOne a -> e2
-    | _, N a when isOne a -> e1
-    | N a, _ when isZero a  -> N zero
-    | _, N a when isZero a  -> N zero
+    | N a, _ when Number.isOne a -> e2
+    | _, N a when Number.isOne a -> e1
+    | N a, _ when Number.isZero a  -> N zero
+    | _, N a when Number.isZero a  -> N zero
     | Neg a, Neg b                   -> mul a b
     | Neg a, b | a, Neg b            -> neg (mul a b)
     | Div (a, b), Div (c, d) -> div (mul a c) (mul b d)
-    | Div (a, b), c | c , Div(a, b) -> div (applyAssociation (Mul(a, c))) b
-    | _, _ -> applyAssociation (Mul(e1, e2))
+    | Div (a, b), c | c , Div(a, b) -> div (AssociationForMulDiv.applyAssociation (Mul(a, c))) b
+    | _, _ -> AssociationForMulDiv.applyAssociation (Mul(e1, e2))
 
 
 // simplifies a division expression
-and div e1 e2 =
+and div e1 e2:Expr<Number> =
     match e1, e2 with
     | _, _ when e1 = e2 -> N one
-    | _, N a when isOne a -> e1
-    |N a, _ when isZero a -> N zero
-    | _, N a when isZero a -> failwith "Zero division"
+    | _, N a when Number.isOne a -> e1
+    |N a, _ when Number.isZero a -> N zero
+    | _, N a when Number.isZero a -> failwith "Zero division"
     |N a, N b -> N(a / b)                    
-    //|Mul(a, b), c -> mul (div a c) (div b c)
-    | Mul _, _ | _, Mul _ -> applyAssociation (Div(e1, e2))
-    | _,_ -> applyAssociation (Div(e1, e2))
+    | Mul _, _ | _, Mul _ -> AssociationForMulDiv.applyAssociation (Div(e1, e2))
+    | _,_ -> AssociationForMulDiv.applyAssociation (Div(e1, e2))
 
 
 
 // Simplifies an Expression 
 let rec simplifyExpr e =
+    // printfn "%A" e
     match e with
+    // | N (Rational(R(a, b))) -> Div(N (Int a), N (Int b))
     | Neg a     -> neg (simplifyExpr a)
     | Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
     | Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 

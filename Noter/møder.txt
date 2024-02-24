@@ -46,12 +46,8 @@ Spørgsmål
 *Comparison mellem elementer i mit mondule
 
 IDE: 
-* Til devision er det en ide at lave en funktion som laver en list af alt som ganges sammen eller divs, så skubbe alle N frem, så X, så divs. der efter gang alle Numbers sammen.
-=> den kan burges til reducering af Mul.
-=> Den kan bruges til reducering af DIV
 
-* Lave en fukntion der vudere kompleksiteten af et udtryk
-=> kan bruges til at vudre om noget er simplere eller ej
+
 
 Til møde:
 

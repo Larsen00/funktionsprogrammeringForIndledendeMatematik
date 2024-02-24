@@ -1,11 +1,12 @@
 module Number
-open Rational
-type Number = | Int of int | Rational of Rational
+open rational
+type Number = | Int of int | Rational of rational
 
 // #TODO med tiden vil man kunne tilføje funktionalitet sådan at man kan mixe int rationalle tal
 
 // mathemathical operations on two numbers
 let operation a b f g =
+  printfn "operation - %A %A %A" a f b
   match a, b with
   | Int x, Int y -> Int (f x y)
   | Rational x, Rational y -> Rational (g x y)
@@ -13,6 +14,7 @@ let operation a b f g =
 
 // negates a number
 let neg a =
+    printfn "neg - %A" a
     match a with
     | Int a -> Int -a
     | Rational a -> Rational -a
@@ -23,12 +25,22 @@ let tryMakeInt r =
     | Rational a when isInt a -> Int (makeRatInt a)
     | _ -> r
 
+let compare a b =
+    match a, b with
+    | Int x, Int y -> x > y
+    | Rational x, Rational y -> greaterThan(x, y)
+    | Int x, Rational y | Rational y, Int x -> greaterThan(make(x, 1), y)
+
 type Number with
-    static member (+)  (a, b)       = operation a b (+) (+)
-    static member (-)  (a, b)       = operation a b (-) (-)
-    static member (*)  (a, b)       = operation a b ( * ) ( * )
-    static member (~-) (a)          = neg a 
-    static member (/)  (a, b)       = operation a b (/) (/)
+    static member (+)  (a, b)       = tryMakeInt (operation a b (+) (+))
+    static member (-)  (a, b)       = tryMakeInt (operation a b (-) (-))
+    static member (*)  (a, b)       = tryMakeInt (operation a b ( * ) ( * ))
+    static member (~-) (a)          = tryMakeInt (neg a) 
+    static member (/)  (a, b)       = tryMakeInt (operation a b (/) (/))
+
+
+// compares two numbers a >b
+let greaterThan a b = compare a b
 
 // checks if a number is zero
 let isZero n =

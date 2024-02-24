@@ -1,5 +1,5 @@
-module Rational
-type Rational = R of int * int
+module rational
+type rational = R of int * int
 
 // constructor of a rational number
 let make(x, y) =
@@ -22,7 +22,8 @@ let rec gcd r =
 // Functional Programming Using F# page 57
 // reduces a rational number to its simplest form
 let canc(R(p, q)) =
-    let sign = if posetive(R(p, q)) then -1 else 1
+    printfn "canc - %A %A" p q
+    let sign = if posetive(R(p, q)) then 1 else -1
     let ap = abs p
     let aq = abs q
     let d = gcd (ap, aq)
@@ -33,7 +34,7 @@ let mkQ = function
     | R(_, 0) -> failwith "Division by zero"
     | r -> canc r
 
-type Rational with
+type rational with
     static member (~-) (R(x,y))             = canc(R(-x, y))
     static member (+)  (R(a,b),R(c,d))      = canc(R(a*d+b*c, b*d))
     static member (+)  (a,R(c,d))           = canc(R(a*d+c, d))
@@ -46,8 +47,13 @@ type Rational with
     static member (/)  (R(x,y), a)          = mkQ(R(x, a*y))
     static member (/)  (R(a,b),R(c,d))      = mkQ(R(a*d, b*c))
 
+
+
 // checks if two rational numbers are equal
 let equal(R(a,b), R(c,d))  = (a*d = c*b)
+
+// checks if a rational number is greater than another
+let greaterThan(R(a,b),R(c,d)) = a*d > c*b
 
 // returns the string representation of a rational number
 let toString(R(a,b)) = sprintf "%d/%d" a b

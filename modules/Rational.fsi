@@ -1,23 +1,26 @@
 
-module Rational
+module rational
 [<Sealed>]
-type Rational =
-    static member ( ~- ) : Rational -> Rational
-    static member ( + )  : Rational * Rational -> Rational
-    static member ( + )  : int * Rational -> Rational
-    static member ( - )  : Rational * Rational -> Rational
-    static member ( - )  : int * Rational -> Rational
-    static member ( * )  : int  * Rational -> Rational
-    static member ( * )  : Rational * int -> Rational
-    static member ( * )  : Rational * Rational -> Rational
-    static member ( / )  : Rational * Rational -> Rational
-    static member ( / )  : int * Rational -> Rational
-    static member ( / )  : Rational * int -> Rational
-val make : int * int -> Rational
-val equal : Rational * Rational -> bool
-val posetive : Rational -> bool
-val toString : Rational -> string
-val isZero : Rational -> bool
-val isOne : Rational -> bool
-val isInt : Rational -> bool
-val makeRatInt : Rational -> int
+type rational =
+    static member ( ~- ) : rational -> rational
+    static member ( + )  : rational * rational -> rational
+    static member ( + )  : int * rational -> rational
+    static member ( - )  : rational * rational -> rational
+    static member ( - )  : int * rational -> rational
+    static member ( * )  : int  * rational -> rational
+    static member ( * )  : rational * int -> rational
+    static member ( * )  : rational * rational -> rational
+    static member ( / )  : rational * rational -> rational
+    static member ( / )  : int * rational -> rational
+    static member ( / )  : rational * int -> rational
+
+
+val make : int * int -> rational
+val equal : rational * rational -> bool
+val posetive : rational -> bool
+val toString : rational -> string
+val isZero : rational -> bool
+val isOne : rational -> bool
+val isInt : rational -> bool
+val makeRatInt : rational -> int
+val greaterThan  : rational * rational -> bool

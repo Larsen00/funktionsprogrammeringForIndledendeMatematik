@@ -7,6 +7,7 @@ type Number =
     static member ( * )  : Number * Number -> Number 
     static member ( ~- ) : Number -> Number
     static member ( / )  : Number * Number -> Number
+
     
 val isZero : Number -> bool
 val getZero : Number -> Number
@@ -15,3 +16,4 @@ val isOne : Number -> bool
 val one : Number 
 val two : Number
 val toString : Number -> string
+val greaterThan : Number -> Number -> bool

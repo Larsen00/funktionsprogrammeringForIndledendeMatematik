@@ -1,2 +1,6 @@
 * implemter PTED fra fagproject til at tjekke om to træer er ens
 * impleter et is simpler case, kan bruges når man ganger int * add -> lige nu ganger den bare ind i den første parentes
+
+
+* Lave en fukntion der vudere kompleksiteten af et udtryk
+    => kan bruges til at vudre om noget er simplere eller ej

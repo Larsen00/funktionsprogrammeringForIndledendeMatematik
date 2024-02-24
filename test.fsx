@@ -3,6 +3,7 @@
 // Modules
 open Expression
 open Number
+open rational
 
 // fsx files
 open Differentiation
@@ -51,6 +52,7 @@ printfn "%A" dx
 *)
 
 
-let ligning = tree "(2*x-5)*2"
-printfn "ligning:\n%A" ligning
-printfn "\n%A" (ExpressionToInfix (simplifyExpr ligning) false)
+let ligning = tree "(3*x-5)*2"
+let rat = N (Rational (R(3, 2)))
+let i = N (Int 5)
+showSimp (Add(ligning, rat))

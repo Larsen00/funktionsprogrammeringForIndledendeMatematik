@@ -1,13 +1,13 @@
 
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-#load "modules/Rational.fs"
+#load "modules/rational.fs"
 #load "modules/Number.fs"
 #load "modules/Expression.fs"
 #load "modules.fsx"
 open Number
 open Expression
 
-type Associative = | L | R
+type Associative = | Left | Right
 type Operator = char * int * Associative
 type Symbol =
     | Operand of char
@@ -24,10 +24,10 @@ and mapToSymbol l allowUnary allowOperator=
     match l with
     | [] -> []
     | x::tail when x = ' ' -> mapToSymbol tail allowUnary allowOperator
-    | x::tail when allowOperator && x = '/' || x = '*' -> Operator (x, 2, L)::mapToSymbol tail false false 
-    | x::tail when allowOperator && (x = '+' || (x = '-' && not allowUnary)) -> Operator (x, 1, L)::mapToSymbol tail false false
-    | x::tail when  (x = '-' && allowUnary) -> Operator ('~', 2, R)::mapToSymbol tail true false
-    | x::tail when x = '(' || x = ')' -> Operator (x, -1, L)::mapToSymbol tail true true
+    | x::tail when allowOperator && x = '/' || x = '*' -> Operator (x, 2, Left)::mapToSymbol tail false false 
+    | x::tail when allowOperator && (x = '+' || (x = '-' && not allowUnary)) -> Operator (x, 1, Left)::mapToSymbol tail false false
+    | x::tail when  (x = '-' && allowUnary) -> Operator ('~', 2, Right)::mapToSymbol tail true false
+    | x::tail when x = '(' || x = ')' -> Operator (x, -1, Left)::mapToSymbol tail true true
     | x::_ when System.Char.IsDigit(x) -> 
         let (k, tail) = foundInt l ""
         Konstant (int k):: mapToSymbol tail false true
@@ -74,7 +74,7 @@ let rec generateExpresion c (stack:OperatorList) postfix =
     | Operator e::tail, s::stack_tail 
         ->  match e, s with
             | (x, precX, lr), (y, precY, _) 
-                when precX < precY || (precX = precY && lr = L)
+                when precX < precY || (precX = precY && lr = Left)
                 -> generateExpresion c stack_tail (popPostfixStack y postfix)
             | _, _ -> generateExpresion tail (e::stack) postfix
 

@@ -13,6 +13,7 @@ type rational =
     static member ( / )  : rational * rational -> rational
     static member ( / )  : int * rational -> rational
     static member ( / )  : rational * int -> rational
+    static member ( / )  : int * int -> rational
 
 
 val make : int * int -> rational

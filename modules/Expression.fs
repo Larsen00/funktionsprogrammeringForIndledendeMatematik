@@ -29,7 +29,7 @@ let rec add a b:Expr<Number>  =
 let rec sub a b:Expr<Number>  =
     printfn "SUB : %A - %A" a b
     match a, b with
-    | N x, N y  when greaterThan y x -> Neg (N (x + y)) // greaterThan y x <=> y > x
+    | N x, N y  when greaterThan y x -> Neg (N (y - x)) // greaterThan y x <=> y > x
     | N x, N y -> N (x - y)
     | N a, b | b, N a when isZero a -> Neg b
     | a, Neg b -> add a b 
@@ -51,7 +51,7 @@ let div e1 e2:Expr<Number> =
     | _, N a when isOne a     -> e1
     | N a, _ when isZero a    -> N zero
     | _, N a when isZero a    -> failwith "Zero division"
-    | N a, N b                -> N(a / b)
+    | N a, N b                -> N (a / b)
     | _, _                    -> Div(e1, e2)  
 
 type Expr<'a> with

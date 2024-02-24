@@ -16,13 +16,16 @@ let expressionSortRank e1 =
     | Div _ -> 7
     | Neg _ -> 8
 
+// Flattens a expression tree with respect to addition and subtraction
 let rec flatTree e =
+    printfn "ft %A" e
     match e with
     | Add (a, b) -> flatTree a @ flatTree b
     | Sub (a, b) -> flatTree a @ flatTree (Neg b)
     | Neg (Add(a, b)) -> flatTree (Neg a) @ flatTree (Neg b)
     | Neg (Sub(a, b)) -> flatTree (Neg a) @ flatTree b
     | X a -> [Mul(N one, X a)]
+    | Div (a, b) -> [a / b]
     | N _ | Div _ | Mul _ | Neg _-> [e]
 
 let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
@@ -33,7 +36,7 @@ let rec reduceNumbers l =
     match l with
     | [] -> []
     | N a :: N b :: tail -> reduceNumbers (N a + N b :: tail)
-    | N a :: Neg (N b) :: tail  -> reduceNumbers (N a - Neg (N b) :: tail)
+    | N a :: Neg (N b) :: tail  -> reduceNumbers (N a - N b :: tail)
     | Neg (N a) :: Neg (N b) :: tail -> reduceNumbers (Neg (N a + N b) :: tail)
     | Neg (N a) :: tail -> Neg (N a) :: tail
     | N a :: tail -> N a :: tail
@@ -56,7 +59,6 @@ let rec findAllInstancesOfVariableInAss x l =
 
 
 let rec reduceVariables l = 
-    printfn "%A" l
     match l with
     | [] -> []
     | Mul(N a, X b) :: tail
@@ -90,7 +92,7 @@ let neg e:Expr<Number> =
 
 // simplifies a subtraction expression
 let rec sub e1 e2:Expr<Number>=
-    printfn "%A - %A" e1 e2
+    printfn "s sub %A - %A" e1 e2
     match e1, e2 with
     | _, _ when e1 = e2 -> N zero
     | N a, _ when Number.isZero a -> neg e2
@@ -145,7 +147,7 @@ and div e1 e2:Expr<Number> =
 let rec simplifyExpr e =
     // printfn "%A" e
     match e with
-    // | N (Rational(R(a, b))) -> Div(N (Int a), N (Int b))
+    | N (Rational(R(a, b))) -> Div(N (Int a), N (Int b))
     | Neg a     -> neg (simplifyExpr a)
     | Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
     | Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 

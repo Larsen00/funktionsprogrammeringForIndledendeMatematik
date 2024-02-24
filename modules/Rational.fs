@@ -1,12 +1,6 @@
 module rational
 type rational = R of int * int
 
-// constructor of a rational number
-let make(x, y) =
-    if y <> 0 then
-        R(x, y)
-    else
-        failwith "Denominator cannot be zero"
 
 // checks if a rational number is posetive
 let posetive(R(a,b)) = a*b > 0
@@ -46,6 +40,7 @@ type rational with
     static member (/)  (a, R(x,y))          = mkQ(R(a*y, x))
     static member (/)  (R(x,y), a)          = mkQ(R(x, a*y))
     static member (/)  (R(a,b),R(c,d))      = mkQ(R(a*d, b*c))
+    static member (/)  (a,b)                = mkQ(R(a, b))
 
 
 
@@ -69,3 +64,10 @@ let isInt(R(_, b)) = b = 1
 
 // returns the integer value of a rational number
 let makeRatInt(R(a, b)) = if isInt(R(a, b)) then a else failwith "Not an integer"
+
+// constructor of a rational number
+let make(x, y) =
+    if y <> 0 then
+        mkQ(R(x, y))
+    else
+        failwith "Denominator cannot be zero"

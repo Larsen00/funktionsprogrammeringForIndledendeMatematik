@@ -5,12 +5,13 @@ type Number = | Int of int | Rational of rational
 // #TODO med tiden vil man kunne tilføje funktionalitet sådan at man kan mixe int rationalle tal
 
 // mathemathical operations on two numbers
-let operation a b f g =
+let operation a b f =
   printfn "operation - %A %A %A" a f b
   match a, b with
-  | Int x, Int y -> Int (f x y)
-  | Rational x, Rational y -> Rational (g x y)
-  | Int x, Rational y | Rational y, Int x -> Rational (g (make(x, 1)) y)
+  | Int x, Int y -> Rational (f (make(x, 1)) (make(y, 1)))
+  | Rational x, Rational y -> Rational (f x y)
+  | Int x, Rational y | Rational y, Int x -> Rational (f (make(x, 1)) y)
+
 
 // negates a number
 let neg a =
@@ -32,11 +33,11 @@ let compare a b =
     | Int x, Rational y | Rational y, Int x -> greaterThan(make(x, 1), y)
 
 type Number with
-    static member (+)  (a, b)       = tryMakeInt (operation a b (+) (+))
-    static member (-)  (a, b)       = tryMakeInt (operation a b (-) (-))
-    static member (*)  (a, b)       = tryMakeInt (operation a b ( * ) ( * ))
+    static member (+)  (a, b)       = tryMakeInt (operation a b (+))
+    static member (-)  (a, b)       = tryMakeInt (operation a b (-))
+    static member (*)  (a, b)       = tryMakeInt (operation a b ( * ))
     static member (~-) (a)          = tryMakeInt (neg a) 
-    static member (/)  (a, b)       = tryMakeInt (operation a b (/) (/))
+    static member (/)  (a, b)       = tryMakeInt (operation a b (/))
 
 
 // compares two numbers a >b

@@ -2,7 +2,7 @@
 open Expression
 open Number
 
-
+// rank when sorting a assoative expression
 let expressionSortRank e1 =
     match e1 with
     | Neg _ -> 1
@@ -13,7 +13,7 @@ let expressionSortRank e1 =
     | Mul _ -> 6
     | Div _ -> 7
  
-// flattens the tree to a list, where each element is multiplicated
+// flattens the tree to a assoative list
 let rec flatTree e =
     match e with 
     | N _ | X _ | Add _ | Sub _ -> [e]
@@ -21,39 +21,40 @@ let rec flatTree e =
     | Mul (a, b) -> flatTree a @ flatTree b
     | Div (a, b) -> Div (N one, b) :: flatTree a 
 
+// sorts the assoative list
 let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
 
 
-
+// determines the sign of a assoative list
 let rec signList l s =
     match l with
     | [] -> s
     | Neg _::tail -> signList tail (-1*s)
     | _::tail -> signList tail s
 
-
-
-let rec concatDivSortedList l =
+// multiplys all Div elements in a assoative list
+let rec multiplyDivaInAssList l =
     // division will always be in the end of a sorted list, and numarator will be 1
     match l with
     | [] -> []
-    | Div (_, b) :: Div (_, c) :: tail -> concatDivSortedList (Div(N one, Mul(b, c)) :: tail)
-    | x::tail -> x :: concatDivSortedList tail
+    | Div (_, b) :: Div (_, c) :: tail -> multiplyDivaInAssList (Div(N one, Mul(b, c)) :: tail)
+    | x::tail -> x :: multiplyDivaInAssList tail
 
-
+// reduces a assoative list
 let rec reduceAss l =
     let sorted = divCancelling (sortAss l)
-    // printfn "%A" sorted
     if signList sorted 1 > 0 then rebuildTree sorted else Neg (rebuildTree sorted)
 
+// initiates the division cancelling
 and divCancelling l = 
-    printfn "%A" l
     match List.rev l with
     | [] -> l
     | Div(_, b)::tail -> 
-                        let (numerator, denominator) = cancelEquality  l (sortAss (flatTree b))
+                        let (numerator, denominator) = cancelEquality  (List.rev tail) (sortAss (flatTree b))
                         sortAss (flatTree (rebuildTree numerator / rebuildTree denominator))
     | _ -> l
+
+// cancels out equal elements in the numerator and denominator
 and cancelEquality nu de =
     match nu with
     | [] -> ([], [])
@@ -64,12 +65,14 @@ and cancelEquality nu de =
                             (n::numerator, denominator)
                 | true, de_new -> cancelEquality ntail de_new
 
+// determines if a element is in the numerator
 and checkElementInNumerator e de =
     match de with
     | [] -> false , []
     | d::tail when d = e -> true, tail
     | _::tail -> checkElementInNumerator e tail
 
+// rebuilds a assoative list to a tree
 and rebuildTree l =
     match l with
     | [] -> N one
@@ -80,8 +83,7 @@ and rebuildTree l =
     | a::tail -> a * rebuildTree tail
 
 
-
-    
+// applies the assoation rules to a tree    
 let applyAssociation e =
     match e with
     | Mul _ | Div _ -> reduceAss (flatTree e)
@@ -93,11 +95,14 @@ let applyAssociation e =
 ////////////////////////////////////////
 /// SIMPLIFICATION FUNCTIONS ///////////
 ////////////////////////////////////////
+
+// simplifies a negation expression
 let neg e =
     match e with
     | Neg a -> a
     | _ -> Neg e
 
+// simplifies a subtraction expression
 let rec sub e1 e2 =
     match e1, e2 with
     | _, _ when e1 = e2 -> N zero
@@ -108,6 +113,7 @@ let rec sub e1 e2 =
     | a, Neg b -> neg (a + b) 
     | _, _ -> Sub(e1, e2)
 
+// simplifies a addition expression
 let rec add e1 e2 = 
     match e1, e2 with
     | N a, _ | _, N a when isZero a -> e2
@@ -117,7 +123,7 @@ let rec add e1 e2 =
     | a, Neg b -> sub a b 
     | _, _ -> Add (e1, e2)
 
-open TreeGenerator
+// simplifies a multiplication expression
 let rec mul e1 e2 =
     //printfn "\n 81 - %A" (ExpressionToInfix (Mul (e1, e2)) false)
     match e1 ,e2 with
@@ -133,9 +139,7 @@ let rec mul e1 e2 =
     | _, _ -> applyAssociation (Mul(e1, e2))
 
 
-
-
-// #ToDo: mangler cases
+// simplifies a division expression
 and div e1 e2 =
     match e1, e2 with
     | _, _ when e1 = e2 -> N one
@@ -159,12 +163,13 @@ let rec simplifyExpr e =
     | Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
     | _ -> e 
 
-
+// replaces a variable with a expression
 let replaceX c map =
     match Map.tryFind c map with
     | None -> X c
     | Some a -> a
 
+// replaces all variables in a expression with a expression
 let rec insert e map =
     match e with 
     | X a -> replaceX a map        
@@ -174,3 +179,8 @@ let rec insert e map =
     | Sub(a, b) -> Sub(insert a map, insert b map)
     | Mul(a, b) -> Mul(insert a map, insert b map)
     | Div(a, b) -> Div(insert a map, insert b map)
+
+// evaluates a expression using a map
+let eval e map = 
+    let simplified = simplifyExpr (insert e map)
+    insert simplified map

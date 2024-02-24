@@ -66,4 +66,3 @@ til næste gang:
 Sider: 30-40 sider + billag
 
 
-OBS: Ligner ikke neg bliver skubbet ud foran div

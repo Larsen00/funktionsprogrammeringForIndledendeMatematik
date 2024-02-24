@@ -4,7 +4,9 @@ module Rational
 type Rational =
     static member ( ~- ) : Rational -> Rational
     static member ( + )  : Rational * Rational -> Rational
+    static member ( + )  : int * Rational -> Rational
     static member ( - )  : Rational * Rational -> Rational
+    static member ( - )  : int * Rational -> Rational
     static member ( * )  : int  * Rational -> Rational
     static member ( * )  : Rational * int -> Rational
     static member ( * )  : Rational * Rational -> Rational
@@ -17,3 +19,5 @@ val posetive : Rational -> bool
 val toString : Rational -> string
 val isZero : Rational -> bool
 val isOne : Rational -> bool
+val isInt : Rational -> bool
+val makeRatInt : Rational -> int

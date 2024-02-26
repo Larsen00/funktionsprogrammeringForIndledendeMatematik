@@ -1,13 +1,13 @@
 
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-open Rational
+open rational
 
 #r "nuget: FsCheck"
 open FsCheck
 
 type Number = 
-            | Re of Rational
-            | Cn of Rational * Rational
+            | Re of rational
+            | Cn of rational * rational
 
 
 

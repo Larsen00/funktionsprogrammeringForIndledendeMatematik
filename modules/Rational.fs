@@ -16,7 +16,7 @@ let rec gcd r =
 // Functional Programming Using F# page 57
 // reduces a rational number to its simplest form
 let canc(R(p, q)) =
-    printfn "canc - %A %A" p q
+    // printfn "canc - %A %A" p q
     let sign = if posetive(R(p, q)) then 1 else -1
     let ap = abs p
     let aq = abs q

@@ -9,7 +9,7 @@
 *)
 
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-open Rational
+open rational
 
 // Expression
 type Associative = | L | R
@@ -108,15 +108,15 @@ let rec convert c (stack:OperatorList) postfix =
 
 
 
-printfn "%A" (convert test [] []) 
-printfn "%A" (convert (infixToSymbolList "(300+A+B)") [] [])
-printfn "%A" (convert (infixToSymbolList "(10^30)*X+B") [] [])
-printfn "%A" (convert (infixToSymbolList "(X+2)^2*45") [] []) 
-printfn "%A" (convert (infixToSymbolList "-(X+2)^2*45") [] [])
-printfn "%A" (convert (infixToSymbolList "-(X+2)^(-2)*45") [] [])
+// printfn "%A" (convert test [] []) 
+// printfn "%A" (convert (infixToSymbolList "(300+A+B)") [] [])
+// printfn "%A" (convert (infixToSymbolList "(10^30)*X+B") [] [])
+// printfn "%A" (convert (infixToSymbolList "(X+2)^2*45") [] []) 
+// printfn "%A" (convert (infixToSymbolList "-(X+2)^2*45") [] [])
+// printfn "%A" (convert (infixToSymbolList "-(X+2)^(-2)*45") [] [])
 
 
-printfn "DIFF"
+// printfn "DIFF"
 let rec diff f dx = 
     match f with
     | X a when a = dx -> N 1
@@ -131,8 +131,8 @@ let rec diff f dx =
 
 
 let f::_ = (convert (infixToSymbolList "2*x") [] [])
-printfn "%A" (diff f 'x')
+// printfn "%A" (diff f 'x')
 let g::_ = (convert (infixToSymbolList "-(X+2)^(-2)*45") [] [])
-printfn "%A" (diff g 'x')
+// printfn "%A" (diff g 'x')
 
 

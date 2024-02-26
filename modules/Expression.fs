@@ -18,7 +18,7 @@ let neg e:Expr<Number> =
 
 // adds two expressions
 let rec add a b:Expr<Number>  =
-    printfn "ADD : %A + %A" a b
+    // printfn "ADD : %A + %A" a b
     match a, b with
     | N x, N y -> N (x + y)
     | N a, b | b, N a when isZero a -> b 
@@ -27,7 +27,7 @@ let rec add a b:Expr<Number>  =
 
 // subtracts two expressions
 let rec sub a b:Expr<Number>  =
-    printfn "SUB : %A - %A" a b
+    // printfn "SUB : %A - %A" a b
     match a, b with
     | N x, N y  when greaterThan y x -> Neg (N (y - x)) // greaterThan y x <=> y > x
     | N x, N y -> N (x - y)

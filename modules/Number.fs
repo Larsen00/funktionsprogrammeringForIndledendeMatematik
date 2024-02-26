@@ -6,7 +6,7 @@ type Number = | Int of int | Rational of rational
 
 // mathemathical operations on two numbers
 let operation a b f =
-  printfn "operation - %A %A %A" a f b
+//   printfn "operation - %A %A %A" a f b
   match a, b with
   | Int x, Int y -> Rational (f (make(x, 1)) (make(y, 1)))
   | Rational x, Rational y -> Rational (f x y)
@@ -15,7 +15,7 @@ let operation a b f =
 
 // negates a number
 let neg a =
-    printfn "neg - %A" a
+    // printfn "neg - %A" a
     match a with
     | Int a -> Int -a
     | Rational a -> Rational -a

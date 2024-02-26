@@ -62,3 +62,21 @@ til næste gang:
 Sider: 30-40 sider + billag
 
 
+# Møde 4
+Hvad har jeg lavet:
+    * Har lavet en bedre simpificering for (add, sub) og (mul, div) 
+    * Har tilføjet så exprissions nu også virker med at kombinere int og rationelle tal
+    * Har lavet en evaluerings funktion, der anvender simpificering
+    * Har skrevet 2 sider på projectet
+
+Plan for næste uge:
+    * Skrive om Number, exprissions, rationel, complex
+    * Skal bruge et klasse diagram for f# som eksemple
+    * Skal lave en property based testing
+        - skal måske bruge noget dokumentation til hvordan. (Der skal laves en maks dybde på træerne)
+            Ellers risikere man at der kommer så mange grene at sandsynligheden for at det stopper bliver 
+            for lille.
+
+
+monomie basen for poly nomier - Lav det dirkete som det står i mat 1 noterne
+gram smidt algorithme ligger under 1b

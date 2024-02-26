@@ -1,84 +1,9 @@
 #load "Differentiation.fsx"
 #load "AssociationForMulDiv.fs"
+#load "AssociationForAddSub.fs"
 open Expression
 open Number
 open rational
-
-// rank when sorting a assoative expression
-let expressionSortRank e1 =
-    match e1 with
-    | N _ -> 1
-    | Neg (N _) -> 2
-    | X _ -> failwith "Variables should not be in the list" // all veriables are multiplied with 1
-    | Add _ -> 4
-    | Sub _ -> 5
-    | Mul _ -> 6
-    | Div _ -> 7
-    | Neg _ -> 8
-
-// Flattens a expression tree with respect to addition and subtraction
-let rec flatTree e =
-    printfn "ft %A" e
-    match e with
-    | Add (a, b) -> flatTree a @ flatTree b
-    | Sub (a, b) -> flatTree a @ flatTree (Neg b)
-    | Neg (Add(a, b)) -> flatTree (Neg a) @ flatTree (Neg b)
-    | Neg (Sub(a, b)) -> flatTree (Neg a) @ flatTree b
-    | X a -> [Mul(N one, X a)]
-    | Div (a, b) -> [a / b]
-    | N _ | Div _ | Mul _ | Neg _-> [e]
-
-let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
-
-// Reduces a sorted assoative list for addition
-let rec reduceNumbers l =
-    printfn "rn %A" l
-    match l with
-    | [] -> []
-    | N a :: N b :: tail -> reduceNumbers (N a + N b :: tail)
-    | N a :: Neg (N b) :: tail  -> reduceNumbers (N a - N b :: tail)
-    | Neg (N a) :: Neg (N b) :: tail -> reduceNumbers (Neg (N a + N b) :: tail)
-    | Neg (N a) :: tail -> Neg (N a) :: tail
-    | N a :: tail -> N a :: tail
-    | _ -> l
-
-
-let rec findAllInstancesOfVariableInAss x l =
-    match x, l with
-    | _, [] -> ([] ,x)
-    | Mul(N n1, X x1), Mul(N n2, X x2) :: tail 
-    | Mul(N n1, X x1), Mul(X x2, N n2) :: tail
-    | Mul(X x1, N n1), Mul(N n2, X x2) :: tail
-    | Mul(X x1, N n1), Mul(X x2, N n2) :: tail
-        when x1 = x2    -> findAllInstancesOfVariableInAss (Mul(N (n1 + n2), X x1)) tail
-    | _, head :: tail   -> 
-                        let (l_new, x_new) = findAllInstancesOfVariableInAss x tail
-                        (head :: l_new, x_new)
-    
-
-
-
-let rec reduceVariables l = 
-    match l with
-    | [] -> []
-    | Mul(N a, X b) :: tail
-    | Mul(X b, N a) :: tail 
-        -> 
-        let (l_new, x_new) = findAllInstancesOfVariableInAss (Mul(N a, X b)) tail
-        x_new :: reduceVariables l_new
-    | head :: tail -> head :: reduceVariables tail
-    
-let rec rebuldTree l =
-    match l with
-    | [] -> N zero
-    | Neg x::tail -> (rebuldTree tail) - x
-    | x::tail -> (rebuldTree tail) + x
-
-let applyAssociation e =
-    match e with 
-    | Sub _ | Add _ -> rebuldTree (reduceVariables (reduceNumbers(sortAss (flatTree e))))
-    | _ -> e
-
 
 ////////////////////////////////////////
 /// SIMPLIFICATION FUNCTIONS ///////////
@@ -92,16 +17,16 @@ let neg e:Expr<Number> =
 
 // simplifies a subtraction expression
 let rec sub e1 e2:Expr<Number>=
-    printfn "s sub %A - %A" e1 e2
+    // printfn "s sub %A - %A" e1 e2
     match e1, e2 with
     | _, _ when e1 = e2 -> N zero
     | N a, _ when Number.isZero a -> neg e2
     | _, N a when Number.isZero a -> e1
     | N a, N b -> N (a - b)
     | Neg a, Neg b -> neg (sub a b)
-    | a, Neg b -> Expression.add a b 
+    | a, Neg b -> a + b
     | Mul(a, X b), Mul(c, X d) when b = d -> Mul(sub a c, X b)
-    | _, _ -> applyAssociation (Sub(e1, e2))
+    | _, _ -> AssociationForAddSub.applyAssociation (Sub(e1, e2))
 
 // simplifies a addition expression
 let rec add e1 e2:Expr<Number> = 
@@ -112,7 +37,7 @@ let rec add e1 e2:Expr<Number> =
     | Neg a, Neg b -> neg (add a b) 
     | a, Neg b -> sub a b
     | Mul(a, X b), Mul(c, X d) when b = d -> Mul(add a c, X b)
-    | _, _ -> applyAssociation (Add(e1, e2))
+    | _, _ -> AssociationForAddSub.applyAssociation (Add(e1, e2))
 
 // simplifies a multiplication expression
 let rec mul e1 e2:Expr<Number> =
@@ -172,7 +97,7 @@ let rec insert e map =
     | Mul(a, b) -> Mul(insert a map, insert b map)
     | Div(a, b) -> Div(insert a map, insert b map)
 
-// evaluates a expression using a map
+// evaluates a expression using a map // #TODO tror ikke den virker
 let eval e map = 
     let simplified = simplifyExpr (insert e map)
     insert simplified map

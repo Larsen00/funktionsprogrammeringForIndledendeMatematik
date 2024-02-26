@@ -56,3 +56,9 @@ let ligning = tree "(3*x-5)*2"
 let rat = N (Rational (R(3, 2)))
 let i = N (Int 5)
 showSimp (Add(ligning, rat))
+
+printfn "\nEvaluation x = 2:"
+printfn "%A" (eval (Add(ligning, rat)) (Map.ofList [('x', N (Int 2))]))
+
+
+

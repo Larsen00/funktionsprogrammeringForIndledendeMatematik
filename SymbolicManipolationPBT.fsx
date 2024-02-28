@@ -60,9 +60,21 @@ let smallEnvGen =
         return (Map.ofList (List.zip xlist ns), xlist) }
 
 // generate a random expression
-let expr charlist = 
-    let rec exprGen xlist n = 
-        printfn "n: %A" n
+// let expr charlist n = 
+//     let rec exprGen xlist n = 
+//         if n = 0 then
+//             leafGen xlist
+//         else
+//             Gen.oneof [
+//                 leafGen xlist; // leaf occurs twice becourse leaf is X or N giving the same probability for each expression 
+//                 leafGen xlist;
+//                 Gen.map2 (fun x y -> Add (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
+//                 Gen.map2 (fun x y -> Mul (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
+//                 Gen.map2 (fun x y -> Div (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
+//                 Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));            
+//                 Gen.map (fun x -> Neg x) (exprGen xlist (n/2))]
+//     Gen.sized (exprGen charlist)
+let rec exprGen xlist n = 
         if n = 0 then
             leafGen xlist
         else
@@ -74,7 +86,6 @@ let expr charlist =
                 Gen.map2 (fun x y -> Div (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
                 Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));            
                 Gen.map (fun x -> Neg x) (exprGen xlist (n/2))]
-    Gen.sized (exprGen charlist)
 
 type ExprWithEnv = Expr<Number> * Map<char, Number>
 type SmallEnv = Map<char, Number> * char list
@@ -88,33 +99,26 @@ type SmallEnvGen =
 Arb.register<SmallEnvGen>()
 
 
-
+let compareSimpExpr env (e:Expr<Number>) =
+    printfn "Expression: %A" e
+    eval (SymbolicManipolation.simplifyExpr e) env  = eval e env
 
 
 let simpEqualEval se = 
     try
         let (env, xlist) = se
-        printfn "   Environment: %A" env
-        let e = Gen.sample 1 1 (expr xlist) |> List.head
-        printfn "   Expression: %A" e
-        let simplified = SymbolicManipolation.simplifyExpr e  
-        printfn "   Simplified: %A" simplified 
-        let evaled = eval e env
-        printfn "   Evaled: %A" evaled
-        let simplifiedEvaled = eval simplified env
-        printfn "   SimplifiedEvaled: %A" simplifiedEvaled     
-        if evaled = simplifiedEvaled then 1 else 0
+        if Gen.sample 1 1 (exprGen xlist 10) |> List.head |> compareSimpExpr env then 1 else 0
     with
         | :? System.DivideByZeroException as ex ->
             printfn "DivideByZeroException: %A" ex
             2
 
 let simpPBT (se:SmallEnv) =
-    printfn "START"
     let result = simpEqualEval se
-    printfn "END"
-    result = 1 
-    |> Prop.classify (result = 2) "DivideByZeroException"
+    (result = 1 || result = 2)
+    |> Prop.classify (result = 1) "Equal"
+    |> Prop.classify (result = 2) "DivideByZeroExceptions"
+
 
 let _ = Check.Quick simpPBT
 

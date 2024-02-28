@@ -47,6 +47,13 @@ let rec multiplyDivaInAssList l =
     | Div (_, b) :: Div (_, c) :: tail -> multiplyDivaInAssList (Div(N one, Mul(b, c)) :: tail)
     | x::tail -> x :: multiplyDivaInAssList tail
 
+// removes a element from a list
+let rec removeElem e l =
+    match  l with
+    | [] -> []
+    | x::tail when x = e -> tail
+    | x::tail -> x :: removeElem e tail
+
 // reduces a assoative list
 let rec reduceAss l =
     let sorted = divCancelling (sortAss l)
@@ -70,30 +77,19 @@ and cancelEquality nu de =
     // printfn "cancelEquality: %A / %A" nu de
     match nu with
     | [] -> ([], de)
-    | n::ntail -> 
-                // printfn "checkelementINnumerator res: %A" (checkElementInNumerator n de)
-                match checkElementInNumerator n de with
-                | false, _ ->  
-                            let numerator, denominator = cancelEquality ntail de
-                            // printfn "Canceleq: numerator: %A, denominator: %A" numerator denominator
-                            (n::numerator, denominator)
-                | true, de_new -> cancelEquality ntail de_new
-
-// determines if a element is in the numerator
-and checkElementInNumerator e de =
-    // printfn "checkElementInNumerator: %A / %A" e de
-    match de with
-    | [] -> false , []
-    | d::tail when d = e -> true, tail
-    | d::tail -> checkElementInNumerator e tail
+    | n::ntail when List.contains n de ->  cancelEquality ntail (removeElem n de)
+    | n::ntail -> let (numerator, denominator) = cancelEquality ntail de
+                  (n::numerator, denominator)
+                
 
 
 // rebuilds a assoative list to a tree
 and rebuildTree l =
-    // printfn "rebuildTree: %A" l
+    printfn "rebuildTree: %A" l
     match l with
     | [] -> N one
-    | Neg _::tail -> rebuildTree tail
+    | Neg (N a)::tail when isOne a -> rebuildTree tail
+    | Neg a::tail -> rebuildTree (a::tail)
     | N a::N b::tail -> rebuildTree (N (a * b) :: tail)
     | N a :: Add(b, c) :: tail -> rebuildTree (Add(reduceAss (flatTree (Mul(N a, b))), reduceAss (flatTree (Mul(N a, c)))) :: tail)
     | N a :: Sub(b, c) :: tail -> rebuildTree (Sub(reduceAss (flatTree (Mul(N a, b))), reduceAss (flatTree (Mul(N a, c)))) :: tail)

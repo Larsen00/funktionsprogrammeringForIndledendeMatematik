@@ -10,8 +10,8 @@ let expressionSortRank e1 =
     | N _ -> 1
     | Neg (N _) -> 2
     | X _ -> failwith "Variables should not be in the list" // all veriables are multiplied with 1
-    | Add _ -> 4
-    | Sub _ -> 5
+    | Add _ -> failwith "Addition should not be in the list" // all addition should be reduced
+    | Sub _ -> failwith "Subtraction should not be in the list" // all subtraction should be reduced    
     | Mul _ -> 6
     | Div _ -> 7
     | Neg _ -> 8
@@ -26,7 +26,10 @@ let rec flatTree e =
     | Neg (Sub(a, b)) -> flatTree (Neg a) @ flatTree b
     | X a -> [Mul(N one, X a)]
     | Div (a, b) -> [a / b]
+    | Neg (Neg a) -> flatTree a
     | N _ | Div _ | Mul _ | Neg _-> [e]
+
+
 
 let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
 
@@ -69,13 +72,25 @@ let rec reduceVariables l =
     | head :: tail -> head :: reduceVariables tail
     
 let rec rebuldTree l =
+    // printfn "rt %A" l
     match l with
     | [] -> N zero
     | Neg x::tail -> (rebuldTree tail) - x
-    | x::tail -> (rebuldTree tail) + x
+    | Mul (a, b)::tail -> (rebuldTree tail) + (a * b)
+    | Div (a, b)::tail -> (rebuldTree tail) + (a / b)
+    | x::tail -> rebuldTree tail + x
 
 let applyAssociation e =
     match e with 
-    | Sub _ | Add _ -> rebuldTree (reduceVariables (reduceNumbers(sortAss (flatTree e))))
+    | Sub _ | Add _ -> 
+                        let l = flatTree e
+                        // printfn "flattree %A" l
+                        let s = sortAss l
+                        // printfn "sortAss %A" s
+                        let r = reduceNumbers s
+                        // printfn "reduceNumbers %A" r
+                        let v = reduceVariables r
+                        rebuldTree s
+
     | _ -> e
 

@@ -61,10 +61,45 @@ printfn "%A" dx
 // printfn "%A" (eval (Add(ligning, rat)) (Map.ofList [('x', N (Int 2))]))
 
 
-showSimp (Sub (N (Rational (R (-9, 7))), X 'T'))
+// showSimp (Sub (N (Rational (R (-9, 7))), X 'T'))
 // Simplified: Mul (X 'Q', Div (N (Int 1), N (Int -3)))
 // map [('O', Rational (R (-1, 1))); ('T', Int 8)], ['O'; 'T']
 
+let generateExpresion = Add
+                            (Div
+                                (Mul (Neg (N (Rational (R (5, 7)))), X 'U'),
+                                Neg (Neg (N (Rational (R (-1, 4)))))),
+                            Sub
+                                (Add
+                                    (Div (N (Rational (R (8, 9))), N (Rational (R (-4, 1)))),
+                                    Div (X 'U', N (Rational (R (9, 2))))),
+                                Add (Neg (X 'A'), Add (N (Rational (R (4, 3))), N (Rational (R (-7, 6)))))))
 
-printfn "%A" (eval (Sub (Neg (X 'T'), N (Rational (R (9, 7))))) (Map.ofList [('O', Rational (R (-1, 1))); ('T', Int 8)]))
-printfn "%A" (eval ((Sub (N (Rational (R (-9, 7))), X 'T'))) (Map.ofList [('O', Rational (R (-1, 1))); ('T', Int 8)]))
+
+let m = Map.ofList [('A', Rational (R (-1, 7))); ('D', Int -1); ('U', Rational (R (10, 9)))]
+// let s = simplifyExpr generateExpresion
+let a = (AssociationForAddSub.applyAssociation (generateExpresion))
+// showSimp generateExpresion
+// printfn "%A" (eval s m)
+printfn "%A" (eval generateExpresion m)
+printfn "%A" (eval a m)
+
+// Add
+//   (Div
+//      (Mul (Neg (N (Rational (R (5, 7)))), X 'U'),
+//       Neg (Neg (N (Rational (R (-1, 4)))))),
+//    Sub
+//      (Add
+//         (Div (N (Rational (R (8, 9))), N (Rational (R (-4, 1)))),
+//          Div (X 'U', N (Rational (R (9, 2))))),
+//       Add (Neg (X 'A'), Add (N (Rational (R (4, 3))), N (Rational (R (-7, 6)))))))
+
+
+// flattree [Div (Mul (N (Int 5), X 'U'), N (Rational (R (-1, 4)))); Mul (N (Int 1), X 'D');
+//  Div (X 'U', N (Rational (R (9, 2)))); Neg (X 'A'); N (Rational (R (4, 3)));
+//  N (Rational (R (-1, 2)))]
+ 
+// sortAss [N (Rational (R (4, 3))); N (Rational (R (-1, 2))); Mul (N (Int 1), X 'D');
+//  Div (Mul (N (Int 5), X 'U'), N (Rational (R (-1, 4))));
+//  Div (X 'U', N (Rational (R (9, 2)))); Neg (X 'A')]
+

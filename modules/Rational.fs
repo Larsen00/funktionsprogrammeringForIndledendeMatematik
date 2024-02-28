@@ -20,15 +20,14 @@ let rec gcd r =
 // Functional Programming Using F# page 57
 // reduces a rational number to its simplest form
 let canc(R(p, q)) =
-    // printfn "canc - %A %A" p q
-    if 
-        isZero(R(p, q)) then R(0, 1)
+    if isZero(R(p, q)) then R(0, 1)
     else
-        let sign = if posetive(R(p, q)) then 1 else -1
         let ap = abs p
         let aq = abs q
+        let sign = if (p/ap * q/aq) > 0 then 1 else -1
         let d = gcd (ap, aq)
         R(sign * (ap / d), aq / d)
+
 
 // checks for division by zero before reducing a rational number
 let mkQ = function

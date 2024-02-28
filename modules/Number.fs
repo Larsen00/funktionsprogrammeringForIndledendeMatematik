@@ -10,7 +10,8 @@ let operation a b f =
   match a, b with
   | Int x, Int y -> Rational (f (make(x, 1)) (make(y, 1)))
   | Rational x, Rational y -> Rational (f x y)
-  | Int x, Rational y | Rational y, Int x -> Rational (f (make(x, 1)) y)
+  | Int x, Rational y  -> Rational (f (make(x, 1)) y)
+  | Rational y, Int x -> Rational (f y (make(x, 1)))
 
 
 // negates a number
@@ -72,3 +73,12 @@ let toString n =
 let zero = Int 0
 let one = Int 1
 let two = Int 2
+let isNegative n = 
+    match n with
+    | Int a -> a < 0
+    | Rational a -> rational.isNegative a
+
+let abs n = 
+    match n with
+    | Int a -> Int (abs a)
+    | Rational a -> Rational (absRational(a))

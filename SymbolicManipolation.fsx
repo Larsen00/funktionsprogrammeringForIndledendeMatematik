@@ -57,13 +57,13 @@ let rec mul e1 e2:Expr<Number> =
 
 // simplifies a division expression
 and div e1 e2:Expr<Number> =
+    // printfn "%A / %A" e1 e2
     match e1, e2 with
     | _, _ when e1 = e2 -> N one
     | _, N a when Number.isOne a -> e1
     |N a, _ when Number.isZero a -> N zero
-    | _, N a when Number.isZero a -> failwith "Zero division"
+    | _, N a when Number.isZero a ->  raise (System.DivideByZeroException("SymbolicManipolation.div: Cannot divide by zero!"))
     |N a, N b -> N(a / b)                    
-    | Mul _, _ | _, Mul _ -> AssociationForMulDiv.applyAssociation (Div(e1, e2))
     | _,_ -> AssociationForMulDiv.applyAssociation (Div(e1, e2))
 
 
@@ -72,7 +72,8 @@ and div e1 e2:Expr<Number> =
 let rec simplifyExpr e =
     // printfn "%A" e
     match e with
-    | N (Rational(R(a, b))) -> Div(N (Int a), N (Int b))
+    | N a when Number.isNegative a -> Neg (N (Number.abs a))
+    | N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
     | Neg a     -> neg (simplifyExpr a)
     | Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
     | Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 
@@ -80,24 +81,3 @@ let rec simplifyExpr e =
     | Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
     | _ -> e 
 
-// replaces a variable with a expression
-let replaceX c map =
-    match Map.tryFind c map with
-    | None -> X c
-    | Some a -> a
-
-// replaces all variables in a expression with a expression
-let rec insert e map =
-    match e with 
-    | X a -> replaceX a map        
-    | N _ -> e
-    | Neg a -> Neg(insert a map)
-    | Add(a, b) -> Add(insert a map, insert b map)
-    | Sub(a, b) -> Sub(insert a map, insert b map)
-    | Mul(a, b) -> Mul(insert a map, insert b map)
-    | Div(a, b) -> Div(insert a map, insert b map)
-
-// evaluates a expression using a map // #TODO tror ikke den virker
-let eval e map = 
-    let simplified = simplifyExpr (insert e map)
-    insert simplified map

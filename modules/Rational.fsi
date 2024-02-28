@@ -25,3 +25,5 @@ val isOne : rational -> bool
 val isInt : rational -> bool
 val makeRatInt : rational -> int
 val greaterThan  : rational * rational -> bool
+val isNegative : rational -> bool
+val absRational : rational -> rational

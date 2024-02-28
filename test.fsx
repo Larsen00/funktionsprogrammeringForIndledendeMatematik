@@ -23,15 +23,15 @@ let showSimp e =
     ""
 
 
-let expr1 = tree "x*2"
-let expr2 = tree "-y*2"
-let expr3 = tree "10*x+1"
-let expr4 = Mul(expr1, expr2)
-let expr5 = Add(expr3, expr4)
-let expr6 = Div(expr4, expr5)
-let expr7 = Mul(expr6, expr5)
+// let expr1 = tree "x*2"
+// let expr2 = tree "-y*2"
+// let expr3 = tree "10*x+1"
+// let expr4 = Mul(expr1, expr2)
+// let expr5 = Add(expr3, expr4)
+// let expr6 = Div(expr4, expr5)
+// let expr7 = Mul(expr6, expr5)
 
-showSimp expr7
+// showSimp expr7
 
 //let dx = (diff expr5 'x')
 //let simplified = simplifyExpr dx
@@ -52,13 +52,19 @@ printfn "%A" dx
 *)
 
 
-let ligning = tree "(3*x-5)*2"
-let rat = N (Rational (R(3, 2)))
-let i = N (Int 5)
-showSimp (Add(ligning, rat))
+// let ligning = tree "(3*x-5)*2"
+// let rat = N (Rational (R(3, 2)))
+// let i = N (Int 5)
+// showSimp (Add(ligning, rat))
 
-printfn "\nEvaluation x = 2:"
-printfn "%A" (eval (Add(ligning, rat)) (Map.ofList [('x', N (Int 2))]))
+// printfn "\nEvaluation x = 2:"
+// printfn "%A" (eval (Add(ligning, rat)) (Map.ofList [('x', N (Int 2))]))
 
 
+showSimp (Sub (N (Rational (R (-9, 7))), X 'T'))
+// Simplified: Mul (X 'Q', Div (N (Int 1), N (Int -3)))
+// map [('O', Rational (R (-1, 1))); ('T', Int 8)], ['O'; 'T']
 
+
+printfn "%A" (eval (Sub (Neg (X 'T'), N (Rational (R (9, 7))))) (Map.ofList [('O', Rational (R (-1, 1))); ('T', Int 8)]))
+printfn "%A" (eval ((Sub (N (Rational (R (-9, 7))), X 'T'))) (Map.ofList [('O', Rational (R (-1, 1))); ('T', Int 8)]))

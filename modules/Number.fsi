@@ -17,3 +17,6 @@ val one : Number
 val two : Number
 val toString : Number -> string
 val greaterThan : Number -> Number -> bool
+val tryMakeInt : Number -> Number
+val isNegative : Number -> bool
+val abs : Number -> Number

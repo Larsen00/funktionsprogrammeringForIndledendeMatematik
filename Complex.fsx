@@ -39,7 +39,7 @@ let conjugate (Cn (a, b)) = Cn (a, -b)
 // Division of complex numbers with real numbers
 let divRational n r = 
     match n with
-    | _ when isZero(r) -> failwith "Division by zero"
+    | _ when isZero(r) ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
     | Cn (a, b) -> Cn (a / r, b / r) 
 
 // Multiplying a complex number with its conjugation

@@ -37,20 +37,22 @@ let rec sub a b:Expr<Number>  =
     | _, _ -> Sub(a, b)
  
 // multiplies two expressions with simplification 
-let mul e1 e2:Expr<Number> =
+let rec mul e1 e2:Expr<Number> =
     match e1, e2 with
     |N a, N b                       -> N (a * b)
     |N a, b | b, N a when isOne a   -> b
     |N a, _ | _, N a when isZero a  -> N zero
+    |a, Div(b, c) | Div(b, c), a    -> Div (mul a b, c)
     | _, _ -> Mul(e1, e2)
 
 // divides two expressions with simplification
 let div e1 e2:Expr<Number> =
+    // printfn "div.expr %A / %A" e1 e2
     match e1, e2 with
     | _, _   when e1 = e2     -> N one
     | _, N a when isOne a     -> e1
     | N a, _ when isZero a    -> N zero
-    | _, N a when isZero a    -> failwith "Zero division"
+    | _, N a when isZero a    ->  raise (System.DivideByZeroException("Expression.div: Cannot divide by zero!"))
     | N a, N b                -> N (a / b)
     | _, _                    -> Div(e1, e2)  
 
@@ -62,3 +64,13 @@ type Expr<'a> with
     static member (/) (e1, e2)          = div e1 e2
     
 
+// evaluates an expression without simplification, hence only using the Number operations
+let rec eval (e:Expr<Number>) (env) =
+    match e with
+    | X x -> Map.find x env
+    | N n -> tryMakeInt(n)
+    | Neg a -> - eval a env
+    | Add (a, b) -> eval a env + eval b env
+    | Sub (a, b) -> eval a env - eval b env
+    | Mul (a, b) -> eval a env * eval b env
+    | Div (a, b) -> eval a env / eval b env

@@ -50,37 +50,47 @@ let rec multiplyDivaInAssList l =
 // reduces a assoative list
 let rec reduceAss l =
     let sorted = divCancelling (sortAss l)
+    // printfn "sorted: %A" sorted
     if signList sorted 1 > 0 then rebuildTree sorted else Neg (rebuildTree sorted)
 
 // initiates the division cancelling
 and divCancelling l = 
+    // printfn "DivCancelling: %A" l
     match List.rev l with
     | [] -> l
     | Div(_, b)::tail -> 
                         let (numerator, denominator) = cancelEquality  (List.rev tail) (sortAss (flatTree b))
-                        sortAss (flatTree (rebuildTree numerator / rebuildTree denominator))
+                        // printfn "numerator: %A, denominator: %A" numerator denominator
+                        // sortAss (flatTree (rebuildTree numerator / rebuildTree denominator))
+                        sortAss (flatTree (reduceAss numerator / reduceAss denominator))
     | _ -> l
 
 // cancels out equal elements in the numerator and denominator
 and cancelEquality nu de =
+    // printfn "cancelEquality: %A / %A" nu de
     match nu with
-    | [] -> ([], [])
+    | [] -> ([], de)
     | n::ntail -> 
+                // printfn "checkelementINnumerator res: %A" (checkElementInNumerator n de)
                 match checkElementInNumerator n de with
                 | false, _ ->  
-                            let (numerator, denominator) = cancelEquality ntail de
+                            let numerator, denominator = cancelEquality ntail de
+                            // printfn "Canceleq: numerator: %A, denominator: %A" numerator denominator
                             (n::numerator, denominator)
                 | true, de_new -> cancelEquality ntail de_new
 
 // determines if a element is in the numerator
 and checkElementInNumerator e de =
+    // printfn "checkElementInNumerator: %A / %A" e de
     match de with
     | [] -> false , []
     | d::tail when d = e -> true, tail
-    | _::tail -> checkElementInNumerator e tail
+    | d::tail -> checkElementInNumerator e tail
+
 
 // rebuilds a assoative list to a tree
 and rebuildTree l =
+    // printfn "rebuildTree: %A" l
     match l with
     | [] -> N one
     | Neg _::tail -> rebuildTree tail

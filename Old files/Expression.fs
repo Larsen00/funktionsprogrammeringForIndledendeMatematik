@@ -75,7 +75,7 @@ and div e1 e2 =
     | _, _ when e1 = e2 -> N one
     | _, N a when isOne a -> e1
     |N a, _ when isZero a -> N zero
-    | _, N a when isZero a -> failwith "Zero division"
+    | _, N a when isZero a ->  raise (System.DivideByZeroException("Expression.div: Cannot divide by zero!"))
     |N a, N b -> N(a / b)                    
     |Mul(a, b), c -> mul (div a c) (div b c)
     | _,_ -> Div (e1, e2)

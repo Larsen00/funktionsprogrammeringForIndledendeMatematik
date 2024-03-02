@@ -5,3 +5,6 @@ https://en.wikipedia.org/wiki/Python_(programming_language)
 https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
 https://en.wikipedia.org/wiki/F_Sharp_(programming_language)
 https://www.sympy.org/en/index.html
+https://techbeacon.com/app-dev-testing/how-make-your-code-bulletproof-property-testing#:~:text=What%20is%20property%2Dbased%20testing,that%20you%20want%20to%20test.
+https://en.wikipedia.org/wiki/Floating-point_error_mitigation
+https://en.wikipedia.org/wiki/Rational_number

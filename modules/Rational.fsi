@@ -1,5 +1,5 @@
-
 module rational
+
 [<Sealed>]
 type rational =
     static member ( ~- ) : rational -> rational
@@ -7,7 +7,7 @@ type rational =
     static member ( + )  : int * rational -> rational
     static member ( - )  : rational * rational -> rational
     static member ( - )  : int * rational -> rational
-    static member ( * )  : int  * rational -> rational
+    static member ( * )  : int * rational -> rational
     static member ( * )  : rational * int -> rational
     static member ( * )  : rational * rational -> rational
     static member ( / )  : rational * rational -> rational
@@ -15,15 +15,14 @@ type rational =
     static member ( / )  : rational * int -> rational
     static member ( / )  : int * int -> rational
 
-
-val make : int * int -> rational
-val equal : rational * rational -> bool
-val posetive : rational -> bool
-val toString : rational -> string
-val isZero : rational -> bool
-val isOne : rational -> bool
-val isInt : rational -> bool
-val makeRatInt : rational -> int
+val make         : int * int -> rational
+val equal        : rational * rational -> bool
+val posetive     : rational -> bool
+val toString     : rational -> string
+val isZero       : rational -> bool
+val isOne        : rational -> bool
+val isInt        : rational -> bool
+val makeRatInt   : rational -> int
 val greaterThan  : rational * rational -> bool
-val isNegative : rational -> bool
-val absRational : rational -> rational
+val isNegative   : rational -> bool
+val absRational  : rational -> rational

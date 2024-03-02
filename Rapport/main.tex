@@ -18,68 +18,41 @@ Projektet vil undersøge, hvordan et funktionsprogrammeringssprog, kan gavne de 
 
 Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funktionsprogrammering samt metoder til validering af programmerne. 
 
-\section{Fundamentale koncepter}
-\subsection{Introduktion til Funktions Programmering}
+\input{sections/Fundamentale_koncepter}
 
-Det er forventet af læseren har kendskab til programmering, der gives derfor kun en kort beskrivelse af syntax og notationen, så læser ikke bekendt med F\# kan forstå de eksempler der løbende vil forkomme i rappoten.
+\section{Symbolske lignings udtryk}
+Det ønskes at kunne repræsentere simple ligninger som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udøføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere ligninger samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
-\begin{equation}
-    \label{Fakultet}
-    f(n) = \begin{cases} 
-            1 &  n = 0  \\
-            n \cdot f(n-1) & n > 0 \\
-            \text{undefined} & n < 0 
-           \end{cases}
-\end{equation}
+\subsection{Tal Mondulet}
+Vi begynder med opbygningen af et mondul som kan repræsentere tal. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet på gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footnote{\url{https://en.wikipedia.org/wiki/Floating-point_error_mitigation}}, men for ikke at komplikere programmet vil vi i denne opgave ikke betragte floats.  
 
-Vi begynder derfor med at betragte funktionen for fakultet \ref{Fakultet}, et eksempel på en implementering i F\# er givet i \ref{lst:fsharp_factorial} som kan sammelignes med Python kode \ref{lst:python_factorial}, da Python og pseudokode er næsten det samme. 
+\subsubsection{Rationelle tal Mondul}
+Repræsentationen af rationale tal kan laves ved hjælp af danne et par af integers, hvor den ene integer er tælleren og den anden er nævneren. 
 
-\begin{lstlisting}[language={FSharp}, label={lst:fsharp_factorial}, caption={Eksempel på Fakultet i F\#}]
-// Fakultet i F#
-let rec factorial n =
-    match n with
-    | 0             -> 1 
-    | x when x > 0  -> x * factorial (x - 1)
-    | _             -> failwith "Negative argument"
+\begin{lstlisting}[language={FSharp}, label={lst:fsharp_factorial}, caption={Typen for rationelle tal}]
+type rational = R of int * int
 \end{lstlisting}
 
-\begin{lstlisting}[language={FSharp}, label={lst:python_factorial}, caption={Eksempel på Fakultet i Python}]
-// Fakultet i Python
-def factorial(n):
-    if n == 0:
-        return 1
-    elif n > 0:
-        return n * factorial(n - 1)
-    else:
-        raise ValueError("Negative argument")
-\end{lstlisting}
+Nedestående er der givet en signatur fil for rational mondulet \ref{rational_fsi}. i Implementerings filen overloades de matematiske operatorer, ved hjælp af de klassiske regneregler for brøker\footnote{\url{https://en.wikipedia.org/wiki/Rational_number}}. 
+\lstinputlisting[
+    language=FSharp,
+    label={rational_fsi},
+    caption={Signatur filen for rational mondulet}
+]{../modules/rational.fsi}
 
-I F\# anvendes \textcolor{blue}{let} til at definere en ny variabel eller, i dette tilfælde, en funktion kaldet \textcolor{red}{factorial}. Næste nøgleord er \textcolor{blue}{rec}, hvilket indikerer, at funktionen er rekursiv. Funktionen tager et inputargument \(n\), og i linje 3 starter et match-udtryk. Her er \(n\) vores udtryk, og efter \textcolor{codepurple}{with} begynder en række mønstre, som udtrykket forsøger at matche på, separeret med '$\vert$'.
-
-Et match på et mønster er ikke det samme som '==' kendt fra andre programmeringssprog. I linje 4 forsøger den at tildele værdien af \(n\) til 0, og dette lykkes kun, hvis \(n\) er 0. Hvis \(n\) ikke er 0 og dermed ikke matcher linje 4, vil den forsøge at matche det næste mønster. Her står der kun \(x\), da der ikke yderligere specificeres om netop \(x\), vil det altid lykkes, og \(x\) bliver tildelt værdien af \(n\) svarende til \( [x \mapsto n] \). Derefter skal betingelserne efter \textcolor{codepurple}{when} være opfyldt. Hvis de er det, kan mønsteret matche på den givne linje. Derefter eksekverer den og returnerer koden efter '$\rightarrow$', hvor den samtidig har adgang til den nyligt tildelte værdi af \(x\). 
-Det sidste mønster på linje 6 anvender '\textunderscore' som mønster. 
-Dette betyder, at det kan matche alle udtryk, men vi er ikke interesseret i at anvende værdien. I dette tilfælde kan det tredje mønster på linje 6 kun køres, når \(n\) er negativ.
-
-Bemærk hvordan en funktion i F\# altid returnere sidste kørte linje af en funktion. Svarende til man ikke skrev \textcolor{codepurple}{return} i linje 4 og 6 af Python koden\ref{lst:python_factorial}, men værdierne stadig blev returneret. 
-
-\subsubsection{Typer}
-Alle funktioner har en type i F\#, typen for \textcolor{red}{factorial}\ref{lst:fsharp_factorial} er $int \rightarrow int$. Det er ikke muligt at kalde funktionen med et argument der ikke er af typen $int$. Typen for funktionen skrives som $Factorial: int \rightarrow int$. Vi kan dermed formulere følgende omkring typer\footnote{s14 FPU F\#}: 
-\begin{gather*}
-    f: T_1 \rightarrow T_2 \\
-    f e : T_2 \iff e : T_1
-\end{gather*}
-% => f(e) ville give en fejl hvis ikke e er af typen T2 
-% <= per defination så er f(e) :T2 hvis e:T1
-
-Er en funktion kaldt med et argument der ikke matcher funktionen type, gives en fejlmeddelelse. Derudover kan en type også være bestående at en tuple af typer.
-\begin{gather*}
-    f: T_1 * T_2 * .. * T_n \rightarrow T_{n+1}\\
-    f (e_1, e_2, .., e_n) :T_{n+1} \iff e_1 : T_1 \land e_2 : T_2 \land .. \land e_n : T_n
-\end{gather*}
-En tuple som kun består af to typer, kaldes et par. \\I F\# er det ikke nødvendigt at anvende parenteser som i andre programmeringssprog. De vil derfor kun anvendes hvor det er nødvendige, gennem rapporten. Når man laver en tuple er det nødvendigt.
-Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$ betyder den tager to udtryk af typen $T_1$ og $T_2$ hvor evalueringen af funktionen giver $T_3$
+For forholdvis nemt at kunne sammenligne, men også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simpleste from. Dette kan gøres ved at finde den største fælles divisor (GCD) \footnote{\url{https://en.wikipedia.org/wiki/Greatest_common_divisor}}. Der udover er det vigtigt at være opmærksom på man ikke foretager nul division. Derfor vil implementerings filen kaste en "System.DivideByZeroException" hvis nævneren er eller bliver nul. Signatur filen indeholder en række funktioner som bliver anvendt af andre filer.
  
-\subsection{Property-based testing}
+\subsubsection{Komplekse tal Mondul}
 
+\subsection{Ligningsudtryk Mondulet}
+\subsubsection{Ligninger som træer}
+\subsubsection{Infix og Prefix notation}
+\subsubsection{Generering af Ligningsudtryk}
+
+\subsection{Simplifikation af Ligningsudtryk}
+\subsubsection{PBT af simplifikationen} % Beskriv hvordan man laver property based testen før simplifikationen
+
+\subsection{differentiering af Ligningsudtryk}
 
 \end{document}
+

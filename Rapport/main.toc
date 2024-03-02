@@ -3,4 +3,17 @@
 \contentsline {section}{\numberline {2}Fundamentale koncepter}{2}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Introduktion til Funktions Programmering}{2}{subsection.2.1}%
 \contentsline {subsubsection}{\numberline {2.1.1}Typer}{3}{subsubsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.2}Property-based testing}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}Signatur filer og implementerings filer}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Overloading operatorer}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Property Based Testing}{4}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Symbolske lignings udtryk}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Tal Mondulet}{5}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Rationelle tal Mondul}{5}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Komplekse tal Mondul}{7}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}Ligningsudtryk Mondulet}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Ligninger som træer}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Infix og Prefix notation}{7}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Generering af Ligningsudtryk}{7}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Simplifikation af Ligningsudtryk}{7}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}PBT af simplifikationen}{7}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}differentiering af Ligningsudtryk}{7}{subsection.3.4}%

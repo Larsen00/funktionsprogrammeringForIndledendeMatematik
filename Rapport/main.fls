@@ -410,8 +410,20 @@ INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT .\sections\Fundamentale_koncepter.tex
+INPUT .\sections\Fundamentale_koncepter.tex
+INPUT .\sections\Fundamentale_koncepter.tex
+INPUT .\sections\Fundamentale_koncepter.tex
+INPUT sections\Fundamentale_koncepter.tex
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
+INPUT .\exampleCodes\valid1.fsx
+INPUT .\exampleCodes\valid1.fsx
+INPUT exampleCodes\valid1.fsx
+INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
+INPUT ..\modules\rational.fsi
+INPUT ..\modules\rational.fsi
+INPUT ..\modules\rational.fsi
 INPUT main.aux
 INPUT .\main.out
 INPUT .\main.out
@@ -443,3 +455,5 @@ INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
+INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt8.pfb
+INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt8.pfb

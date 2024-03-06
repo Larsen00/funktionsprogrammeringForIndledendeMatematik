@@ -67,6 +67,7 @@
 \definecolor{bluekeywords}{rgb}{0.13, 0.13, 1}
 \definecolor{greencomments}{rgb}{0, 0.5, 0}
 \definecolor{red}{rgb}{0.9, 0, 0.6}
+\definecolor{liteblue}{rgb}{0.13, 0.58, 1}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -92,15 +93,16 @@
   tabsize=1,
   morecomment=[l][\color{greencomments}]{///},
   morecomment=[l][\color{greencomments}]{//},
-  morecomment=[s][\color{greencomments}]{{(*}{*)}},
   morestring=[b]",
   showstringspaces=false,
   literate={`}{\`}1,
   stringstyle=\color{greencomments},
-  emph={[2]let, rec, def, raise, member, static, type, of}, % Let og var er blå
+  emph={[2]let, rec, def, raise, member, static, type, of, }, % Let og var er blå
   emphstyle={[2]\color{bluekeywords}},
+  %emph={[3]Rational, rational, Number, int, Int}, % Typer
+  %emphstyle={[3]\color{liteblue}},
   emph={
-    sumList, factorial, f , failwith, ValueError, make, equal, posetive, toString, isZero, isOne, isInt, makeRatInt, greaterThan, isNegative, absRational,  propositional_formula
+    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational
     }, % Dit funktionsnavn her (purple)
   emphstyle=\color{red},
   xleftmargin=2em,

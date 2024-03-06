@@ -31,7 +31,7 @@ let rec sub e1 e2:Expr<Number>=
 
 // simplifies a addition expression
 let rec add e1 e2:Expr<Number> = 
-    printfn "s add %A + %A" e1 e2
+    // printfn "s add %A + %A" e1 e2
     match e1, e2 with
     | N a, b | b, N a when Number.isZero a -> b
     | N a, N b -> N (a + b)

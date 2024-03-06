@@ -100,7 +100,7 @@ Arb.register<SmallEnvGen>()
 
 
 let compareSimpExpr env (e:Expr<Number>) =
-    printfn "Expression: %A" e
+    // printfn "Expression: %A" e
     eval (SymbolicManipolation.simplifyExpr e) env  = eval e env
 
 

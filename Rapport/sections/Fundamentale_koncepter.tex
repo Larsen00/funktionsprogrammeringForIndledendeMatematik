@@ -61,7 +61,7 @@ En tuple som kun består af to typer, kaldes et par. \\I F\# er det ikke nødven
 Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$ betyder den tager to udtryk af typen $T_1$ og $T_2$ hvor evalueringen af funktionen giver $T_3$
  
 \subsection{Signatur filer og implementerings filer}
-En standard F\# fil er lavet med .fs extension, denne fil indeholder alt den kode som er nødigt for at kunne køre programmet. En implementerings fil kan have en signatur fil t med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementerings filen som er tilgængelige for andre filer. En signatur fil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replikere implementerings filen. 
+En standard F\# fil er lavet med .fs extension, denne fil indeholder alt den kode som er nødigt for at kunne køre programmet. En implementerings fil kan have en signatur fil t med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementerings filen som er tilgængelige for andre filer. En signatur fil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replikere implementerings filen. I andre programmerings sprog vil man anse funktionerne i signatur filen som værende "public" og de funktioner der ikke er i signatur filen, men er i implementerings filen som værende "private". I F\# er det ikke muligt at lave en funktion "private" i en implementerings
 
 \subsection{Overloading operatorer}
 I F\# er det muligt at overloade standard operatore, så man kan anvende dem på egne typer. Det vil igennem rapporten blive anvendt til at definere matematiske operationer på de typer som vi kommer til at bygge.

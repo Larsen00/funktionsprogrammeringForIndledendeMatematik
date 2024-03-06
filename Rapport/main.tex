@@ -23,8 +23,8 @@ Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funkti
 \section{Symbolske lignings udtryk}
 Det ønskes at kunne repræsentere simple ligninger som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udøføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere ligninger samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
-\subsection{Tal Mondulet}
-Vi begynder med opbygningen af et mondul som kan repræsentere tal. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet på gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footnote{\url{https://en.wikipedia.org/wiki/Floating-point_error_mitigation}}, men for ikke at komplikere programmet vil vi i denne opgave ikke betragte floats.  
+\subsection{Tal mængder}
+Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet er lavet på, gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footnote{\url{https://en.wikipedia.org/wiki/Floating-point_error_mitigation}}, men for ikke at komplicere programmet vil vi i denne opgave ikke betragte floats.  
 
 \subsubsection{Rationelle tal Mondul}
 Repræsentationen af rationale tal kan laves ved hjælp af danne et par af integers, hvor den ene integer er tælleren og den anden er nævneren. 
@@ -40,11 +40,73 @@ Nedestående er der givet en signatur fil for rational mondulet \ref{rational_fs
     caption={Signatur filen for rational mondulet}
 ]{../modules/rational.fsi}
 
-For forholdvis nemt at kunne sammenligne, men også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simpleste from. Dette kan gøres ved at finde den største fælles divisor (GCD) \footnote{\url{https://en.wikipedia.org/wiki/Greatest_common_divisor}}. Der udover er det vigtigt at være opmærksom på man ikke foretager nul division. Derfor vil implementerings filen kaste en "System.DivideByZeroException" hvis nævneren er eller bliver nul. Signatur filen indeholder en række funktioner som bliver anvendt af andre filer.
+For at kunne sammenligne, men også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simpleste from. Dette kan gøres ved at finde den største fælles divisor (GCD) \footnote{\url{https://en.wikipedia.org/wiki/Greatest_common_divisor}}. Der udover er det vigtigt at være opmærksom på man ikke foretager nul division. Derfor vil implementerings filen kaste en "System.DivideByZeroException" hvis nævneren er eller bliver nul. Signatur filen indeholder en række funktioner som bliver anvendt af andre filer. 
  
 \subsubsection{Komplekse tal Mondul}
 
+\subsubsection{Tal Mondulet}
+Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Vi begynder med at definere en type for tal \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
+
+% TODO: Tilføj komplekte tal når det er implementeret
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={number_type}, 
+    caption={Typen for Number}
+    ]
+    type Number = | Int of int | Rational of rational
+\end{lstlisting}
+
+Betragtes signatur filen for Number mondulet \ref{Number_fsi}, ses det at der igen er defineret overloading af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
+
+\lstinputlisting[
+    language=FSharp,
+    label={Number_fsi},
+    caption={Signatur filen for Number mondulet}
+]{../modules/number.fsi}
+
+Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som parameter. Funktionen vil derefter matche på de to tal og anvende den operation på de to tal. 
+
+\begin{lstlisting}[
+    language={FSharp},
+    label={operation}, 
+    caption={Number.operation funktionen}
+    ]
+// makeRational: Number -> rational
+let makeRational a =
+    match a with
+    | Int x       -> make(x, 1)
+    | Rational x  -> x
+
+// operation: Number -> Number -> (rational -> rational -> rational) -> Number
+let operation a b f =
+    f (makeRational a) (makeRational b) |> Rational
+\end{lstlisting}
+
+Det vil her til være oplagt på alle de matematiske operationer at anvende en funktionen til at forsøge at konvenere tal typen til den simpleste talmængde, som i vores tilfælde er heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryMakeInt} på alle de matematiske operations overloadnings \ref{overloads_number}.
+
+\begin{lstlisting}[
+    language={FSharp},
+    label={overloads_number}, 
+    caption={Overloadnings funktionerne for Number}
+    ]
+// tryMakeInt: Number -> Number
+let tryMakeInt r =
+    match r with
+    | Rational a when isInt a -> Int (makeRatInt a)
+    | _ -> r
+    
+type Number with
+  static member (+) (a, b) = operation a b (+) |> tryMakeInt
+  static member (-) (a, b) = operation a b (-) |> tryMakeInt
+  static member (*) (a, b) = operation a b (*) |> tryMakeInt
+  static member (/) (a, b) = operation a b (/) |> tryMakeInt
+  static member (~-) (a)   = neg a |> tryMakeInt
+\end{lstlisting}
+
+Dermed har vi et mondulet som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
+
 \subsection{Ligningsudtryk Mondulet}
+
 \subsubsection{Ligninger som træer}
 \subsubsection{Infix og Prefix notation}
 \subsubsection{Generering af Ligningsudtryk}

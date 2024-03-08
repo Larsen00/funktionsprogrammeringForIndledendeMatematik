@@ -16,24 +16,31 @@ let neg e:Expr<Number> =
     | N a -> N (-a)
     | _ -> Neg(e) 
 
+
 // adds two expressions
-let rec add a b:Expr<Number>  =
-    // printfn "ADD : %A + %A" a b
-    match a, b with
-    | N x, N y -> N (x + y)
-    | N a, b | b, N a when isZero a -> b 
-    | Mul(a, X b), Mul(c, X d) when b = d -> Mul(add a c, X b) 
-    | _, _ -> Add(a, b)
+let rec add e1 e2:Expr<Number>  =
+    match e1, e2 with
+    | N a, N b                            -> N (a + b)
+    | N a, b | b, N a when isZero a       -> b
+    | Mul(a, X b), Mul(c, X d) 
+    | Mul(X b, a), Mul(c, X d)
+    | Mul(a, X b), Mul(X d, c) 
+    | Mul(X b, a), Mul(X d, c) when b = d -> Mul(add a c, X b)  
+    | _, _                                -> Add(e1, e2)
 
 // subtracts two expressions
 let rec sub a b:Expr<Number>  =
-    // printfn "SUB : %A - %A" a b
     match a, b with
-    | N x, N y  when greaterThan y x -> Neg (N (y - x)) // greaterThan y x <=> y > x
+    | _, _ when a = b -> N zero
+    | N x, N y  when greaterThan y x -> Neg (N (y - x)) // Want to avoid negative numbers
     | N x, N y -> N (x - y)
-    | N a, b | b, N a when isZero a -> Neg b
+    | N a, b when isZero a -> Neg b
+    | a, N b when isZero b -> a
     | a, Neg b -> add a b 
-    | Mul(a, X b), Mul(c, X d) when b = d -> Mul(sub a c, X b)
+    | Mul(a, X b), Mul(c, X d) 
+    | Mul(X b, a), Mul(c, X d)
+    | Mul(a, X b), Mul(X d, c) 
+    | Mul(X b, a), Mul(X d, c) when b = d -> Mul(sub a c, X b) 
     | _, _ -> Sub(a, b)
  
 // multiplies two expressions with simplification 
@@ -42,12 +49,10 @@ let rec mul e1 e2:Expr<Number> =
     |N a, N b                       -> N (a * b)
     |N a, b | b, N a when isOne a   -> b
     |N a, _ | _, N a when isZero a  -> N zero
-    |a, Div(b, c) | Div(b, c), a    -> Div (mul a b, c)
     | _, _                          -> Mul(e1, e2)
 
 // divides two expressions with simplification
 let div e1 e2:Expr<Number> =
-    // printfn "div.expr %A / %A" e1 e2
     match e1, e2 with
     | _, _   when e1 = e2     -> N one
     | _, N a when isOne a     -> e1
@@ -55,6 +60,8 @@ let div e1 e2:Expr<Number> =
     | _, N a when isZero a    ->  raise (System.DivideByZeroException("Expression.div: Cannot divide by zero!"))
     | N a, N b                -> N (a / b)
     | _, _                    -> Div(e1, e2)  
+
+
 
 type Expr<'a> with
     static member (~-) (e)              = neg e

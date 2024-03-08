@@ -65,24 +65,19 @@ printfn "%A" dx
 // Simplified: Mul (X 'Q', Div (N (Int 1), N (Int -3)))
 // map [('O', Rational (R (-1, 1))); ('T', Int 8)], ['O'; 'T']
 
-let generateExpresion = Add
-                            (Div
-                                (Mul (Neg (N (Rational (R (5, 7)))), X 'U'),
-                                Neg (Neg (N (Rational (R (-1, 4)))))),
-                            Sub
-                                (Add
-                                    (Div (N (Rational (R (8, 9))), N (Rational (R (-4, 1)))),
-                                    Div (X 'U', N (Rational (R (9, 2))))),
-                                Add (Neg (X 'A'), Add (N (Rational (R (4, 3))), N (Rational (R (-7, 6)))))))
+let generateExpresion = 
+                            
+
+                                    Sub (N (Rational (R (-9, 5))), N (Rational (R (0, 1))))
 
 
-let m = Map.ofList [('A', Rational (R (-1, 7))); ('D', Int -1); ('U', Rational (R (10, 9)))]
-// let s = simplifyExpr generateExpresion
-let a = (AssociationForAddSub.applyAssociation (generateExpresion))
+let m = Map.ofList []
+let s = simplifyExpr generateExpresion
+// let a = (AssociationForAddSub.applyAssociation (generateExpresion))
 // showSimp generateExpresion
 // printfn "%A" (eval s m)
 printfn "%A" (eval generateExpresion m)
-printfn "%A" (eval a m)
+printfn "%A" (eval s m)
 
 // Add
 //   (Div
@@ -102,8 +97,5 @@ printfn "%A" (eval a m)
 // sortAss [N (Rational (R (4, 3))); N (Rational (R (-1, 2))); Mul (N (Int 1), X 'D');
 //  Div (Mul (N (Int 5), X 'U'), N (Rational (R (-1, 4))));
 //  Div (X 'U', N (Rational (R (9, 2)))); Neg (X 'A')]
-
-
-tree "-(3*x-5)*2"
 
 

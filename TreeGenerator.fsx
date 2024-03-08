@@ -85,7 +85,7 @@ let tree s =
     |tree::_ -> tree
 
 
-
+// uses modified inorder traversal to generate infix string from expression tree
 let rec ExpressionToInfix e p =
     match e with
     | N a -> toString a

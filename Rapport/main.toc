@@ -15,8 +15,9 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Polsk notation}{8}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}Ligninger som træer}{8}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Ligningsudtryk mondulet}{10}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.4}Generering af Ligningsudtryk}{11}{subsubsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.3}Evaluering af ligningsudtryk}{11}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Simplifikation af Ligningsudtryk}{11}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}PBT af simplifikationen}{11}{subsubsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.5}differentiering af Ligningsudtryk}{11}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.2.4}Generering af Ligningsudtryk}{12}{subsubsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.3}Evaluering af ligningsudtryk}{12}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}PBT af evalueringen}{12}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Simplifikation af Ligningsudtryk}{12}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}PBT af simplifikationen}{12}{subsubsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.5}differentiering af Ligningsudtryk}{12}{subsection.3.5}%

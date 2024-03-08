@@ -107,7 +107,9 @@ let compareSimpExpr env (e:Expr<Number>) =
 let simpEqualEval se = 
     try
         let (env, xlist) = se
-        if Gen.sample 1 1 (exprGen xlist 10) |> List.head |> compareSimpExpr env then 1 else 0
+        let expr = Gen.sample 1 1 (exprGen xlist 10) |> List.head
+        printfn "Expression: %A" expr
+        if expr |> compareSimpExpr env then 1 else 0
     with
         | :? System.DivideByZeroException as ex ->
             printfn "DivideByZeroException: %A" ex

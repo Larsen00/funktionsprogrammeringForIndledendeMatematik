@@ -307,17 +307,48 @@ val it: Expr<Number> =
   Mul (Neg (Sub (Mul (N (Int 3), X 'x'), N (Int 5))), N (Int 2))
 \end{lstlisting}
 
-Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes mellem på ligningsudtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et ligningsudtryk. 
+Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes mellem ligningsudtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et ligningsudtryk. 
 \lstinputlisting[
     language=FSharp,
     label={Number_fsi},
     caption={Signatur filen for Expression mondulet}
     ]{../modules/Expression.fsi}
 
+
+
+De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evalueing vil sige at de individuellen funktioner kun betragter de to øverste niveauer på de lignings udtryk træer de tager som input, mullige implementeringer af addition og multiplikation er givet i \ref{lst:mul_expr}. 
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:mul_expr}, 
+  caption={Addition og multiplikation af to ligningsudtryk}
+  ]
+// add: Expr<Number> -> Expr<Number> -> Expr<Number>
+let rec add e1 e2:Expr<Number>  =
+  match e1, e2 with
+  | N a, N b                            -> N (a + b)
+  | N a, b | b, N a when isZero a       -> b
+  | Mul(a, X b), Mul(c, X d) 
+  | Mul(X b, a), Mul(c, X d)
+  | Mul(a, X b), Mul(X d, c) 
+  | Mul(X b, a), Mul(X d, c) when b = d -> Mul(add a c, X b)  
+  | _, _                                -> Add(e1, e2)
+
+// mul: Expr<Number> -> Expr<Number> -> Expr<Number>
+let mul e1 e2:Expr<Number> =
+  match e1, e2 with
+  |N a, N b                       -> N (a * b)
+  |N a, b | b, N a when isOne a   -> b
+  |N a, _ | _, N a when isZero a  -> N zero
+  | _, _                          -> Mul(e1, e2)
+\end{lstlisting}
+
+
 \subsubsection{Generering af Ligningsudtryk}\label{sec:expression_generation}
 % KAN lave PBT
     
 \subsection{Evaluering af ligningsudtryk}
+\subsubsection{PBT af evalueringen} % #TODO
 \subsection{Simplifikation af Ligningsudtryk} \label{sec:simplification_expression}
 \subsubsection{PBT af simplifikationen} % Beskriv hvordan man laver property based testen før simplifikationen
 

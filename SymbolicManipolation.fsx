@@ -15,32 +15,35 @@ let neg e:Expr<Number> =
     | Neg a -> a
     | _ -> Neg e
 
-// simplifies a subtraction expression
-let rec sub e1 e2:Expr<Number>=
-    // printfn "s sub %A - %A" e1 e2
-    match e1, e2 with
-    | _, _ when e1 = e2 -> N zero
-    | N a, _ when Number.isZero a -> neg e2
-    | _, N a when Number.isZero a -> e1
-    | N a, N b -> N (a - b)
-    | Neg a, Neg b -> neg (sub a b)
-    | a, Neg b -> a + b
-    | Mul(a, X b), Mul(c, X d) when b = d -> Mul(sub a c, X b)
-    // | _, _ -> AssociationForAddSub.applyAssociation (Sub(e1, e2))
-    | _ -> Sub(e1, e2)
-
 // simplifies a addition expression
-let rec add e1 e2:Expr<Number> = 
-    // printfn "s add %A + %A" e1 e2
+let rec add e1 e2 =
+    match e1 + e2 with
+    | Neg a -> neg a
+    | Add(a, b) -> add_simp a b
+    | a -> a
+
+and add_simp e1 e2:Expr<Number> = 
     match e1, e2 with
-    | N a, b | b, N a when Number.isZero a -> b
-    | N a, N b -> N (a + b)
     | a, b when a = b -> Mul (N two, b)
     | Neg a, Neg b -> neg (add a b) 
     | a, Neg b -> sub a b
-    | Mul(a, X b), Mul(c, X d) when b = d -> Mul(add a c, X b)
     | _, _ -> AssociationForAddSub.applyAssociation (Add(e1, e2))
-    // | _ -> Add(e1, e2)
+
+// simplifies a subtraction expression
+let rec sub e1 e2 =
+    match e1 - e2 with
+    | Neg a -> neg a
+    | Add(a, b) -> add a b
+    | Sub(a, b) -> sub_simp a b
+    | a -> a
+and sub_simp e1 e2:Expr<Number>=
+    match e1, e2 with
+    | Neg a, Neg b -> neg (sub a b)
+    // | _, _ -> AssociationForAddSub.applyAssociation (Sub(e1, e2))
+    | _, _ -> Sub(e1, e2)
+
+
+
 
 // simplifies a multiplication expression
 let rec mul e1 e2:Expr<Number> =

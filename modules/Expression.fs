@@ -4,8 +4,8 @@ open Number
 type Expr<'a> = 
             | X of char
             | N of 'a
-            | Add of Expr<'a> * Expr<'a>
             | Neg of Expr<'a>
+            | Add of Expr<'a> * Expr<'a>
             | Sub of Expr<'a> * Expr<'a>
             | Mul of Expr<'a> * Expr<'a>
             | Div of Expr<'a> * Expr<'a>
@@ -43,7 +43,7 @@ let rec mul e1 e2:Expr<Number> =
     |N a, b | b, N a when isOne a   -> b
     |N a, _ | _, N a when isZero a  -> N zero
     |a, Div(b, c) | Div(b, c), a    -> Div (mul a b, c)
-    | _, _ -> Mul(e1, e2)
+    | _, _                          -> Mul(e1, e2)
 
 // divides two expressions with simplification
 let div e1 e2:Expr<Number> =

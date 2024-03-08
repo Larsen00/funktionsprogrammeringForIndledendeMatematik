@@ -1,1 +1,5 @@
 * For at udvide expr kan man lave fx type vector så have expr<Vector> 
+
+* Lav en PBT til at vise træ generaringen er korrekt fra string (Man bør kunne bruge komplekse tal og rationelle).
+
+* laves en poly kan man fx lave poly<'a> og så tilføje den i number som P of poly<Number>

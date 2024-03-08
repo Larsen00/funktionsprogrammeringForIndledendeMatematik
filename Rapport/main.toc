@@ -8,13 +8,15 @@
 \contentsline {subsection}{\numberline {2.4}Property Based Testing}{4}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Symbolske lignings udtryk}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Tal mængder}{5}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Rationelle tal Mondul}{6}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Komplekse tal Mondul}{7}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Tal Mondulet}{7}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Ligningsudtryk Mondulet}{8}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Ligninger som træer}{8}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Infix og Prefix notation}{8}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Generering af Ligningsudtryk}{8}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Simplifikation af Ligningsudtryk}{8}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}PBT af simplifikationen}{8}{subsubsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.4}differentiering af Ligningsudtryk}{8}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.1.1}Rationelle tal Mondul}{5}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Komplekse tal Mondul}{6}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Tal Mondulet}{6}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Matematiske ligninger}{8}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Polsk notation}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Ligninger som træer}{8}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Ligningsudtryk mondulet}{10}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Generering af Ligningsudtryk}{11}{subsubsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.3}Evaluering af ligningsudtryk}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Simplifikation af Ligningsudtryk}{11}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}PBT af simplifikationen}{11}{subsubsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.5}differentiering af Ligningsudtryk}{11}{subsection.3.5}%

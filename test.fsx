@@ -103,3 +103,7 @@ printfn "%A" (eval a m)
 //  Div (Mul (N (Int 5), X 'U'), N (Rational (R (-1, 4))));
 //  Div (X 'U', N (Rational (R (9, 2)))); Neg (X 'A')]
 
+
+tree "-(3*x-5)*2"
+
+

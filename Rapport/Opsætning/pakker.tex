@@ -86,7 +86,7 @@
     let!, return!, do!, yield!, use!, from, select, where, order, by, val },
   keywordstyle=\color{codepurple},
   sensitive=true,
-  basicstyle=\ttfamily,
+  basicstyle=\ttfamily\small,
   breaklines=true,
   xleftmargin=\parindent,
   aboveskip=\bigskipamount,
@@ -102,7 +102,7 @@
   %emph={[3]Rational, rational, Number, int, Int}, % Typer
   %emphstyle={[3]\color{liteblue}},
   emph={
-    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational
+    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval
     }, % Dit funktionsnavn her (purple)
   emphstyle=\color{red},
   xleftmargin=2em,
@@ -135,7 +135,8 @@
 
 \lstdefinestyle{output}{
     backgroundcolor=\color{gray!10}, % Set the background color
-    basicstyle=\ttfamily,            % Use a monospaced font
+    literate={''}{{'}}1,
+    basicstyle=\ttfamily\small,            % Use a monospaced font
     numbers=none,                    % No line numbers
     frame=none,                      % No frame around the code
 }

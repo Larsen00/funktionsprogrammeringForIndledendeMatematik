@@ -8,3 +8,6 @@ https://www.sympy.org/en/index.html
 https://techbeacon.com/app-dev-testing/how-make-your-code-bulletproof-property-testing#:~:text=What%20is%20property%2Dbased%20testing,that%20you%20want%20to%20test.
 https://en.wikipedia.org/wiki/Floating-point_error_mitigation
 https://en.wikipedia.org/wiki/Rational_number
+https://en.wikipedia.org/wiki/Infix_notation#:~:text=Infix%20notation%20is%20the%20notation,plus%20sign%20in%202%20%2B%202.
+http://www.docjava.dk/grundlaeggende_programmering/typer/typer.htm#:~:text=Man%20kalder%20de%20to%20v%C3%A6rdier,operanderne%20(der%20er%20undtagelser).
+https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/

@@ -103,18 +103,226 @@ type Number with
   static member (~-) (a)   = neg a |> tryMakeInt
 \end{lstlisting}
 
-Dermed har vi et mondulet som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
+Dermed har vi et mondul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
 
-\subsection{Ligningsudtryk Mondulet}
+\subsection{Matematiske ligninger}
+\subsubsection{Polsk notation}
+Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notation I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footnote{\url{https://en.wikipedia.org/wiki/Polish_notation}}. 
+
+\begin{align*}
+    \text{Infix Notation:} \quad & (A + B) \cdot C \\
+    \text{Prefix Notation:} \quad &  \cdot + A B C  \\
+    \text{Postfix Notation:} \quad & A \, B \, + \, C \, \cdot
+\end{align*}
+
+ 
 
 \subsubsection{Ligninger som træer}
-\subsubsection{Infix og Prefix notation}
-\subsubsection{Generering af Ligningsudtryk}
+Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ \ref{fig:expression_tree}. 
 
-\subsection{Simplifikation af Ligningsudtryk}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    level distance=1.5cm,
+    level 1/.style={sibling distance=3.5cm},
+    level 2/.style={sibling distance=2cm},
+    level 3/.style={sibling distance=1.5cm},
+    every node/.style={ align=center}
+  ]
+  \node {*}
+    child {
+      node {-}
+      child {
+        node {-}
+        child {
+          node {*}
+          child {
+            node {3}
+          }
+          child {
+            node {x}
+          }
+        }
+        child {
+          node {5}
+        }
+      }
+    }
+    child {
+      node {2}
+    };
+\end{tikzpicture}
+\caption{Et binært træ der repræsenterer udtrykket $-(3 \cdot x - 5) \cdot 2$}
+\label{fig:expression_tree}
+\end{figure}
+Det skal bemærkes der er forskel på den unære og binære operator $-$ i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for en matematisk ligning, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footnote{\url{https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/}}, algorithmerne er illustreret i figut \ref{fig:expression_tree_traversal}.
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.32\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},
+    ]
+      \node[label={[label distance=0.1cm, text=red]165:7}] {*}
+        child {
+          node[label={[label distance=0.1cm, text=red]165:1}] {-}
+          child {
+            node[label={[label distance=0.1cm, text=red]165:5}] {-}
+            child {
+              node[label={[label distance=0.1cm, text=red]165:3}] {*}
+              child {
+                node[label={[label distance=0.1cm, text=red]165:2}] {3}
+              }
+              child {
+                node[label={[label distance=0.1cm, text=red]15:4}] {x}
+              }
+            }
+            child {
+              node[label={[label distance=0.1cm, text=red]15:6}] {5}
+            }
+          }
+        }
+        child {
+          node[label={[label distance=0.1cm, text=red]15:8}] {2}
+        };
+    \end{tikzpicture}
+    \caption{\\Modificeret Inorder Travesal}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.3\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},
+    ]
+      \node[label={[label distance=0.1cm, text=red]165:1}] {*}
+        child {
+          node[label={[label distance=0.1cm, text=red]165:2}] {-}
+          child {
+            node[label={[label distance=0.1cm, text=red]165:3}] {-}
+            child {
+              node[label={[label distance=0.1cm, text=red]165:4}] {*}
+              child {
+                node[label={[label distance=0.1cm, text=red]165:5}] {3}
+              }
+              child {
+                node[label={[label distance=0.1cm, text=red]15:6}] {x}
+              }
+            }
+            child {
+              node[label={[label distance=0.1cm, text=red]15:7}] {5}
+            }
+          }
+        }
+        child {
+          node[label={[label distance=0.1cm, text=red]15:8}] {2}
+        };
+    \end{tikzpicture}
+    \caption{\\Preorder Traversal}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.3\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},
+    ]
+      \node[label={[label distance=0.1cm, text=red]165:8}] {*}
+        child {
+          node[label={[label distance=0.1cm, text=red]165:6}] {-}
+          child {
+            node[label={[label distance=0.1cm, text=red]165:5}] {-}
+            child {
+              node[label={[label distance=0.1cm, text=red]165:3}] {*}
+              child {
+                node[label={[label distance=0.1cm, text=red]165:1}] {3}
+              }
+              child {
+                node[label={[label distance=0.1cm, text=red]15:2}] {x}
+              }
+            }
+            child {
+              node[label={[label distance=0.1cm, text=red]15:4}] {5}
+            }
+          }
+        }
+        child {
+          node[label={[label distance=0.1cm, text=red]15:7}] {2}
+        };
+    \end{tikzpicture}
+    \caption{\\Postorder Traversal}
+  \end{subfigure}
+  \begin{align*}
+      \text{Modificeret Inorder Traversal:} \quad & - (3 \cdot x - 5) \cdot 2 \\
+      \text{Preorder Traversal:} \quad &  \cdot - - \cdot 3\, x\, 5\, 2  \\
+      \text{Postorder Traversal:} \quad & 3\, x\, \cdot 5\, - -  2\, \cdot
+  \end{align*}
+  \caption{Træet fra \ref{fig:expression_tree} med forskellige travesal metoder}
+  \label{fig:expression_tree_traversal}
+\end{figure}
+
+
+Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et mondul som kan repræsentere ligningsudtryk ved brug af prefix notation.
+Postorder Traversal blive anvendt til at kunne rekursivt simplificere og evaluere ligningsudtryk.
+
+Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes en symbolsk ligning. Den modificeret Inorder Traversal anvendes til at kunne visualisere ligningsudtryk i infix notation.
+
+
+\subsubsection{Ligningsudtryk mondulet} \label{sec:expression_module}
+Efter at have lavet et mondul til at repræsentere tal mængder, er det nu muligt at kunne implementere et mondul som kan repræsentere ligningsudtryk. Vi begynder ved at definere en polymorf type for et ligningsudtryk \ref{expr_type}. Typen består af en række konstruktører, som repræsentere de matematiske operationer vi ønsker at kunne anvende, samt en konstruktør N for at repræsentere matematiske strukturer og X for at repræsentere variable. Vi begynder med at betragte matematiske strukturer, i form af de tal mængder vi har definerede som Number \ref{number_type}. Vi vil senere betragte hvordan det vil være muligt at udvide programmet til at kunne repræsentere flere matematiske strukturer så som vektorer.     
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={expr_type}, 
+    caption={Typen for Expr}
+    ]
+type Expr<'a> = 
+    | X of char
+    | N of 'a
+    | Neg of Expr<'a>
+    | Add of Expr<'a> * Expr<'a>
+    | Sub of Expr<'a> * Expr<'a>
+    | Mul of Expr<'a> * Expr<'a>
+    | Div of Expr<'a> * Expr<'a>
+\end{lstlisting}
+
+Expr\textless'a\textgreater{}  typen er dermed en polymorf type, hvor 'a er typen for den matematiske struktur hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i \ref{lst:expr_example}. 
+
+\begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen tree bliver beskrevet i \ref{sec:expression_generation}.}]
+> tree "-(3*x-5)*2";;
+val it: Expr<Number> = 
+  Mul (Neg (Sub (Mul (N (Int 3), X 'x'), N (Int 5))), N (Int 2))
+\end{lstlisting}
+
+Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes mellem på ligningsudtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et ligningsudtryk. 
+\lstinputlisting[
+    language=FSharp,
+    label={Number_fsi},
+    caption={Signatur filen for Expression mondulet}
+    ]{../modules/Expression.fsi}
+
+\subsubsection{Generering af Ligningsudtryk}\label{sec:expression_generation}
+% KAN lave PBT
+    
+\subsection{Evaluering af ligningsudtryk}
+\subsection{Simplifikation af Ligningsudtryk} \label{sec:simplification_expression}
 \subsubsection{PBT af simplifikationen} % Beskriv hvordan man laver property based testen før simplifikationen
 
 \subsection{differentiering af Ligningsudtryk}
+    
 
 \end{document}
 

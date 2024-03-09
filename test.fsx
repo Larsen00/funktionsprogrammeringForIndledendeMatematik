@@ -3,7 +3,7 @@
 // Modules
 open Expression
 open Number
-open rational
+open rantionalAndComplex
 
 // fsx files
 open Differentiation

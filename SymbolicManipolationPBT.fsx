@@ -6,7 +6,7 @@
 #r "nuget: FsCheck"
 #load "SymbolicManipolation.fsx"
 open FsCheck
-open rational
+open rantionalAndComplex
 open Number
 open Expression
 
@@ -25,13 +25,13 @@ let varGen xlist =
 // generate a random Number
 let numberGen =
     Gen.oneof [
-        Gen.map2 (fun x y -> Rational (make(x, y))) (Gen.choose(-10, 10)) noneZeroGen;
+        Gen.map2 (fun x y -> Rational (makeR(x, y))) (Gen.choose(-10, 10)) noneZeroGen;
         Gen.map (fun x -> Int x) (Gen.choose(-10, 10))]
 
 // generate a random Number (a Expresion leaf)
 let numberInExprGen = 
     Gen.oneof [
-        Gen.map2 (fun x y -> N (Rational (make(x, y)))) (Gen.choose(-10, 10)) noneZeroGen ;
+        Gen.map2 (fun x y -> N (Rational (makeR(x, y)))) (Gen.choose(-10, 10)) noneZeroGen ;
         Gen.map (fun x -> N (Int x)) (Gen.choose(-10, 10))]
 
 // generate a random variable (a Expresion leaf)

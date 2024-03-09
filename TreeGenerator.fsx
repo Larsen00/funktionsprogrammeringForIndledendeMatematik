@@ -1,6 +1,6 @@
 
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-#load "modules/rational.fs"
+#load "modules/rantionalAndComplex.fs"
 #load "modules/Number.fs"
 #load "modules/Expression.fs"
 open Number

@@ -1,7 +1,7 @@
 #load "Differentiation.fsx"
 open Expression
 open Number
-open rational
+open rantionalAndComplex
 
 
 // rank when sorting a assoative expression
@@ -102,7 +102,7 @@ let applyAssociationAS e =
 /////////////////////////////////////////////////////////////////
 
 // rank when sorting a assoative expression
-let expressionSortRank e1 =
+let expressionSortRankMD e1 =
     match e1 with
     | Neg _ -> 1
     | N _ -> 2
@@ -113,7 +113,7 @@ let expressionSortRank e1 =
     | Div _ -> 7
  
 // sorts the assoative list
-let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
+let rec sortAssMD l = List.sortBy (fun e -> expressionSortRankMD e) l
 
 
 // determines the sign of a assoative list
@@ -125,12 +125,12 @@ let rec signList l s =
 
 
 // flattens the tree to a assoative list
-let rec flatTree e =
+let rec flatTreeMD e =
     match e with 
     | N _ | X _ | Add _ | Sub _ -> [e]
-    | Neg a -> Neg (N one) :: flatTree a
-    | Mul (a, b) -> flatTree a @ flatTree b
-    | Div (a, b) -> Div (N one, b) :: flatTree a 
+    | Neg a -> Neg (N one) :: flatTreeMD a
+    | Mul (a, b) -> flatTreeMD a @ flatTreeMD b
+    | Div (a, b) -> Div (N one, b) :: flatTreeMD a 
 
 
 // multiplys all Div elements in a assoative list
@@ -150,7 +150,7 @@ let rec removeElem e l =
 
 // reduces a assoative list
 let rec reduceAss l =
-    let sorted = divCancelling (sortAss l)
+    let sorted = divCancelling (sortAssMD l)
     // printfn "sorted: %A" sorted
     if signList sorted 1 > 0 then rebuildTree sorted else Neg (rebuildTree sorted)
 
@@ -160,10 +160,8 @@ and divCancelling l =
     match List.rev l with
     | [] -> l
     | Div(_, b)::tail -> 
-                        let (numerator, denominator) = cancelEquality  (List.rev tail) (sortAss (flatTree b))
-                        // printfn "numerator: %A, denominator: %A" numerator denominator
-                        // sortAss (flatTree (rebuildTree numerator / rebuildTree denominator))
-                        sortAss (flatTree (reduceAss numerator / reduceAss denominator))
+                        let (numerator, denominator) = cancelEquality  (List.rev tail) (sortAssMD (flatTreeMD b))
+                        sortAssMD (flatTreeMD (reduceAss numerator / reduceAss denominator))
     | _ -> l
 
 // cancels out equal elements in the numerator and denominator
@@ -185,15 +183,15 @@ and rebuildTree l =
     | Neg (N a)::tail when Number.isOne a -> rebuildTree tail
     | Neg a::tail -> rebuildTree (a::tail)
     | N a::N b::tail -> rebuildTree (N (a * b) :: tail)
-    | N a :: Add(b, c) :: tail -> rebuildTree (Add(reduceAss (flatTree (Mul(N a, b))), reduceAss (flatTree (Mul(N a, c)))) :: tail)
-    | N a :: Sub(b, c) :: tail -> rebuildTree (Sub(reduceAss (flatTree (Mul(N a, b))), reduceAss (flatTree (Mul(N a, c)))) :: tail)
+    | N a :: Add(b, c) :: tail -> rebuildTree (Add(reduceAss (flatTreeMD (Mul(N a, b))), reduceAss (flatTreeMD (Mul(N a, c)))) :: tail)
+    | N a :: Sub(b, c) :: tail -> rebuildTree (Sub(reduceAss (flatTreeMD (Mul(N a, b))), reduceAss (flatTreeMD (Mul(N a, c)))) :: tail)
     | a::tail -> a * rebuildTree tail
 
 
 // applies the assoation rules to a tree    
 let applyAssociationMD e:Expr<Number> =
     match e with
-    | Mul _ | Div _ -> reduceAss (flatTree e)
+    | Mul _ | Div _ -> reduceAss (flatTreeMD e)
     | _ -> e
 
 
@@ -252,7 +250,7 @@ let rec mul e1 e2:Expr<Number> =
     | Div (a, b), Div (c, d) -> div (mul a c) (mul b d)
     // | Div (a, b), c | c , Div(a, b) -> div (applyAssociationMD (Mul(a, c))) b
     | _, _ -> applyAssociationMD (Mul(e1, e2))
-    | _ -> Mul(e1, e2)
+
 
 
 // simplifies a division expression

@@ -1,6 +1,12 @@
 module Number
 open rational
-type Number = | Int of int | Rational of rational
+open complex
+type Number = 
+        | Int of int 
+        | Rational of rational
+        | Complex of complex<Number>
+
+
 
 // #TODO med tiden vil man kunne tilføje funktionalitet sådan at man kan mixe int rationalle tal her ville man lave en make complex måske. og en try make rational.
 

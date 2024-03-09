@@ -6,13 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="mudules/complex.fsi" />
+    <Compile Include="modules/complex.fs" />
     <Compile Include="modules/rational.fsi" />
     <Compile Include="modules/rational.fs" />
     <Compile Include="modules/Number.fsi" />
     <Compile Include="modules/Number.fs" />
     <Compile Include="modules/Expression.fsi" />
     <Compile Include="modules/Expression.fs" />
-    <Compile Include="Association.fs" />
   </ItemGroup>
 
 </Project>

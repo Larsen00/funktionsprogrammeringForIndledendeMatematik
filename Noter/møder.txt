@@ -80,3 +80,5 @@ Plan for næste uge:
 
 monomie basen for poly nomier - Lav det dirkete som det står i mat 1 noterne
 gram smidt algorithme ligger under 1b
+
+# Møde 5

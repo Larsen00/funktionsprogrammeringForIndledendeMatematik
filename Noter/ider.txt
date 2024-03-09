@@ -3,3 +3,9 @@
 * Lav en PBT til at vise træ generaringen er korrekt fra string (Man bør kunne bruge komplekse tal og rationelle).
 
 * laves en poly kan man fx lave poly<'a> og så tilføje den i number som P of poly<Number>
+
+* Lav en vector type, som type vector = list<Number> * T hvor T er en type for om den er transponert eller ej
+    - Kan dinifere metoder til fx gramsmidt
+    - i samme mondul vil man kunne have matrix som liste af vector af samme T og definere om den er row eller col vise.
+
+* Et polynomie kan være en vector i monomie basen

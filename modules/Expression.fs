@@ -74,8 +74,8 @@ type Expr<'a> with
 // evaluates an expression without simplification, hence only using the Number operations
 let rec eval (e:Expr<Number>) (env) =
     match e with
-    | X x -> tryMakeInt(Map.find x env)
-    | N n -> tryMakeInt(n)
+    | X x -> tryReduce(Map.find x env)
+    | N n -> tryReduce(n)
     | Neg a -> - eval a env
     | Add (a, b) -> eval a env + eval b env
     | Sub (a, b) -> eval a env - eval b env

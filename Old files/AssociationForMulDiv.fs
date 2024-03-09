@@ -1,7 +1,7 @@
 module AssociationForMulDiv
 open Association
-open Expression
 open Number
+open Expression
 
 /////////////////////////////////////////////////////////////////
 /// ASSOCIATION RULES For multiplication and division ///////////

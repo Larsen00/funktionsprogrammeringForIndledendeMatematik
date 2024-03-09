@@ -13,7 +13,7 @@
 \contentsline {subsubsection}{\numberline {3.1.3}Tal Mondulet}{6}{subsubsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.2}Matematiske ligninger}{8}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}Polsk notation}{8}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Ligninger som træer}{8}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2}Ligninger som træer}{9}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Ligningsudtryk mondulet}{10}{subsubsection.3.2.3}%
 \contentsline {subsubsection}{\numberline {3.2.4}Generering af Ligningsudtryk}{12}{subsubsection.3.2.4}%
 \contentsline {subsection}{\numberline {3.3}Evaluering af ligningsudtryk}{12}{subsection.3.3}%

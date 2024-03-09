@@ -3,7 +3,6 @@
 #load "modules/rational.fs"
 #load "modules/Number.fs"
 #load "modules/Expression.fs"
-#load "modules.fsx"
 open Number
 open Expression
 

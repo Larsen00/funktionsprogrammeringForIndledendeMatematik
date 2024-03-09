@@ -10,6 +10,7 @@ open Differentiation
 open TreeGenerator
 open SymbolicManipolation
 
+
 let showSimp e =
     printfn "ORGINAL"
     printfn "%A" e

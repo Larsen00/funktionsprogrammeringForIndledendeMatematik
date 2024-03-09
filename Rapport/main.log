@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  8 MAR 2024 16:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  9 MAR 2024 18:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -907,7 +907,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 l.11 \newpage
               [1] (sections/Fundamentale_koncepter.tex
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 18.
- [2] [3] (exampleCodes/valid1.fsx)) [4] [5] (../modules/rational.fsi) [6] (../modules/number.fsi) [7{C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [8]
+ [2] [3] (exampleCodes/valid1.fsx)) [4] [5] (../modules/rational.fsi) [6] (../modules/number.fsi) [7] [8{C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 Overfull \hbox (19.87704pt too wide) in paragraph at lines 195--196
  [][] 
  []
@@ -948,17 +948,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 6EB9F003D991D5F41DA4CEEFF51595F6;3894.
  ) 
 Here is how much of TeX's memory you used:
- 30413 strings out of 474457
- 557310 string characters out of 5742755
+ 30420 strings out of 474457
+ 557408 string characters out of 5742755
  2251190 words of memory out of 5000000
- 51955 multiletter control sequences out of 15000+600000
+ 51959 multiletter control sequences out of 15000+600000
  567725 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,96p,1292b,2079s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\jonas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt0900.pk><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on main.pdf (13 pages, 376607 bytes).
+Output written on main.pdf (13 pages, 377138 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
- 198 named destinations out of 1000 (max. 500000)
+ 535 PDF objects out of 1000 (max. 8388607)
+ 201 named destinations out of 1000 (max. 500000)
  194 words of extra memory for PDF output out of 10000 (max. 10000000)
 

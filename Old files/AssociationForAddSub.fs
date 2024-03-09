@@ -1,8 +1,7 @@
 module AssociationForAddSub
 open Association
-open Expression
 open Number
-
+open Expression
 
 // rank when sorting a assoative expression
 let expressionSortRank e1 =

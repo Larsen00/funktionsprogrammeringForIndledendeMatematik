@@ -12,6 +12,8 @@
     <Compile Include="modules/Number.fs" />
     <Compile Include="modules/Expression.fsi" />
     <Compile Include="modules/Expression.fs" />
+    <Compile Include="modules/Vector.fsi" />
+    <Compile Include="modules/Vector.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

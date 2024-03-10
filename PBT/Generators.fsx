@@ -1,14 +1,14 @@
-(*
-    Code is largely based on slides from 02257 Applied Functional Programming
-    about property-based testing.
-*)
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
-#load "SymbolicManipolation.fsx"
+#load "../SymbolicManipolation.fsx"
+#load "../modules/Vector.fs"
 open FsCheck
 open rantionalAndComplex
 open Number
 open Expression
+open Vector
+
+
 
 let max = 10
 let min = -10
@@ -60,21 +60,6 @@ let smallEnvGen =
         let! ns = Gen.listOfLength i numberGen
         return (Map.ofList (List.zip xlist ns), xlist) }
 
-// generate a random expression
-// let expr charlist n = 
-//     let rec exprGen xlist n = 
-//         if n = 0 then
-//             leafGen xlist
-//         else
-//             Gen.oneof [
-//                 leafGen xlist; // leaf occurs twice becourse leaf is X or N giving the same probability for each expression 
-//                 leafGen xlist;
-//                 Gen.map2 (fun x y -> Add (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
-//                 Gen.map2 (fun x y -> Mul (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
-//                 Gen.map2 (fun x y -> Div (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
-//                 Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));            
-//                 Gen.map (fun x -> Neg x) (exprGen xlist (n/2))]
-//     Gen.sized (exprGen charlist)
 let rec exprGen xlist n = 
         if n = 0 then
             leafGen xlist
@@ -88,9 +73,7 @@ let rec exprGen xlist n =
                 Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));            
                 Gen.map (fun x -> Neg x) (exprGen xlist (n/2))]
 
-type ExprWithEnv = Expr<Number> * Map<char, Number>
 type SmallEnv = Map<char, Number> * char list
-
 type SmallEnvGen =
     static member SmallEnv() =
         {new Arbitrary<SmallEnv>() with
@@ -100,32 +83,42 @@ type SmallEnvGen =
 Arb.register<SmallEnvGen>()
 
 
-let compareSimpExpr env (e:Expr<Number>) =
-    // printfn "Expression: %A" e
-    eval (SymbolicManipolation.simplifyExpr e) env  = eval e env
+/////////////////////////////////
+/// Vector Generators ///////////
+/////////////////////////////////
 
 
-let simpEqualEval se = 
-    try
-        let (env, xlist) = se
-        let expr = Gen.sample 1 1 (exprGen xlist 10) |> List.head
-        printfn "Expression: %A" expr
-        if expr |> compareSimpExpr env then 1 else 0
-    with
-        | :? System.DivideByZeroException as ex ->
-            printfn "DivideByZeroException: %A" ex
-            2
-        | :? System.OverflowException as ex ->
-            printfn "OverflowException: %A" ex
-            3
+// A generator to get small ints
+type SmallInt = SmallInt of int
+type SmallIntGen =
+    static member SmallInt() =
+        {new Arbitrary<SmallInt>() with
+            override _.Generator = Gen.map (fun x -> SmallInt x) (Gen.choose (1, max))
+            override _.Shrinker _ = Seq.empty}
 
-let simpPBT (se:SmallEnv) =
-    let result = simpEqualEval se
-    (result = 1 || result = 2 || result = 3)
-    |> Prop.classify (result = 1) "Equal"
-    |> Prop.classify (result = 2) "DivideByZeroExceptions"
-    |> Prop.classify (result = 3) "OverflowException"
+Arb.register<SmallIntGen>()
 
 
-let _ = Check.Quick simpPBT
+// generate a random vector of length n
+let vectorGen (SmallInt n) =
+    Gen.listOfLength n numberGen |> Gen.map (fun x -> V x)
+
+let matrixGen (SmallInt col) row  =
+    Gen.listOfLength col (vectorGen row) |> Gen.map (fun x -> M x)
+
+type MaxtrixGen =
+    static member Matrix(col:SmallInt, row:SmallInt) =
+        {new Arbitrary<Matrix>() with
+            override _.Generator = matrixGen col row
+            override _.Shrinker _ = Seq.empty}
+
+Arb.register<MaxtrixGen>()
+
+type MaxtrixGen3Cols =
+    static member Matrix(row:SmallInt) =
+        {new Arbitrary<Matrix>() with
+            override _.Generator = matrixGen (SmallInt 3) row
+            override _.Shrinker _ = Seq.empty}
+
+Arb.register<MaxtrixGen3Cols>()
 

@@ -3,9 +3,11 @@ module rantionalAndComplex
 
 
 type rational = R of int * int
+type r64 = R64 of int64 * int64
 
 // determines if a rational number is zero
-let isZeroR(R(a, b)) = a = 0 || b = 0
+let isZeroR(R(a, _)) = a = 0
+let isZeroR64(R64(a, _)) = a = 0
 
 // checks if a rational number is posetive
 let posetive(R(a,b)) = a*b > 0
@@ -15,41 +17,55 @@ let posetive(R(a,b)) = a*b > 0
 let rec gcd r =
     // printfn "gcd - %A" r
     match r with
-    | a, b when a < 0 || b <  0-> failwith "Euclid's algorithm dosen't allow negative numbers"
+    | a, b when a < 0L || b <  0L-> failwith "Euclid's algorithm dosen't allow negative numbers"
     | a, b when a = b -> a
     | a, b when a > b -> gcd(a-b, b)
     | a, b -> gcd(a, b - a) 
 
 // Functional Programming Using F# page 57
 // reduces a rational number to its simplest form
-let canc(R(p, q)) =
-    if isZeroR(R(p, q)) then R(0, 1)
+let canc(R64(p, q)) =
+    if isZeroR64(R64(p, q)) then R64(0, 1)
     else
         let ap = abs p
         let aq = abs q
-        let sign = if (p/ap * q/aq) > 0 then 1 else -1
+        let sign = if (p/ap * q/aq) > 0 then 1L else -1L
         let d = gcd (ap, aq)
-        R(sign * (ap / d), aq / d)
+        R64(sign * (ap / d), aq / d)
 
 
 // checks for division by zero before reducing a rational number
 let mkQ = function
-    | R(_, 0) ->  raise (System.DivideByZeroException("rational.mkQ: Cannot divide by zero!"))
+    | R64(0L, _) -> R64(0, 1)
+    | R64(_, 0L) ->  raise (System.DivideByZeroException("rational.mkQ: Cannot divide by zero!"))
     | r -> canc r
 
+
+
+let r64ToR (R64(a, b)) = 
+    let MaxValue = 2147483647
+    if 
+        abs a > MaxValue || abs b > MaxValue 
+    then
+        raise (System.OverflowException("rational.r64ToR: operation would result in an overflow of maxInt!"))
+    else
+        R(int a, int b)
+
+
+
 type rational with
-    static member (~-) (R(x,y))             = canc(R(-x, y))
-    static member (+)  (R(a,b),R(c,d))      = canc(R(a*d+b*c, b*d))
-    static member (+)  (a,R(c,d))           = canc(R(a*d+c, d))
-    static member (-)  (R(a,b),R(c,d))      = canc(R(a*d-b*c, b*d))
-    static member (-)  (a,R(c,d))           = canc(R(a*d-c, d))
-    static member (*)  (a, R(x,y))          = canc(R(a*x, a*y))
-    static member (*)  (R(x,y), a)          = canc(R(a*x, a*y))
-    static member (*)  (R(a,b),R(c,d))      = canc(R(a*c, b*d))
-    static member (/)  (a, R(x,y))          = mkQ(R(a*y, x))
-    static member (/)  (R(x,y), a)          = mkQ(R(x, a*y))
-    static member (/)  (R(a,b),R(c,d))      = mkQ(R(a*d, b*c))
-    static member (/)  (a,b)                = mkQ(R(a, b))
+    static member (~-) (R(x,y))             = canc(R64(-int64 x, int64 y)) |> r64ToR
+    static member (+)  (R(a,b),R(c,d))      = canc(R64(int64 a * int64 d + int64 b * int64 c, int64 b * int64 d)) |> r64ToR
+    static member (+)  (a,R(c,d))           = canc(R64(int64 a * int64 d + int64 c, int64 d)) |> r64ToR
+    static member (-)  (R(a,b),R(c,d))      = canc(R64(int64 a * int64 d - int64 b * int64 c, int64 b * int64 d)) |> r64ToR
+    static member (-)  (a,R(c,d))           = canc(R64(int64 a * int64 d - int64 c, int64 d)) |> r64ToR
+    static member (*)  (a, R(x,y))          = canc(R64(int64 a * int64 x, int64 a * int64 y)) |> r64ToR
+    static member (*)  (R(x,y), a)          = canc(R64(int64 a * int64 x, int64 a * int64 y)) |> r64ToR
+    static member (*)  (R(a,b),R(c,d))      = canc(R64(int64 a * int64 c, int64 b * int64 d)) |> r64ToR
+    static member (/)  (a, R(x,y))          = mkQ(R64(int64 a * int64 y, int64 x)) |> r64ToR
+    static member (/)  (R(x,y), a)          = mkQ(R64(int64 x, int64 a * int64 y)) |> r64ToR
+    static member (/)  (R(a,b),R(c,d))      = mkQ(R64(int64 a * int64 d, int64 b * int64 c)) |> r64ToR
+    static member (/)  (a,b)                = mkQ(R64(int64 a, int64 b)) |> r64ToR
 
 
 
@@ -75,7 +91,7 @@ let makeRatInt(R(a, b)) = if isInt(R(a, b)) then a else failwith "Not an integer
 // constructor of a rational number
 let makeR(x, y) =
     if y <> 0 then
-        mkQ(R(x, y))
+        mkQ(R64(int64 x, int64 y)) |> r64ToR
     else
          raise (System.DivideByZeroException("rational.make: Cannot divide by zero!"))
 
@@ -128,7 +144,7 @@ let isZeroC (C(a, b)) = isZeroR a && isZeroR b
 let isNegativeC (C(a, b)) = isNegativeR a && isNegativeR b
 let toStringC (C(a, b)) = 
     if isNegativeR b then
-        sprintf "%s +%si" (toStringR a) (toStringR b)
+        sprintf "%s + %si" (toStringR a) (toStringR b)
     else 
-        sprintf "%s %si" (toStringR a) (toStringR b)
+        sprintf "%s - %si" (toStringR a) (absRational b |> toStringR)
 let absComplex (C(a, b)) = C(absRational(a), absRational(b))

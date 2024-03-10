@@ -67,18 +67,18 @@ printfn "%A" dx
 // map [('O', Rational (R (-1, 1))); ('T', Int 8)], ['O'; 'T']
 
 let generateExpresion = 
-                            
+                        
+                            Div (X 'O', 
+                            Sub ( X 'K', N (Int 5)))
 
-                                    Sub (N (Rational (R (-9, 5))), N (Rational (R (0, 1))))
 
-
-let m = Map.ofList []
+let m = Map.ofList  [('K', Complex (C (R (1, 4), R (3, 2))));
+    ('M', Complex (C (R (3, 5), R (-4, 1)))); ('O', Int -2); ('W', Int -1)]
 let s = simplifyExpr generateExpresion
 // let a = (AssociationForAddSub.applyAssociation (generateExpresion))
-// showSimp generateExpresion
-// printfn "%A" (eval s m)
-printfn "%A" (eval generateExpresion m)
-printfn "%A" (eval s m)
+showSimp generateExpresion
+printfn "evaled: %A" (eval generateExpresion m)
+printfn "simped: %A" (eval s m)
 
 // Add
 //   (Div

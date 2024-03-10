@@ -10,12 +10,14 @@ open rantionalAndComplex
 open Number
 open Expression
 
+let max = 10
+let min = -10
 
 // generate a random natural abs( number ) between 1 and 100
 let noneZeroGen = 
     Gen.oneof [ 
-        Gen.choose(1, 10) ;
-        Gen.choose(-10, -1)]
+        Gen.choose(1, max) ;
+        Gen.choose(min, -1)]
 
 // picks a random variable from a list of variables
 let varGen xlist = 
@@ -25,14 +27,13 @@ let varGen xlist =
 // generate a random Number
 let numberGen =
     Gen.oneof [
-        Gen.map2 (fun x y -> Rational (makeR(x, y))) (Gen.choose(-10, 10)) noneZeroGen;
-        Gen.map (fun x -> Int x) (Gen.choose(-10, 10))]
+        Gen.map2 (fun x y -> Rational (makeR(x, y))) (Gen.choose(min, max)) noneZeroGen;
+        Gen.map (fun x -> Int x) (Gen.choose(min, max));
+        Gen.map4 (fun a b c d -> Complex (makeC (makeR(a, b), makeR(c, d)))) (Gen.choose(min, max)) noneZeroGen (Gen.choose(min, max)) noneZeroGen]
 
 // generate a random Number (a Expresion leaf)
 let numberInExprGen = 
-    Gen.oneof [
-        Gen.map2 (fun x y -> N (Rational (makeR(x, y)))) (Gen.choose(-10, 10)) noneZeroGen ;
-        Gen.map (fun x -> N (Int x)) (Gen.choose(-10, 10))]
+    Gen.map (fun x -> N x) numberGen
 
 // generate a random variable (a Expresion leaf)
 let XGen xlist = Gen.map X (varGen xlist)
@@ -114,12 +115,16 @@ let simpEqualEval se =
         | :? System.DivideByZeroException as ex ->
             printfn "DivideByZeroException: %A" ex
             2
+        | :? System.OverflowException as ex ->
+            printfn "OverflowException: %A" ex
+            3
 
 let simpPBT (se:SmallEnv) =
     let result = simpEqualEval se
-    (result = 1 || result = 2)
+    (result = 1 || result = 2 || result = 3)
     |> Prop.classify (result = 1) "Equal"
     |> Prop.classify (result = 2) "DivideByZeroExceptions"
+    |> Prop.classify (result = 3) "OverflowException"
 
 
 let _ = Check.Quick simpPBT

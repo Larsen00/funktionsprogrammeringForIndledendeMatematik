@@ -85,7 +85,6 @@ and cancelEquality nu de =
 
 // rebuilds a assoative list to a tree
 and rebuildTree l =
-    printfn "rebuildTree: %A" l
     match l with
     | [] -> N one
     | Neg (N a)::tail when isOne a -> rebuildTree tail

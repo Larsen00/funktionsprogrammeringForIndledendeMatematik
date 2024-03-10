@@ -1,0 +1,46 @@
+
+Uge 1:
+* implementere: 
+    - rationelle tal 
+    - komplekse tal
+    - et tal mondul
+    - Expressions
+    - måde at oversætte infix til exprissions på
+
+
+Uge 2:
+* implementere:
+    - Diffrenation af Expressions
+    - simpificering af Expressions
+
+Uge 3:
+ * Udvider simpificering af Expressions
+ * implementere:
+    - PBT til Expressions
+
+Uge 4-5:
+* Begynder at skive på rapporten
+
+Skriver hver uge på rapprten
+
+Uge 6:
+* implementere:
+    - Vectore, MAtricer og gramschimt metodern
+    - PBT generatore af vectore
+    - Polynomier
+
+Uge 7:
+* Lave beviser og PBT af gramschimt
+
+Uge 8-12:
+* I uge 8 Burde jeg har det mest grundlængede færdig og skal nu kunne anvende de talmængder til at betragte hvilke metoder fra nedestående emner vil kunne implementeres:
+    [02 - Sets and functions]
+    [04 - Polynomials]
+    [05 - Recursion and induction]
+    [08 - Determinants]
+    backpropagation
+    Taylor-approksimationer
+
+
+uge 12-16
+* Skriver opgaven færdig

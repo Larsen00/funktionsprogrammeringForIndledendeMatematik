@@ -5,7 +5,7 @@ open rantionalAndComplex
 
 
 type Number = 
-        | Int of int 
+        | Int of int
         | Rational of rational
         | Complex of complex
         

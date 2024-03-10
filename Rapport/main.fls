@@ -423,9 +423,9 @@ INPUT .\exampleCodes\valid1.fsx
 INPUT .\exampleCodes\valid1.fsx
 INPUT exampleCodes\valid1.fsx
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
-INPUT ..\modules\rational.fsi
-INPUT ..\modules\rational.fsi
-INPUT ..\modules\rational.fsi
+INPUT .\exampleCodes\rational.fsi
+INPUT .\exampleCodes\rational.fsi
+INPUT exampleCodes\rational.fsi
 INPUT ..\modules\number.fsi
 INPUT ..\modules\number.fsi
 INPUT ..\modules\number.fsi

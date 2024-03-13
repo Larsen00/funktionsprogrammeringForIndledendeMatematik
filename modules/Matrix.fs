@@ -3,13 +3,18 @@ open Number
 
 // row or coloumn major ordere: default of a vector and matric is Column major order.
 type order = | R | C
+
 // Rows x Cols
 type Dimension  = D of int * int
+
 // a "Normal" is C major and a Transposed one is R major
 type Vector = V of list<Number> * order
 type Matrix = M of list<Vector> * order
 
+// Construct a vector
 let vector nl = V (nl, C)
+
+// Construct a matrix
 let matrix vl = M (vl, C)
 
 // The dimension of a vector
@@ -26,7 +31,10 @@ let matrixValidMajor (M(m, o)) =
     | V (_, C), C -> true
     | _, _ -> failwith "Matrix's vector's dont have same major order"
 
+// The list length of a vector
 let vectorLength (V(v, _)) = List.length v
+
+// The list length of a matrix's vectors
 let matrixVectorLength (M(m, _)) = List.head m |> vectorLength
 
 // The dimension of a matrix
@@ -55,6 +63,7 @@ let scalarVector (n:Number) (V (v, o)) =
 // Construct a vector of n with length len
 let vectorOf n len = V ((List.init len (fun _ -> n)), C)
 
+// Construct a matrix of n with dimension d
 let matrixOf n (D (r, c)) = M ((List.init c (fun _ -> vectorOf n r)), C)
 
 // Transposes a vector
@@ -63,6 +72,7 @@ let transposeVector (V(v, o)) =
     | R -> V(v, C)
     | C -> V(v, R)
 
+// adds a dimension to a vector
 let extendVector (V(v, o)) n =
     V(v @ [n], o)
 
@@ -78,14 +88,18 @@ let alternateOrder o =
     | R -> C
     | C -> R
 
+// Alternates the Major order of a matrix
 let alternateOrderMatrix (M(m, o)) =
     M (m, alternateOrder o)
 
 // The i'th number of a vector
 let getVectorIthNumber (V(v, _)) i = v.[i]
 
-let seperateFistNumberFromVector (V(v, o)) = (v.Head, V(v.Tail, o)) // LAVER FEJL
+// pops a vector 
+let seperateFistNumberFromVector (V(v, o)) = 
+    (v.Head, V(v.Tail, o))
 
+// Gives a vector of all the first elements of the vectors in a matrix
 let rec firstElemetsVectors (M(m, o)) v_acc m_acc = 
     match m with
     | [] -> (v_acc, M(m_acc, o))
@@ -101,14 +115,15 @@ let rec chaingingOrderMatrix (M(m, o)) m_acc =
         let (v, m_new) = firstElemetsVectors (M(m, o)) [] []
         extendMatrix m_acc v |> chaingingOrderMatrix m_new 
 
-
+// Changes the order of a matrix
 let changeOrderMatrix (M(m, o)) =
     alternateOrderMatrix (M([], o)) |> chaingingOrderMatrix (M(m, o)) 
 
+// Makes sure that two matrices have the same major order, if diffrent then changes the order of the second matrix
 let giveMatrixHaveSameOrder (M(m1, o1)) (M(m2, o2)) = 
     if o1 <> o2 then changeOrderMatrix (M(m2, o2)) else M(m2, o2)
 
-
+// Adds two matrices elemtwise
 let addMatrix m1 m2 =
     let m3 = giveMatrixHaveSameOrder m1 m2
     if dimMatrix m1 <> dimMatrix m3 then failwith "addMatrix: Matrices must have the same dimension"
@@ -117,6 +132,7 @@ let addMatrix m1 m2 =
     let (M(m3, _)) = m3
     M (List.map2 addVector m1 m3, o)
 
+// Multiplication of a scalar and a matrix
 let scalarMatrix (n:Number) (M (m, o)) = 
     M ((List.map (fun x -> scalarVector n x) m), o)
 

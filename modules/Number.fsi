@@ -1,7 +1,11 @@
 module Number
+open rantionalAndComplex
 
-[<Sealed>]
 type Number =
+    | Int of int
+    | Rational of rational
+    | Complex of complex
+    with
     static member ( + )  : Number * Number -> Number
     static member ( - )  : Number * Number -> Number 
     static member ( * )  : Number * Number -> Number 

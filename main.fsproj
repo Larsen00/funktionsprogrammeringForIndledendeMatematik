@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FsCheck" Version="2.16.6" />
     <Compile Include="modules/rantionalAndComplex.fsi" />
     <Compile Include="modules/rantionalAndComplex.fs" />
     <Compile Include="modules/Number.fsi" />
@@ -14,6 +15,10 @@
     <Compile Include="modules/Expression.fs" />
     <Compile Include="modules/Matrix.fsi" />
     <Compile Include="modules/matrix.fs" />
+    <Compile Include="PBT/Generators.fs" />
+    <Compile Include="scripts/TreeGenerator.fs" /> 
+    <Compile Include="scripts/Differentiation.fs" />
+    <Compile Include="scripts/SymbolicManipolation.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

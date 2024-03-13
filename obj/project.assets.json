@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "FsCheck/2.16.6": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.2.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/FsCheck.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsCheck.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "FSharp.Core/7.0.400": {
         "type": "package",
         "compile": {
@@ -59,6 +75,25 @@
     }
   },
   "libraries": {
+    "FsCheck/2.16.6": {
+      "sha512": "8yQlt7HgoigIXIoe7ZouNh551rypxp4WtQnqBlpB9a7gf4IkpdMSnEzsnJS/gFmeNtIf9hEJ37celeCq/6FuHA==",
+      "type": "package",
+      "path": "fscheck/2.16.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fscheck.2.16.6.nupkg.sha512",
+        "fscheck.nuspec",
+        "lib/net452/FsCheck.dll",
+        "lib/net452/FsCheck.xml",
+        "lib/netstandard1.0/FsCheck.dll",
+        "lib/netstandard1.0/FsCheck.xml",
+        "lib/netstandard1.6/FsCheck.dll",
+        "lib/netstandard1.6/FsCheck.xml",
+        "lib/netstandard2.0/FsCheck.dll",
+        "lib/netstandard2.0/FsCheck.xml"
+      ]
+    },
     "FSharp.Core/7.0.400": {
       "sha512": "kJQ7TBQqd1d2VoODSgwFSAaApaBN0Fuu8mZt2XExmd3UzUxLjUsMn5Y5XhpsUWdnxOL8amp7VFg7cwhPllR4Qw==",
       "type": "package",
@@ -104,7 +139,8 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "FSharp.Core >= 7.0.400"
+      "FSharp.Core >= 7.0.400",
+      "FsCheck >= 2.16.6"
     ]
   },
   "packageFolders": {
@@ -144,6 +180,11 @@
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
             "version": "[7.0.400, )",
+            "generatePathProperty": true
+          },
+          "FsCheck": {
+            "target": "Package",
+            "version": "[2.16.6, )",
             "generatePathProperty": true
           }
         },

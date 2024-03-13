@@ -1,12 +1,15 @@
-#r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-#r "nuget: FsCheck"
-#load "../SymbolicManipolation.fsx"
-#load "../modules/Matrix.fs"
+module Generators
+
+// #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
+// #r "nuget: FsCheck"
+// #load "../SymbolicManipolation.fsx"
+// #load "../modules/Matrix.fs"
 open FsCheck
 open rantionalAndComplex
 open Number
 open Expression
 open Matrix
+// open SymbolicManipolation
 
 
 
@@ -80,8 +83,7 @@ type SmallEnvGen =
             override _.Generator = smallEnvGen
             override _.Shrinker _ = Seq.empty}
 
-Arb.register<SmallEnvGen>()
-
+// Arb.register<SmallEnvGen>()
 
 /////////////////////////////////
 /// Matrix Generators ///////////
@@ -112,7 +114,7 @@ type MaxtrixGen =
             override _.Generator = matrixGen
             override _.Shrinker _ = Seq.empty}
 
-Arb.register<MaxtrixGen>()
+// Arb.register<MaxtrixGen>()
 
 let getSmallInt = 
     Gen.sample 1 1 smallIntGen |> List.head
@@ -124,7 +126,7 @@ type VectorGen =
             override _.Generator = (fun (SmallInt x) -> vectorGen x) getSmallInt
             override _.Shrinker _ = Seq.empty}
 
-Arb.register<VectorGen>()
+// Arb.register<VectorGen>()
 
 
 type NumberGen =
@@ -133,7 +135,7 @@ type NumberGen =
             override _.Generator = numberGen
             override _.Shrinker _ = Seq.empty}
 
-Arb.register<NumberGen>()
+// Arb.register<NumberGen>()
 
 /////////////////////////////////
 /// Properties //////////////////
@@ -150,3 +152,5 @@ let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
 // test c * (v1 + ..+  vn) = c*v1 + .. + c*v2
 let vectorAssCom m n =
     n * (sumRows m) = sumRows (n * m)
+
+

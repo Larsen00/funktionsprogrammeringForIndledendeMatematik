@@ -1,7 +1,8 @@
 module rantionalAndComplex
 
-[<Sealed>]
-type rational =
+
+type rational = R of int * int 
+    with
     static member ( ~- ) : rational -> rational
     static member ( + )  : rational * rational -> rational
     static member ( + )  : int * rational -> rational
@@ -28,8 +29,9 @@ val isNegativeR   : rational -> bool
 val absRational  : rational -> rational
 
 
-[<Sealed>]
-type complex =
+
+type complex = | C of rational * rational
+    with
     static member ( + )  : complex * complex -> complex
     static member ( - )  : complex * complex -> complex
     static member ( * )  : rational * complex -> complex

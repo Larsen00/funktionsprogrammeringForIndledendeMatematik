@@ -1,0 +1,1 @@
+Undersøg hvor nul division fejlene sker, evt klasificer symbolic nul div anderledes end dem i modulerne.

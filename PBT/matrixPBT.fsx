@@ -1,12 +1,13 @@
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
-#load "Generators.fsx"
 #load "../modules/Matrix.fs"
 open FsCheck
-open rantionalAndComplex
-open Matrix
-open Number
 open Generators
+
+
+Arb.register<MaxtrixGen>()
+Arb.register<VectorGen>()
+Arb.register<NumberGen>()
 
 
 // Test the associativity property for vector addition Theorem 7.2 - 1 & 2

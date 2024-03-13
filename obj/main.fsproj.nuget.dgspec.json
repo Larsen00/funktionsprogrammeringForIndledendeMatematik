@@ -39,6 +39,11 @@
               "target": "Package",
               "version": "[7.0.400, )",
               "generatePathProperty": true
+            },
+            "FsCheck": {
+              "target": "Package",
+              "version": "[2.16.6, )",
+              "generatePathProperty": true
             }
           },
           "imports": [

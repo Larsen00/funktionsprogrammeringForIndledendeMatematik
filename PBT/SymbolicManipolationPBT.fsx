@@ -1,19 +1,18 @@
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
-#load "Generators.fsx"
-#load "../modules/vector.fs"
 open FsCheck
-open rantionalAndComplex
-open Number
 open Expression
+open Number
 open Generators
-open Vector
+open SymbolicManipolation
 
+
+Arb.register<SmallEnvGen>()
 
 // Compares the evaluation of a simplified expression with the evaluation of the original expression
 let compareSimpExpr env (e:Expr<Number>) =
     // printfn "Expression: %A" e
-    eval (SymbolicManipolation.simplifyExpr e) env  = eval e env
+    eval (simplifyExpr e) env  = eval e env
 
 
 // samples and expression and test if the simplified expression is equal to the original expression

@@ -8,10 +8,22 @@
     ".NETCoreApp,Version=v7.0": {
       "main/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "7.0.400"
+          "FSharp.Core": "7.0.400",
+          "FsCheck": "2.16.6"
         },
         "runtime": {
           "main.dll": {}
+        }
+      },
+      "FsCheck/2.16.6": {
+        "dependencies": {
+          "FSharp.Core": "7.0.400"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsCheck.dll": {
+            "assemblyVersion": "2.16.6.0",
+            "fileVersion": "2.16.6.0"
+          }
         }
       },
       "FSharp.Core/7.0.400": {
@@ -70,6 +82,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "FsCheck/2.16.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8yQlt7HgoigIXIoe7ZouNh551rypxp4WtQnqBlpB9a7gf4IkpdMSnEzsnJS/gFmeNtIf9hEJ37celeCq/6FuHA==",
+      "path": "fscheck/2.16.6",
+      "hashPath": "fscheck.2.16.6.nupkg.sha512"
     },
     "FSharp.Core/7.0.400": {
       "type": "package",

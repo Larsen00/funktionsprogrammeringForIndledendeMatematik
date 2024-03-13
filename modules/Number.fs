@@ -15,14 +15,14 @@ type Number =
 // Creates a rational number from an Number
 let makeRational a =
     match a with
-    | Int x       -> makeR(x, 1)
+    | Int x       -> newRational(x, 1)
     | Rational x  -> x
     | Complex _   -> raise (System.NotSupportedException("Cannot convert complex to rational"))
 
 let makeComplex n =
     match n with
-    | Int x -> makeC (makeR(x, 1), makeR(0, 1))
-    | Rational x -> makeC (x, makeR(0, 1))
+    | Int x -> newComplex (newRational(x, 1), newRational(0, 1))
+    | Rational x -> newComplex (x, newRational(0, 1))
     | Complex x -> x
 
 // binary operation on two numbers
@@ -44,17 +44,17 @@ let neg a =
 let rec compare a b =
     match a, b with
     | Int x, Int y           -> x > y
-    | Int x, Rational y      -> greaterThan (makeR(x, 1), y)
+    | Int x, Rational y      -> greaterThan (newRational (x, 1), y)
     | Complex x, Complex y   -> isGreater (x, y)
     | Rational x, Rational y -> greaterThan (x, y)
-    | Int x, Complex y       -> isGreater (makeC(makeR(x, 1), makeR(0, 1)), y)
-    | Rational x, Complex y  -> isGreater (makeC(x, makeR(0, 1)), y)
+    | Int x, Complex y       -> isGreater (newComplex (newRational(x, 1), newRational(0, 1)), y)
+    | Rational x, Complex y  -> isGreater (newComplex (x, newRational(0, 1)), y)
     | _, _                   -> not (compare b a)
 
 let rec tryReduce n =
     match n with
     | Complex a when isReal a -> realPart a |> Rational |> tryReduce
-    | Rational a when isInt a -> makeRatInt a |> Int
+    | Rational a when isInt a -> makeInt a |> Int
     | _ -> n
 
     
@@ -73,8 +73,8 @@ let greaterThan a b = compare a b
 let isZero n =
     match n with
     | Int a -> a = 0
-    | Rational a -> rational.isZeroR(a)
-    | Complex a -> complex.isZeroC(a)
+    | Rational a -> rational.isZero(a)
+    | Complex a -> complex.isZero(a)
 
 
 // checks if a number is one
@@ -88,8 +88,8 @@ let isOne n =
 let toString n = 
     match n with
     | Int a -> sprintf "%d" a
-    | Rational a -> toStringR a
-    | Complex a -> toStringC a
+    | Rational a -> rational.toString a
+    | Complex a -> complex.toString a
 
 // returns the specific number 
 let zero = Int 0
@@ -100,8 +100,8 @@ let two = Int 2
 let isNegative n = 
     match n with
     | Int a -> a < 0
-    | Rational a -> isNegativeR a
-    | Complex a -> isNegativeC a
+    | Rational a -> rational.isNegative a
+    | Complex a -> complex.isNegative a
 
 // is used to negate a number, hence why both the real and imaginary part needs to be negative
 let absNumber n = 

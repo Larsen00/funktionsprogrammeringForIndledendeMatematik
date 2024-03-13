@@ -32,9 +32,9 @@ let varGen xlist =
 // generate a random Number
 let numberGen =
     Gen.oneof [
-        Gen.map2 (fun x y -> Rational (makeR(x, y))) (Gen.choose(min, max)) noneZeroGen;
+        Gen.map2 (fun x y -> Rational (newRational(x, y))) (Gen.choose(min, max)) noneZeroGen;
         Gen.map (fun x -> Int x) (Gen.choose(min, max));
-        Gen.map4 (fun a b c d -> Complex (makeC (makeR(a, b), makeR(c, d)))) (Gen.choose(min, max)) noneZeroGen (Gen.choose(min, max)) noneZeroGen]
+        Gen.map4 (fun a b c d -> Complex (newComplex (newRational(a, b), newRational(c, d)))) (Gen.choose(min, max)) noneZeroGen (Gen.choose(min, max)) noneZeroGen]
 
 // generate a random Number (a Expresion leaf)
 let numberInExprGen = 

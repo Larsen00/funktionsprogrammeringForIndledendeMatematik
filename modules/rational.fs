@@ -4,7 +4,7 @@ type rational = R of int * int
 type r64 = R64 of int64 * int64
 
 // determines if a rational number is zero
-let isZeroR(R(a, _)) = a = 0
+let isZero(R(a, _)) = a = 0
 let isZeroR64(R64(a, _)) = a = 0
 
 // checks if a rational number is posetive
@@ -75,27 +75,27 @@ let equal(R(a,b), R(c,d))  = (a*d = c*b)
 let greaterThan(R(a,b),R(c,d)) = a*d > c*b
 
 // returns the string representation of a rational number
-let toStringR(R(a,b)) = sprintf "%d/%d" a b
+let toString(R(a,b)) = sprintf "%d/%d" a b
 
 
 // determines if a rational number is one
-let isOne(R(a, b)) = not (isZeroR(R(a, b))) && a = b
+let isOne(R(a, b)) = not (isZero(R(a, b))) && a = b
 
 // determines if a rational number is an integer
 let isInt(R(_, b)) = b = 1
 
 // returns the integer value of a rational number
-let makeRatInt(R(a, b)) = if isInt(R(a, b)) then a else failwith "Not an integer"
+let makeInt(R(a, b)) = if isInt(R(a, b)) then a else failwith "Not an integer"
 
 // constructor of a rational number
-let makeR(x, y) =
+let newRational (x, y) =
     if y <> 0 then
         mkQ(R64(int64 x, int64 y)) |> r64ToR
     else
          raise (System.DivideByZeroException("rational.make: Cannot divide by zero!"))
 
 // checks if a rational number is negative
-let isNegativeR(R(a, b)) = a*b < 0
+let isNegative(R(a, b)) = a*b < 0
 
 // takes the absolute value of a rational number
 let absRational(R(a, b)) = R(abs a, abs b)

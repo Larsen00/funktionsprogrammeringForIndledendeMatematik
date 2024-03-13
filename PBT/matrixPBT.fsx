@@ -1,6 +1,5 @@
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
-#load "../modules/Matrix.fs"
 open FsCheck
 open Generators
 

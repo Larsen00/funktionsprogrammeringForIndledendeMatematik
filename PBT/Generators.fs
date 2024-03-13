@@ -5,7 +5,9 @@ module Generators
 // #load "../SymbolicManipolation.fsx"
 // #load "../modules/Matrix.fs"
 open FsCheck
-open rantionalAndComplex
+// open rantionalAndComplex
+open rational
+open complex
 open Number
 open Expression
 open Matrix

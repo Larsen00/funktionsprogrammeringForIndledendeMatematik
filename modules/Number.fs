@@ -1,7 +1,7 @@
 module Number
-// open rational
-// open complex
-open rantionalAndComplex
+open rational
+open complex
+// open rantionalAndComplex
 
 
 type Number = 
@@ -73,8 +73,8 @@ let greaterThan a b = compare a b
 let isZero n =
     match n with
     | Int a -> a = 0
-    | Rational a -> rantionalAndComplex.isZeroR(a)
-    | Complex a -> rantionalAndComplex.isZeroC(a)
+    | Rational a -> rational.isZeroR(a)
+    | Complex a -> complex.isZeroC(a)
 
 
 // checks if a number is one

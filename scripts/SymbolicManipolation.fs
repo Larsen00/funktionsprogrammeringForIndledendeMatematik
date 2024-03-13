@@ -2,7 +2,8 @@ module SymbolicManipolation
 
 open Expression
 open Number
-open rantionalAndComplex
+open rational
+open complex
 
 
 // rank when sorting a assoative expression

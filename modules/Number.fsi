@@ -1,5 +1,7 @@
 module Number
-open rantionalAndComplex
+// open rantionalAndComplex
+open rational
+open complex
 
 type Number =
     | Int of int

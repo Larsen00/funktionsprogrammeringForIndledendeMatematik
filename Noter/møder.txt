@@ -82,3 +82,11 @@ monomie basen for poly nomier - Lav det dirkete som det står i mat 1 noterne
 gram smidt algorithme ligger under 1b
 
 # Møde 5
+Der er to måder at repræcentere komplekse tal, (tror polær og den jeg har), man kan vise de er ens.
+
+rettelser:
+* dynamisk skrevet -> dynamisk typet
+* overvej at besker f# er mere ektivy grundet der ikke kommer type fejl det er kompilert (tror jeg)
+* udskyd snakken om mønstre
+* funktioner retunere ikke, men er utryk så alt efter = er udtrykket.
+* ttyper er infitert på oversættelse tidpuktet

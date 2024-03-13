@@ -1,12 +1,12 @@
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
 #load "../SymbolicManipolation.fsx"
-#load "../modules/Vector.fs"
+#load "../modules/Matrix.fs"
 open FsCheck
 open rantionalAndComplex
 open Number
 open Expression
-open Vector
+open Matrix
 
 
 
@@ -84,41 +84,69 @@ Arb.register<SmallEnvGen>()
 
 
 /////////////////////////////////
-/// Vector Generators ///////////
+/// Matrix Generators ///////////
 /////////////////////////////////
 
 
 // A generator to get small ints
 type SmallInt = SmallInt of int
-type SmallIntGen =
-    static member SmallInt() =
-        {new Arbitrary<SmallInt>() with
-            override _.Generator = Gen.map (fun x -> SmallInt x) (Gen.choose (1, max))
-            override _.Shrinker _ = Seq.empty}
 
-Arb.register<SmallIntGen>()
-
+let smallIntGen = Gen.map (fun x -> SmallInt x) (Gen.choose (1, max))
 
 // generate a random vector of length n
-let vectorGen (SmallInt n) =
-    Gen.listOfLength n numberGen |> Gen.map (fun x -> V x)
+let vectorGen n =
+    Gen.listOfLength n numberGen |> Gen.map (fun x -> vector x)
 
-let matrixGen (SmallInt col) row  =
-    Gen.listOfLength col (vectorGen row) |> Gen.map (fun x -> M x)
+let sampleTwoSmallInts = 
+    let s = Gen.sample 1 2 smallIntGen
+    (s.[0], s.[1])
+
+let matrixGen =
+    let (SmallInt row, SmallInt col) = sampleTwoSmallInts
+    Gen.listOfLength col (vectorGen row) |> Gen.map (fun x -> matrix x)
+
 
 type MaxtrixGen =
-    static member Matrix(col:SmallInt, row:SmallInt) =
+    static member Matrix() =
         {new Arbitrary<Matrix>() with
-            override _.Generator = matrixGen col row
+            override _.Generator = matrixGen
             override _.Shrinker _ = Seq.empty}
 
 Arb.register<MaxtrixGen>()
 
-type MaxtrixGen3Cols =
-    static member Matrix(row:SmallInt) =
-        {new Arbitrary<Matrix>() with
-            override _.Generator = matrixGen (SmallInt 3) row
+let getSmallInt = 
+    Gen.sample 1 1 smallIntGen |> List.head
+    
+
+type VectorGen =
+    static member Vector() =
+        {new Arbitrary<Vector>() with
+            override _.Generator = (fun (SmallInt x) -> vectorGen x) getSmallInt
             override _.Shrinker _ = Seq.empty}
 
-Arb.register<MaxtrixGen3Cols>()
+Arb.register<VectorGen>()
 
+
+type NumberGen =
+    static member Number() =
+        {new Arbitrary<Number>() with
+            override _.Generator = numberGen
+            override _.Shrinker _ = Seq.empty}
+
+Arb.register<NumberGen>()
+
+/////////////////////////////////
+/// Properties //////////////////
+/////////////////////////////////
+
+
+// Property: The addition of vectors is associative Theorem 7.2
+let vectorAss m =
+    sumRows m = sumRows (flip m)
+
+let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
+    n1 * (n2 * m) = (n1 * n2) * m
+
+// test c * (v1 + ..+  vn) = c*v1 + .. + c*v2
+let vectorAssCom m n =
+    n * (sumRows m) = sumRows (n * m)

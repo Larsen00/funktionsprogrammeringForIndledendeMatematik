@@ -1,11 +1,13 @@
 #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
 #load "Generators.fsx"
+#load "../modules/vector.fs"
 open FsCheck
 open rantionalAndComplex
 open Number
 open Expression
 open Generators
+open Vector
 
 
 // Compares the evaluation of a simplified expression with the evaluation of the original expression
@@ -35,4 +37,5 @@ let simpPBT (se:SmallEnv) =
 
 
 let _ = Check.Quick simpPBT
+
 

@@ -239,3 +239,28 @@ and sumProj w vk =
 // Orthogonal bacis
 let orthogonalBacis m =
     Gram_Schmidt m (fun _ -> M([], C))
+
+
+// Checks if a vector is a zero vector
+let isZeroVector (V(v, _)) = 
+    List.forall (fun x -> Number.isZero x) v
+
+// Checks if a matrix is a zero matrix
+let isZeroMatrix (M(m, _)) = 
+    List.forall (fun x -> isZeroVector x) m
+
+// fist non zero element of a vector
+let firstNonZero (V(v, _)) = 
+    List.find (fun x -> not (Number.isZero x)) v
+
+let rec rowEchelonForm m = 
+    if corectOrderCheck m R |> not then rowEchelonForm (correctOrder m R)
+    else
+    let (D(r, c)) = dimMatrix m
+
+    match m with
+    | _ when isZeroMatrix m -> m
+    |
+
+    
+    

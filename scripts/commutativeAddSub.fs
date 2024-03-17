@@ -1,9 +1,9 @@
-module assoativeAddSub
+module commutativeAddSub
 open Expression
 open Number
 
 
-// rank when sorting a assoative expression
+// rank when sorting a commutative expression
 let expressionSortRank e1 =
     match e1 with
     | N _ -> 1
@@ -30,9 +30,9 @@ let rec flatTree e =
 
 
 
-let rec sortAss l = List.sortBy (fun e -> expressionSortRank e) l
+let rec sort l = List.sortBy (fun e -> expressionSortRank e) l
 
-// Reduces a sorted assoative list for addition
+// Reduces a sorted commutative list for addition
 let rec reduceNumbers l =
     // printfn "rn %A" l
     match l with
@@ -44,17 +44,17 @@ let rec reduceNumbers l =
     | N a :: tail -> N a :: tail
     | _ -> l
 
-
-let rec findAllInstancesOfVariableInAss x l =
+// given a list of commutative expressions, and a variable, sums the corefficients of the variable
+let rec sumInstancesOfVarible x l =
     match x, l with
     | _, [] -> ([] ,x)
     | Mul(N n1, X x1), Mul(N n2, X x2) :: tail 
     | Mul(N n1, X x1), Mul(X x2, N n2) :: tail
     | Mul(X x1, N n1), Mul(N n2, X x2) :: tail
     | Mul(X x1, N n1), Mul(X x2, N n2) :: tail
-        when x1 = x2    -> findAllInstancesOfVariableInAss (Mul(N (n1 + n2), X x1)) tail
+        when x1 = x2    -> sumInstancesOfVarible (Mul(N (n1 + n2), X x1)) tail
     | _, head :: tail   -> 
-                        let (l_new, x_new) = findAllInstancesOfVariableInAss x tail
+                        let (l_new, x_new) = sumInstancesOfVarible x tail
                         (head :: l_new, x_new)
     
 
@@ -66,7 +66,7 @@ let rec reduceVariables l =
     | Mul(N a, X b) :: tail
     | Mul(X b, N a) :: tail 
         -> 
-        let (l_new, x_new) = findAllInstancesOfVariableInAss (Mul(N a, X b)) tail
+        let (l_new, x_new) = sumInstancesOfVarible (Mul(N a, X b)) tail
         x_new :: reduceVariables l_new
     | head :: tail -> head :: reduceVariables tail
     
@@ -79,17 +79,8 @@ let rec rebuldTree l =
     | Div (a, b)::tail -> (rebuldTree tail) + (a / b)
     | x::tail -> rebuldTree tail + x
 
-let applyAssociation e =
+let applyCommutative e =
     match e with 
-    | Sub _ | Add _ -> 
-                        let l = flatTree e
-                        // printfn "flattree %A" l
-                        let s = sortAss l
-                        // printfn "sortAss %A" s
-                        let r = reduceNumbers s
-                        // printfn "reduceNumbers %A" r
-                        let v = reduceVariables r
-                        rebuldTree s
-
+    | Sub _ | Add _ -> flatTree e |> sort |> reduceNumbers |> reduceVariables |> rebuldTree
     | _ -> e
 

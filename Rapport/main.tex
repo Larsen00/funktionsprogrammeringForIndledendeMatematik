@@ -21,7 +21,7 @@ Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funkti
 \input{sections/Fundamentale_koncepter}
 
 \section{Symbolske lignings udtryk}
-Det ønskes at kunne repræsentere simple ligninger som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udøføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere ligninger samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+Det ønskes at kunne repræsentere simple ligninger som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere ligninger samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
 Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet er lavet på, gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footnote{\url{https://en.wikipedia.org/wiki/Floating-point_error_mitigation}}, men for ikke at komplicere programmet vil vi i denne opgave ikke betragte floats.  
@@ -29,7 +29,10 @@ Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typ
 \subsubsection{Rationelle tal Mondul}
 Repræsentationen af rationale tal kan laves ved hjælp af danne et par af integers, hvor den ene integer er tælleren og den anden er nævneren. 
 
-\begin{lstlisting}[language={FSharp}, label={lst:fsharp_factorial}, caption={Typen for rationelle tal}]
+\begin{lstlisting}
+    [language={FSharp}, 
+    label={type_rationel},
+    caption={Typen for rationelle tal}]
 type rational = R of int * int
 \end{lstlisting}
 

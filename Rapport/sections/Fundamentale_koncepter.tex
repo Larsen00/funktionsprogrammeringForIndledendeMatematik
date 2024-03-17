@@ -2,7 +2,7 @@
 \section{Fundamentale koncepter}
 \subsection{Introduktion til Funktions Programmering}
 
-Det er forventet af læseren har kendskab til programmering, der gives derfor kun en kort beskrivelse af syntax og notationen, så læser ikke bekendt med F\# kan forstå de eksempler der løbende vil forkomme i rappoten.
+Det er forventet af læseren har kendskab til programmering, der gives derfor kun en kort beskrivelse af syntaks og notationen, så læser ikke bekendt med F\# kan forstå de eksempler der løbende vil forkomme i rappoten.
 
 \begin{equation}
     \label{Fakultet}
@@ -13,7 +13,7 @@ Det er forventet af læseren har kendskab til programmering, der gives derfor ku
            \end{cases}
 \end{equation}
 
-Vi begynder derfor med at betragte funktionen for fakultet ligning \ref{Fakultet}, et eksempel på en implementering i F\# er givet i \ref{lst:fsharp_factorial} som kan sammenlignes med Python kode \ref{lst:python_factorial}, da Python og pseudokode er næsten det samme. 
+Vi begynder derfor med at betragte funktionen for fakultet (\ref{Fakultet}), et eksempel på en implementering i F\# er givet i Listing \ref{lst:fsharp_factorial} som kan sammelignes med Python kode i Listing \ref{lst:python_factorial}, da Python og pseudokode er næsten det samme. 
 
 \begin{lstlisting}[language={FSharp}, label={lst:fsharp_factorial}, caption={Eksempel på Fakultet i F\#}]
 // Fakultet i F#
@@ -35,16 +35,16 @@ def factorial(n):
         raise ValueError("Negative argument")
 \end{lstlisting}
 
-I F\# anvendes \textcolor{blue}{let} til at definere en ny variabel eller, i dette tilfælde, en funktion kaldet \textcolor{red}{factorial}. Næste nøgleord er \textcolor{blue}{rec}, hvilket indikerer, at funktionen er rekursiv. Funktionen tager et inputargument \(n\), og i linje 3 starter et match-udtryk. Her er \(n\) vores udtryk, og efter \textcolor{codepurple}{with} begynder en række mønstre, som udtrykket forsøger at genkende på, separeret med '$\vert$'.
+I F\# anvendes \textcolor{blue}{let} til at definere en ny variabel eller, i dette tilfælde, en funktion kaldet \textcolor{red}{factorial}. Næste nøgleord er \textcolor{blue}{rec}, hvilket indikerer, at funktionen er rekursiv. Funktionen tager et inputargument \(n\), og i linje 3 starter et match-udtryk. Her er \(n\) vores udtryk, og efter \textcolor{codepurple}{with} begynder en række mønstre, som udtrykket forsøger at genkende på, separeret med '$\vert$'. Resultatet for funktionen vil blive koden som er eksekveret efter  '$\rightarrow$'.
 
-Et match på et mønster er ikke det samme som '==' kendt fra andre programmeringssprog. I linje 4 forsøger den at tildele værdien af \(n\) til 0, og dette lykkes kun, hvis \(n\) er 0. Hvis \(n\) ikke er 0 og dermed ikke genkender linje 4, vil den forsøge at genkende det næste mønster. Her står der kun \(x\), da der ikke yderligere specificeres om netop \(x\), vil det altid lykkes, og \(x\) bliver tildelt værdien af \(n\) svarende til \( [x \mapsto n] \). Derefter skal betingelserne efter \textcolor{codepurple}{when} være opfyldt. Hvis de er det, kan mønsteret genkendes på den givne linje. Derefter eksekverer den og returnerer koden efter '$\rightarrow$', hvor den samtidig har adgang til den nyligt tildelte værdi af \(x\). 
-Det sidste mønster på linje 6 anvender '\textunderscore' som mønster. 
-Dette betyder, at det kan genkende alle udtryk, men vi er ikke interesseret i at anvende værdien. I dette tilfælde kan det tredje mønster på linje 6 kun køres, når \(n\) er negativ.
 
-Bemærk hvordan en funktion i F\# altid returnere sidste kørte linje af en funktion. Svarende til man ikke skrev \textcolor{codepurple}{return} i linje 4 og 6 af Python koden\ref{lst:python_factorial}, men værdierne stadig blev returneret. 
+% Et match på et mønster er ikke det samme som '==' kendt fra andre programmeringssprog. I linje 4 forsøger den at tildele værdien af \(n\) til 0, og dette lykkes kun, hvis \(n\) er 0. Hvis \(n\) ikke er 0 og dermed ikke genkender linje 4, vil den forsøge at genkende det næste mønster. Her står der kun \(x\), da der ikke yderligere specificeres om netop \(x\), vil det altid lykkes, og \(x\) bliver tildelt værdien af \(n\) svarende til \( [x \mapsto n] \). Derefter skal betingelserne efter \textcolor{codepurple}{when} være opfyldt. Hvis de er det, kan mønsteret genkendes på den givne linje. Derefter eksekverer den koden efter '$\rightarrow$', hvor den samtidig har adgang til den nyligt tildelte værdi af \(x\). 
+% Det sidste mønster på linje 6 anvender '\textunderscore' som mønster. 
+% Dette betyder, at det kan genkende alle udtryk, men vi er ikke interesseret i at anvende værdien. I dette tilfælde kan det tredje mønster på linje 6 kun køres, når \(n\) er negativ.
+
 
 \subsubsection{Typer}
-Alle funktioner har en type i F\#, typen for \textcolor{red}{factorial}\ref{lst:fsharp_factorial} er $int \rightarrow int$. Det er ikke muligt at kalde funktionen med et argument der ikke er af typen $int$. Typen for funktionen skrives som $Factorial: int \rightarrow int$. Vi kan dermed formulere følgende omkring typer\footnote{s14 FPU F\#}: 
+Typer er tildelt ved kompilering, i modsætning til python som kør det under kørsel. Alle udtryk funktioner inkluderet har en type i F\#, typen for Listing \textcolor{red}{factorial}\ref{lst:fsharp_factorial} er $int \rightarrow int$. Det er derfor ikke muligt at kalde funktionen med et argument der ikke er af typen $int$. Typen for funktionen skrives som $Factorial: int \rightarrow int$. Vi kan dermed formulere følgende omkring typer\footnote{s14 FPU F\#}: 
 \begin{gather*}
     f: T_1 \rightarrow T_2 \\
     f e : T_2 \iff e : T_1
@@ -52,38 +52,38 @@ Alle funktioner har en type i F\#, typen for \textcolor{red}{factorial}\ref{lst:
 % => f(e) ville give en fejl hvis ikke e er af typen T2 
 % <= per defination så er f(e) :T2 hvis e:T1
 
-Er en funktion kaldt med et argument der ikke genkender funktionen type, gives en fejlmeddelelse. Derudover kan en type også være bestående at en tuple af typer.
+Er en funktion kaldt med et argument der ikke passer til funktionens type, gives en fejlmeddelelse. Derudover kan en type også være bestående at en tuple af typer.
 \begin{gather*}
     f: T_1 * T_2 * .. * T_n \rightarrow T_{n+1}\\
     f (e_1, e_2, .., e_n) :T_{n+1} \iff e_1 : T_1 \land e_2 : T_2 \land .. \land e_n : T_n
 \end{gather*}
 En tuple som kun består af to typer, kaldes et par. \\I F\# er det ikke nødvendigt at anvende parenteser som i andre programmeringssprog. De vil derfor kun anvendes hvor det er nødvendige, gennem rapporten. Når man laver en tuple er det nødvendigt.
-Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$ betyder den tager to udtryk af typen $T_1$ og $T_2$ hvor evalueringen af funktionen giver $T_3$
+Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$ betyder den tager et udtryk af typen $T_1$ som giver en funktion af typen $T_2 \rightarrow T_3$ hvor evalueringen af funktionen giver $T_3$
  
 \subsection{Signatur filer og implementerings filer}
-En standard F\# fil er lavet med .fs extension, denne fil indeholder alt den kode som er nødigt for at kunne køre programmet. En implementerings fil kan have en signatur fil t med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementerings filen som er tilgængelige for andre filer. En signatur fil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replikere implementerings filen. I andre programmerings sprog vil man anse funktionerne i signatur filen som værende "public" og de funktioner der ikke er i signatur filen, men er i implementerings filen som værende "private". I F\# er det ikke muligt at lave en funktion "private" i en implementerings
+En standard F\# fil er lavet med .fs extension, denne fil indeholder alt den kode som er nødigt for at kunne køre programmet. En implementerings fil kan have en signatur fil med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementerings filen som er tilgængelige for andre filer. En signatur fil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replicere implementerings filen. I andre programmerings sprog vil man anse funktionerne i signatur filen som værende "public" og de funktioner der ikke er i signatur filen, men er i implementerings filen som værende "private". 
 
 \subsection{Overloading operatorer}
-I F\# er det muligt at overloade standard operatore, så man kan anvende dem på egne typer. Det vil igennem rapporten blive anvendt til at definere matematiske operationer på de typer som vi kommer til at bygge.
+I F\# er det muligt at overskrive standard operatorer, så man kan anvende dem på egne typer. Det vil igennem rapporten blive anvendt til at definere matematiske operationer på de typer som vi kommer til at bygge.
 
 \subsection{Property Based Testing}
-Property Based Test (PBT) er en teknik til at teste korrekthed af egenskaber som man ved altid skal være opfyldt. En PBT test genere en række tilfældige input til en funktion og tester om en egenskab er opfyldt. Hvis en egenskab ikke er opfyldt, vil PBT give et eksempel på en fejl. De matematiske studerende på DTU, begynder med at lære om logik. I den forbindelse lærer man at en udsagnslogisk formel er gyldig (tautologi) hvis den altid er sand. Der eksistere mange teknikker til at vise at en udsagnslogisk formel er gyldig, i DTU's matematiske kursus lærer man at anvende sandhedstabellen. De viser hvordan \ref{udsagnslogik} er gyldig. 
+Property Based Test (PBT) er en teknik til at teste korrekthed af egenskaber som man ved altid skal være opfyldt. En PBT test generer en række tilfældige input til en funktion og tester om en egenskab er opfyldt. Hvis en egenskab ikke er opfyldt, vil PBT give et eksempel på en fejl. De matematiske studerende på DTU, begynder med at lære om logik. I den forbindelse lærer man at en udsagnslogisk formel er gyldig (tautologi) hvis den altid er sand. Der eksistere mange teknikker til at vise at en udsagnslogisk formel er gyldig, i DTU's matematiske kursus lærer man at anvende sandhedstabellen. De viser hvordan \ref{udsagnslogik} er gyldig. 
 \begin{gather}
     P \land (Q \land R) \iff (P \land Q) \land R
     \label{udsagnslogik}
 \end{gather}
-Vi vil også kunne anvende PBT til at undersøge om \ref{udsagnslogik} er gyldig\ref{valid1}.
+Vi vil også kunne anvende PBT til at undersøge om (\ref{udsagnslogik}) er gyldig, ved at udtrykke egenskaben som en funktionen af $P, Q$ og $R$ se Listing 3 \ref{valid1}.
 
 \lstinputlisting[
     language=FSharp,
     label={valid1},
-    caption={PBT af \ref{udsagnslogik}, for at undgår shortcircuting har begge sider af lighedstegnet omgivet af parenteser.}
+    caption={PBT af (\ref{udsagnslogik}), for at undgår shortcircuting har begge sider af lighedstegnet omgivet af parenteser.}
 ]{exampleCodes/valid1.fsx}
 
-\begin{lstlisting}[style=output, label={lst:output_example}, caption={Output ved PBT af \ref{udsagnslogik}}]
+\begin{lstlisting}[style=output, label={lst:output_example}, caption={Output ved PBT af (\ref{udsagnslogik}})]
 > let _ = Check.Quick propositional_formula;;
 Ok, passed 100 tests.
 \end{lstlisting}
 
-Check.Quick er en del af "FsCheck" biblioteket, den tager en funktion som argument, og generere en række tilfældige input til funktionen på baggrund af funktionens type. Hvis funktionen returnere "true" for alle input, vil testen lykkedes. Hvis funktionen returnere "false" for et input, vil testen fejle og give et eksempel på et input der fejlede. I \ref{valid1} er der anvendt "Check.Quick" til at teste om \ref{udsagnslogik} er gyldig. Funktionen "Check.Quick" returnere "Ok, passed 100 tests." hvilket indikerer at \ref{udsagnslogik} er gyldig. Det vigtigt her at forstå dette ikke er det samme som at bevise at den er gyldig, der er en mindre sandsynlighed for ikke alle muligheder er blevet testet. I dette tilfælde kan vi regne sandsynligheden for hvor vidt alle kombinationer er testet. $P, Q, R \in \{True, False\}$, derfor er der $2^3 = 8$ mulige kombinationer for input til funktionen. Hvis vi antager at alle kombinationer er lige sandsynlige, er sandsynligheden for at alle kombinationer er blevet testet $1 - (\frac{7}{8})^{100} = 0.999998$. Derfor er det meget sandsynligt at \ref{udsagnslogik} er gyldig.\\
+Check.Quick er en del af "FsCheck" biblioteket, den tager en funktion som argument, og generere en række tilfældige input til funktionen på baggrund af funktionens type. Hvis funktionen returnere "true" for alle input, vil testen lykkedes. Hvis funktionen returnere "false" for et input, vil testen fejle og give et eksempel på et input der fejlede. I Listing \ref{valid1} er der anvendt "Check.Quick" til at teste om (\ref{udsagnslogik}) er gyldig. Funktionen "Check.Quick" returnere "Ok, passed 100 tests." hvilket indikerer at (\ref{udsagnslogik}) er gyldig. Det vigtigt her at forstå dette ikke er det samme som at bevise at den er gyldig, da ikke alle muligheder er blevet testet. I dette tilfælde kan vi regne sandsynligheden for hvor vidt alle kombinationer er testet. $P, Q, R \in \{True, False\}$, derfor er der $2^3 = 8$ mulige kombinationer for input til funktionen. Hvis vi antager at alle kombinationer er lige sandsynlige, er sandsynligheden for at alle kombinationer er blevet testet $1 - (\frac{7}{8})^{100} = 0.999998$. Derfor er det meget sandsynligt at (\ref{udsagnslogik}) er gyldig.\\
 Det vil generelt ikke være muligt at regne denne sandsynlighed, da vi senere vil anvende PBT til at teste funktioner der tager argumenter som ikke har et endeligt antal kombinationer. Dog vil det stadig give en god indikation hvorvidt en egenskab er overholdt. I nogle tilfælde vil det være en fordel at opskrive en PBT før implementeringen af en funktion som man ved skal overholde en egenskab, på den måde anvende Test Driven Development (TDD) \footnote{\url{https://en.wikipedia.org/wiki/Test-driven_development}} til at teste om ens egenskab forbliver overholdt, under implementering.

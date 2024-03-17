@@ -27,3 +27,4 @@ val absNumber    : Number -> Number
 val greaterThan  : Number -> Number -> bool
 val tryReduce   : Number -> Number
 val toString     : Number -> string
+val conjugate         : Number -> Number

@@ -1,1 +1,6 @@
 Undersøg hvor nul division fejlene sker, evt klasificer symbolic nul div anderledes end dem i modulerne.
+
+PBT på inner produkt
+
+en vector med længde 1 har inner product på 1
+tror at vector skal være liste af expr, så lave en sqrt

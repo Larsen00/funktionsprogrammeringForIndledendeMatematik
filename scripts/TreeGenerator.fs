@@ -94,7 +94,9 @@ let rec ExpressionToInfix e p =
     | Add(a, b) -> (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false)
     | Sub(a, b) when p -> "(" + (ExpressionToInfix a false) + "-" + (ExpressionToInfix b false) + ")"
     | Sub(a, b) -> (ExpressionToInfix a false) + "-" + (ExpressionToInfix b false)
+    | Mul(a, b) when p -> "(" + (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) + ")"
     | Mul(a, b) -> (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) 
+    | Div(a, b) when p -> "(" + (ExpressionToInfix a true) + "/" + (ExpressionToInfix b true) + ")"
     | Div(a, b) -> (ExpressionToInfix a true)  + "/" + (ExpressionToInfix b true)
 
 let InfixExpression e = ExpressionToInfix e false

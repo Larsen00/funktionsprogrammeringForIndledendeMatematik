@@ -9,7 +9,6 @@ type Number =
         | Rational of rational
         | Complex of complex
         
-
 // #TODO med tiden vil man kunne tilføje funktionalitet sådan at man kan mixe int rationalle tal her ville man lave en makeR complex måske. og en try makeR rational.
 
 // Creates a rational number from an Number
@@ -109,3 +108,8 @@ let absNumber n =
     | Int a -> Int (abs a)
     | Rational a -> Rational (absRational(a))
     | Complex a -> Complex (absComplex(a))
+
+let conjugate n = 
+    match n with
+    | Complex a -> conjugate(a) |> Complex
+    | _ -> n

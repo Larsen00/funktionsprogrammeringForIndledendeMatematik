@@ -20,3 +20,4 @@ val isZero : complex -> bool
 val toString : complex -> string
 val isNegative : complex -> bool
 val absComplex : complex -> complex
+val conjugate : complex -> complex

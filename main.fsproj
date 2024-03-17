@@ -20,6 +20,7 @@
     <Compile Include="PBT/Generators.fs" />
     <Compile Include="scripts/TreeGenerator.fs" /> 
     <Compile Include="scripts/Differentiation.fs" />
+    <Compile Include="scripts/assoativeAddSub.fs" />
     <Compile Include="scripts/SymbolicManipolation.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

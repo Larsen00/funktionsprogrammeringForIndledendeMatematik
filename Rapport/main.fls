@@ -410,6 +410,7 @@ INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
 INPUT .\sections\Fundamentale_koncepter.tex
 INPUT .\sections\Fundamentale_koncepter.tex
 INPUT .\sections\Fundamentale_koncepter.tex
@@ -422,7 +423,6 @@ INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr9.tfm
 INPUT .\exampleCodes\valid1.fsx
 INPUT .\exampleCodes\valid1.fsx
 INPUT exampleCodes\valid1.fsx
-INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
 INPUT .\exampleCodes\rational.fsi
 INPUT .\exampleCodes\rational.fsi
 INPUT exampleCodes\rational.fsi

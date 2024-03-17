@@ -90,3 +90,13 @@ rettelser:
 * udskyd snakken om mønstre
 * funktioner retunere ikke, men er utryk så alt efter = er udtrykket.
 * ttyper er infitert på oversættelse tidpuktet
+
+
+# Møde 7
+* Det ikke muligt at lave orthnormal men kun orthhoganol bacis
+
+Har Lavet:
+    *Alle mine filer til script filer
+    *Implamentert gram smidt metoden dog uden at normalizere bacisen.
+    
+     

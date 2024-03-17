@@ -9,3 +9,5 @@
     - i samme mondul vil man kunne have matrix som liste af vector af samme T og definere om den er row eller col vise.
 
 * Et polynomie kan være en vector i monomie basen
+
+* man kan lave matricer om til lister af expressions og så dermed have sqrt

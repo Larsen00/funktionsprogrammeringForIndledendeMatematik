@@ -16,6 +16,14 @@ let neg e:Expr<Number> =
     | N a -> N (-a)
     | _ -> Neg(e) 
 
+// multiplies two expressions with simplification 
+let rec mul e1 e2:Expr<Number> =
+    match e1, e2 with
+    |N a, N b                       -> N (a * b)
+    |N a, b | b, N a when isOne a   -> b
+    |N a, _ | _, N a when isZero a  -> N zero
+    |Div(a, b), c | c, Div(a, b) -> Div (mul a c, b)
+    | _, _                          -> Mul(e1, e2)
 
 // adds two expressions
 let rec add e1 e2:Expr<Number>  =
@@ -25,7 +33,7 @@ let rec add e1 e2:Expr<Number>  =
     | Mul(a, X b), Mul(c, X d) 
     | Mul(X b, a), Mul(c, X d)
     | Mul(a, X b), Mul(X d, c) 
-    | Mul(X b, a), Mul(X d, c) when b = d -> Mul(add a c, X b)  
+    | Mul(X b, a), Mul(X d, c) when b = d -> Mul(add a c, X b)
     | _, _                                -> Add(e1, e2)
 
 // subtracts two expressions
@@ -43,13 +51,6 @@ let rec sub a b:Expr<Number>  =
     | Mul(X b, a), Mul(X d, c) when b = d -> Mul(sub a c, X b) 
     | _, _ -> Sub(a, b)
  
-// multiplies two expressions with simplification 
-let rec mul e1 e2:Expr<Number> =
-    match e1, e2 with
-    |N a, N b                       -> N (a * b)
-    |N a, b | b, N a when isOne a   -> b
-    |N a, _ | _, N a when isZero a  -> N zero
-    | _, _                          -> Mul(e1, e2)
 
 // divides two expressions with simplification
 let div e1 e2:Expr<Number> =

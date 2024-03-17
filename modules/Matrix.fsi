@@ -2,9 +2,16 @@ module Matrix
 open Number
 
 type order = | R | C
-
-type Vector =  V of Number list * order
 type Dimension = D of int * int
+
+type Vector =
+    V of Number list * order
+    with
+        static member ( + )  : Vector * Vector -> Vector
+        static member ( + )  : Vector * Vector -> Vector
+        static member ( * )  : Number * Vector -> Vector
+        static member ( * )  : Vector * Number -> Vector 
+        static member ( ~- ) : Vector -> Vector
 
 type Matrix =
     M of Vector list * order
@@ -20,3 +27,4 @@ val matrix : Vector list -> Matrix
 val matrixOf : Number -> Dimension -> Matrix
 val sumRows : Matrix -> Matrix
 val flip : Matrix -> Matrix
+val Gram_Schmidt : Matrix -> (Number list -> Matrix) -> Matrix

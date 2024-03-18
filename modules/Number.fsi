@@ -25,6 +25,7 @@ val isOne        : Number -> bool
 val isNegative   : Number -> bool
 val absNumber    : Number -> Number
 val greaterThan  : Number -> Number -> bool
-val tryReduce   : Number -> Number
+val tryReduce    : Number -> Number
 val toString     : Number -> string
-val conjugate         : Number -> Number
+val conjugate    : Number -> Number
+val inv          : Number -> Number

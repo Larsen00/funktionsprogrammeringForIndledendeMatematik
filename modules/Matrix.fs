@@ -138,7 +138,7 @@ let addMatrix m1 m2 =
     M (List.map2 addVector m1 m3, o)
 
 // Multiplication of a scalar and a matrix
-let scalarMatrix (n:Number) (M (m, o)) = 
+let scalarMatrix (M (m, o)) (n:Number) = 
     M ((List.map (fun x -> scalarVector n x) m), o)
 
 type Vector with
@@ -153,8 +153,8 @@ type Matrix with
     static member (+) (m1, m2) = addMatrix m1 m2
     static member (+) (m, n)  = dimMatrix m |> matrixOf n |> addMatrix m
     static member (+) (n, m)  = dimMatrix m |> matrixOf n |> addMatrix m
-    static member (*) (n, v)  = scalarMatrix n v
-    static member (*) (v, n)  = scalarMatrix n v
+    static member (*) (n, m)  = scalarMatrix m n
+    static member (*) (m, n)  = scalarMatrix m n
 
 
 // Changes the order of af matrix to x
@@ -185,7 +185,6 @@ let extractVector (M(m, o)) =
     
 // Multiplies two vectors element wise
 let vectorMulElementWise (V(u, o1)) (V(v, o2)) =
-    printfn "%A - %A" u v
     if o1 <> C || o2 <> C then failwith "Vectors must have the same major order"
     elif List.length u <> List.length v then failwith "Vectors must have the same dimension"
     else
@@ -230,7 +229,6 @@ let rec Gram_Schmidt vm acc_wm =
 
 // Sum all the projections of vk on w1 to wk-1
 and sumProj w vk =
-    printfn "sumproj: %A" w
     match w with
     | [] -> vectorOf zero (vectorLength vk)
     | x::xs -> proj x vk + sumProj xs vk
@@ -250,17 +248,50 @@ let isZeroMatrix (M(m, _)) =
     List.forall (fun x -> isZeroVector x) m
 
 // fist non zero element of a vector
-let firstNonZero (V(v, _)) = 
+let firstNonZero (V(v, _)) =
+    if isZeroVector (V(v, C)) then failwith "firstNonZero: Vector does not have a non zero element"
+    else
     List.find (fun x -> not (Number.isZero x)) v
 
-let rec rowEchelonForm m = 
-    if corectOrderCheck m R |> not then rowEchelonForm (correctOrder m R)
+// Index of the first non zero element of a vector
+let firstNonZeroIndex (V(v, _)) = 
+    if isZeroVector (V(v, C)) then -1
     else
-    let (D(r, c)) = dimMatrix m
+    List.findIndex (fun x -> not (Number.isZero x)) v
 
+
+// Index of the first non zero element of a matrix
+let rec firstNonZeroIndexMatrix (M(m, o)) idx (r, c) = 
+    let fnxi = List.head m |> firstNonZeroIndex
     match m with
-    | _ when isZeroMatrix m -> m
-    |
+    | [] -> idx
+    | v::vt when fnxi >= 0 && (fnxi < c || c = -1) -> firstNonZeroIndexMatrix (M(vt, o)) (idx + 1) (idx, fnxi)
+    | _::vt -> firstNonZeroIndexMatrix (M(vt, o)) (idx + 1) (r, c)
+
+    
+
+// Switches two vectors in a matrix
+// let switchVectors (M(m, o)) i j =
+//     let temp = m.[i]
+//     let m.[i] = m.[j]
+//     let m.[j] = temp
+//     M(m, o)
+
+// let rec rowEchelonForm A = 
+//     if corectOrderCheck A R |> not then rowEchelonForm (correctOrder A R)
+//     else
+//     let (D(r, c)) = dimMatrix A
+
+//     match A with
+//     |M([], _) -> A
+//     | _ when isZeroMatrix A -> A
+//     | M(v::_, _) when r = 1 -> (Number.one / firstNonZero v) |> scalarMatrix A  
+//     | _ ->
+//         let (i, j) = firstNonZeroIndexMatrix A 0 -1
+//         let (M(B, o)) = switchVectors A 0 i
+//         let b = B.[i]
+//         
+
 
     
     

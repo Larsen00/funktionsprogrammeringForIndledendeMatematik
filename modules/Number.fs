@@ -113,3 +113,6 @@ let conjugate n =
     match n with
     | Complex a -> conjugate(a) |> Complex
     | _ -> n
+
+let inv n =
+    one / n

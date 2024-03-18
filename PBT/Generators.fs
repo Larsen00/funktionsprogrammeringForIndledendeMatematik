@@ -144,14 +144,14 @@ type NumberGen =
 /////////////////////////////////
 
 
-// Property: The addition of vectors is associative Theorem 7.2
-let vectorAss m =
+// Property: The addition of vectors is commutative Theorem 7.2
+let vectorCom m =
     sumRows m = sumRows (flip m)
 
 let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
     n1 * (n2 * m) = (n1 * n2) * m
 
-// test c * (v1 + ..+  vn) = c*v1 + .. + c*v2
+// test c * (v1 + ..+  vn) = c*v1 + .. + c*vn
 let vectorAssCom m n =
     n * (sumRows m) = sumRows (n * m)
 

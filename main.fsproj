@@ -16,7 +16,7 @@
     <Compile Include="modules/Expression.fsi" />
     <Compile Include="modules/Expression.fs" />
     <Compile Include="modules/Matrix.fsi" />
-    <Compile Include="modules/matrix.fs" />
+    <Compile Include="modules/Matrix.fs" />
     <Compile Include="PBT/Generators.fs" />
     <Compile Include="scripts/TreeGenerator.fs" /> 
     <Compile Include="scripts/Differentiation.fs" />

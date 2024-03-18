@@ -98,5 +98,15 @@ rettelser:
 Har Lavet:
     *Alle mine filer til script filer
     *Implamentert gram smidt metoden dog uden at normalizere bacisen.
+
+Spørgsmål:
+    * Er der en systematisk måde at generere basiser for et givet vector rum?
+    
+Næste to mandage er der ikke møde
+
+Næste gang:
+    * Bevis gramschmidt metoden,
+    * Der er en egenskab på acc_wm og på extend matrix 
+    * acc_wm er skal alle vektore forblive ortogonale på hinande når man extender den 
     
      

@@ -7,7 +7,21 @@ let v1 = vector [Int 1; Int -1; Int 1]
 let v2 = vector [Int 1; Int 0; Int 1]
 let v3 = vector [Int 1; Int 1; Int 2]
 
+// let v1 = vector [Int 1; Int 1]
+// let v2 = v1
+// let v3 = vector [Int 1; Int 0]
+
+
 let m1 = matrix [v1; v2; v3]
 
-printfn "%A" (Gram_Schmidt m1 (fun _ -> (M([], C))))
+// printfn "%A" (orthogonalBacis m1)
 
+
+ 
+printfn "%A\n" (stringMatrix m1)
+let rf = (rowEchelonForm m1)
+printfn "res:\n%A" (stringMatrix rf)
+
+
+
+printfn "%A" (stringMatrix (m1*m1) )

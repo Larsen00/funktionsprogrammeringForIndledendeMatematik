@@ -18,11 +18,11 @@
     <Compile Include="modules/Matrix.fsi" />
     <Compile Include="modules/Matrix.fs" />
     <Compile Include="PBT/Generators.fs" />
-    <Compile Include="scripts/TreeGenerator.fs" /> 
-    <Compile Include="scripts/Differentiation.fs" />
-    <Compile Include="scripts/commutativeAddSub.fs" />
-    <Compile Include="scripts/commutativeMulDiv.fs" />
-    <Compile Include="scripts/SymbolicManipolation.fs" />
+    <Compile Include="implamentations/TreeGenerator.fs" /> 
+    <Compile Include="implamentations/Differentiation.fs" />
+    <Compile Include="implamentations/commutativeAddSub.fs" />
+    <Compile Include="implamentations/commutativeMulDiv.fs" />
+    <Compile Include="implamentations/SymbolicManipolation.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

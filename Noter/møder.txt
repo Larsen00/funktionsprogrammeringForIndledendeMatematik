@@ -110,3 +110,5 @@ Næste gang:
     * acc_wm er skal alle vektore forblive ortogonale på hinande når man extender den 
     
      
+# møde 8
+Har lavet matrixproduct og matrix vector product

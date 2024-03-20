@@ -14,9 +14,6 @@ type Matrix = M of list<Vector> * order
 // Construct a vector
 let vector nl = V (nl, C)
 
-// Construct a matrix
-let matrix vl = M (vl, C)
-
 // The dimension of a vector
 let dimVector (V(v, o)) = 
     let len = List.length v
@@ -35,10 +32,15 @@ let matrixValidMajor (M(m, o)) =
 let vectorLength (V(v, _)) = List.length v
 
 // The list length of a matrix's vectors
-let matrixVectorLength (M(m, _)) = List.head m |> vectorLength
+let matrixVectorLength (M(m, _)) = 
+    match m with
+    | [] -> 0
+    | x::_ -> vectorLength x
 
 // The dimension of a matrix
 let dimMatrix (M(m, o)) =
+    if m = [] then D (0, 0)
+    else
     let _ = matrixValidMajor (M(m, o))
     let d1 = List.length m
     let d2 = matrixVectorLength (M(m, o))
@@ -98,11 +100,14 @@ let alternateOrderMatrix (M(m, o)) =
     M (m, alternateOrder o)
 
 // The i'th number of a vector
-let getVectorIthNumber (V(v, _)) i = v.[i]
+let getVectorIthNumber i (V(v, _)) = v.[i]
 
 // pops a vector 
 let seperateFistNumberFromVector (V(v, o)) = 
     (v.Head, V(v.Tail, o))
+
+// first element of a vector
+let headVector (V(v, _)) = List.head v
 
 // Gives a vector of all the first elements of the vectors in a matrix
 let rec firstElemetsVectors (M(m, o)) v_acc m_acc = 
@@ -141,21 +146,14 @@ let addMatrix m1 m2 =
 let scalarMatrix (M (m, o)) (n:Number) = 
     M ((List.map (fun x -> scalarVector n x) m), o)
 
-type Vector with
-    static member (+) (v1, v2) = addVector v1 v2
-    static member (-) (v1, v2) = subVector v1 v2
-    static member (*) (n, v)  = scalarVector n v
-    static member (*) (v, n)  = scalarVector n v
-    static member (~-) (v)    = scalarVector (-one) v
 
-
-type Matrix with
-    static member (+) (m1, m2) = addMatrix m1 m2
-    static member (+) (m, n)  = dimMatrix m |> matrixOf n |> addMatrix m
-    static member (+) (n, m)  = dimMatrix m |> matrixOf n |> addMatrix m
-    static member (*) (n, m)  = scalarMatrix m n
-    static member (*) (m, n)  = scalarMatrix m n
-
+// Construct a matrix
+let matrix vl =
+    let rec mc vl m =
+        match vl with
+        | [] -> m
+        | (V(x, _))::xs -> mc xs (extendMatrix m x)
+    mc vl (M([], C))
 
 // Changes the order of af matrix to x
 let correctOrder (M(m, o)) x =
@@ -171,6 +169,58 @@ let sumRows m =
     let v = List.fold (addVector) (matrixVectorLength (M(m_new, o)) |> vectorOf zero) m_new
     matrix [v]
 
+
+// multiplies a matrix and a vector A.v = b - Definition 7.10
+let rec matrixMulVector m v =
+    let (D(rv, _)) = dimVector v
+    let (D(_, cm)) = dimMatrix m
+    if rv <> cm  
+    then failwith "matrixVector: the number of columns of the matrix has to be the same as the number of entries in the vector."
+    elif not <| corectOrderCheck m C then matrixMulVector (correctOrder m C) v
+    else
+    let (M(vl, _)) = m
+    let (V(nl, _)) = v
+    sumRows <| M (List.map2 (fun mc n -> scalarVector n mc) vl nl, C)
+
+// Converts a matrix to a vector if possible
+let mactrixToVector m =
+    match dimMatrix m, m with
+    | D(r, c), M(v::_, _) when r = 1 || c = 1 -> v
+    | _, _ -> failwith "mactrixToVector: Matrix is not a vector"
+    
+// Multiplies two matrices - Definition 7.12
+let rec matrixProduct a b =
+    let (D(_, ca)) = dimMatrix a
+    let (D(rb, _)) = dimMatrix b
+    if ca <> rb 
+    then failwith "matrixProduct: matrix product A · B is defined only if the number of columns of A is the same as the number of rows of B"
+    elif not <| corectOrderCheck b C then matrixProduct a (correctOrder b C)
+    else
+    let (M(vlb, _)) = b
+    M(List.map (fun bv -> matrixMulVector a bv |> mactrixToVector ) vlb, C)
+
+
+type Vector with
+    static member (+) (v1, v2) = addVector v1 v2
+    static member (-) (v1, v2) = subVector v1 v2
+    static member (*) (n, v)  = scalarVector n v
+    static member (*) (v, n)  = scalarVector n v
+    static member (~-) (v)    = scalarVector (-one) v
+
+
+type Matrix with
+    static member (+) (m1, m2) = addMatrix m1 m2
+    static member (+) (m, n)  = dimMatrix m |> matrixOf n |> addMatrix m
+    static member (+) (n, m)  = dimMatrix m |> matrixOf n |> addMatrix m
+    static member (*) (n, m)  = scalarMatrix m n
+    static member (*) (m, n)  = scalarMatrix m n
+    static member (*) (m, v)  = matrixMulVector m v
+    static member (*) (m1, m2) = matrixProduct m1 m2
+
+
+
+
+
 // Horisontal flip of a matrix
 let flip m = 
     let (M(m_new, _)) = correctOrder m C
@@ -182,7 +232,11 @@ let extractVector (M(m, o)) =
     match m with
     | [] -> failwith "Matrix is empty"
     | x::xs -> x, M(xs, o)
-    
+
+// extract i'th element of a vector
+let getVectorIth (V(v, _)) i = 
+    v.[i]
+
 // Multiplies two vectors element wise
 let vectorMulElementWise (V(u, o1)) (V(v, o2)) =
     if o1 <> C || o2 <> C then failwith "Vectors must have the same major order"
@@ -214,30 +268,30 @@ let proj y x =
     scalarVector (innerProduct x y / innerProduct y y) y
 
 
-
-// Gram-Schmidt process but without the normalization
-let rec Gram_Schmidt vm acc_wm =
-    if corectOrderCheck vm C |> not then Gram_Schmidt (correctOrder vm C) acc_wm
-    else
-
-    match acc_wm [], vm with
-    | x, M([], _) -> x 
-    | M([], _), M(v1::vrest, o) -> Gram_Schmidt (M(vrest,o)) (fun x -> extendMatrix (M([v1], C)) x) 
-    | M(w, _), M(vk::vrest, o) -> 
-                let (V(wk, _)) = vk - sumProj w vk
-                Gram_Schmidt (M(vrest,o)) (fun x -> extendMatrix (acc_wm wk) x)
-
-// Sum all the projections of vk on w1 to wk-1
-and sumProj w vk =
-    match w with
-    | [] -> vectorOf zero (vectorLength vk)
-    | x::xs -> proj x vk + sumProj xs vk
-    
-
-// Orthogonal bacis
+// Orthogonal bacis using the Gram-Schmidt process
 let orthogonalBacis m =
-    Gram_Schmidt m (fun _ -> M([], C))
+    
+    // Gram-Schmidt process but without the normalization
+    let rec Gram_Schmidt vm acc_wm =
+        if not <| corectOrderCheck vm C  
+        then Gram_Schmidt (correctOrder vm C) acc_wm
+        else
 
+        match acc_wm [], vm with
+        | x, M([], _) -> x 
+        | M([], _), M(v1::vrest, o) -> 
+            Gram_Schmidt (M(vrest,o)) (fun x -> extendMatrix (M([v1], C)) x) 
+        | M(w, _), M(vk::vrest, o) -> 
+            let (V(wk, _)) = vk - sumProj w vk
+            Gram_Schmidt (M(vrest,o)) (fun x -> extendMatrix (acc_wm wk) x)
+
+    // Sum all the projections of vk on w1 to wk-1
+    and sumProj w vk =
+        match w with
+        | [] -> vectorOf zero (vectorLength vk)
+        | x::xs -> proj x vk + sumProj xs vk
+        
+    Gram_Schmidt m (fun _ -> M([], C))
 
 // Checks if a vector is a zero vector
 let isZeroVector (V(v, _)) = 
@@ -259,38 +313,85 @@ let firstNonZeroIndex (V(v, _)) =
     else
     List.findIndex (fun x -> not (Number.isZero x)) v
 
+// string a vector
+let stringVector (V(v, o)) =
+    let space  = if o = C then "\n" else " "
+    List.map (fun x -> toString x) v |> String.concat space
+
+// string a matrix
+let rec stringMatrix m =
+    if not <| corectOrderCheck m R then stringMatrix (correctOrder m R)
+    else
+    let (M(vl, _)) = m
+    List.map (fun x -> stringVector x) vl |> String.concat "\n"
+    
 
 // Index of the first non zero element of a matrix
 let rec firstNonZeroIndexMatrix (M(m, o)) idx (r, c) = 
+    if m = [] then (r, c) else
     let fnxi = List.head m |> firstNonZeroIndex
     match m with
-    | [] -> idx
-    | v::vt when fnxi >= 0 && (fnxi < c || c = -1) -> firstNonZeroIndexMatrix (M(vt, o)) (idx + 1) (idx, fnxi)
+    | [] -> (r, c)
+    | _::vt when fnxi >= 0 && (fnxi < c || c = -1) -> firstNonZeroIndexMatrix (M(vt, o)) (idx + 1) (idx, fnxi)
     | _::vt -> firstNonZeroIndexMatrix (M(vt, o)) (idx + 1) (r, c)
 
-    
 
 // Switches two vectors in a matrix
-// let switchVectors (M(m, o)) i j =
-//     let temp = m.[i]
-//     let m.[i] = m.[j]
-//     let m.[j] = temp
-//     M(m, o)
+let swapFirstWith (M(m, o)) i =
+    if i = 0 
+    then M(m, o)
+    else
+    let rec swapper h m i idx acc_m =
+        match m with
+        | [] -> failwith "swapFirstWith: Index out of range"
+        | x::xs when idx = i -> x :: acc_m @ (h::xs)
+        | x::xs -> swapper h xs i (idx + 1) (acc_m @ [x])
 
-// let rec rowEchelonForm A = 
-//     if corectOrderCheck A R |> not then rowEchelonForm (correctOrder A R)
-//     else
-//     let (D(r, c)) = dimMatrix A
+    match m with
+    | [] -> failwith "swapFirstWith: Matrix is empty"
+    | h::tail -> M(swapper h tail i 1 [], o)
 
-//     match A with
-//     |M([], _) -> A
-//     | _ when isZeroMatrix A -> A
-//     | M(v::_, _) when r = 1 -> (Number.one / firstNonZero v) |> scalarMatrix A  
-//     | _ ->
-//         let (i, j) = firstNonZeroIndexMatrix A 0 -1
-//         let (M(B, o)) = switchVectors A 0 i
-//         let b = B.[i]
-//         
+// Muliplies the i'th vector with a scalar 
+let scalarIthVector c i (M(m, o)) =
+    let rec sIV c m i idx acc_m =
+        printfn "c: %A" c
+        match m with
+        | [] -> failwith "scalarIthVector: Index out of range"
+        | x::xs when idx = i -> acc_m @ c * x :: xs
+        | x::xs -> sIV c xs i (idx + 1) (acc_m @ [x])
+    
+    M(sIV c m i 0 [], o)
+
+// row echelon form of a matrix
+let rec rowEchelonForm A = 
+    if not <| corectOrderCheck A R then rowEchelonForm (correctOrder A R)
+    else
+    let (D(r, c)) = dimMatrix A
+
+    match A with
+    |M([], _) -> A
+    | _ when isZeroMatrix A -> A
+    | M(v::_, _) when r = 1 -> firstNonZero v |> inv |> scalarMatrix A  
+    | M(_, o) ->
+        let (i, _) = firstNonZeroIndexMatrix A 0 (-1 ,-1)
+        let (M(B, _)) = swapFirstWith A i
+        let b = List.head B |> firstNonZero
+        let (M(B, _)) = scalarIthVector (inv b) i (M(B, o))
+        let R1 = List.head B
+        let B = alterB (List.tail B) 1 R1 [R1]
+        let (M(Cm, _)) = rowEchelonForm <| M(List.tail B, o)
+        M(R1::Cm, o)
+
+and alterB vl i R1 acc_B =
+    match vl with
+    | [] -> acc_B
+    | Ri::tail -> alterB tail i R1<| acc_B @ [Ri - (headVector Ri) * R1]
+        
+
+
+
+
+        
 
 
     

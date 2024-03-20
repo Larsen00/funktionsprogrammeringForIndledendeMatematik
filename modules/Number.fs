@@ -31,7 +31,6 @@ let operation a b f =
 
 // negates a number
 let neg a =
-    // printfn "neg - %A" a
     match a with
     | Int a -> Int -a
     | Rational a -> Rational -a

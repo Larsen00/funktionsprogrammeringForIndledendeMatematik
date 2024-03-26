@@ -102,6 +102,13 @@ let alternateOrderMatrix (M(m, o)) =
 // The i'th number of a vector
 let getVectorIthNumber i (V(v, _)) = v.[i]
 
+// The i'th vector of a matrix
+let getMatrixIthVector i (M(m, _)) = m.[i]
+
+// replaces the i'th vector of a matrix
+let replaceMatrixIthVector i (M(m, o)) v =
+    M (m.[0..i-1] @ [v] @ m.[i+1..], o)
+
 // pops a vector 
 let seperateFistNumberFromVector (V(v, o)) = 
     (v.Head, V(v.Tail, o))
@@ -233,9 +240,6 @@ let extractVector (M(m, o)) =
     | [] -> failwith "Matrix is empty"
     | x::xs -> x, M(xs, o)
 
-// extract i'th element of a vector
-let getVectorIth (V(v, _)) i = 
-    v.[i]
 
 // Multiplies two vectors element wise
 let vectorMulElementWise (V(u, o1)) (V(v, o2)) =
@@ -362,36 +366,69 @@ let scalarIthVector c i (M(m, o)) =
     
     M(sIV c m i 0 [], o)
 
+
+// Alters row j with Rj <- Rj - c * Ri
+let rec rowOperation i j c m = 
+    if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
+    elif not <| corectOrderCheck m R then rowOperation i j c <| correctOrder m R
+    else
+
+    replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
+
+
 // row echelon form of a matrix
 let rec rowEchelonForm A = 
     if not <| corectOrderCheck A R then rowEchelonForm (correctOrder A R)
     else
     let (D(r, c)) = dimMatrix A
-
     match A with
     |M([], _) -> A
     | _ when isZeroMatrix A -> A
     | M(v::_, _) when r = 1 -> firstNonZero v |> inv |> scalarMatrix A  
     | M(_, o) ->
-        let (i, _) = firstNonZeroIndexMatrix A 0 (-1 ,-1)
+        let (i, j) = firstNonZeroIndexMatrix A 0 (-1 ,-1)
         let (M(B, _)) = swapFirstWith A i
         let b = List.head B |> firstNonZero
         let (M(B, _)) = scalarIthVector (inv b) i (M(B, o))
         let R1 = List.head B
-        let B = alterB (List.tail B) 1 R1 [R1]
-        let (M(Cm, _)) = rowEchelonForm <| M(List.tail B, o)
+        let R2m = List.tail B
+        let B = rowOps j 1 r R1 (M(R2m, o))
+        let (M(Cm, _)) = rowEchelonForm B
         M(R1::Cm, o)
 
-and alterB vl i R1 acc_B =
-    match vl with
-    | [] -> acc_B
-    | Ri::tail -> alterB tail i R1<| acc_B @ [Ri - (headVector Ri) * R1]
-        
-
-
-
+// Ri <- Ri - b * R1 - posible error i mat 1 notes Algorithm 1 (should be b <- the jth entry og the ith row if B)
+and rowOps coloumn i nrows R1 acc_m  =
+    if i >= nrows then acc_m else
+    let Ri = getMatrixIthVector (i - 1) acc_m
+    let b = getVectorIthNumber coloumn Ri
+    rowOps coloumn (i + 1) nrows R1 <| replaceMatrixIthVector (i-1) acc_m (Ri - b * R1)
 
         
+// A standard bacis vector of length n with 1 at i
+let standardBacisVector n i =
+    let rec sbv idx =
+        match idx with
+        | _ when idx < 1 -> []
+        | 1 when i <> 1 -> [zero]
+        | x when x = i -> one :: sbv (x - 1)
+        | _ -> zero :: sbv (idx - 1)
+    vector <| sbv n
+
+// A standard bacis matrix of F^n
+let standardBacis n =
+    let rec sb idx =
+        match idx with
+        | _ when idx < 1 -> []
+        | 1 -> [standardBacisVector n 1]
+        | _ -> standardBacisVector n idx :: sb (idx - 1)
+    matrix <| sb n
+
+
+
+    
+
+
+
 
 
     

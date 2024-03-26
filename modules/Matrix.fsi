@@ -32,3 +32,5 @@ val flip : Matrix -> Matrix
 val orthogonalBacis : Matrix -> Matrix
 val rowEchelonForm : Matrix -> Matrix
 val stringMatrix : Matrix -> string
+val standardBacis : int -> Matrix
+val rowOperation : int -> int -> Number -> Matrix -> Matrix

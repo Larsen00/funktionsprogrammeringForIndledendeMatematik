@@ -61,6 +61,7 @@
 
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{centernot}
 
 
 
@@ -83,7 +84,7 @@
   morekeywords={when, or, elif, new, match, with, rec, open, module, namespace, % 
     and, for, while, true, false, in, do, begin, end, fun, function, return, yield, try, %
     mutable, if, then, else, cloud, async, use, abstract, interface, inherit, finally,
-    let!, return!, do!, yield!, use!, from, select, where, order, by, val },
+    let!, return!, do!, yield!, use!, from, select, where, by, val },
   keywordstyle=\color{codepurple},
   sensitive=true,
   basicstyle=\ttfamily\small,
@@ -102,7 +103,7 @@
   %emph={[3]Rational, rational, Number, int, Int}, % Typer
   %emphstyle={[3]\color{liteblue}},
   emph={
-    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval, add, mul, sub, neg
+    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval, add, mul, sub, neg, dimMatrix, matrixValidMajor, matrixVectorLength, scalarVector, scalarMatrix, map, orthogonalBacis, Gram_Schmidt, sumProj, not, vectorOf, proj, extendMatrix, correctOrder, corectOrderCheck, map2,vectorMulElementWise, conjugateVector, innerProduct, conjugate, fold, length, performRowOperationGen, multipleRowOperationsGen, getIndependetBacisGen, empty, getBacismatrixGen, choose, standardBacis, oneof, rowOperation, isOrthogonalBacis, gramSchmidtIsOrthogonal, classify
     }, % Dit funktionsnavn her (purple)
   emphstyle=\color{red},
   xleftmargin=2em,
@@ -134,9 +135,9 @@
 \lstset{style=fsharpstyle}
 
 \lstdefinestyle{output}{
-    backgroundcolor=\color{gray!10}, % Set the background color
-    literate={''}{{'}}1,
-    basicstyle=\ttfamily\small,            % Use a monospaced font
-    numbers=none,                    % No line numbers
-    frame=none,                      % No frame around the code
+    backgroundcolor=\color{gray!10},  % Set the background color
+    literate={\%}{{\%}}1,              % Properly display percent symbols
+    basicstyle=\ttfamily\small,        % Use a monospaced font
+    numbers=none,                      % No line numbers
+    frame=none,                        % No frame around the code
 }

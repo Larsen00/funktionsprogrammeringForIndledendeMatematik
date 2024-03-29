@@ -192,19 +192,13 @@ let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
 let vectorAssCom m n =
     n * (sumRows m) = sumRows (n * m)
 
-
-let mutable globalVar = 0
 // An independtent set of vectors is orthogonal after the Gram-Schmidt process
 let gramSchmidtIsOrthogonal (m:IndependetBacis) =
-    globalVar <- globalVar + 1
-    printfn "loop: %A" globalVar
-    printfn "\n%A" m
     let res =
         try 
             if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
         with
-            | :? System.OverflowException ->
-                2
+            | :? System.OverflowException -> 2
     (res = 1 || res = 2)
     |> Prop.classify (res = 1) "PropertyHolds"
     |> Prop.classify (res = 2) "OverflowException"

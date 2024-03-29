@@ -1,15 +1,16 @@
 module Matrix
 open Number
+open Expression
 
 // row or coloumn major ordere: default of a vector and matric is Column major order.
-type Order = | R | C
+type order = | R | C
 
 // Rows x Cols
 type Dimension  = D of int * int
 
 // a "Normal" is C major and a Transposed one is R major
-type Vector = V of list<Number> * Order
-type Matrix = M of list<Vector> * Order
+type Vector = V of list<Expr<Number>> * order
+type Matrix = M of list<Vector> * order
 
 // Construct a vector
 let vector nl = V (nl, C)
@@ -38,23 +39,24 @@ let matrixVectorLength (M(m, _)) =
     | x::_ -> vectorLength x
 
 // The dimension of a matrix
-let dimMatrix (M(vl, o)) =
-    if vl = [] then D (0, 0)
+let dimMatrix (M(m, o)) =
+    if m = [] then D (0, 0)
     else
-    let _ = matrixValidMajor (M(vl, o))
-    let d1 = List.length vl
-    let d2 = matrixVectorLength (M(vl, o))
+    let _ = matrixValidMajor (M(m, o))
+    let d1 = List.length m
+    let d2 = matrixVectorLength (M(m, o))
     match o with
     | R -> D (d1, d2)
     | C -> D (d2, d1)
 
 // Multiplication of a scalar and a vector
-let scalarVector (n:Number) (V (nl, o)) = 
-    V ((List.map (fun x -> x * n) nl), o)
+let scalarVector (n:Expr<Number>) (V (v, o)) = 
+    V ((List.map (fun x -> x * n) v), o)
 
 // Multiplication of a scalar and a matrix
-let scalarMatrix (M (vl, o)) n = 
-    M ((List.map (fun x -> scalarVector n x) vl), o)
+let scalarMatrix (M (m, o)) n = 
+    M ((List.map (fun x -> scalarVector n x) m), o)
+
 
 // Addision two vectors
 let addVector x y =
@@ -67,7 +69,7 @@ let addVector x y =
 
 // Subtraction of two vectors
 let subVector x y =
-    scalarVector (-one) y |> addVector x 
+    scalarVector (- N one) y |> addVector x 
 
 
 // Construct a vector of n with length len
@@ -153,8 +155,6 @@ let addMatrix m1 m2 =
     let (M(m3, _)) = m3
     M (List.map2 addVector m1 m3, o)
 
-
-
 // Construct a matrix
 let matrix vl =
     let rec mc vl m =
@@ -171,10 +171,12 @@ let correctOrder (M(m, o)) x =
 let corectOrderCheck (M(_, o)) x =
     o = x
 
+let zeroVector len = vectorOf (N zero) len 
+
 // Sum the rows of a matrix
 let sumRows m = 
     let (M(m_new, o)) = correctOrder m C
-    let v = List.fold (addVector) (matrixVectorLength (M(m_new, o)) |> vectorOf zero) m_new
+    let v = List.fold (addVector) (matrixVectorLength (M(m_new, o)) |> vectorOf (N zero)) m_new
     matrix [v]
 
 
@@ -213,7 +215,7 @@ type Vector with
     static member (-) (v1, v2) = subVector v1 v2
     static member (*) (n, v)  = scalarVector n v
     static member (*) (v, n)  = scalarVector n v
-    static member (~-) (v)    = scalarVector (-one) v
+    static member (~-) (v)    = scalarVector (- N one) v
 
 
 type Matrix with
@@ -224,7 +226,7 @@ type Matrix with
     static member (*) (m, n)  = scalarMatrix m n
     static member (*) (m, v)  = matrixMulVector m v
     static member (*) (m1, m2) = matrixProduct m1 m2
-    static member (/) (m, n)  = scalarMatrix m (inv n)
+    static member (/) (m, n)  = scalarMatrix m (N one/n)
 
 
 
@@ -245,12 +247,10 @@ let extractVector (M(m, o)) =
 
 // Multiplies two vectors element wise
 let vectorMulElementWise (V(u, o1)) (V(v, o2)) =
-    if o1 <> o2
-    then failwith "Vectors must have the same major order"
-    elif List.length u <> List.length v 
-    then failwith "Vectors must have the same dimension"
+    if o1 <> C || o2 <> C then failwith "Vectors must have the same major order"
+    elif List.length u <> List.length v then failwith "Vectors must have the same dimension"
     else
-    V (List.map2 (*) u v, o1)
+    V (List.map2 (*) u v, C)
 
 // Conjugates a vector
 let conjugateVector (V(v, o)) = 
@@ -260,10 +260,6 @@ let conjugateVector (V(v, o)) =
 let innerProduct u v =
     let (V(w, _)) = conjugateVector v |> vectorMulElementWise u
     List.fold (+) zero w
-
-// Projection of a vector on another vector    
-let proj y x =
-    scalarVector (innerProduct x y / innerProduct y y) y
 
 // Dot product of two vectors
 let dotProduct (V(u, ou)) (V(v, ov)) = 
@@ -275,23 +271,27 @@ let dotProduct (V(u, ou)) (V(v, ov)) =
     | R, C -> innerProduct (V(u, C)) (V(v, C))
     | _ -> failwith "Missing implementation for this case."
 
-// Orthogonal bacis using the Gram-Schmidt process
-let rec orthogonalBacis m =
-    if not <| corectOrderCheck m C  
-    then orthogonalBacis (correctOrder m C)
-    else
+// Projection of a vector on another vector    
+let proj y x =
+    scalarVector (innerProduct x y / innerProduct y y) y
 
+
+// Orthogonal bacis using the Gram-Schmidt process
+let orthogonalBacis m =
+    
     // Gram-Schmidt process but without the normalization
     let rec Gram_Schmidt vm acc_wm =
+        if not <| corectOrderCheck vm C  
+        then Gram_Schmidt (correctOrder vm C) acc_wm
+        else
+
         match acc_wm [], vm with
         | x, M([], _) -> x 
         | M([], _), M(v1::vrest, o) -> 
-            Gram_Schmidt (M(vrest,o)) 
-            <| fun x -> extendMatrix (M([v1], C)) x 
+            Gram_Schmidt (M(vrest,o)) (fun x -> extendMatrix (M([v1], C)) x) 
         | M(w, _), M(vk::vrest, o) -> 
             let (V(wk, _)) = vk - sumProj w vk
-            Gram_Schmidt (M(vrest,o)) 
-            <| fun x -> extendMatrix (acc_wm wk) x
+            Gram_Schmidt (M(vrest,o)) (fun x -> extendMatrix (acc_wm wk) x)
 
     // Sum all the projections of vk on w1 to wk-1
     and sumProj w vk =

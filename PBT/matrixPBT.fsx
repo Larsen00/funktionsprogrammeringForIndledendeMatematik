@@ -7,7 +7,6 @@ open Generators
 Arb.register<MaxtrixGen>()
 Arb.register<VectorGen>()
 Arb.register<NumberGen>()
-Arb.register<IndependetBacisGen>()
 
 
 // Test the associativity property for vector addition Theorem 7.2 - 1 & 2
@@ -18,4 +17,5 @@ let _ = Check.Quick vectorScalarAss
 
 let _ = Check.Quick vectorAssCom
 
+Arb.register<IndependetBacisGen>()
 let _ = Check.Quick gramSchmidtIsOrthogonal

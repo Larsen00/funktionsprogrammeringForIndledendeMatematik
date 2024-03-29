@@ -1,11 +1,11 @@
 module Matrix
 open Number
 
-type Order = | R | C
+type order = | R | C
 type Dimension = D of int * int
 
 type Vector =
-    V of Number list * Order
+    V of Number list * order
     with
         static member ( + )  : Vector * Vector -> Vector
         static member ( + )  : Vector * Vector -> Vector
@@ -14,7 +14,7 @@ type Vector =
         static member ( ~- ) : Vector -> Vector
 
 type Matrix =
-    M of Vector list * Order
+    M of Vector list * order
     with
         static member ( + )  : Matrix * Matrix -> Matrix
         static member ( + )  : Matrix * Number -> Matrix

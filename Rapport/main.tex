@@ -110,7 +110,7 @@ Dermed har vi et mondul som kan repræsentere tal, samt udføre matematiske oper
 
 \subsection{Matematiske ligninger}
 \subsubsection{Polsk notation}
-Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notation I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footnote{\url{https://en.wikipedia.org/wiki/Polish_notation}}. 
+Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footnote{\url{https://en.wikipedia.org/wiki/Polish_notation}}. 
 
 \begin{align*}
     \text{Infix Notation:} \quad & (A + B) \cdot C \\
@@ -121,7 +121,7 @@ Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notati
  
 
 \subsubsection{Ligninger som træer}
-Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ \ref{fig:expression_tree}. 
+Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ Figur \ref{fig:expression_tree}. 
 
 
 \begin{figure}[H]
@@ -159,7 +159,7 @@ Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er ope
 \caption{Et binært træ der repræsenterer udtrykket $-(3 \cdot x - 5) \cdot 2$}
 \label{fig:expression_tree}
 \end{figure}
-Det skal bemærkes der er forskel på den unære og binære operator $-$ i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for en matematisk ligning, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footnote{\url{https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/}}, algorithmerne er illustreret i figut \ref{fig:expression_tree_traversal}.
+Det skal bemærkes der er forskel på den unære og binære operator '$-$' i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for en matematisk ligning, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footnote{\url{https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/}}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
 
 
 \begin{figure}[H]
@@ -273,7 +273,7 @@ Det skal bemærkes der er forskel på den unære og binære operator $-$ i træe
       \text{Preorder Traversal:} \quad &  \cdot - - \cdot 3\, x\, 5\, 2  \\
       \text{Postorder Traversal:} \quad & 3\, x\, \cdot 5\, - -  2\, \cdot
   \end{align*}
-  \caption{Træet fra \ref{fig:expression_tree} med forskellige travesal metoder}
+  \caption{Træet fra Figur \ref{fig:expression_tree} med forskellige travesal metoder}
   \label{fig:expression_tree_traversal}
 \end{figure}
 
@@ -285,7 +285,7 @@ Grundet præcedens regler i infix notation, er det nødvendigt at modificere Ino
 
 
 \subsubsection{Ligningsudtryk mondulet} \label{sec:expression_module}
-Efter at have lavet et mondul til at repræsentere tal mængder, er det nu muligt at kunne implementere et mondul som kan repræsentere ligningsudtryk. Vi begynder ved at definere en polymorf type for et ligningsudtryk \ref{expr_type}. Typen består af en række konstruktører, som repræsentere de matematiske operationer vi ønsker at kunne anvende, samt en konstruktør N for at repræsentere matematiske strukturer og X for at repræsentere variable. Vi begynder med at betragte matematiske strukturer, i form af de tal mængder vi har definerede som Number \ref{number_type}. Vi vil senere betragte hvordan det vil være muligt at udvide programmet til at kunne repræsentere flere matematiske strukturer så som vektorer.     
+Efter at have udviklet et modul til repræsentation af talmængder, er det nu muligt at videreudvikle et modul til at repræsentere ligningsudtryk. Vi starter med at definere en polymorfisk type for et ligningsudtryk, som vist i Listing \ref{expr_type}. Denne type inkluderer flere konstruktører, der hver især repræsenterer de matematiske operationer, vi ønsker at anvende. Desuden indfører vi konstruktøren N til at repræsentere en matematisk struktur; i dette tilfælde anvender vi vores talmængder (se Listing \ref{number_type}). Det er dog muligt at udvide dette til at omfatte andre matematiske strukturer, hvor det er muligt at definere de samme operationer. Sidst haves en konstruktør X til repræsentation af variable.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -302,7 +302,7 @@ type Expr<'a> =
     | Div of Expr<'a> * Expr<'a>
 \end{lstlisting}
 
-Expr\textless'a\textgreater{}  typen er dermed en polymorf type, hvor 'a er typen for den matematiske struktur hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i \ref{lst:expr_example}. 
+Expr\textless'a\textgreater{}  typen er dermed en polymorfisk type, hvor 'a er typen for den matematiske struktur hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i \ref{lst:expr_example}. 
 
 \begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen tree bliver beskrevet i \ref{sec:expression_generation}.}]
 > tree "-(3*x-5)*2";;
@@ -319,7 +319,7 @@ Signatur filen indeholder overloadings på de matematiske operationer, så de ka
 
 
 
-De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evalueing vil sige at de individuellen funktioner kun betragter de to øverste niveauer på de lignings udtryk træer de tager som input, mullige implementeringer af addition og multiplikation er givet i \ref{lst:mul_expr}. 
+De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evalueing vil sige at de individuellen funktioner kun betragter de to øverste niveauer på de lignings udtryk træer de tager som input, mullige implementeringer af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. 
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -356,6 +356,9 @@ let mul e1 e2:Expr<Number> =
 \subsubsection{PBT af simplifikationen} % Beskriv hvordan man laver property based testen før simplifikationen
 
 \subsection{differentiering af Ligningsudtryk}
+
+\section{Vektorer og Matricer}
+\input{sections/vektorer_og_matricer}
     
 
 \end{document}

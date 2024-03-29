@@ -21,3 +21,8 @@
 \contentsline {subsection}{\numberline {3.4}Simplifikation af Ligningsudtryk}{12}{subsection.3.4}%
 \contentsline {subsubsection}{\numberline {3.4.1}PBT af simplifikationen}{12}{subsubsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.5}differentiering af Ligningsudtryk}{12}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Vektorer og Matricer}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Matrix operationer}{13}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Projection af en vektor}{14}{subsubsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.2}Implementering af Gram-Schmidt}{15}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}PBT af Gram-Schmidt}{16}{subsubsection.4.2.1}%

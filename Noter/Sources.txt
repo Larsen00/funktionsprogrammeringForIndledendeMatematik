@@ -11,3 +11,5 @@ https://en.wikipedia.org/wiki/Rational_number
 https://en.wikipedia.org/wiki/Infix_notation#:~:text=Infix%20notation%20is%20the%20notation,plus%20sign%20in%202%20%2B%202.
 http://www.docjava.dk/grundlaeggende_programmering/typer/typer.htm#:~:text=Man%20kalder%20de%20to%20v%C3%A6rdier,operanderne%20(der%20er%20undtagelser).
 https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+https://en.wikipedia.org/wiki/Row-_and_column-major_order
+https://www.w3schools.com/python/python_lists_comprehension.asp

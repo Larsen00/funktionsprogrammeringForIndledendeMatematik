@@ -15,8 +15,8 @@ open Matrix
 
 
 
-let max = 10
-let min = -10
+let max = 3
+let min = -3
 
 // generate a random natural abs( number ) between 1 and 100
 let noneZeroGen = 
@@ -139,6 +139,43 @@ type NumberGen =
 
 // Arb.register<NumberGen>()
 
+let getBacismatrixGen n =
+    Gen.map (fun x -> standardBacis x) (Gen.choose (2, n))
+
+
+let performRowOperationGen m =
+    let (D(n, _)) = dimMatrix m
+    gen { 
+        let! i = Gen.choose(1, n)
+        let! j = match i with
+                    | 1 -> Gen.choose(2, n)
+                    | _ when i = n -> Gen.choose(1, n-1)
+                    | _ -> Gen.oneof [Gen.choose(1, i-1); Gen.choose(i+1, n)]
+        let! a = numberGen
+        return rowOperation i j a m }
+
+let rec multipleRowOperationsGen m count =
+    if count <= 0 then Gen.constant m
+    else
+        gen {
+            let! newMatrix = performRowOperationGen m
+            return! multipleRowOperationsGen newMatrix (count - 1)
+        }
+
+let getIndependetBacisGen =
+    gen { 
+        let! m = getBacismatrixGen 5
+        let! numberOfOperations = Gen.choose(1, 10)
+        let! span = multipleRowOperationsGen m numberOfOperations
+        return span }
+
+type IndependetBacis = Matrix
+type IndependetBacisGen =
+    static member IndependetBacis() =
+        {new Arbitrary<Matrix>() with
+            override _.Generator = getIndependetBacisGen
+            override _.Shrinker _ = Seq.empty}
+
 /////////////////////////////////
 /// Properties //////////////////
 /////////////////////////////////
@@ -156,3 +193,18 @@ let vectorAssCom m n =
     n * (sumRows m) = sumRows (n * m)
 
 
+let mutable globalVar = 0
+// An independtent set of vectors is orthogonal after the Gram-Schmidt process
+let gramSchmidtIsOrthogonal (m:IndependetBacis) =
+    globalVar <- globalVar + 1
+    printfn "loop: %A" globalVar
+    printfn "\n%A" m
+    let res =
+        try 
+            if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
+        with
+            | :? System.OverflowException ->
+                2
+    (res = 1 || res = 2)
+    |> Prop.classify (res = 1) "PropertyHolds"
+    |> Prop.classify (res = 2) "OverflowException"

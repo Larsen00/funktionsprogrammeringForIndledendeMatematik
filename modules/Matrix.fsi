@@ -23,6 +23,7 @@ type Matrix =
         static member ( * )  : Matrix * Number -> Matrix
         static member ( * )  : Matrix * Vector -> Matrix
         static member ( * )  : Matrix * Matrix -> Matrix
+        static member ( / )  : Matrix * Number -> Matrix
 
 val vector : Number list -> Vector
 val matrix : Vector list -> Matrix
@@ -34,3 +35,5 @@ val rowEchelonForm : Matrix -> Matrix
 val stringMatrix : Matrix -> string
 val standardBacis : int -> Matrix
 val rowOperation : int -> int -> Number -> Matrix -> Matrix
+val dimMatrix : Matrix -> Dimension
+val isOrthogonalBacis : Matrix -> bool

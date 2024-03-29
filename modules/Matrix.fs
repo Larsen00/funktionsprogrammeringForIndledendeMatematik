@@ -223,6 +223,7 @@ type Matrix with
     static member (*) (m, n)  = scalarMatrix m n
     static member (*) (m, v)  = matrixMulVector m v
     static member (*) (m1, m2) = matrixProduct m1 m2
+    static member (/) (m, n)  = scalarMatrix m (inv n)
 
 
 
@@ -296,6 +297,16 @@ let orthogonalBacis m =
         | x::xs -> proj x vk + sumProj xs vk
         
     Gram_Schmidt m (fun _ -> M([], C))
+
+// checks is if every vector has inner product of zero with the next vector
+let rec isOrthogonalBacis (M(vl, o)) =
+    if not <| corectOrderCheck (M(vl, o)) C then isOrthogonalBacis <| correctOrder (M(vl, o)) C
+    else
+    match vl with
+    | [] -> true
+    | _::[] -> true
+    | v::vnext::vrest -> innerProduct v vnext = zero && isOrthogonalBacis (M(vnext::vrest, o))
+
 
 // Checks if a vector is a zero vector
 let isZeroVector (V(v, _)) = 

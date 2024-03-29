@@ -21,10 +21,10 @@ let simpEqualEval (env, xlist) =
         if Gen.sample 1 1 (exprGen xlist 10) |> List.head |> compareSimpExpr env then 1 else 0
     with
         | :? System.DivideByZeroException as ex ->
-            printfn "DivideByZeroException: %A" ex
+            // printfn "DivideByZeroException: %A" ex
             2
         | :? System.OverflowException as ex ->
-            printfn "OverflowException: %A" ex
+            // printfn "OverflowException: %A" ex
             3
 
 let simpPBT (se:SmallEnv) =

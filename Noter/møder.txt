@@ -111,4 +111,7 @@ Næste gang:
     
      
 # møde 8
-Har lavet matrixproduct og matrix vector product
+Har lavet 
+    *matrixproduct og matrix vector product
+    *row echelon form
+    *PBT til gramschmidt

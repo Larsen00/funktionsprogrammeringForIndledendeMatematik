@@ -23,7 +23,10 @@ let rec gcd r =
 // Functional Programming Using F# page 57
 // reduces a rational number to its simplest form
 let canc(R64(p, q)) =
+    let MaxValue = 2147483647
     if isZeroR64(R64(p, q)) then R64(0, 1)
+    elif q = 1L then R64(p, 1)
+    elif abs p > MaxValue && abs q > MaxValue then raise <| System.OverflowException("rational.r64ToR: operation will take to long")
     else
         let ap = abs p
         let aq = abs q

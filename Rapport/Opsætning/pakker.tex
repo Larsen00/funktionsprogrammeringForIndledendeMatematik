@@ -15,6 +15,7 @@
 \usepackage{pdfpages}
 \usepackage{xcolor}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{Opsætning/mcode}
+\usepackage{datetime}
 
 %-----------images manipulation----------------
 \usepackage{subcaption}                        % for more pictures in one figure
@@ -45,18 +46,21 @@
 \usepackage{booktabs}                            % Enhances the quality of tables
 
 %----------------header-&-footer----------------
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
 \usepackage{fancyhdr}
-\usepackage{lastpage}
+% \usepackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{}
 \rhead{Funktionel Modellering af Matematiske Systemer i F\#}
-\rfoot{Side \thepage{} af \pageref{LastPage}}     % page number out of pages
+% \rfoot{Side \thepage{} af \pageref{LastPage}}     % page
+\rfoot{Side \thepage{}} 
 %\lfoot{\today}                                  % gives date 
 
 %---------------------------------------------
-\usepackage[backend=biber, style=authoryear, natbib=true]{biblatex}
-\addbibresource{ref.bib}
+
 
 \usepackage{tikz}
 %\scalebox{<h-scale>}[<v-scale>]{<content>}

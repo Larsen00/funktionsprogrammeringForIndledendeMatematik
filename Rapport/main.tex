@@ -5,8 +5,9 @@
 
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
+\usepackage{biblatex}
+\addbibresource{references.bib}
 \begin{document}
-
 \input{Opsætning/forside}
 \tableofcontents
 \newpage
@@ -314,7 +315,7 @@ val it: Expr<Number> =
 Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes mellem ligningsudtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et ligningsudtryk. 
 \lstinputlisting[
     language=FSharp,
-    label={Number_fsi},
+    label={Expression.fsi},
     caption={Signatur filen for Expression mondulet}
     ]{../modules/Expression.fsi}
 

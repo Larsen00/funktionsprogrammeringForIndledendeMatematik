@@ -60,8 +60,10 @@ let scalarMatrix (M (vl, o)) n =
 let addVector x y =
     let (V (v1, o1)) = x
     let (V (v2, o2)) = y
-    if o1 <> o2 then failwith "Vectors must have the same major order"
-    elif dimVector x <> dimVector y then failwith "Vectors must have the same dimension"
+    if o1 <> o2 
+    then failwith "Vectors must have the same major order"
+    elif dimVector x <> dimVector y 
+    then failwith "Vectors must have the same dimension"
     else 
     V ((List.map2 (+) v1 v2), o1)
 
@@ -141,19 +143,18 @@ let changeOrderMatrix (M(m, o)) =
     alternateOrderMatrix (M([], o)) |> chaingingOrderMatrix (M(m, o)) 
 
 // Makes sure that two matrices have the same major order, if diffrent then changes the order of the second matrix
-let giveMatrixHaveSameOrder (M(m1, o1)) (M(m2, o2)) = 
+let giveMatrixHaveSameOrder (M(_, o1)) (M(m2, o2)) = 
     if o1 <> o2 then changeOrderMatrix (M(m2, o2)) else M(m2, o2)
 
 // Adds two matrices elemtwise
 let addMatrix m1 m2 =
     let m3 = giveMatrixHaveSameOrder m1 m2
-    if dimMatrix m1 <> dimMatrix m3 then failwith "addMatrix: Matrices must have the same dimension"
+    if dimMatrix m1 <> dimMatrix m3 
+    then failwith "addMatrix: Matrices must have the same dimension"
     else
-    let (M(m1, o)) = m1
-    let (M(m3, _)) = m3
-    M (List.map2 addVector m1 m3, o)
-
-
+    let (M(vl1, o)) = m1
+    let (M(vl3, _)) = m3
+    M (List.map2 addVector vl1 vl3, o)
 
 // Construct a matrix
 let matrix vl =
@@ -172,10 +173,14 @@ let corectOrderCheck (M(_, o)) x =
     o = x
 
 // Sum the rows of a matrix
-let sumRows m = 
-    let (M(m_new, o)) = correctOrder m C
-    let v = List.fold (addVector) (matrixVectorLength (M(m_new, o)) |> vectorOf zero) m_new
-    matrix [v]
+let rec sumRows m = 
+    if not <| corectOrderCheck m C 
+    then sumRows <| correctOrder m C
+    else
+    let zeroVector = vectorOf zero <| matrixVectorLength m
+    let (M(vl, _)) = m
+    matrix [List.fold (addVector) zeroVector vl]
+
 
 
 // multiplies a matrix and a vector A.v = b - Definition 7.10
@@ -188,10 +193,11 @@ let rec matrixMulVector m v =
     else
     let (M(vl, _)) = m
     let (V(nl, _)) = v
-    sumRows <| M (List.map2 (fun mc n -> scalarVector n mc) vl nl, C)
+    M (List.map2 (fun mc n -> scalarVector n mc) vl nl, C) 
+    |> sumRows
 
 // Converts a matrix to a vector if possible
-let mactrixToVector m =
+let matrixToVector m =
     match dimMatrix m, m with
     | D(r, c), M(v::_, _) when r = 1 || c = 1 -> v
     | _, _ -> failwith "mactrixToVector: Matrix is not a vector"
@@ -201,11 +207,13 @@ let rec matrixProduct a b =
     let (D(_, ca)) = dimMatrix a
     let (D(rb, _)) = dimMatrix b
     if ca <> rb 
-    then failwith "matrixProduct: matrix product A · B is defined only if the number of columns of A is the same as the number of rows of B"
+    then failwith "matrixProduct: matrix product A .* B is defined only if the number of columns of A is the same as the number of rows of B"
     elif not <| corectOrderCheck b C then matrixProduct a (correctOrder b C)
     else
     let (M(vlb, _)) = b
-    M(List.map (fun bv -> matrixMulVector a bv |> mactrixToVector ) vlb, C)
+    let product = List.map (
+            fun bv -> matrixMulVector a bv |> matrixToVector ) vlb
+    M(product, C)
 
 
 type Vector with
@@ -225,9 +233,6 @@ type Matrix with
     static member (*) (m, v)  = matrixMulVector m v
     static member (*) (m1, m2) = matrixProduct m1 m2
     static member (/) (m, n)  = scalarMatrix m (inv n)
-
-
-
 
 
 // Horisontal flip of a matrix
@@ -275,6 +280,7 @@ let dotProduct (V(u, ou)) (V(v, ov)) =
     | R, C -> innerProduct (V(u, C)) (V(v, C))
     | _ -> failwith "Missing implementation for this case."
 
+
 // Orthogonal bacis using the Gram-Schmidt process
 let rec orthogonalBacis m =
     if not <| corectOrderCheck m C  
@@ -295,9 +301,10 @@ let rec orthogonalBacis m =
 
     // Sum all the projections of vk on w1 to wk-1
     and sumProj w vk =
-        match w with
-        | [] -> vectorOf zero (vectorLength vk)
-        | x::xs -> proj x vk + sumProj xs vk
+        List.map (fun x -> proj x vk) w 
+        |> matrix 
+        |> sumRows
+        |> matrixToVector
         
     Gram_Schmidt m (fun _ -> M([], C))
 
@@ -380,16 +387,6 @@ let scalarIthVector c i (M(m, o)) =
     
     M(sIV c m i 0 [], o)
 
-
-// Alters row j with Rj <- Rj - c * Ri
-let rec rowOperation i j c m = 
-    if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
-    elif not <| corectOrderCheck m R then rowOperation i j c <| correctOrder m R
-    else
-
-    replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
-
-
 // row echelon form of a matrix
 let rec rowEchelonForm A = 
     if not <| corectOrderCheck A R then rowEchelonForm (correctOrder A R)
@@ -417,7 +414,7 @@ and rowOps coloumn i nrows R1 acc_m  =
     let b = getVectorIthNumber coloumn Ri
     rowOps coloumn (i + 1) nrows R1 <| replaceMatrixIthVector (i-1) acc_m (Ri - b * R1)
 
-        
+  
 // A standard bacis vector of length n with 1 at i
 let standardBacisVector n i =
     let rec sbv idx =
@@ -437,6 +434,13 @@ let standardBacis n =
         | _ -> standardBacisVector n idx :: sb (idx - 1)
     matrix <| sb n
 
+// Alters row j with Rj <- Rj - c * Ri
+let rec rowOperation i j c m = 
+    if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
+    elif not <| corectOrderCheck m R then rowOperation i j c <| correctOrder m R
+    else
+
+    replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
 
 
     

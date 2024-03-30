@@ -5,7 +5,6 @@ open Generators
 
 
 Arb.register<MaxtrixGen>()
-Arb.register<VectorGen>()
 Arb.register<NumberGen>()
 
 

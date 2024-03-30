@@ -49,12 +49,14 @@
 \usepackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{kursus nummer}
-\rhead{Title}
+\lhead{}
+\rhead{Funktionel Modellering af Matematiske Systemer i F\#}
 \rfoot{Side \thepage{} af \pageref{LastPage}}     % page number out of pages
 %\lfoot{\today}                                  % gives date 
 
 %---------------------------------------------
+\usepackage[backend=biber, style=authoryear, natbib=true]{biblatex}
+\addbibresource{ref.bib}
 
 \usepackage{tikz}
 %\scalebox{<h-scale>}[<v-scale>]{<content>}
@@ -63,7 +65,58 @@
 \usepackage{xcolor}
 \usepackage{centernot}
 
+% Definerer et nyt theorem-miljø
+% Definerer en ny theorem-stil
+\newtheoremstyle{break}  % navn
+  {}                      % Plads over
+  {}                      % Plads under
+  {\itshape}              % Skrifttype i body
+  {}                      % Indrykning
+  {\bfseries}             % Skrifttype i theorem-hoved
+  {.}                     % Punktuering efter theorem-hoved
+  {\newline}              % Plads efter theorem-hoved
+  {}                      % 'Theorem'-hoved specifikation (kan være efterladt tom, dvs. 'normal')
 
+% Anvender theorem-stilen
+\theoremstyle{break}
+\newtheorem{theorem}{Sætning}
+\newtheorem{definition}{Defination} % Definerer 'definition' miljøet
+
+% -------------------------------------------
+% så man kan lave sub sections 
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+
+% --------------------------------
 
 \definecolor{bluekeywords}{rgb}{0.13, 0.13, 1}
 \definecolor{greencomments}{rgb}{0, 0.5, 0}
@@ -103,7 +156,7 @@
   %emph={[3]Rational, rational, Number, int, Int}, % Typer
   %emphstyle={[3]\color{liteblue}},
   emph={
-    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval, add, mul, sub, neg, dimMatrix, matrixValidMajor, matrixVectorLength, scalarVector, scalarMatrix, map, orthogonalBacis, Gram_Schmidt, sumProj, not, vectorOf, proj, extendMatrix, correctOrder, corectOrderCheck, map2,vectorMulElementWise, conjugateVector, innerProduct, conjugate, fold, length, performRowOperationGen, multipleRowOperationsGen, getIndependetBacisGen, empty, getBacismatrixGen, choose, standardBacis, oneof, rowOperation, isOrthogonalBacis, gramSchmidtIsOrthogonal, classify
+    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval, add, mul, sub, neg, dimMatrix, matrixValidMajor, matrixVectorLength, scalarVector, scalarMatrix, map, orthogonalBacis, Gram_Schmidt, sumProj, not, vectorOf, proj, extendMatrix, correctOrder, corectOrderCheck, map2,vectorMulElementWise, conjugateVector, innerProduct, conjugate, fold, length, performRowOperationGen, multipleRowOperationsGen, getIndependetBacisGen, empty, getBacismatrixGen, choose, standardBacis, oneof, rowOperation, isOrthogonalBacis, gramSchmidtIsOrthogonal, classify, addVector, subVector, addMatrix, giveMatrixHaveSameOrder, sumRows, matrixToVector, matrix, matrixMulVector, matrixProduct, numberGen, vectorGen, matrixGen
     }, % Dit funktionsnavn her (purple)
   emphstyle=\color{red},
   xleftmargin=2em,

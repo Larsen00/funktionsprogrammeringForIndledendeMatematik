@@ -87,28 +87,28 @@ type SmallEnvGen =
 
 // Arb.register<SmallEnvGen>()
 
+type NumberGen =
+    static member Number() =
+        {new Arbitrary<Number>() with
+            override _.Generator = numberGen
+            override _.Shrinker _ = Seq.empty}
+
+
 /////////////////////////////////
 /// Matrix Generators ///////////
 /////////////////////////////////
-
-
-// A generator to get small ints
-type SmallInt = SmallInt of int
-
-let smallIntGen = Gen.map (fun x -> SmallInt x) (Gen.choose (1, max))
 
 // generate a random vector of length n
 let vectorGen n =
     Gen.listOfLength n numberGen |> Gen.map (fun x -> vector x)
 
-let sampleTwoSmallInts = 
-    let s = Gen.sample 1 2 smallIntGen
-    (s.[0], s.[1])
-
 let matrixGen =
-    let (SmallInt row, SmallInt col) = sampleTwoSmallInts
-    Gen.listOfLength col (vectorGen row) |> Gen.map (fun x -> matrix x)
-
+    gen {
+        let! row = Gen.choose(1, 6)
+        let! col = Gen.choose(1, 6)
+        let! vectors = Gen.listOfLength col (vectorGen row)
+        return matrix vectors
+    }
 
 type MaxtrixGen =
     static member Matrix() =
@@ -116,32 +116,10 @@ type MaxtrixGen =
             override _.Generator = matrixGen
             override _.Shrinker _ = Seq.empty}
 
-// Arb.register<MaxtrixGen>()
 
-let getSmallInt = 
-    Gen.sample 1 1 smallIntGen |> List.head
-    
-
-type VectorGen =
-    static member Vector() =
-        {new Arbitrary<Vector>() with
-            override _.Generator = (fun (SmallInt x) -> vectorGen x) getSmallInt
-            override _.Shrinker _ = Seq.empty}
-
-// Arb.register<VectorGen>()
-
-
-type NumberGen =
-    static member Number() =
-        {new Arbitrary<Number>() with
-            override _.Generator = numberGen
-            override _.Shrinker _ = Seq.empty}
-
-// Arb.register<NumberGen>()
 
 let getBacismatrixGen n =
     Gen.map (fun x -> standardBacis x) (Gen.choose (2, n))
-
 
 let performRowOperationGen m =
     let (D(n, _)) = dimMatrix m
@@ -189,8 +167,8 @@ let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
     n1 * (n2 * m) = (n1 * n2) * m
 
 // test c * (v1 + ..+  vn) = c*v1 + .. + c*vn
-let vectorAssCom m n =
-    n * (sumRows m) = sumRows (n * m)
+let vectorAssCom m (c:Number) =
+    c * (sumRows m) = sumRows (c * m)
 
 // An independtent set of vectors is orthogonal after the Gram-Schmidt process
 let gramSchmidtIsOrthogonal (m:IndependetBacis) =

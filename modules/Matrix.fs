@@ -494,9 +494,7 @@ let rec solveEquations el bl cl =
         | [], [], [] -> Map.empty
         | e::es, b::bs, c::cs -> 
                             let env = solveEquations es bs cs
-                            printfn "e: %A, b: %A" e b
                             let (lhs, rhs) = isolateX (insertEnv e env) b c
-                            printfn "lhs: %A, rhs: %A" lhs rhs
                             Map.add (getVariable lhs) (getNumber rhs) env
         | _, _, _ -> failwith "solveEquations: The number of equations and variables must be the same"
 
@@ -508,7 +506,6 @@ let Axequalb A (V(nlb, ob)) =
     elif r <> List.length nlb ||  ob = R then failwith "Axequalb: b must be a column or have same length as rows of A"
     else
     let (V(ef_b, _), M(ef_vl, o)) = correctOrder (rowEchelonForm <| extendMatrix A nlb) C |> extractlastVector
-    stringMatrix (extendMatrix (M(ef_vl, o)) ef_b) |> printfn "%A" 
     if not <| isUpperTriangular (M(ef_vl, o)) then failwith "Axequalb: There dont exitst a single solution"
     else
     let varlist = charVector c

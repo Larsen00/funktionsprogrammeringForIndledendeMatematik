@@ -37,3 +37,4 @@ val standardBacis : int -> Matrix
 val rowOperation : int -> int -> Number -> Matrix -> Matrix
 val dimMatrix : Matrix -> Dimension
 val isOrthogonalBacis : Matrix -> bool
+val Axequalb : Matrix -> Vector -> Vector

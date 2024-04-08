@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  30 MAR 2024 19:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  1 APR 2024 13:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -261,10 +261,6 @@ Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
 Package: import 2020/04/01  v 6.2
 )) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
 Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/cite\cite.sty
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 332.
-Package: cite 2015/02/27  v 5.5
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
 \labelindent=\skip56
@@ -297,23 +293,7 @@ File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
 File: listings.cfg 2024/02/21 1.10 listings configuration
 ))
 Package: listings 2024/02/21 1.10 (Carsten Heinz)
- (Opsætning/mcode.sty
--- Package: `mcode' 2.5 <2014/03/06> --
-
-LaTeX Warning: You have requested package `Opsætning/mcode',
-               but the package provides `mcode'.
-
-Package: mcode 2014/03/06 2.5
- - settings optimized for display (colour formating)
- - line numbering enabled
- - literate programming (character replacements) enabled
- - automatic line breaking enabled (careful, buggy!)
- - framed listings
-\lbreakdots=\box58
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 228.
-(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/datetime\datetime.sty
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/datetime\datetime.sty
 Package: datetime 2015/03/20 v2.60 Date Time Package
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/fmtcount\fmtcount.sty
 Package: fmtcount 2020/01/30 v3.07
@@ -400,7 +380,7 @@ Package caption Info: New subtype `subtable' on input line 238.
 \wrapoverhang=\dimen177
 \WF@size=\dimen178
 \c@WF@wrappedlines=\count329
-\WF@box=\box59
+\WF@box=\box58
 \WF@everypar=\toks33
 Package: wrapfig 2003/01/31  v 3.6
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
@@ -425,7 +405,7 @@ Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
 Package shellesc Info: Restricted shell escape enabled on input line 77.
 )
 \c@svg@param@lastpage=\count330
-\svg@box=\box60
+\svg@box=\box59
 \c@svg@param@currpage=\count331
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/transparent\transparent.sty
 Package: transparent 2022-10-27 v1.5 Transparency with color stacks
@@ -436,7 +416,7 @@ Package: transparent-nometadata 2022-10-27 v1.5 Transparency via pdfTeX's color 
 \pgfutil@tempdima=\dimen179
 \pgfutil@tempdimb=\dimen180
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
-\pgfutil@abb=\box61
+\pgfutil@abb=\box60
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
 Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
 )) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
@@ -514,8 +494,8 @@ LaTeX Info: Redefining \colon on input line 410.
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box62
-\strutbox@=\box63
+\Mathstrutbox@=\box61
+\strutbox@=\box62
 LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
@@ -575,19 +555,19 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \l_MT_below_intertext_sep=\dimen259
 \l_MT_above_shortintertext_sep=\dimen260
 \l_MT_below_shortintertext_sep=\dimen261
-\xmathstrut@box=\box64
+\xmathstrut@box=\box63
 \xmathstrut@dim=\dimen262
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2024/02/20 v1.0g Color table columns (DPC)
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
 \col@sep=\dimen263
-\ar@mcellbox=\box65
+\ar@mcellbox=\box64
 \extrarowheight=\dimen264
 \NC@list=\toks51
 \extratabsurround=\skip64
 \backup@length=\skip65
-\ar@cellbox=\box66
+\ar@cellbox=\box65
 )
 \everycr=\toks52
 \minrowclearance=\skip66
@@ -605,11 +585,11 @@ Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
 \LTpost=\skip70
 \LTchunksize=\count354
 \LTcapwidth=\dimen266
-\LT@head=\box67
-\LT@firsthead=\box68
-\LT@foot=\box69
-\LT@lastfoot=\box70
-\LT@gbox=\box71
+\LT@head=\box66
+\LT@firsthead=\box67
+\LT@foot=\box68
+\LT@lastfoot=\box69
+\LT@gbox=\box70
 \LT@cols=\count355
 \LT@rows=\count356
 \c@LT@tables=\count357
@@ -619,7 +599,7 @@ Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
 Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box72
+\@vwid@box=\box71
 \sift@deathcycles=\count359
 \@vwid@loff=\dimen267
 \@vwid@roff=\dimen268
@@ -641,10 +621,10 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabustrutrule=\dimen277
 \tabu@thebody=\toks55
 \tabu@footnotes=\toks56
-\tabu@box=\box73
-\tabu@arstrutbox=\box74
-\tabu@hleads=\box75
-\tabu@vleads=\box76
+\tabu@box=\box72
+\tabu@arstrutbox=\box73
+\tabu@hleads=\box74
+\tabu@vleads=\box75
 \tabu@cellskip=\skip71
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
 Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
@@ -682,171 +662,340 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count370
 \@lastruleclass=\count371
 \@thisrulewidth=\dimen296
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.sty
+Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
+\csq@reset=\count372
+\csq@gtype=\count373
+\csq@glevel=\count374
+\csq@qlevel=\count375
+\csq@maxlvl=\count376
+\csq@tshold=\count377
+\csq@ltx@everypar=\toks58
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.def
+File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.cfg
+File: csquotes.cfg 
+)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+\f@nch@headwidth=\skip74
+\f@nch@O@elh=\skip75
+\f@nch@O@erh=\skip76
+\f@nch@O@olh=\skip77
+\f@nch@O@orh=\skip78
+\f@nch@O@elf=\skip79
+\f@nch@O@erf=\skip80
+\f@nch@O@olf=\skip81
+\f@nch@O@orf=\skip82
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpage.sty
+Package: lastpage 2023/10/14 v2.0e lastpage: 2.09 or 2e? (HMM)
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpage2e.sty
+Package: lastpage2e 2023/10/14 v2.0e Decide which 2e lastpage version to use (HMM)
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpagemodern.sty
+Package: lastpagemodern 2023-10-14 v2.0e Refers to last page's name (HMM; JPG)
+\c@lastpagecount=\count378
+) 
+)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
+\pgfmath@dimen=\dimen297
+\pgfmath@count=\count379
+\pgfmath@box=\box76
+\pgfmath@toks=\toks59
+\pgfmath@stack@operand=\toks60
+\pgfmath@stack@operation=\toks61
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count380
+)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen298
+\pgf@picmaxx=\dimen299
+\pgf@picminy=\dimen300
+\pgf@picmaxy=\dimen301
+\pgf@pathminx=\dimen302
+\pgf@pathmaxx=\dimen303
+\pgf@pathminy=\dimen304
+\pgf@pathmaxy=\dimen305
+\pgf@xx=\dimen306
+\pgf@xy=\dimen307
+\pgf@yx=\dimen308
+\pgf@yy=\dimen309
+\pgf@zx=\dimen310
+\pgf@zy=\dimen311
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen312
+\pgf@path@lasty=\dimen313
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen314
+\pgf@shorten@start@additional=\dimen315
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box77
+\pgf@hbox=\box78
+\pgf@layerbox@main=\box79
+\pgf@picture@serial@count=\count381
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen316
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen317
+\pgf@pt@y=\dimen318
+\pgf@pt@temp=\dimen319
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen320
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen321
+\pgf@sys@shading@range@num=\count382
+\pgf@shadingcount=\count383
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box80
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box81
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen322
+\pgf@nodesepend=\dimen323
+) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen324
+\pgffor@skip=\dimen325
+\pgffor@stack=\toks62
+\pgffor@toks=\toks63
+)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count384
+\pgfplotmarksize=\dimen326
+)
+\tikz@lastx=\dimen327
+\tikz@lasty=\dimen328
+\tikz@lastxsaved=\dimen329
+\tikz@lastysaved=\dimen330
+\tikz@lastmovetox=\dimen331
+\tikz@lastmovetoy=\dimen332
+\tikzleveldistance=\dimen333
+\tikzsiblingdistance=\dimen334
+\tikz@figbox=\box82
+\tikz@figbox@bg=\box83
+\tikz@tempbox=\box84
+\tikz@tempbox@bg=\box85
+\tikztreelevel=\count385
+\tikznumberofchildren=\count386
+\tikznumberofcurrentchild=\count387
+\tikz@fig@count=\count388
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count389
+\pgfmatrixcurrentcolumn=\count390
+\pgf@matrix@numberofcolumns=\count391
+)
+\tikz@expandcount=\count392
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/oberdiek\centernot.sty
+Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
+)
+\c@theorem=\count393
+\c@definition=\count394
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
+Package: titlesec 2023/10/27 v2.16 Sectioning titles
+\ttl@box=\box86
+\beforetitleunit=\skip83
+\aftertitleunit=\skip84
+\ttl@plus=\dimen335
+\ttl@minus=\dimen336
+\ttl@toksa=\toks64
+\titlewidth=\dimen337
+\titlewidthlast=\dimen338
+\titlewidthfirst=\dimen339
+)
+\c@subsubsubsection=\count395
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
 Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count372
+\lrq@indent=\count396
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-
-C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty:212: Package biblatex Error: Incompatible package 'cite'.
-
-See the biblatex package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.212 \blx@packageincompatibility
-                                 
-The 'cite' package and biblatex are incompatible.
-
-\c@tabx@nest=\count373
-\c@listtotal=\count374
-\c@listcount=\count375
-\c@liststart=\count376
-\c@liststop=\count377
-\c@citecount=\count378
-\c@citetotal=\count379
-\c@multicitecount=\count380
-\c@multicitetotal=\count381
-\c@instcount=\count382
-\c@maxnames=\count383
-\c@minnames=\count384
-\c@maxitems=\count385
-\c@minitems=\count386
-\c@citecounter=\count387
-\c@maxcitecounter=\count388
-\c@savedcitecounter=\count389
-\c@uniquelist=\count390
-\c@uniquename=\count391
-\c@refsection=\count392
-\c@refsegment=\count393
-\c@maxextratitle=\count394
-\c@maxextratitleyear=\count395
-\c@maxextraname=\count396
-\c@maxextradate=\count397
-\c@maxextraalpha=\count398
-\c@abbrvpenalty=\count399
-\c@highnamepenalty=\count400
-\c@lownamepenalty=\count401
-\c@maxparens=\count402
-\c@parenlevel=\count403
-\blx@tempcnta=\count404
-\blx@tempcntb=\count405
-\blx@tempcntc=\count406
-\c@blx@maxsection=\count407
-\blx@maxsegment@0=\count408
-\blx@notetype=\count409
-\blx@parenlevel@text=\count410
-\blx@parenlevel@foot=\count411
-\blx@sectionciteorder@0=\count412
-\blx@sectionciteorderinternal@0=\count413
-\blx@entrysetcounter=\count414
-\blx@biblioinstance=\count415
-\labelnumberwidth=\skip74
-\labelalphawidth=\skip75
-\biblabelsep=\skip76
-\bibitemsep=\skip77
-\bibnamesep=\skip78
-\bibinitsep=\skip79
-\bibparsep=\skip80
-\bibhang=\skip81
+\c@tabx@nest=\count397
+\c@listtotal=\count398
+\c@listcount=\count399
+\c@liststart=\count400
+\c@liststop=\count401
+\c@citecount=\count402
+\c@citetotal=\count403
+\c@multicitecount=\count404
+\c@multicitetotal=\count405
+\c@instcount=\count406
+\c@maxnames=\count407
+\c@minnames=\count408
+\c@maxitems=\count409
+\c@minitems=\count410
+\c@citecounter=\count411
+\c@maxcitecounter=\count412
+\c@savedcitecounter=\count413
+\c@uniquelist=\count414
+\c@uniquename=\count415
+\c@refsection=\count416
+\c@refsegment=\count417
+\c@maxextratitle=\count418
+\c@maxextratitleyear=\count419
+\c@maxextraname=\count420
+\c@maxextradate=\count421
+\c@maxextraalpha=\count422
+\c@abbrvpenalty=\count423
+\c@highnamepenalty=\count424
+\c@lownamepenalty=\count425
+\c@maxparens=\count426
+\c@parenlevel=\count427
+\blx@tempcnta=\count428
+\blx@tempcntb=\count429
+\blx@tempcntc=\count430
+\c@blx@maxsection=\count431
+\blx@maxsegment@0=\count432
+\blx@notetype=\count433
+\blx@parenlevel@text=\count434
+\blx@parenlevel@foot=\count435
+\blx@sectionciteorder@0=\count436
+\blx@sectionciteorderinternal@0=\count437
+\blx@entrysetcounter=\count438
+\blx@biblioinstance=\count439
+\labelnumberwidth=\skip85
+\labelalphawidth=\skip86
+\biblabelsep=\skip87
+\bibitemsep=\skip88
+\bibnamesep=\skip89
+\bibinitsep=\skip90
+\bibparsep=\skip91
+\bibhang=\skip92
 \blx@bcfin=\read4
 \blx@bcfout=\write4
 \blx@langwohyphens=\language80
-\c@mincomprange=\count416
-\c@maxcomprange=\count417
-\c@mincompwidth=\count418
+\c@mincomprange=\count440
+\c@maxcomprange=\count441
+\c@mincompwidth=\count442
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
-(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
 File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count419
-\c@savedafterword=\count420
-\c@annotator=\count421
-\c@savedannotator=\count422
-\c@author=\count423
-\c@savedauthor=\count424
-\c@bookauthor=\count425
-\c@savedbookauthor=\count426
-\c@commentator=\count427
-\c@savedcommentator=\count428
-\c@editor=\count429
-\c@savededitor=\count430
-\c@editora=\count431
-\c@savededitora=\count432
-\c@editorb=\count433
-\c@savededitorb=\count434
-\c@editorc=\count435
-\c@savededitorc=\count436
-\c@foreword=\count437
-\c@savedforeword=\count438
-\c@holder=\count439
-\c@savedholder=\count440
-\c@introduction=\count441
-\c@savedintroduction=\count442
-\c@namea=\count443
-\c@savednamea=\count444
-\c@nameb=\count445
-\c@savednameb=\count446
-\c@namec=\count447
-\c@savednamec=\count448
-\c@translator=\count449
-\c@savedtranslator=\count450
-\c@shortauthor=\count451
-\c@savedshortauthor=\count452
-\c@shorteditor=\count453
-\c@savedshorteditor=\count454
-\c@labelname=\count455
-\c@savedlabelname=\count456
-\c@institution=\count457
-\c@savedinstitution=\count458
-\c@lista=\count459
-\c@savedlista=\count460
-\c@listb=\count461
-\c@savedlistb=\count462
-\c@listc=\count463
-\c@savedlistc=\count464
-\c@listd=\count465
-\c@savedlistd=\count466
-\c@liste=\count467
-\c@savedliste=\count468
-\c@listf=\count469
-\c@savedlistf=\count470
-\c@location=\count471
-\c@savedlocation=\count472
-\c@organization=\count473
-\c@savedorganization=\count474
-\c@origlocation=\count475
-\c@savedoriglocation=\count476
-\c@origpublisher=\count477
-\c@savedorigpublisher=\count478
-\c@publisher=\count479
-\c@savedpublisher=\count480
-\c@language=\count481
-\c@savedlanguage=\count482
-\c@origlanguage=\count483
-\c@savedoriglanguage=\count484
-\c@pageref=\count485
-\c@savedpageref=\count486
-\shorthandwidth=\skip82
-\shortjournalwidth=\skip83
-\shortserieswidth=\skip84
-\shorttitlewidth=\skip85
-\shortauthorwidth=\skip86
-\shorteditorwidth=\skip87
-\locallabelnumberwidth=\skip88
-\locallabelalphawidth=\skip89
-\localshorthandwidth=\skip90
-\localshortjournalwidth=\skip91
-\localshortserieswidth=\skip92
-\localshorttitlewidth=\skip93
-\localshortauthorwidth=\skip94
-\localshorteditorwidth=\skip95
+\c@afterword=\count443
+\c@savedafterword=\count444
+\c@annotator=\count445
+\c@savedannotator=\count446
+\c@author=\count447
+\c@savedauthor=\count448
+\c@bookauthor=\count449
+\c@savedbookauthor=\count450
+\c@commentator=\count451
+\c@savedcommentator=\count452
+\c@editor=\count453
+\c@savededitor=\count454
+\c@editora=\count455
+\c@savededitora=\count456
+\c@editorb=\count457
+\c@savededitorb=\count458
+\c@editorc=\count459
+\c@savededitorc=\count460
+\c@foreword=\count461
+\c@savedforeword=\count462
+\c@holder=\count463
+\c@savedholder=\count464
+\c@introduction=\count465
+\c@savedintroduction=\count466
+\c@namea=\count467
+\c@savednamea=\count468
+\c@nameb=\count469
+\c@savednameb=\count470
+\c@namec=\count471
+\c@savednamec=\count472
+\c@translator=\count473
+\c@savedtranslator=\count474
+\c@shortauthor=\count475
+\c@savedshortauthor=\count476
+\c@shorteditor=\count477
+\c@savedshorteditor=\count478
+\c@labelname=\count479
+\c@savedlabelname=\count480
+\c@institution=\count481
+\c@savedinstitution=\count482
+\c@lista=\count483
+\c@savedlista=\count484
+\c@listb=\count485
+\c@savedlistb=\count486
+\c@listc=\count487
+\c@savedlistc=\count488
+\c@listd=\count489
+\c@savedlistd=\count490
+\c@liste=\count491
+\c@savedliste=\count492
+\c@listf=\count493
+\c@savedlistf=\count494
+\c@location=\count495
+\c@savedlocation=\count496
+\c@organization=\count497
+\c@savedorganization=\count498
+\c@origlocation=\count499
+\c@savedoriglocation=\count500
+\c@origpublisher=\count501
+\c@savedorigpublisher=\count502
+\c@publisher=\count503
+\c@savedpublisher=\count504
+\c@language=\count505
+\c@savedlanguage=\count506
+\c@origlanguage=\count507
+\c@savedoriglanguage=\count508
+\c@pageref=\count509
+\c@savedpageref=\count510
+\shorthandwidth=\skip93
+\shortjournalwidth=\skip94
+\shortserieswidth=\skip95
+\shorttitlewidth=\skip96
+\shortauthorwidth=\skip97
+\shorteditorwidth=\skip98
+\locallabelnumberwidth=\skip99
+\locallabelalphawidth=\skip100
+\localshorthandwidth=\skip101
+\localshortjournalwidth=\skip102
+\localshortserieswidth=\skip103
+\localshorttitlewidth=\skip104
+\localshortauthorwidth=\skip105
+\localshorteditorwidth=\skip106
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-compat.def
@@ -856,19 +1005,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
 File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count487
-\c@textcitetotal=\count488
-\c@textcitemaxnames=\count489
-\c@biburlbigbreakpenalty=\count490
-\c@biburlbreakpenalty=\count491
-\c@biburlnumpenalty=\count492
-\c@biburlucpenalty=\count493
-\c@biburllcpenalty=\count494
+\c@textcitecount=\count511
+\c@textcitetotal=\count512
+\c@textcitemaxnames=\count513
+\c@biburlbigbreakpenalty=\count514
+\c@biburlbreakpenalty=\count515
+\c@biburlnumpenalty=\count516
+\c@biburlucpenalty=\count517
+\c@biburllcpenalty=\count518
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count495
+\c@smartand=\count519
 )
 Package biblatex Info: Trying to load bibliography style 'numeric'...
 Package biblatex Info: ... file 'numeric.bbx' found.
@@ -878,8 +1027,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.bbx
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count496
-\c@bbx:relatedtotal=\count497
+\c@bbx:relatedcount=\count520
+\c@bbx:relatedtotal=\count521
 ))
 Package biblatex Info: Trying to load citation style 'numeric'...
 Package biblatex Info: ... file 'numeric.cbx' found.
@@ -908,8 +1057,8 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-02-20 L3 programming layer (loader) 
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count498
-\l__pdf_internal_box=\box77
+\l__color_backend_stack_int=\count522
+\l__pdf_internal_box=\box87
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2024-02-20 L3 programming layer (loader) 
@@ -919,203 +1068,45 @@ Package biblatex Info: ... and expl3
 Package: xparse 2024-02-18 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
-)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
-Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
-\f@nch@headwidth=\skip96
-\f@nch@O@elh=\skip97
-\f@nch@O@erh=\skip98
-\f@nch@O@olh=\skip99
-\f@nch@O@orh=\skip100
-\f@nch@O@elf=\skip101
-\f@nch@O@erf=\skip102
-\f@nch@O@olf=\skip103
-\f@nch@O@orf=\skip104
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
-Package: pgf 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
-Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
-\pgfmath@dimen=\dimen297
-\pgfmath@count=\count499
-\pgfmath@box=\box78
-\pgfmath@toks=\toks58
-\pgfmath@stack@operand=\toks59
-\pgfmath@stack@operation=\toks60
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count500
-)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
-File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@picminx=\dimen298
-\pgf@picmaxx=\dimen299
-\pgf@picminy=\dimen300
-\pgf@picmaxy=\dimen301
-\pgf@pathminx=\dimen302
-\pgf@pathmaxx=\dimen303
-\pgf@pathminy=\dimen304
-\pgf@pathmaxy=\dimen305
-\pgf@xx=\dimen306
-\pgf@xy=\dimen307
-\pgf@yx=\dimen308
-\pgf@yy=\dimen309
-\pgf@zx=\dimen310
-\pgf@zy=\dimen311
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
-File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@path@lastx=\dimen312
-\pgf@path@lasty=\dimen313
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
-File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@shorten@end@additional=\dimen314
-\pgf@shorten@start@additional=\dimen315
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
-File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfpic=\box79
-\pgf@hbox=\box80
-\pgf@layerbox@main=\box81
-\pgf@picture@serial@count=\count501
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
-File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgflinewidth=\dimen316
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
-File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@pt@x=\dimen317
-\pgf@pt@y=\dimen318
-\pgf@pt@temp=\dimen319
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
-File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
-File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.tex
-File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
-File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowsep=\dimen320
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
-File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@max=\dimen321
-\pgf@sys@shading@range@num=\count502
-\pgf@shadingcount=\count503
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
-File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
-File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfexternal@startupbox=\box82
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
-File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
-File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
-File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
-File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
-File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodeparttextbox=\box83
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
-File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
-Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
-\pgf@nodesepstart=\dimen322
-\pgf@nodesepend=\dimen323
-) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
-Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
-)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
-Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
-\pgffor@iter=\dimen324
-\pgffor@skip=\dimen325
-\pgffor@stack=\toks61
-\pgffor@toks=\toks62
-)) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
-Package: tikz 2023-01-15 v3.1.10 (3.1.10)
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
-File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count504
-\pgfplotmarksize=\dimen326
-)
-\tikz@lastx=\dimen327
-\tikz@lasty=\dimen328
-\tikz@lastxsaved=\dimen329
-\tikz@lastysaved=\dimen330
-\tikz@lastmovetox=\dimen331
-\tikz@lastmovetoy=\dimen332
-\tikzleveldistance=\dimen333
-\tikzsiblingdistance=\dimen334
-\tikz@figbox=\box84
-\tikz@figbox@bg=\box85
-\tikz@tempbox=\box86
-\tikz@tempbox@bg=\box87
-\tikztreelevel=\count505
-\tikznumberofchildren=\count506
-\tikznumberofcurrentchild=\count507
-\tikz@fig@count=\count508
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
-File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count509
-\pgfmatrixcurrentcolumn=\count510
-\pgf@matrix@numberofcolumns=\count511
-)
-\tikz@expandcount=\count512
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
-File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/oberdiek\centernot.sty
-Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
-)
-\c@theorem=\count513
-\c@definition=\count514
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
-Package: titlesec 2023/10/27 v2.16 Sectioning titles
-\ttl@box=\box88
-\beforetitleunit=\skip105
-\aftertitleunit=\skip106
-\ttl@plus=\dimen335
-\ttl@minus=\dimen336
-\ttl@toksa=\toks63
-\titlewidth=\dimen337
-\titlewidthlast=\dimen338
-\titlewidthfirst=\dimen339
-)
-\c@subsubsubsection=\count515
-)
-
-Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
-(biblatex)                Loading 'csquotes' recommended.
-
-\@quotelevel=\count516
-\@quotereset=\count517
-(main.aux)
+))
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'danish'.
+ (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count518
+\scratchcounter=\count523
 \scratchdimen=\dimen340
-\scratchbox=\box89
-\nofMPsegments=\count519
-\nofMParguments=\count520
-\everyMPshowfont=\toks64
-\MPscratchCnt=\count521
+\scratchbox=\box88
+\nofMPsegments=\count524
+\nofMParguments=\count525
+\everyMPshowfont=\toks65
+\MPscratchCnt=\count526
 \MPscratchDim=\dimen341
-\MPnumerator=\count522
-\makeMPintoPDFobject=\count523
-\everyMPtoPDFconversion=\toks65
+\MPnumerator=\count527
+\makeMPintoPDFobject=\count528
+\everyMPtoPDFconversion=\toks66
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -1161,12 +1152,14 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 8.
+Package hyperref Info: Link coloring OFF on input line 21.
+(main.out) (main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
+
 Couldn't patch \deferred@thm@head!
-\c@lstlisting=\count524
+\c@lstlisting=\count529
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: longtable package is loaded.
 (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
@@ -1187,10 +1180,10 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
-Package biblatex Info: Reference section=0 on input line 8.
-Package biblatex Info: Reference segment=0 on input line 8.
+Package biblatex Info: Reference section=0 on input line 21.
+Package biblatex Info: Reference segment=0 on input line 21.
  (Opsætning/forside.tex
-<Opsætning/DTULogo.png, id=6, 469.9959pt x 685.6014pt>
+<Opsætning/DTULogo.png, id=146, 469.9959pt x 685.6014pt>
 File: Opsætning/DTULogo.png Graphic file (type png)
 <use Opsætning/DTULogo.png>
 Package pdftex.def Info: Opsætning/DTULogo.png  used on input line 17.
@@ -1204,8 +1197,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Opsætning/DTULogo.png>])
-No file main.toc.
+{C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Opsætning/DTULogo.png>]) (main.toc)
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
@@ -1213,282 +1205,63 @@ No file main.toc.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.12 \newpage
+l.24 \newpage
               [1] (sections/Fundamentale_koncepter.tex
-
-LaTeX Warning: Reference `Fakultet' on page 2 undefined on input line 16.
-
-
-LaTeX Warning: Reference `lst:fsharp_factorial' on page 2 undefined on input line 16.
-
-
-LaTeX Warning: Reference `lst:python_factorial' on page 2 undefined on input line 16.
-
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 18.
-[2]
-
-LaTeX Warning: Reference `lst:fsharp_factorial' on page 3 undefined on input line 47.
-
-[3]
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 70.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 75.
-
-
-LaTeX Warning: Reference `valid1' on page 4 undefined on input line 75.
-
-(exampleCodes/valid1.fsx)
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 81.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 81.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 86.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 86.
-
-
-LaTeX Warning: Reference `valid1' on page 4 undefined on input line 88.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 88.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 88.
-
-
-LaTeX Warning: Reference `udsagnslogik' on page 4 undefined on input line 88.
-
-) [4]
-
-LaTeX Warning: Reference `rational_fsi' on page 5 undefined on input line 40.
-
-(exampleCodes/rational.fsi [5])
-
-LaTeX Warning: Reference `number_type' on page 6 undefined on input line 52.
-
-
-LaTeX Warning: Reference `Number_fsi' on page 6 undefined on input line 63.
-
-[6] (../modules/number.fsi)
-
-LaTeX Warning: Reference `operation' on page 7 undefined on input line 71.
-
-[7]
-
-LaTeX Warning: Reference `overloads_number' on page 8 undefined on input line 89.
-
-
-LaTeX Warning: Reference `fig:expression_tree' on page 8 undefined on input line 125.
-
-[8{C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
-
-LaTeX Warning: Reference `fig:expression_tree_traversal' on page 9 undefined on input line 163.
-
-
-Overfull \hbox (19.87704pt too wide) in paragraph at lines 199--200
+ [2] [3] (exampleCodes/valid1.fsx)) [4] (exampleCodes/rational.fsi [5]) [6] (../modules/number.fsi) [7] [8]
+Overfull \hbox (19.87704pt too wide) in paragraph at lines 211--212
  [][] 
  []
 
 
-Overfull \hbox (28.18134pt too wide) in paragraph at lines 234--235
+Overfull \hbox (28.18134pt too wide) in paragraph at lines 246--247
  [][] 
  []
 
 
-Overfull \hbox (28.18134pt too wide) in paragraph at lines 269--270
+Overfull \hbox (28.18134pt too wide) in paragraph at lines 281--282
  [][] 
  []
 
-
-LaTeX Warning: Reference `fig:expression_tree' on page 9 undefined on input line 277.
-
-
-LaTeX Warning: Reference `fig:expression_tree' on page 9 undefined on input line 277.
-
-[9]
-
-LaTeX Warning: Reference `sec:expression_module' on page 10 undefined on input line 282.
-
-
-LaTeX Warning: Reference `expr_type' on page 10 undefined on input line 289.
-
-
-LaTeX Warning: Reference `number_type' on page 10 undefined on input line 289.
-
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 296.
-(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmtt.fd
-File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [10]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 306.
+[9] [10]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 318.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 306.
-
-
-LaTeX Warning: Reference `lst:expr_example' on page 11 undefined on input line 306.
-
-
-LaTeX Warning: Reference `sec:expression_generation' on page 11 undefined on input line 312.
-
-
-LaTeX Warning: Reference `sec:expression_generation' on page 11 undefined on input line 312.
-
-(../modules/Expression.fsi)
-
-LaTeX Warning: Reference `lst:mul_expr' on page 11 undefined on input line 323.
-
-[11] (sections/vektorer_og_matricer.tex
-
-LaTeX Warning: Reference `Order' on page 12 undefined on input line 13.
-
-
-LaTeX Warning: Reference `Order' on page 12 undefined on input line 15.
-
-
-LaTeX Warning: Reference `matrix' on page 12 undefined on input line 15.
-
-[12]
-
-LaTeX Warning: Reference `dim' on page 13 undefined on input line 26.
-
-
-LaTeX Warning: Reference `dim_func' on page 13 undefined on input line 42.
-
-
-LaTeX Warning: Reference `sec:matrix.fs' on page 13 undefined on input line 64.
-
-
-LaTeX Warning: Reference `scale_matrix' on page 13 undefined on input line 67.
-
-[13]
-
-LaTeX Warning: Reference `add_matrix' on page 14 undefined on input line 114.
-
-
-LaTeX Warning: Reference `sec:gram_schmidt' on page 14 undefined on input line 114.
-
-
-LaTeX Warning: Reference `sumRows' on page 14 undefined on input line 114.
-
-[14] [15]
-
-LaTeX Warning: Reference `sumRows' on page 16 undefined on input line 210.
-
-
-LaTeX Warning: Reference `def:matrix_vector_mul' on page 16 undefined on input line 210.
-
-
-LaTeX Warning: Reference `matrix_vector_mul' on page 16 undefined on input line 220.
-
-
-LaTeX Warning: Reference `mul_vector' on page 16 undefined on input line 220.
-
-
-LaTeX Warning: Reference `def:matrix_matrix_mul' on page 16 undefined on input line 250.
-
-
-LaTeX Warning: Reference `mul_matrix' on page 16 undefined on input line 250.
-
-[16]
-
-LaTeX Warning: Reference `proj' on page 17 undefined on input line 301.
-
-
-LaTeX Warning: Reference `vector_space_axioms' on page 17 undefined on input line 304.
-
-
-LaTeX Warning: Reference `number_type' on page 17 undefined on input line 304.
-
-[17]
-
-LaTeX Warning: Reference `vector_space_axioms' on page 18 undefined on input line 354.
-
-[18]
-
-LaTeX Warning: Reference `vector_space_axioms' on page 19 undefined on input line 372.
-
-
-LaTeX Warning: Reference `vector_space_axioms' on page 19 undefined on input line 372.
-
-
-LaTeX Warning: Reference `lst:vector_space_axioms' on page 19 undefined on input line 387.
-
-
-LaTeX Warning: Reference `lst:vector_space_axioms' on page 19 undefined on input line 387.
-
-
-LaTeX Warning: Reference `number_type' on page 19 undefined on input line 393.
-
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 393.
-(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 318.
+ (../modules/Expression.fsi) [11] (sections/vektorer_og_matricer.tex [12] [13] [14] [15] [16] [17] [18]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 391.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 393.
- [19] [20]
-
-LaTeX Warning: Reference `generators_gram_schmidt' on page 21 undefined on input line 488.
-
-
-LaTeX Warning: Reference `check_orthogonal_basis' on page 21 undefined on input line 490.
-
-[21]
-
-LaTeX Warning: Reference `output_gram_schmidt' on page 22 undefined on input line 539.
-
-)
-
-LaTeX Warning: Empty bibliography on input line 368.
-
-[22] (main.aux)
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 391.
+ [19] [20] [21]) [22] [23] 
+enddocument/afterlastpage: lastpage setting LastPage.
+(main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7A8611F39766D6C8119E8C034D61B82F;6059.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 77ED24CAD5CDE9D711E9AC58D301CAD4;5965.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39142 strings out of 474457
- 724782 string characters out of 5742755
- 2208190 words of memory out of 5000000
- 60320 multiletter control sequences out of 15000+600000
- 570009 words of font info for 81 fonts, out of 8000000 for 9000
+ 39874 strings out of 474457
+ 740198 string characters out of 5742755
+ 2200190 words of memory out of 5000000
+ 61028 multiletter control sequences out of 15000+600000
+ 569165 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,18n,134p,1284b,2248s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\jonas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt0900.pk><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on main.pdf (23 pages, 490193 bytes).
+ 99i,18n,134p,1284b,2289s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (24 pages, 537917 bytes).
 PDF statistics:
- 798 PDF objects out of 1000 (max. 8388607)
- 477 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1033 PDF objects out of 1200 (max. 8388607)
+ 494 named destinations out of 1000 (max. 500000)
+ 298 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -17,3 +17,6 @@ type Expr<'a> =
   static member ( / ) : Expr<Number> * Expr<Number> -> Expr<Number>
 
 val eval : Expr<Number> -> Map<char,Number> -> Number
+val containsX : Expr<Number> -> Expr<Number> -> bool
+val getNumber : Expr<Number> -> Number
+val getVariable : Expr<Number> -> char

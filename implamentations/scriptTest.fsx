@@ -24,4 +24,13 @@ let showSimp e =
     ""
 
 
-showSimp (tree "3/(x+5)+1/x")
+
+
+
+
+let lhs = tree "a*4+b"
+let rhs = N one
+
+let (a, b) = isolateX lhs rhs (X 'a')
+printfn "%A = %A" (ExpressionToInfix a false) (ExpressionToInfix b false)
+

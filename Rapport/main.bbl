@@ -18,15 +18,284 @@
 
 
 \refsection{0}
-  \datalist[entry]{nyt/global//global/global}
-    \entry{statista}{misc}{}
+  \datalist[entry]{nty/global//global/global}
+    \entry{fpe}{online}{}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labeltitlesource}{title}
+      \field{title}{Floating-point error}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
+      \endverb
+    \endentry
+    \entry{fsharp}{online}{}
+      \field{sortinit}{f}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labeltitlesource}{title}
+      \field{title}{fsharp.org}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://fsharp.org/
+      \endverb
+      \verb{url}
+      \verb https://fsharp.org/
+      \endverb
+    \endentry
+    \entry{gcd}{online}{}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labeltitlesource}{title}
+      \field{title}{Greatest common divisor wikipedia}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Greatest_common_divisor
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Greatest_common_divisor
+      \endverb
+    \endentry
+    \entry{HansenRischelFSharp}{book}{}
+      \name{author}{2}{}{%
+        {{hash=6d850cf11127a08e4b9b096c24d8695f}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Michael\bibnamedelima R.},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=669b35041ef36bf9ede00d14ebf0d4b7}{%
+           family={Rischel},
+           familyi={R\bibinitperiod},
+           given={Hans},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{5fdcd0e3ac91f6d9cb9693a0a8442b92}
+      \strng{fullhash}{5fdcd0e3ac91f6d9cb9693a0a8442b92}
+      \strng{bibnamehash}{5fdcd0e3ac91f6d9cb9693a0a8442b92}
+      \strng{authorbibnamehash}{5fdcd0e3ac91f6d9cb9693a0a8442b92}
+      \strng{authornamehash}{5fdcd0e3ac91f6d9cb9693a0a8442b92}
+      \strng{authorfullhash}{5fdcd0e3ac91f6d9cb9693a0a8442b92}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781107019027, 1107019028}
+      \field{title}{Functional Programming Using F\#}
+      \field{year}{2013}
+    \endentry
+    \entry{mat1b}{online}{}
+      \name{author}{1}{}{%
+        {{hash=6d18a27c701cb27bec7a538ea273a347}{%
+           family={Jakob\bibnamedelima Lemvig},
+           familyi={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Ole\bibnamedelima Christensen},
+           giveni={O\bibinitperiod\bibinitdelim C\bibinitperiod},
+           prefix={og},
+           prefixi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{fullhash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{bibnamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authorbibnamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authornamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authorfullhash}{6d18a27c701cb27bec7a538ea273a347}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mathematics 1b - Functions of several variables}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
+      \endverb
+      \verb{url}
+      \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
+      \endverb
+    \endentry
+    \entry{mat1apage}{online}{}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labeltitlesource}{title}
+      \field{title}{Kursus side for Mathematics 1a}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://mat1a.compute.dtu.dk/intro.html
+      \endverb
+      \verb{url}
+      \verb https://mat1a.compute.dtu.dk/intro.html
+      \endverb
+    \endentry
+    \entry{mat1a}{online}{}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labeldatesource}{nodate}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/}}
-      \field{note}{Besøgt den:}
+      \field{title}{Mathematics 1a}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+      \verb{url}
+      \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+    \endentry
+    \entry{Polsk_notation}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Polsk notation wikipedia}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Polish_notation
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Polish_notation
+      \endverb
+    \endentry
+    \entry{list_comprehension}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Python - List Comprehension}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.w3schools.com/python/python_lists_comprehension.asp
+      \endverb
+      \verb{url}
+      \verb https://www.w3schools.com/python/python_lists_comprehension.asp
+      \endverb
+    \endentry
+    \entry{Rational_number}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Rational Number wikipedia}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Rational_number
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Rational_number
+      \endverb
+    \endentry
+    \entry{major_order}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Row- and column-major order}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
+      \endverb
+    \endentry
+    \entry{statista2023}{online}{}
+      \name{author}{1}{}{%
+        {{hash=62182ca58a739daa8ddd8a48b7b19abb}{%
+           family={Statista},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{fullhash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{bibnamehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{authorbibnamehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{authornamehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{authorfullhash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
       \field{title}{Most used programming languages among developers worldwide as of 2023}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
+      \endverb
+      \verb{url}
+      \verb https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
+      \endverb
+    \endentry
+    \entry{sympy}{online}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{title}{SymPy}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.sympy.org/en/index.html
+      \endverb
+      \verb{url}
+      \verb https://www.sympy.org/en/index.html
+      \endverb
+    \endentry
+    \entry{TDD}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Test-Driven Development}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Test-driven_development
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Test-driven_development
+      \endverb
+    \endentry
+    \entry{tree_algo}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Tree Traversal Techniques – Data Structure and Algorithm Tutorials}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

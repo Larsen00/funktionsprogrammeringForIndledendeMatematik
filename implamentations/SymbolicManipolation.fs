@@ -77,14 +77,14 @@ and div e1 e2:Expr<Number> =
     | _, N a when Number.isZero a ->  raise (System.DivideByZeroException("SymbolicManipolation.div: Cannot divide by zero!"))
     |N a, N b -> N(a / b)
     | Neg a, Neg b -> div a b
-    | a, Neg b -> neg (div a b)                    
+    | a, Neg b -> neg (div a b)  
+    | Div(a, b), c            -> div a (mul b c)                  
     | _,_ -> commutativeMulDiv.applyCommutative (Div(e1, e2))
 
 
 
 // Simplifies an Expression 
 let rec simplifyExpr e =
-    // printfn "%A" e
     match e with
     | N a when Number.isNegative a -> Neg (N (Number.absNumber a))
     | N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
@@ -94,4 +94,42 @@ let rec simplifyExpr e =
     | Mul(a, b) -> mul (simplifyExpr a) (simplifyExpr b) 
     | Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
     | _ -> e 
+
+// insert envirement into an expression
+let rec insertEnv e env =
+    match e with
+    | X a when Map.containsKey a env -> N (Map.find a env)
+    | Neg a -> Neg (insertEnv a env)
+    | Add(a, b) -> Add(insertEnv a env, insertEnv b env)
+    | Sub(a, b) -> Sub(insertEnv a env, insertEnv b env)
+    | Mul(a, b) -> Mul(insertEnv a env, insertEnv b env)
+    | Div(a, b) -> Div(insertEnv a env, insertEnv b env)
+    | _ -> e
+
+
+// Finds X in an expression and returns the reverse expression
+let rec expressionOnX t v =
+    match t with
+    | N _ | X _ -> fun a -> a
+    | Neg(x) when x = v -> fun a -> Neg a
+    | Add(x, y) | Add(y, x) | Sub(y, x) when x = v -> fun a -> Sub(a, y)
+    | Sub(x, y) when x = v -> fun a -> Add(a, y)
+    | Mul(x, y) | Mul(y, x) when x = v -> fun a -> Div(a, y)
+    | Div(x, y) when x = v -> fun a -> Mul(a, y)
+    | Div(_, x) when x = v -> fun a -> Mul(a, x)
+    | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) -> fun a -> expressionOnX x v a |> expressionOnX y v 
+    | Neg(x) -> fun a -> expressionOnX x v a
+
+// Isolates X in an equation
+// Cant handle to complex equations, well suited for multivariable polynomials of degree 1
+let rec isolateX lhs rhs v =
+    let operation = 
+        if containsX lhs v 
+        then expressionOnX lhs v
+        elif containsX rhs v 
+        then expressionOnX rhs v
+        else failwith "Variable not found in either side of the equation"
+    match operation lhs |> simplifyExpr, operation rhs |> simplifyExpr with
+    | x, y | y, x when x = v -> (x, y)
+    | x, y -> isolateX x y v
 

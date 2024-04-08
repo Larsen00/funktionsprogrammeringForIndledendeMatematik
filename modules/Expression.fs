@@ -30,6 +30,7 @@ let rec add e1 e2:Expr<Number>  =
     match e1, e2 with
     | N a, N b                            -> N (a + b)
     | N a, b | b, N a when isZero a       -> b
+    | Neg a, b | b, Neg a                 -> sub b a
     | Mul(a, X b), Mul(c, X d) 
     | Mul(X b, a), Mul(c, X d)
     | Mul(a, X b), Mul(X d, c) 
@@ -37,7 +38,7 @@ let rec add e1 e2:Expr<Number>  =
     | _, _                                -> Add(e1, e2)
 
 // subtracts two expressions
-let rec sub a b:Expr<Number>  =
+and sub a b:Expr<Number>  =
     match a, b with
     | _, _ when a = b -> N zero
     | N x, N y  when greaterThan y x -> Neg (N (y - x)) // Want to avoid negative numbers
@@ -53,13 +54,14 @@ let rec sub a b:Expr<Number>  =
  
 
 // divides two expressions with simplification
-let div e1 e2:Expr<Number> =
+let rec div e1 e2:Expr<Number> =
     match e1, e2 with
     | _, _   when e1 = e2     -> N one
     | _, N a when isOne a     -> e1
     | N a, _ when isZero a    -> N zero
     | _, N a when isZero a    ->  raise (System.DivideByZeroException("Expression.div: Cannot divide by zero!"))
     | N a, N b                -> N (a / b)
+    | Div(a, b), c            -> div a (mul b c) 
     | _, _                    -> Div(e1, e2)  
 
 
@@ -70,7 +72,14 @@ type Expr<'a> with
     static member (-) (e1, e2)          = sub e1 e2
     static member (*) (e1, e2)          = mul e1 e2
     static member (/) (e1, e2)          = div e1 e2
-    
+
+let rec containsX t (v:Expr<Number>) =
+    match t with
+    | _ when t = v -> true
+    | Add(a, b) | Sub(a, b) | Mul(a, b) | Div(a, b) -> containsX a v || containsX b v
+    | Neg a -> containsX a v
+    | _ -> false
+
 
 // evaluates an expression without simplification, hence only using the Number operations
 let rec eval (e:Expr<Number>) (env) =
@@ -82,3 +91,11 @@ let rec eval (e:Expr<Number>) (env) =
     | Sub (a, b) -> eval a env - eval b env
     | Mul (a, b) -> eval a env * eval b env
     | Div (a, b) -> eval a env / eval b env
+
+let getNumber (e:Expr<Number>) =
+    eval e Map.empty
+
+let getVariable (e:Expr<Number>) =
+    match e with
+    | X x -> x
+    | _ -> raise (System.Exception("Expression.getChar: Expression is not a variable!"))

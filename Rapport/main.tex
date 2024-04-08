@@ -5,8 +5,19 @@
 
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
-\usepackage{biblatex}
-\addbibresource{references.bib}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib} % Erstat med stien til din .bib fil
+
+% Definer en tilpasset kommando til at citere kun med titlen i en fodnote
+\DeclareCiteCommand{\footcitetitle}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\printfield{title}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+
+
 \begin{document}
 \input{Opsætning/forside}
 \tableofcontents
@@ -14,9 +25,9 @@
 \section{Introduktion}
 
 
-I 2023 valgte Danmarks Tekniske Universitet at anvende Python som et hjælpeværktøj i deres grundlæggende matematikkursus "01001 Matematik 1a (Polyteknisk grundlag)". Python er et af de mest anvendte programmeringssprog \footnote{statista}, kun overgået af to sprog, der primært bruges sammen til at udvikle hjemmesider. Derfor har Python, med en række matematiske programudvidelser som SymPy \footnote{https://www.sympy.org/en/index.html}, været et oplagt valg som programmeringssprog til det grundlæggende matematikkursus tilbudt af DTU.
+I 2023 valgte Danmarks Tekniske Universitet at anvende Python som et hjælpeværktøj i deres grundlæggende matematikkursus "01001 Matematik 1a (Polyteknisk grundlag)". Python er et af de mest anvendte programmeringssprog \footcitetitle{statista2023}, kun overgået af to sprog, der primært bruges sammen til at udvikle hjemmesider. Derfor har Python, med en række matematiske programudvidelser som SymPy \footcitetitle{sympy}, været et oplagt valg som programmeringssprog til det grundlæggende matematikkursus tilbudt af DTU.
 
-Projektet vil undersøge, hvordan et funktionsprogrammeringssprog, kan gavne de studerendes forståelse af de grundlæggende matematiske koncepter. Formålet er at guide læseren gennem opbygningen af en række funktionsprogrammer baseret på grundlæggende matematik \footnote{\url{https://mat1a.compute.dtu.dk/intro.html}} og dermed illustrere anvendelser. Projektet beskriver en generel struktur til opbygning og anvendelse af et funktions programmeringsprogram. Der tages udgangspunkt i F\# \footnote{\url{https://fsharp.org/}}, men beskrivelserne af programmerne vil også kunne anvendes i lignende funktionsprogrammeringssprog.
+Projektet vil undersøge, hvordan et funktionsprogrammeringssprog, kan gavne de studerendes forståelse af de grundlæggende matematiske koncepter. Formålet er at guide læseren gennem opbygningen af en række funktionsprogrammer baseret på grundlæggende matematik \footcitetitle{mat1apage} og dermed illustrere anvendelser. Projektet beskriver en generel struktur til opbygning og anvendelse af et funktions programmeringsprogram. Der tages udgangspunkt i F\# \footcitetitle{fsharp}, men beskrivelserne af programmerne vil også kunne anvendes i lignende funktionsprogrammeringssprog.
 
 Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funktionsprogrammering samt metoder til validering af programmerne. 
 
@@ -26,7 +37,7 @@ Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funkti
 Det ønskes at kunne repræsentere simple ligninger som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere ligninger samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
-Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet er lavet på, gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footnote{\url{https://en.wikipedia.org/wiki/Floating-point_error_mitigation}}, men for ikke at komplicere programmet vil vi i denne opgave ikke betragte floats.  
+Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet er lavet på, gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for ikke at komplicere programmet vil vi i denne opgave ikke betragte floats.  
 
 \subsubsection{Rationelle tal Mondul}
 Repræsentationen af rationale tal kan laves ved hjælp af danne et par af integers, hvor den ene integer er tælleren og den anden er nævneren. 
@@ -38,14 +49,14 @@ Repræsentationen af rationale tal kan laves ved hjælp af danne et par af integ
 type rational = R of int * int
 \end{lstlisting}
 
-Nedestående er der givet en signatur fil for rational mondulet \ref{rational_fsi}. i Implementerings filen overloades de matematiske operatorer, ved hjælp af de klassiske regneregler for brøker\footnote{\url{https://en.wikipedia.org/wiki/Rational_number}}. 
+Nedestående er der givet en signatur fil for rational mondulet \ref{rational_fsi}. i Implementerings filen overloades de matematiske operatorer, ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}. 
 \lstinputlisting[
     language=FSharp,
     label={rational_fsi},
     caption={Signatur filen for rational mondulet}
 ]{exampleCodes/rational.fsi}
 
-For at kunne sammenligne, men også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simpleste from. Dette kan gøres ved at finde den største fælles divisor (GCD) \footnote{\url{https://en.wikipedia.org/wiki/Greatest_common_divisor}}. Der udover er det vigtigt at være opmærksom på man ikke foretager nul division. Derfor vil implementerings filen kaste en "System.DivideByZeroException" hvis nævneren er eller bliver nul. Signatur filen indeholder en række funktioner som bliver anvendt af andre filer. 
+For at kunne sammenligne, men også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simpleste from. Dette kan gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Der udover er det vigtigt at være opmærksom på man ikke foretager nul division. Derfor vil implementerings filen kaste en "System.DivideByZeroException" hvis nævneren er eller bliver nul. Signatur filen indeholder en række funktioner som bliver anvendt af andre filer. 
  
 \subsubsection{Komplekse tal Mondul}
 
@@ -112,7 +123,7 @@ Dermed har vi et mondul som kan repræsentere tal, samt udføre matematiske oper
 
 \subsection{Matematiske ligninger}
 \subsubsection{Polsk notation}
-Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footnote{\url{https://en.wikipedia.org/wiki/Polish_notation}}. 
+Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. 
 
 \begin{align*}
     \text{Infix Notation:} \quad & (A + B) \cdot C \\
@@ -161,7 +172,7 @@ Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er ope
 \caption{Et binært træ der repræsenterer udtrykket $-(3 \cdot x - 5) \cdot 2$}
 \label{fig:expression_tree}
 \end{figure}
-Det skal bemærkes der er forskel på den unære og binære operator '$-$' i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for en matematisk ligning, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footnote{\url{https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/}}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
+Det skal bemærkes der er forskel på den unære og binære operator '$-$' i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for en matematisk ligning, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footcitetitle{tree_algo}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
 
 
 \begin{figure}[H]
@@ -364,7 +375,6 @@ let mul e1 e2:Expr<Number> =
 
 \section{Appendiks}
 \subsection{Matrix.fs} \label{sec:matrix.fs}
-
-\section{Referencer}
+\newpage
 \printbibliography
 \end{document}

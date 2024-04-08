@@ -36,6 +36,8 @@ let rec flatTree e =
     | N _ | X _ | Add _ | Sub _ -> [e]
     | Neg a -> Neg (N one) :: flatTree a
     | Mul (a, b) -> flatTree a @ flatTree b
+    | Div (N a, N b) -> [N (a / b)]
+    | Div (a, N b) -> N (one / b) :: flatTree a
     | Div (a, b) -> Div (N one, b) :: flatTree a 
 
 

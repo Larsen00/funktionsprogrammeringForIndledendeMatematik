@@ -1,5 +1,7 @@
 module Matrix
 open Number
+open Expression
+open SymbolicManipolation
 
 // row or coloumn major ordere: default of a vector and matric is Column major order.
 type Order = | R | C
@@ -242,10 +244,15 @@ let flip m =
 
 
 // extracts the first vector of a matrix
-let extractVector (M(m, o)) = 
+let extractfirstVector (M(m, o)) = 
     match m with
     | [] -> failwith "Matrix is empty"
     | x::xs -> x, M(xs, o)
+
+// Last vector of a matrix
+let rec extractlastVector m =
+    let (v, mf) = flip m |> extractfirstVector 
+    (v, flip mf)
 
 
 // Multiplies two vectors element wise
@@ -439,8 +446,82 @@ let rec rowOperation i j c m =
     if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
     elif not <| corectOrderCheck m R then rowOperation i j c <| correctOrder m R
     else
-
     replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
+
+let rec isUpperTriangular (M(vl, o)) = 
+    if not <| corectOrderCheck (M(vl, o)) R then isUpperTriangular (correctOrder (M(vl, o)) R)
+    else
+    let rec iut vl idx =
+        match vl with
+        | [] -> true
+        | x::xs -> firstNonZeroIndex x = idx && iut xs (idx + 1)
+    iut vl 0
+            
+
+    
+
+/////////////////////////////////
+/// Functions to solve Ax = b ///
+/////////////////////////////////
+
+type ExprVector = list<Expr<Number>>
+
+
+// multiplies a expression with a vector and returns a Expr list
+let scalarWithExpr (V(nl, _)) e=
+        List.map (fun x -> N x * e) nl
+
+let matrixMulExprList vl el =
+    let znl = (vectorOf zero (List.length el)) 
+    let zeroExprList = scalarWithExpr  znl (N zero) // zero expr vector
+    List.map2 (fun mc n -> scalarWithExpr n mc) el vl 
+    |> List.fold (fun a b -> (List.map2 (+) a b)) zeroExprList
+
+let rec charVector n =
+    match n with
+    | _ when n <= 0 -> []
+    | _ -> X (char (n - 1)) :: charVector (n - 1)
+
+let rec vectorEnv n env =
+    match n with
+    | _ when n <= 0 -> V([], C)
+    | _ -> 
+        let (V(nl, _)) = vectorEnv (n - 1) env   
+        Map.find (char (n - 1)) env :: nl |> vector
+
+let rec solveEquations el bl cl =
+        match el, bl, cl with
+        | [], [], [] -> Map.empty
+        | e::es, b::bs, c::cs -> 
+                            let env = solveEquations es bs cs
+                            printfn "e: %A, b: %A" e b
+                            let (lhs, rhs) = isolateX (insertEnv e env) b c
+                            printfn "lhs: %A, rhs: %A" lhs rhs
+                            Map.add (getVariable lhs) (getNumber rhs) env
+        | _, _, _ -> failwith "solveEquations: The number of equations and variables must be the same"
+
+
+// Solves the equation Ax = b
+let Axequalb A (V(nlb, ob)) =
+    let (D(r, c)) = dimMatrix A
+    if r <> c then failwith "Axequalb: A must be a square matrix"
+    elif r <> List.length nlb ||  ob = R then failwith "Axequalb: b must be a column or have same length as rows of A"
+    else
+    let (V(ef_b, _), M(ef_vl, o)) = correctOrder (rowEchelonForm <| extendMatrix A nlb) C |> extractlastVector
+    stringMatrix (extendMatrix (M(ef_vl, o)) ef_b) |> printfn "%A" 
+    if not <| isUpperTriangular (M(ef_vl, o)) then failwith "Axequalb: There dont exitst a single solution"
+    else
+    let varlist = charVector c
+    let b = scalarWithExpr (vector ef_b) (N one)
+    solveEquations (matrixMulExprList ef_vl varlist) b varlist
+    |> vectorEnv c 
+
+
+    
+
+
+    
+
 
 
     

@@ -448,6 +448,7 @@ let rec rowOperation i j c m =
     else
     replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
 
+// Checks if a matrix is upper triangular
 let rec isUpperTriangular (M(vl, o)) = 
     if not <| corectOrderCheck (M(vl, o)) R then isUpperTriangular (correctOrder (M(vl, o)) R)
     else

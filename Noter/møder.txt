@@ -117,3 +117,4 @@ Har lavet
     *PBT til gramschmidt
     *kan løse et lineært ligningssystem Ax = b (A skal kunne reducers til en uppertriangular matrice og være square)
     *Skrevet en del sider om matricer og vektorer
+    *PBT af tree generator

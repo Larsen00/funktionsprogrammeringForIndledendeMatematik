@@ -27,3 +27,4 @@ c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main
 c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.pdb
 c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.genruntimeconfig.cache
 c:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\ref\main.dll
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\bin\Debug\net7.0\FsCheck.dll

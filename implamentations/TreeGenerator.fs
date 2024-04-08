@@ -26,7 +26,8 @@ and mapToSymbol l allowUnary allowOperator=
     | x::tail when allowOperator && x = '/' || x = '*' -> Operator (x, 2, Left)::mapToSymbol tail false false 
     | x::tail when allowOperator && (x = '+' || (x = '-' && not allowUnary)) -> Operator (x, 1, Left)::mapToSymbol tail false false
     | x::tail when  (x = '-' && allowUnary) -> Operator ('~', 2, Right)::mapToSymbol tail true false
-    | x::tail when x = '(' || x = ')' -> Operator (x, -1, Left)::mapToSymbol tail true true
+    | x::tail when x = '(' -> Operator (x, -1, Left)::mapToSymbol tail true true
+    | x::tail when x = ')' -> Operator (x, -1, Left)::mapToSymbol tail false true
     | x::_ when System.Char.IsDigit(x) -> 
         let (k, tail) = foundInt l ""
         Konstant (int k):: mapToSymbol tail false true
@@ -52,6 +53,8 @@ let popPostfixStack op postfix =
 
 
 let rec generateExpresion c (stack:OperatorList) postfix =
+    // printfn "c:\n%A\n" c
+    // printfn "Stack:\n%A\n\npostfix:\n%A" stack postfix 
     match c, stack with
     | [], [] -> postfix
     | [], (s,_,_)::stack_tail  -> generateExpresion c stack_tail (popPostfixStack s postfix)  
@@ -78,7 +81,8 @@ let rec generateExpresion c (stack:OperatorList) postfix =
             | _, _ -> generateExpresion tail (e::stack) postfix
 
 
-let tree s = 
+let tree s =
+    // printfn "Tree\n%A" s
     match generateExpresion (infixToSymbolList s) [] [] with
     | [] -> failwith "Tree is empty" 
     |tree::_ -> tree
@@ -89,11 +93,12 @@ let rec ExpressionToInfix e p =
     match e with
     | N a -> toString a
     | X a -> string a
+    | Neg a when p -> "- (" + ExpressionToInfix a false + ")"
     | Neg a -> "-" + ExpressionToInfix a true
     | Add(a, b) when p -> "(" + (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false) + ")"
     | Add(a, b) -> (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false)
-    | Sub(a, b) when p -> "(" + (ExpressionToInfix a false) + "-" + (ExpressionToInfix b false) + ")"
-    | Sub(a, b) -> (ExpressionToInfix a false) + "-" + (ExpressionToInfix b false)
+    | Sub(a, b) when p -> "(" + (ExpressionToInfix a false) + "-" + (ExpressionToInfix b true) + ")"
+    | Sub(a, b) -> (ExpressionToInfix a false) + "-" + (ExpressionToInfix b true)
     | Mul(a, b) when p -> "(" + (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) + ")"
     | Mul(a, b) -> (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) 
     | Div(a, b) when p -> "(" + (ExpressionToInfix a true) + "/" + (ExpressionToInfix b true) + ")"

@@ -50,6 +50,12 @@ let leafGen xlist =
     else
         numberInExprGen
 
+let onlyIntleafGen xlist :Gen<Expr<Number>> = 
+    if xlist <> [] then
+        Gen.oneof [Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10)); XGen xlist]
+    else
+        Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10))
+
 // generate a sequence of characters
 let charsSeqGen c1 c2 = seq { for c in c1 .. c2 do
                                 yield gen { return c} }
@@ -65,18 +71,19 @@ let smallEnvGen =
         let! ns = Gen.listOfLength i numberGen
         return (Map.ofList (List.zip xlist ns), xlist) }
 
-let rec exprGen xlist n = 
+let rec exprGen xlist n leafType = 
         if n = 0 then
-            leafGen xlist
+            leafType xlist
         else
             Gen.oneof [
-                leafGen xlist; // leaf occurs twice becourse leaf is X or N giving the same probability for each expression 
-                leafGen xlist;
-                Gen.map2 (fun x y -> Add (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
-                Gen.map2 (fun x y -> Mul (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
-                Gen.map2 (fun x y -> Div (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));
-                Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2)) (exprGen xlist (n/2));            
-                Gen.map (fun x -> Neg x) (exprGen xlist (n/2))]
+                leafType xlist; // leaf occurs twice becourse leaf is X or N giving the same probability for each expression 
+                leafType xlist;
+                Gen.map2 (fun x y -> Add (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);
+                Gen.map2 (fun x y -> Mul (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);
+                Gen.map2 (fun x y -> Div (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);
+                Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);            
+                Gen.map (fun x -> Neg x) (exprGen xlist (n/2) leafType)]
+
 
 type SmallEnv = Map<char, Number> * char list
 type SmallEnvGen =

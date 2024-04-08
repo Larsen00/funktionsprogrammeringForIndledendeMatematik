@@ -4,6 +4,8 @@ open Differentiation
 open Expression
 open Number
 open SymbolicManipolation
+open rational
+open complex
 
 // let ligning = simplifyExpr (tree "(3*x-5)*2")
 // printfn "Orginal equation: %A" (InfixExpression ligning) 
@@ -24,13 +26,20 @@ let showSimp e =
     ""
 
 
+let e = Add (X 'E', Neg (Sub (Sub (N (Int 10), N (Int -1)), Mul (X 'R', X 'R'))))
+let env = Map [('A', Complex (C (R (0, 1), R (-2, 1))));
+    ('E', Complex (C (R (3, 2), R (2, 1))));
+    ('R', Complex (C (R (1, 1), R (3, 1)))); ('U', Rational (R (1, 1)))]
 
 
+let s0 = eval e env 
+let se = simplifyExpr e
+let t =  InfixExpression se
+let s1 = eval (t|> tree) env
 
+printfn "s0:\n%A" s0
+printfn "s1\n%A" s1
 
-let lhs = tree "a*4+b"
-let rhs = N one
-
-let (a, b) = isolateX lhs rhs (X 'a')
-printfn "%A = %A" (ExpressionToInfix a false) (ExpressionToInfix b false)
-
+printfn "%A" (InfixExpression e)
+printfn "%A" (tree t |> InfixExpression)
+printfn "%A" se

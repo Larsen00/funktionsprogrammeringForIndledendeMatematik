@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1711884906.60532 "main.bcf" "main.bbl" "main" 1711971208.79373 0
-  "main.bcf" 1711971208 108668 2d4148f9a643d8164705e5fedc423066 "pdflatex"
+["biber main"] 1712571680.27477 "main.bcf" "main.bbl" "main" 1712571744.0862 0
+  "main.bcf" 1712571743 108668 2d4148f9a643d8164705e5fedc423066 "pdflatex"
   "references.bib" 1711884905 2585 2eb483feb51878ce8cc952511b5f29fd ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1711971204.69581 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1711971208.79587 0
+["pdflatex"] 1712571740.48172 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1712571744.08712 0
   "../modules/Expression.fsi" 1711971203 757 75a81c1152a8d210805a6a39a16199ce ""
   "../modules/number.fsi" 1710690696 858 bd6697078c7eec8143ec11843db6537f ""
   "C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1711822995 82507 a9eef8696c92627b87e9975edea03b2a ""
@@ -267,15 +267,15 @@
   "Opsætning/DTULogo.png" 1709375398 71324 08d7a624ec2f9f1df696ed86b2d8893d ""
   "Opsætning/Pakker.tex" 1711885401 7894 ef12fd81f0b618067ac699c07ec5feac ""
   "Opsætning/forside.tex" 1711819024 2148 c278081412b431856ee7aa61dfa55a2c ""
-  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1711884759 19132 07aed5ae68861a1651927aee176d617f ""
+  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1712571674 19128 a97b7904934e1080fa386a39ca1c37da ""
   "exampleCodes/rational.fsi" 1710006846 1158 0ae0d1def194755e712e9dce626f4df7 ""
   "exampleCodes/valid1.fsx" 1710682578 174 1c793f2026d3f274ba30a14fa979c2cc ""
-  "main.aux" 1711971208 16872 14c69de7c6cc2b511a8f080e597e9955 "pdflatex"
-  "main.bbl" 1711884909 10731 bbe576d121be6a8c8ed730990c35011b "biber main"
-  "main.out" 1711971208 5965 77ed24cad5cde9d711e9ac58d301cad4 "pdflatex"
-  "main.run.xml" 1711971208 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
-  "main.tex" 1711884759 19132 07aed5ae68861a1651927aee176d617f ""
-  "main.toc" 1711971208 3232 62dea4349183e205e6625139c9a44f5a "pdflatex"
+  "main.aux" 1712571743 16745 54d551eb7d7a9f380f936052d04550ea "pdflatex"
+  "main.bbl" 1712571736 10731 bbe576d121be6a8c8ed730990c35011b "biber main"
+  "main.out" 1712571743 5806 abc15fa15225f9da621736ff3ba9a871 "pdflatex"
+  "main.run.xml" 1712571743 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
+  "main.tex" 1712571674 19128 a97b7904934e1080fa386a39ca1c37da ""
+  "main.toc" 1712571743 3146 2a20e8dafab7ac089c37efe097a392d3 "pdflatex"
   "sections/Fundamentale_koncepter.tex" 1711883464 8528 93aa5a4ae911e555ab0ea33c65a7ed6a ""
   "sections/vektorer_og_matricer.tex" 1711884880 23794 3a311293772e3c5371823df14f763181 ""
   (generated)

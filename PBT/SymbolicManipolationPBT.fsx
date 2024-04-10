@@ -12,7 +12,6 @@ Arb.register<SmallEnvGen>()
 
 // Compares the evaluation of a simplified expression with the evaluation of the original expression
 let compareSimpExpr env (e:Expr<Number>) =
-    // printfn "Expression: %A" e
     eval (simplifyExpr e) env  = eval e env
 
 
@@ -36,8 +35,6 @@ let simpPBT (se:SmallEnv) =
 let _ = Check.Quick simpPBT
 
 let generatesCorrectTree env (e:Expr<Number>) =
-    // printfn "Expressionnos:\n%A" e
-    // printfn "Expression:\n%A" (simplifyExpr e)
     eval e env = eval (simplifyExpr e |> InfixExpression |> tree ) env
 
 let treeEqualEval (env, xlist) =

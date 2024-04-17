@@ -38,3 +38,7 @@ val rowOperation : int -> int -> Number -> Matrix -> Matrix
 val dimMatrix : Matrix -> Dimension
 val isOrthogonalBacis : Matrix -> bool
 val Axequalb : Matrix -> Vector -> Vector
+val extendMatrix : Matrix -> list<Number> -> Matrix
+val fullrankedDiagonalMatrix : int -> int -> Matrix
+val hasFullRank : Matrix -> bool
+val transposeMatrix : Matrix -> Matrix

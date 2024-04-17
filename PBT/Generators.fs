@@ -161,6 +161,29 @@ type IndependetBacisGen =
             override _.Generator = getIndependetBacisGen
             override _.Shrinker _ = Seq.empty}
 
+
+let getDiagonalMatrixGen maxRows =
+    gen { 
+        let! n = Gen.choose(2, maxRows)
+        let! m = Gen.choose(n, n + 3)   
+        return fullrankedDiagonalMatrix n m }
+        
+
+let getFullRankedMatrixGen =
+    gen { 
+        let! m = getDiagonalMatrixGen 5
+        let! numberOfOperations = Gen.choose(1, 10)
+        let! span = multipleRowOperationsGen m numberOfOperations
+        return span }
+
+type fullRankedMatrix = Matrix
+type fullRankedMatrixGen =
+    static member fullRankedDiagonalMatrix() =
+        {new Arbitrary<Matrix>() with 
+            override _.Generator = getFullRankedMatrixGen
+            override _.Shrinker _ = Seq.empty}
+            
+
 /////////////////////////////////
 /// Properties //////////////////
 /////////////////////////////////
@@ -177,6 +200,9 @@ let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
 let vectorAssCom m (c:Number) =
     c * (sumRows m) = sumRows (c * m)
 
+let transposeTwice (m:Matrix) =
+    transposeMatrix m |> transposeMatrix = m
+
 // An independtent set of vectors is orthogonal after the Gram-Schmidt process
 let gramSchmidtIsOrthogonal (m:IndependetBacis) =
     let res =
@@ -187,3 +213,24 @@ let gramSchmidtIsOrthogonal (m:IndependetBacis) =
     (res = 1 || res = 2)
     |> Prop.classify (res = 1) "PropertyHolds"
     |> Prop.classify (res = 2) "OverflowException"
+
+let gramSchmidtIsOrthogonal2 (m:fullRankedMatrix) =
+    let res =
+        try 
+            if transposeMatrix m |> orthogonalBacis |> isOrthogonalBacis then 1 else 0
+        with
+            | :? System.OverflowException -> 2
+    (res = 1 || res = 2)
+    |> Prop.classify (res = 1) "PropertyHolds"
+    |> Prop.classify (res = 2) "OverflowException"
+
+let fullRankedMatrixIsFullRanked (m:IndependetBacis) =
+    let res =
+        try 
+            if hasFullRank m then 1 else 0
+        with
+            | :? System.OverflowException -> 2
+    (res = 1 || res = 2)
+    |> Prop.classify (res = 1) "PropertyHolds"
+    |> Prop.classify (res = 2) "OverflowException"
+

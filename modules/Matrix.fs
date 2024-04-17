@@ -148,6 +148,10 @@ let changeOrderMatrix (M(m, o)) =
 let giveMatrixHaveSameOrder (M(_, o1)) (M(m2, o2)) = 
     if o1 <> o2 then changeOrderMatrix (M(m2, o2)) else M(m2, o2)
 
+// Transposes a matrix
+let transposeMatrix (M(vl, o)) =
+    M(List.map (fun x -> transposeVector x) vl, alternateOrder o)
+
 // Adds two matrices elemtwise
 let addMatrix m1 m2 =
     let m3 = giveMatrixHaveSameOrder m1 m2
@@ -386,7 +390,6 @@ let swapFirstWith (M(m, o)) i =
 // Muliplies the i'th vector with a scalar 
 let scalarIthVector c i (M(m, o)) =
     let rec sIV c m i idx acc_m =
-        printfn "c: %A" c
         match m with
         | [] -> failwith "scalarIthVector: Index out of range"
         | x::xs when idx = i -> acc_m @ c * x :: xs
@@ -441,6 +444,20 @@ let standardBacis n =
         | _ -> standardBacisVector n idx :: sb (idx - 1)
     matrix <| sb n
 
+// fullranked diagonal matrix
+let fullrankedDiagonalMatrix n m = 
+    if n > m then failwith "fullrankedDiagonalMatrix: number of rows must be less than or equal to the number of columns"
+    else
+    let rec frdm i frm = 
+        match i with
+        | _ when i < 0 -> failwith "fullrankedDiagonalMatrix: i must be greater than or equal to 0"
+        | 0 -> frm
+        | _ ->  
+            let (V(zeroV, _)) = vectorOf zero n
+            frdm (i - 1) <| extendMatrix frm zeroV
+    frdm (m - n) <| standardBacis n
+
+
 // Alters row j with Rj <- Rj - c * Ri
 let rec rowOperation i j c m = 
     if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
@@ -452,13 +469,17 @@ let rec rowOperation i j c m =
 let rec isUpperTriangular (M(vl, o)) = 
     if not <| corectOrderCheck (M(vl, o)) R then isUpperTriangular (correctOrder (M(vl, o)) R)
     else
+    let (D(_, m)) = dimMatrix (M(vl, o))
     let rec iut vl idx =
         match vl with
         | [] -> true
+        | x::xs when idx >= m -> isZeroVector x && iut xs (idx + 1)
         | x::xs -> firstNonZeroIndex x = idx && iut xs (idx + 1)
     iut vl 0
             
-
+// determines if a matrix has full rank
+let hasFullRank m = 
+    rowEchelonForm m |> isUpperTriangular
     
 
 /////////////////////////////////
@@ -472,17 +493,20 @@ type ExprVector = list<Expr<Number>>
 let scalarWithExpr (V(nl, _)) e=
         List.map (fun x -> N x * e) nl
 
+// matrix multiplication with expresion vector
 let matrixMulExprList vl el =
     let znl = (vectorOf zero (List.length el)) 
     let zeroExprList = scalarWithExpr  znl (N zero) // zero expr vector
     List.map2 (fun mc n -> scalarWithExpr n mc) el vl 
     |> List.fold (fun a b -> (List.map2 (+) a b)) zeroExprList
 
+// Creates a vector of n variables
 let rec charVector n =
     match n with
     | _ when n <= 0 -> []
     | _ -> X (char (n - 1)) :: charVector (n - 1)
 
+// inserts an eviroment into a vector
 let rec vectorEnv n env =
     match n with
     | _ when n <= 0 -> V([], C)
@@ -490,6 +514,7 @@ let rec vectorEnv n env =
         let (V(nl, _)) = vectorEnv (n - 1) env   
         Map.find (char (n - 1)) env :: nl |> vector
 
+// solves the system of lineary equations
 let rec solveEquations el bl cl =
         match el, bl, cl with
         | [], [], [] -> Map.empty
@@ -498,7 +523,6 @@ let rec solveEquations el bl cl =
                             let (lhs, rhs) = isolateX (insertEnv e env) b c
                             Map.add (getVariable lhs) (getNumber rhs) env
         | _, _, _ -> failwith "solveEquations: The number of equations and variables must be the same"
-
 
 // Solves the equation Ax = b
 let Axequalb A (V(nlb, ob)) =

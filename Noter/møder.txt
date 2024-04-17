@@ -120,4 +120,5 @@ Har lavet
     *PBT af tree generator
 
 næste gang:
-    
+    * lav et forord til hvem jeg forventer er læser gruppen
+    * gen se gramschimidt og lav en mere til tjek af spannet

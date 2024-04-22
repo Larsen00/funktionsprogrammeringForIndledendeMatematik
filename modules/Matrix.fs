@@ -97,6 +97,13 @@ let extendMatrix (M(m, o)) nl =
     else
     M (m @ [(V (nl, o))], o)
 
+// extend a matrix with a matrix
+let extendMatrixWithMatrix (M(m1, o1)) (M(m2, o2)) =
+    if o1 <> o2 then failwith "Matrices must have the same major order"
+    elif matrixVectorLength (M(m1, o1)) <> matrixVectorLength (M(m2, o2)) then failwith "Matrices must have the same dimension"
+    else M (m1 @ m2, o1)  
+
+
 // Alternates the Major order
 let alternateOrder o =
     match o with
@@ -480,7 +487,47 @@ let rec isUpperTriangular (M(vl, o)) =
 // determines if a matrix has full rank
 let hasFullRank m = 
     rowEchelonForm m |> isUpperTriangular
+      
+// split a matric into two matrices
+let rec splitMatrix o i m =
+    if not <| corectOrderCheck m o then splitMatrix o i (correctOrder m o)
+    else
+    let (M(vl, _)) = m
+
+    let rec sm vl idx acc =
+        match vl with
+        | [] -> failwith "splitMatrix: Index out of range"
+        | x::xs when idx = 0 -> matrix <| acc @ [x], matrix xs
+        | x::xs -> sm xs (idx - 1) (acc @ [x])
+    sm vl i []
+
+// Determines if a matrix has a zero column
+let rec dontHaveZeroCols m =
+    if not <| corectOrderCheck m C then dontHaveZeroCols (correctOrder m C)
+    else
+    let (M(vl, _)) = m
+    List.forall (fun x -> not <| isZeroVector x) vl
+
+
+// Determines if a matrix has the same span as another matrix
+let hasSameSpan m1 m2 = 
+    let (D(r, c)) = dimMatrix m1
+    if (D(r, c)) <> dimMatrix m2 then failwith "Matrices must have the same dimension"
+    else
     
+    let hSS m1 m2 =
+        let s1, s2 = extendMatrixWithMatrix m1 m2 |> rowEchelonForm |> splitMatrix C (c-1)
+        printfn "%A" <| stringMatrix s1
+        printfn "%A" <| stringMatrix s2
+        hasFullRank s1 |> printfn "%A"
+        dontHaveZeroCols s2 |> printfn "%A"
+        hasFullRank s1 && dontHaveZeroCols s2 && hasFullRank s2
+    
+    hSS m1 m2 && hSS m2 m1
+
+
+
+
 
 /////////////////////////////////
 /// Functions to solve Ax = b ///

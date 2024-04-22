@@ -122,3 +122,8 @@ Har lavet
 næste gang:
     * lav et forord til hvem jeg forventer er læser gruppen
     * gen se gramschimidt og lav en mere til tjek af spannet
+
+# møde 9
+Har lavet:
+    * PBT til ref
+    * Ny PBT gramschimidt

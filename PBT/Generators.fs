@@ -217,7 +217,12 @@ let gramSchmidtIsOrthogonal (m:IndependetBacis) =
 let gramSchmidtIsOrthogonal2 (m:fullRankedMatrix) =
     let res =
         try 
-            if transposeMatrix m |> orthogonalBacis |> isOrthogonalBacis then 1 else 0
+
+            printfn "\nNEW TEST"
+            let tm = transposeMatrix m
+            printfn "%A" (stringMatrix tm)
+            let um = orthogonalBacis tm
+            if  isOrthogonalBacis um && hasSameSpan tm um then 1 else 0
         with
             | :? System.OverflowException -> 2
     (res = 1 || res = 2)

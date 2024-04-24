@@ -517,10 +517,6 @@ let hasSameSpan m1 m2 =
     
     let hSS m1 m2 =
         let s1, s2 = extendMatrixWithMatrix m1 m2 |> rowEchelonForm |> splitMatrix C (c-1)
-        printfn "%A" <| stringMatrix s1
-        printfn "%A" <| stringMatrix s2
-        hasFullRank s1 |> printfn "%A"
-        dontHaveZeroCols s2 |> printfn "%A"
         hasFullRank s1 && dontHaveZeroCols s2 && hasFullRank s2
     
     hSS m1 m2 && hSS m2 m1

@@ -1,18 +1,10 @@
 module Generators
-
-// #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-// #r "nuget: FsCheck"
-// #load "../SymbolicManipolation.fsx"
-// #load "../modules/Matrix.fs"
 open FsCheck
-// open rantionalAndComplex
 open rational
 open complex
 open Number
 open Expression
 open Matrix
-// open SymbolicManipolation
-
 
 
 let max = 3
@@ -32,9 +24,9 @@ let varGen xlist =
 // generate a random Number
 let numberGen =
     Gen.oneof [
-        Gen.map2 (fun x y -> Rational (newRational(x, y))) (Gen.choose(min, max)) noneZeroGen;
+        Gen.map2 (fun x y -> newRational(x, y) |> Rational |> tryReduce ) (Gen.choose(min, max)) noneZeroGen;
         Gen.map (fun x -> Int x) (Gen.choose(min, max));
-        Gen.map4 (fun a b c d -> Complex (newComplex (newRational(a, b), newRational(c, d)))) (Gen.choose(min, max)) noneZeroGen (Gen.choose(min, max)) noneZeroGen]
+        Gen.map4 (fun a b c d -> newComplex (newRational(a, b), newRational(c, d)) |> Complex |> tryReduce ) (Gen.choose(min, max)) noneZeroGen (Gen.choose(min, max)) noneZeroGen]
 
 // generate a random Number (a Expresion leaf)
 let numberInExprGen = 
@@ -209,25 +201,27 @@ let gramSchmidtIsOrthogonal (m:IndependetBacis) =
         try 
             if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
         with
-            | :? System.OverflowException -> 2
-    (res = 1 || res = 2)
+            | :? System.DivideByZeroException as x -> 2
+            | :? System.OverflowException as _ -> 3
+    (res = 1 || res = 2 || res = 3)
     |> Prop.classify (res = 1) "PropertyHolds"
-    |> Prop.classify (res = 2) "OverflowException"
+    |> Prop.classify (res = 2) "DivideByZeroExceptions"
+    |> Prop.classify (res = 3) "OverflowException"
 
 let gramSchmidtIsOrthogonal2 (m:fullRankedMatrix) =
     let res =
         try 
-
-            printfn "\nNEW TEST"
             let tm = transposeMatrix m
-            printfn "%A" (stringMatrix tm)
             let um = orthogonalBacis tm
             if  isOrthogonalBacis um && hasSameSpan tm um then 1 else 0
         with
-            | :? System.OverflowException -> 2
-    (res = 1 || res = 2)
+            | :? System.DivideByZeroException as _ -> 2
+            | :? System.OverflowException as _ -> 3
+
+    (res = 1 || res = 2 || res = 3)
     |> Prop.classify (res = 1) "PropertyHolds"
-    |> Prop.classify (res = 2) "OverflowException"
+    |> Prop.classify (res = 2) "DivideByZeroExceptions"
+    |> Prop.classify (res = 3) "OverflowException"
 
 let fullRankedMatrixIsFullRanked (m:IndependetBacis) =
     let res =

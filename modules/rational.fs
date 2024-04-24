@@ -13,7 +13,6 @@ let posetive(R(a,b)) = a*b > 0
 // returns greatest common divisor
 // #TODO: make faster version
 let rec gcd r =
-    // printfn "gcd - %A" r
     match r with
     | a, b when a < 0L || b <  0L-> failwith "Euclid's algorithm dosen't allow negative numbers"
     | a, b when a = b -> a
@@ -24,7 +23,8 @@ let rec gcd r =
 // reduces a rational number to its simplest form
 let canc(R64(p, q)) =
     let MaxValue = 2147483647
-    if isZeroR64(R64(p, q)) then R64(0, 1)
+    if q = 0L then failwith "rationals.canc: Cannot divide by zero!"
+    elif isZeroR64(R64(p, q)) then R64(0, 1)
     elif q = 1L then R64(p, 1)
     elif abs p > MaxValue && abs q > MaxValue then raise <| System.OverflowException("rational.r64ToR: operation will take to long")
     else
@@ -42,12 +42,11 @@ let mkQ = function
     | r -> canc r
 
 
-
 let r64ToR (R64(a, b)) = 
     let MaxValue = 2147483647
-    if 
-        abs a > MaxValue || abs b > MaxValue 
-    then
+    if 0L = b then 
+        raise (System.DivideByZeroException("rational.r64ToR: Cannot divide by zero!"))
+    elif  abs a > MaxValue || abs b > MaxValue then
         raise (System.OverflowException("rational.r64ToR: operation would result in an overflow of maxInt!"))
     else
         R(int a, int b)

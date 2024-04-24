@@ -56,10 +56,10 @@ and sub a b:Expr<Number>  =
 // divides two expressions with simplification
 let rec div e1 e2:Expr<Number> =
     match e1, e2 with
+    | _, N a when isZero a    ->  raise (System.DivideByZeroException("Expression.div: Cannot divide by zero!"))
     | _, _   when e1 = e2     -> N one
     | _, N a when isOne a     -> e1
     | N a, _ when isZero a    -> N zero
-    | _, N a when isZero a    ->  raise (System.DivideByZeroException("Expression.div: Cannot divide by zero!"))
     | N a, N b                -> N (a / b)
     | Div(a, b), c            -> div a (mul b c) 
     | _, _                    -> Div(e1, e2)  
@@ -84,8 +84,8 @@ let rec containsX t (v:Expr<Number>) =
 // evaluates an expression without simplification, hence only using the Number operations
 let rec eval (e:Expr<Number>) (env) =
     match e with
-    | X x -> tryReduce(Map.find x env)
-    | N n -> tryReduce(n)
+    | X x -> Map.find x env
+    | N n -> n
     | Neg a -> - eval a env
     | Add (a, b) -> eval a env + eval b env
     | Sub (a, b) -> eval a env - eval b env

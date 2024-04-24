@@ -127,3 +127,12 @@ næste gang:
 Har lavet:
     * PBT til ref
     * Ny PBT gramschimidt
+
+næste gang:
+    * flyt tryreduce til generatoren
+    * skel mellem udtryl og ligniger
+    * homophi egnenskab eval (e1 + e2) env = eval e1 env + eval e2 env
+
+# møde 10
+    * har ændret tryreduce
+    

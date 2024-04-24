@@ -22,8 +22,7 @@ let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
 
 // Division of complex numbers
 let divComplex z1 z2 =
-    let n = mulConjugate z2
-    complexDivNumber (mulComplex z1 (conjugate z2)) n
+    complexDivNumber (mulComplex z1 (conjugate z2)) <| mulConjugate z2
 
 type complex with
     static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)

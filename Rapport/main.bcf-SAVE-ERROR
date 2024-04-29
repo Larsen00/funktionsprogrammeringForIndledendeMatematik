@@ -2365,4 +2365,7 @@
     <bcf:citekey order="2" intorder="1">sympy</bcf:citekey>
     <bcf:citekey order="3" intorder="1">mat1apage</bcf:citekey>
     <bcf:citekey order="4" intorder="1">fsharp</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">Han
+    <bcf:citekey order="5" intorder="1">HansenRischelFSharp</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">TDD</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">fpe</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">gcd</bcf:citekey>

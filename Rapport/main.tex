@@ -33,8 +33,8 @@ Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funkti
 
 \input{sections/Fundamentale_koncepter}
 
-\section{Symbolske lignings udtryk}
-Det ønskes at kunne repræsentere simple ligninger som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere ligninger samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+\section{Symbolske udtryk}
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
 Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet er lavet på, gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for ikke at komplicere programmet vil vi i denne opgave ikke betragte floats.  
@@ -121,9 +121,9 @@ type Number with
 
 Dermed har vi et mondul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
 
-\subsection{Matematiske ligninger}
+\subsection{Matematiske udtryk}
 \subsubsection{Polsk notation}
-Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. 
+Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. 
 
 \begin{align*}
     \text{Infix Notation:} \quad & (A + B) \cdot C \\
@@ -133,7 +133,7 @@ Matematiske ligningsudtryk som vi normalt kender dem er skrevet med infix notati
 
  
 
-\subsubsection{Ligninger som træer}
+\subsubsection{Udtryk som træer}
 Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ Figur \ref{fig:expression_tree}. 
 
 
@@ -172,7 +172,7 @@ Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er ope
 \caption{Et binært træ der repræsenterer udtrykket $-(3 \cdot x - 5) \cdot 2$}
 \label{fig:expression_tree}
 \end{figure}
-Det skal bemærkes der er forskel på den unære og binære operator '$-$' i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for en matematisk ligning, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footcitetitle{tree_algo}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
+Det skal bemærkes der er forskel på den unære og binære operator '$-$' i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for et matematisk udtryk, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footcitetitle{tree_algo}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
 
 
 \begin{figure}[H]
@@ -291,14 +291,14 @@ Det skal bemærkes der er forskel på den unære og binære operator '$-$' i tr�
 \end{figure}
 
 
-Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et mondul som kan repræsentere ligningsudtryk ved brug af prefix notation.
-Postorder Traversal blive anvendt til at kunne rekursivt simplificere og evaluere ligningsudtryk.
+Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et mondul som kan repræsentere udtryk ved brug af prefix notation.
+Postorder Traversal blive anvendt til at kunne rekursivt simplificere og evaluere udtryk.
 
-Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes en symbolsk ligning. Den modificeret Inorder Traversal anvendes til at kunne visualisere ligningsudtryk i infix notation.
+Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificeret Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
 
 
-\subsubsection{Ligningsudtryk mondulet} \label{sec:expression_module}
-Efter at have udviklet et modul til repræsentation af talmængder, er det nu muligt at videreudvikle et modul til at repræsentere ligningsudtryk. Vi starter med at definere en polymorfisk type for et ligningsudtryk, som vist i Listing \ref{expr_type}. Denne type inkluderer flere konstruktører, der hver især repræsenterer de matematiske operationer, vi ønsker at anvende. Desuden indfører vi konstruktøren N til at repræsentere en matematisk struktur; i dette tilfælde anvender vi vores talmængder (se Listing \ref{number_type}). Det er dog muligt at udvide dette til at omfatte andre matematiske strukturer, hvor det er muligt at definere de samme operationer. Sidst haves en konstruktør X til repræsentation af variable.
+\subsubsection{Udtryks mondulet} \label{sec:expression_module}
+Efter at have udviklet et modul til repræsentation af talmængder, er det nu muligt at videreudvikle et modul til at repræsentere udtryk. Vi starter med at definere en polymorfisk type for et udtryk, som vist i Listing \ref{expr_type}. Denne type inkluderer flere konstruktører, der hver især repræsenterer de matematiske operationer, vi ønsker at anvende. Desuden indfører vi konstruktøren N til at repræsentere en matematisk struktur; i dette tilfælde anvender vi vores talmængder (se Listing \ref{number_type}). Det er dog muligt at udvide dette til at omfatte andre matematiske strukturer, hvor det er muligt at definere de samme operationer. Sidst haves en konstruktør X til repræsentation af variable.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -323,7 +323,7 @@ val it: Expr<Number> =
   Mul (Neg (Sub (Mul (N (Int 3), X 'x'), N (Int 5))), N (Int 2))
 \end{lstlisting}
 
-Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes mellem ligningsudtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et ligningsudtryk. 
+Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes på udtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et udtryk. 
 \lstinputlisting[
     language=FSharp,
     label={Expression.fsi},
@@ -332,12 +332,12 @@ Signatur filen indeholder overloadings på de matematiske operationer, så de ka
 
 
 
-De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evalueing vil sige at de individuellen funktioner kun betragter de to øverste niveauer på de lignings udtryk træer de tager som input, mullige implementeringer af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. 
+De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evalueing vil sige at de individuellen funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som input, mullige implementeringer af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. 
 
 \begin{lstlisting}[
   language={FSharp}, 
   label={lst:mul_expr}, 
-  caption={Addition og multiplikation af to ligningsudtryk}
+  caption={Addition og multiplikation af to udtryk}
   ]
 // add: Expr<Number> -> Expr<Number> -> Expr<Number>
 let rec add e1 e2:Expr<Number>  =
@@ -360,14 +360,14 @@ let mul e1 e2:Expr<Number> =
 \end{lstlisting}
 
 
-\subsubsection{Generering af Ligningsudtryk}\label{sec:expression_generation}
+\subsubsection{Generering af udtryk}\label{sec:expression_generation}
 % KAN lave PBT dvs eval tree ExpressionToInfix x = x
     
-\subsection{Simplifikation af Ligningsudtryk} \label{sec:simplification_expression}
-\subsubsection{Evaluering af ligningsudtryk}
+\subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
+\subsubsection{Evaluering af udtryk}
 \subsubsection{PBT af simplifikationen} % Beskriv hvordan man laver property based testen før simplifikationen
 
-\subsection{differentiering af Ligningsudtryk}
+\subsection{differentiering af udtryk}
 
 \section{Vektorer og Matricer}
 \input{sections/vektorer_og_matricer}

@@ -19,20 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
-    \entry{mat1a}{online}{}
-      \field{sortinit}{}
-      \field{sortinithash}{495dc9894017a8b12cafa9c619d10c0c}
-      \field{urlday}{30}
-      \field{urlmonth}{3}
-      \field{urlyear}{2024}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://mat1a.compute.dtu.dk/intro.html
-      \endverb
-      \verb{url}
-      \verb https://mat1a.compute.dtu.dk/intro.html
-      \endverb
-    \endentry
     \entry{fpe}{online}{}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
@@ -111,6 +97,70 @@
       \field{title}{Functional Programming Using F\#}
       \field{year}{2013}
     \endentry
+    \entry{mat1b}{online}{}
+      \name{author}{1}{}{%
+        {{hash=6d18a27c701cb27bec7a538ea273a347}{%
+           family={Jakob\bibnamedelima Lemvig},
+           familyi={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Ole\bibnamedelima Christensen},
+           giveni={O\bibinitperiod\bibinitdelim C\bibinitperiod},
+           prefix={og},
+           prefixi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{fullhash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{bibnamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authorbibnamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authornamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authorfullhash}{6d18a27c701cb27bec7a538ea273a347}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mathematics 1b - Functions of several variables}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
+      \endverb
+      \verb{url}
+      \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
+      \endverb
+    \endentry
+    \entry{mat1apage}{online}{}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labeltitlesource}{title}
+      \field{title}{Kursus side for Mathematics 1a}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://mat1a.compute.dtu.dk/intro.html
+      \endverb
+      \verb{url}
+      \verb https://mat1a.compute.dtu.dk/intro.html
+      \endverb
+    \endentry
+    \entry{mat1a}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Mathematics 1a}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+      \verb{url}
+      \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+    \endentry
     \entry{Polsk_notation}{online}{}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
@@ -121,6 +171,54 @@
       \endverb
       \verb{url}
       \verb https://en.wikipedia.org/wiki/Polish_notation
+      \endverb
+    \endentry
+    \entry{list_comprehension}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Python - List Comprehension}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.w3schools.com/python/python_lists_comprehension.asp
+      \endverb
+      \verb{url}
+      \verb https://www.w3schools.com/python/python_lists_comprehension.asp
+      \endverb
+    \endentry
+    \entry{Rational_number}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Rational Number wikipedia}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Rational_number
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Rational_number
+      \endverb
+    \endentry
+    \entry{major_order}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Row- and column-major order}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
       \endverb
     \endentry
     \entry{statista2023}{online}{}
@@ -167,6 +265,22 @@
       \verb https://www.sympy.org/en/index.html
       \endverb
     \endentry
+    \entry{TDD}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Test-Driven Development}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Test-driven_development
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Test-driven_development
+      \endverb
+    \endentry
     \entry{tree_algo}{online}{}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
@@ -184,7 +298,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{ational_number}
 \endrefsection
 \endinput
 

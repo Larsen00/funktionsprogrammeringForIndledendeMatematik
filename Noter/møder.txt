@@ -135,4 +135,9 @@ næste gang:
 
 # møde 10
     * har ændret tryreduce
-    
+    * homophi egnenskab eval (e1 + e2) env = eval e1 env + eval e2 env
+    * har forsøgt bevis for egenskaben
+
+næste gang:
+    * udskyd?
+    * Sakl undersøge om det en fejl som giver høje div 0 fejl i mine PBT

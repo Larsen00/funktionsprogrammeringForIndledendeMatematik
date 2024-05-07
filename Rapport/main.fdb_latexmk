@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1715013097.64765 "main.bcf" "main.bbl" "main" 1715083904.21223 0
-  "main.bcf" 1715083903 108785 4ae134af5a00ae52970ed67a0cacf495 "pdflatex"
+["biber main"] 1715094428.983 "main.bcf" "main.bbl" "main" 1715095411.76726 0
+  "main.bcf" 1715095411 108785 4ae134af5a00ae52970ed67a0cacf495 "pdflatex"
   "references.bib" 1715005530 3148 e0d8d018aa626367819ac01a64a611be ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1715083896.776 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715083904.21302 0
+["pdflatex"] 1715095407.99968 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715095411.76799 0
   "../modules/Expression.fsi" 1711971203 757 75a81c1152a8d210805a6a39a16199ce ""
   "../modules/number.fsi" 1710690696 858 bd6697078c7eec8143ec11843db6537f ""
   "C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1711822995 82507 a9eef8696c92627b87e9975edea03b2a ""
@@ -223,6 +223,7 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/lastpage/lastpagemodern.sty" 1697294092 9166 74f0d39535736e850fd2f2796fd37674 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/listings/listings.cfg" 1709026952 1830 20af84c556326f7c12b9202ebe363f56 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/listings/listings.sty" 1709026952 81322 d02238bdeb305f2c9f9d0229f99371d0 ""
+  "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstlang1.sty" 1709026952 205167 fca232873050cd2da4f9c0c32402c38a ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstmisc.sty" 1709026952 77022 5c8c440739265e7ba15b8379ece6ecd7 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstpatch.sty" 1709026952 329 f19f5da7234b51d16764e23d20999c73 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/logreq/logreq.def" 1280941015 1620 fb1c32b818f2058eca187e5c41dfae77 ""
@@ -271,16 +272,16 @@
   "Opsætning/DTULogo.png" 1709375398 71324 08d7a624ec2f9f1df696ed86b2d8893d ""
   "Opsætning/Pakker.tex" 1715001346 8039 66ad85a81d890d18d049f183c012bb6e ""
   "Opsætning/forside.tex" 1711819024 2148 c278081412b431856ee7aa61dfa55a2c ""
-  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715083894 25386 54eb27fa1fb515ab7c0c1a6c9c3926e5 ""
+  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715089313 27478 73ddcff837d6c7bcff7d21b38f2d3003 ""
   "exampleCodes/rational.fsi" 1710006846 1158 0ae0d1def194755e712e9dce626f4df7 ""
   "exampleCodes/valid1.fsx" 1710682578 174 1c793f2026d3f274ba30a14fa979c2cc ""
-  "main.aux" 1715083903 17989 a680eefefd1551d5d36b2ec71605adf9 "pdflatex"
-  "main.bbl" 1715013099 9802 0b064db0d69824c7dcc17acc77b6eb78 "biber main"
-  "main.out" 1715083903 5871 11e425b50252bae707eae3c4e7d18b70 "pdflatex"
-  "main.run.xml" 1715083903 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
-  "main.tex" 1715083894 25386 54eb27fa1fb515ab7c0c1a6c9c3926e5 ""
-  "main.toc" 1715083903 3268 ec5ba848dbc9c76ee920f6f5221af550 "pdflatex"
-  "sections/Fundamentale_koncepter.tex" 1711883464 8528 93aa5a4ae911e555ab0ea33c65a7ed6a ""
+  "main.aux" 1715095411 18842 45b65f31e7ab59989405fd126d9d57a4 "pdflatex"
+  "main.bbl" 1715094431 9802 0b064db0d69824c7dcc17acc77b6eb78 "biber main"
+  "main.out" 1715095411 6148 cdfc706628d1cd2e5d1e51cb2a7a0c4b "pdflatex"
+  "main.run.xml" 1715095411 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
+  "main.tex" 1715089313 27478 73ddcff837d6c7bcff7d21b38f2d3003 ""
+  "main.toc" 1715095411 3377 0d1924afe1a806b3113d8b4d8ce895c2 "pdflatex"
+  "sections/Fundamentale_koncepter.tex" 1715095403 12002 65d6aae68ffb3b5a10bed09800d20a82 ""
   "sections/vektorer_og_matricer.tex" 1714989359 23796 f357ad973493b545ffc071b54c007c5d ""
   (generated)
   "main.aux"

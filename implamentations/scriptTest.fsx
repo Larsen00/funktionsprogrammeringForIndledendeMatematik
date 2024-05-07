@@ -7,6 +7,17 @@ open SymbolicManipolation
 open rational
 open complex
 
+ let rec factorial n =
+    match n with
+    | 0 -> 1
+    | x when x > 0 -> x * factorial ( x - 1)
+    | _ -> failwith " Negative argument "
+
+
+
+
+
+
 // let ligning = simplifyExpr (tree "(3*x-5)*2")
 // printfn "Orginal equation: %A" (InfixExpression ligning) 
 

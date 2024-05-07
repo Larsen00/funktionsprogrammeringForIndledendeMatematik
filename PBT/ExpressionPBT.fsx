@@ -67,7 +67,8 @@ let evalPBT ((env ,xlist):SmallEnv) =
             let exprList = Gen.sample 1 2 (exprGen xlist 10 leafGen)
             let e1::[e2] = exprList
             let prop = evalOperation e1 e2 env
-            if prop ( + ) && prop ( - ) && prop ( * ) && prop ( / ) then 1 else 0
+            let negation = eval (-e1) env = - eval e1 env
+            if negation && prop ( + ) && prop ( - ) && prop ( * ) && prop ( / ) then 1 else 0
         with
         | :? System.DivideByZeroException as _ -> 2
         | :? System.OverflowException as _ -> 3

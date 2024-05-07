@@ -371,8 +371,41 @@ let mul e1 e2:Expr<Number> =
   | _, _                          -> Mul(e1, e2)
 \end{lstlisting}
 
+\subsection{Evaluering af udtryk}
+Vi vil nu betragte hvordan vi kan evaluere et udtryk, ved hjælp af et miljø som indeholder værdier for variable som er indeholdt i udtrykket. Evalueringen af udtryk skal kunne opfylde følgende homomorfiske egenskaber \ref{prop:eval_homomorphism}. Egenskaben vil blive testet i sektion \ref{sec:PBT_eval_homomorphism}.
+\vspace{0.5cm}
+\begin{egenskab}[Homomorfisme af evaluering]\label{prop:eval_homomorphism}
+Lad $\oplus \in \{+, -, \times, /\}$ sættet af binære operationer, $e1$ og $e2$ være udtryk, så gælder følgende:
+\begin{align*}
+    \text{eval}(e1 \oplus e2) = \text{eval}(e1) \oplus \text{eval}(e2)
+\end{align*}
+Derudover skal det om negation også gælde at:
+\begin{align*}
+    \text{eval}(-e) = -\text{eval}(e)
+\end{align*}
+\end{egenskab}
 
-\subsubsection{Generering af udtryk}\label{sec:expression_generation}
+
+Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Preorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number mondulet. 
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:eval_expr}, 
+  caption={Evaluering af et udtryk}
+  ]
+// eval: Expr<Number> -> Map<char, Number> -> Number
+let rec eval (e:Expr<Number>) (env) =
+  match e with
+  | X x -> Map.find x env
+  | N n -> n
+  | Neg a -> - eval a env
+  | Add (a, b) -> eval a env + eval b env
+  | Sub (a, b) -> eval a env - eval b env
+  | Mul (a, b) -> eval a env * eval b env
+  | Div (a, b) -> eval a env / eval b env
+\end{lstlisting}
+
+\subsubsection{Konventering mellem udtryks notation}\label{sec:expression_generation}
 Det er ønkes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverser. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver test i sektion \ref{sec:PBT_infix_prefix}.
 
 \vspace{0.5cm}
@@ -437,17 +470,20 @@ type OperatorList = Operator list
 \end{lstlisting}
 
 
+
+
 \subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
+Vi skal nu betragte en sytematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendig at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplification skal overholde.
 
 
 
 
 
-\subsubsection{Evaluering af udtryk}
 
 \subsection{differentiering af udtryk}
 
 \subsection{PBT af udtryk} % Beskriv hvordan man laver property based testen før simplifikationen
+\subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
 \subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
 
 \section{Vektorer og Matricer}

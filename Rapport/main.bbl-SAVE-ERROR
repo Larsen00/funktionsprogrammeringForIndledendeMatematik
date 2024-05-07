@@ -19,6 +19,22 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{convert_expression}{online}{}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labeltitlesource}{title}
+      \field{title}{Convert Infix expression to Postfix expression}
+      \field{urlday}{17}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/ convert-infix-expression-to-postfix-expression/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/%20convert-infix-expression-to-postfix-expression/
+      \endverb
+    \endentry
     \entry{fpe}{online}{}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
@@ -33,22 +49,6 @@
       \endverb
       \verb{url}
       \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
-      \endverb
-    \endentry
-    \entry{fsharp}{online}{}
-      \field{sortinit}{f}
-      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
-      \field{labeltitlesource}{title}
-      \field{title}{fsharp.org}
-      \field{urlday}{30}
-      \field{urlmonth}{3}
-      \field{urlyear}{2024}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://fsharp.org/
-      \endverb
-      \verb{url}
-      \verb https://fsharp.org/
       \endverb
     \endentry
     \entry{gcd}{online}{}
@@ -145,22 +145,6 @@
       \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
       \endverb
     \endentry
-    \entry{mat1apage}{online}{}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{labeltitlesource}{title}
-      \field{title}{Kursus side for Mathematics 1a}
-      \field{urlday}{30}
-      \field{urlmonth}{3}
-      \field{urlyear}{2024}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://mat1a.compute.dtu.dk/intro.html
-      \endverb
-      \verb{url}
-      \verb https://mat1a.compute.dtu.dk/intro.html
-      \endverb
-    \endentry
     \entry{mat1a}{online}{}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
@@ -175,6 +159,22 @@
       \endverb
       \verb{url}
       \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+    \endentry
+    \entry{precedens_associativity}{online}{}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labeltitlesource}{title}
+      \field{title}{Operator Precedence and Associativity in C}
+      \field{urlday}{17}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/operator-precedence-and-associativity-in-c/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/operator-precedence-and-associativity-in-c/
       \endverb
     \endentry
     \entry{Polsk_notation}{online}{}
@@ -235,50 +235,6 @@
       \endverb
       \verb{url}
       \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
-      \endverb
-    \endentry
-    \entry{statista2023}{online}{}
-      \name{author}{1}{}{%
-        {{hash=62182ca58a739daa8ddd8a48b7b19abb}{%
-           family={Statista},
-           familyi={S\bibinitperiod}}}%
-      }
-      \strng{namehash}{62182ca58a739daa8ddd8a48b7b19abb}
-      \strng{fullhash}{62182ca58a739daa8ddd8a48b7b19abb}
-      \strng{bibnamehash}{62182ca58a739daa8ddd8a48b7b19abb}
-      \strng{authorbibnamehash}{62182ca58a739daa8ddd8a48b7b19abb}
-      \strng{authornamehash}{62182ca58a739daa8ddd8a48b7b19abb}
-      \strng{authorfullhash}{62182ca58a739daa8ddd8a48b7b19abb}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Most used programming languages among developers worldwide as of 2023}
-      \field{urlday}{30}
-      \field{urlmonth}{3}
-      \field{urlyear}{2024}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
-      \endverb
-      \verb{url}
-      \verb https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
-      \endverb
-    \endentry
-    \entry{sympy}{online}{}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labeltitlesource}{title}
-      \field{title}{SymPy}
-      \field{urlday}{30}
-      \field{urlmonth}{3}
-      \field{urlyear}{2024}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.sympy.org/en/index.html
-      \endverb
-      \verb{url}
-      \verb https://www.sympy.org/en/index.html
       \endverb
     \endentry
     \entry{TDD}{online}{}

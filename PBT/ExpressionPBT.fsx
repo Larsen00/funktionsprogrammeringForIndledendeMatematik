@@ -35,7 +35,7 @@ let simpPBT (se:SmallEnv) =
 let _ = Check.Quick simpPBT
 
 let generatesCorrectTree env (e:Expr<Number>) =
-    eval e env = eval (simplifyExpr e |> InfixExpression |> tree ) env
+    eval e env = eval (simplifyExpr e |> infixExpression |> tree |> infixExpression |> tree ) env
 
 let treeEqualEval (env, xlist) =
     try 
@@ -51,6 +51,7 @@ let treePBT (se:SmallEnv) =
     |> Prop.classify (result = 2) "DivideByZeroExceptions"
     |> Prop.classify (result = 3) "OverflowException"
 
+printfn "\nGenerates correct tree"
 let _ = Check.Quick treePBT
 
 

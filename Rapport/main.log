@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  24 APR 2024 13:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  7 MAY 2024 14:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -828,7 +828,8 @@ File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
 Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
 )
 \c@theorem=\count393
-\c@definition=\count394
+\c@egenskab=\count394
+\c@definition=\count395
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2023/10/27 v2.16 Sectioning titles
 \ttl@box=\box86
@@ -841,58 +842,58 @@ Package: titlesec 2023/10/27 v2.16 Sectioning titles
 \titlewidthlast=\dimen338
 \titlewidthfirst=\dimen339
 )
-\c@subsubsubsection=\count395
+\c@subsubsubsection=\count396
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
 Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count396
+\lrq@indent=\count397
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count397
-\c@listtotal=\count398
-\c@listcount=\count399
-\c@liststart=\count400
-\c@liststop=\count401
-\c@citecount=\count402
-\c@citetotal=\count403
-\c@multicitecount=\count404
-\c@multicitetotal=\count405
-\c@instcount=\count406
-\c@maxnames=\count407
-\c@minnames=\count408
-\c@maxitems=\count409
-\c@minitems=\count410
-\c@citecounter=\count411
-\c@maxcitecounter=\count412
-\c@savedcitecounter=\count413
-\c@uniquelist=\count414
-\c@uniquename=\count415
-\c@refsection=\count416
-\c@refsegment=\count417
-\c@maxextratitle=\count418
-\c@maxextratitleyear=\count419
-\c@maxextraname=\count420
-\c@maxextradate=\count421
-\c@maxextraalpha=\count422
-\c@abbrvpenalty=\count423
-\c@highnamepenalty=\count424
-\c@lownamepenalty=\count425
-\c@maxparens=\count426
-\c@parenlevel=\count427
-\blx@tempcnta=\count428
-\blx@tempcntb=\count429
-\blx@tempcntc=\count430
-\c@blx@maxsection=\count431
-\blx@maxsegment@0=\count432
-\blx@notetype=\count433
-\blx@parenlevel@text=\count434
-\blx@parenlevel@foot=\count435
-\blx@sectionciteorder@0=\count436
-\blx@sectionciteorderinternal@0=\count437
-\blx@entrysetcounter=\count438
-\blx@biblioinstance=\count439
+\c@tabx@nest=\count398
+\c@listtotal=\count399
+\c@listcount=\count400
+\c@liststart=\count401
+\c@liststop=\count402
+\c@citecount=\count403
+\c@citetotal=\count404
+\c@multicitecount=\count405
+\c@multicitetotal=\count406
+\c@instcount=\count407
+\c@maxnames=\count408
+\c@minnames=\count409
+\c@maxitems=\count410
+\c@minitems=\count411
+\c@citecounter=\count412
+\c@maxcitecounter=\count413
+\c@savedcitecounter=\count414
+\c@uniquelist=\count415
+\c@uniquename=\count416
+\c@refsection=\count417
+\c@refsegment=\count418
+\c@maxextratitle=\count419
+\c@maxextratitleyear=\count420
+\c@maxextraname=\count421
+\c@maxextradate=\count422
+\c@maxextraalpha=\count423
+\c@abbrvpenalty=\count424
+\c@highnamepenalty=\count425
+\c@lownamepenalty=\count426
+\c@maxparens=\count427
+\c@parenlevel=\count428
+\blx@tempcnta=\count429
+\blx@tempcntb=\count430
+\blx@tempcntc=\count431
+\c@blx@maxsection=\count432
+\blx@maxsegment@0=\count433
+\blx@notetype=\count434
+\blx@parenlevel@text=\count435
+\blx@parenlevel@foot=\count436
+\blx@sectionciteorder@0=\count437
+\blx@sectionciteorderinternal@0=\count438
+\blx@entrysetcounter=\count439
+\blx@biblioinstance=\count440
 \labelnumberwidth=\skip85
 \labelalphawidth=\skip86
 \biblabelsep=\skip87
@@ -904,9 +905,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read4
 \blx@bcfout=\write4
 \blx@langwohyphens=\language80
-\c@mincomprange=\count440
-\c@maxcomprange=\count441
-\c@mincompwidth=\count442
+\c@mincomprange=\count441
+\c@maxcomprange=\count442
+\c@mincompwidth=\count443
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
@@ -914,74 +915,74 @@ File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count443
-\c@savedafterword=\count444
-\c@annotator=\count445
-\c@savedannotator=\count446
-\c@author=\count447
-\c@savedauthor=\count448
-\c@bookauthor=\count449
-\c@savedbookauthor=\count450
-\c@commentator=\count451
-\c@savedcommentator=\count452
-\c@editor=\count453
-\c@savededitor=\count454
-\c@editora=\count455
-\c@savededitora=\count456
-\c@editorb=\count457
-\c@savededitorb=\count458
-\c@editorc=\count459
-\c@savededitorc=\count460
-\c@foreword=\count461
-\c@savedforeword=\count462
-\c@holder=\count463
-\c@savedholder=\count464
-\c@introduction=\count465
-\c@savedintroduction=\count466
-\c@namea=\count467
-\c@savednamea=\count468
-\c@nameb=\count469
-\c@savednameb=\count470
-\c@namec=\count471
-\c@savednamec=\count472
-\c@translator=\count473
-\c@savedtranslator=\count474
-\c@shortauthor=\count475
-\c@savedshortauthor=\count476
-\c@shorteditor=\count477
-\c@savedshorteditor=\count478
-\c@labelname=\count479
-\c@savedlabelname=\count480
-\c@institution=\count481
-\c@savedinstitution=\count482
-\c@lista=\count483
-\c@savedlista=\count484
-\c@listb=\count485
-\c@savedlistb=\count486
-\c@listc=\count487
-\c@savedlistc=\count488
-\c@listd=\count489
-\c@savedlistd=\count490
-\c@liste=\count491
-\c@savedliste=\count492
-\c@listf=\count493
-\c@savedlistf=\count494
-\c@location=\count495
-\c@savedlocation=\count496
-\c@organization=\count497
-\c@savedorganization=\count498
-\c@origlocation=\count499
-\c@savedoriglocation=\count500
-\c@origpublisher=\count501
-\c@savedorigpublisher=\count502
-\c@publisher=\count503
-\c@savedpublisher=\count504
-\c@language=\count505
-\c@savedlanguage=\count506
-\c@origlanguage=\count507
-\c@savedoriglanguage=\count508
-\c@pageref=\count509
-\c@savedpageref=\count510
+\c@afterword=\count444
+\c@savedafterword=\count445
+\c@annotator=\count446
+\c@savedannotator=\count447
+\c@author=\count448
+\c@savedauthor=\count449
+\c@bookauthor=\count450
+\c@savedbookauthor=\count451
+\c@commentator=\count452
+\c@savedcommentator=\count453
+\c@editor=\count454
+\c@savededitor=\count455
+\c@editora=\count456
+\c@savededitora=\count457
+\c@editorb=\count458
+\c@savededitorb=\count459
+\c@editorc=\count460
+\c@savededitorc=\count461
+\c@foreword=\count462
+\c@savedforeword=\count463
+\c@holder=\count464
+\c@savedholder=\count465
+\c@introduction=\count466
+\c@savedintroduction=\count467
+\c@namea=\count468
+\c@savednamea=\count469
+\c@nameb=\count470
+\c@savednameb=\count471
+\c@namec=\count472
+\c@savednamec=\count473
+\c@translator=\count474
+\c@savedtranslator=\count475
+\c@shortauthor=\count476
+\c@savedshortauthor=\count477
+\c@shorteditor=\count478
+\c@savedshorteditor=\count479
+\c@labelname=\count480
+\c@savedlabelname=\count481
+\c@institution=\count482
+\c@savedinstitution=\count483
+\c@lista=\count484
+\c@savedlista=\count485
+\c@listb=\count486
+\c@savedlistb=\count487
+\c@listc=\count488
+\c@savedlistc=\count489
+\c@listd=\count490
+\c@savedlistd=\count491
+\c@liste=\count492
+\c@savedliste=\count493
+\c@listf=\count494
+\c@savedlistf=\count495
+\c@location=\count496
+\c@savedlocation=\count497
+\c@organization=\count498
+\c@savedorganization=\count499
+\c@origlocation=\count500
+\c@savedoriglocation=\count501
+\c@origpublisher=\count502
+\c@savedorigpublisher=\count503
+\c@publisher=\count504
+\c@savedpublisher=\count505
+\c@language=\count506
+\c@savedlanguage=\count507
+\c@origlanguage=\count508
+\c@savedoriglanguage=\count509
+\c@pageref=\count510
+\c@savedpageref=\count511
 \shorthandwidth=\skip93
 \shortjournalwidth=\skip94
 \shortserieswidth=\skip95
@@ -1005,19 +1006,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
 File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count511
-\c@textcitetotal=\count512
-\c@textcitemaxnames=\count513
-\c@biburlbigbreakpenalty=\count514
-\c@biburlbreakpenalty=\count515
-\c@biburlnumpenalty=\count516
-\c@biburlucpenalty=\count517
-\c@biburllcpenalty=\count518
+\c@textcitecount=\count512
+\c@textcitetotal=\count513
+\c@textcitemaxnames=\count514
+\c@biburlbigbreakpenalty=\count515
+\c@biburlbreakpenalty=\count516
+\c@biburlnumpenalty=\count517
+\c@biburlucpenalty=\count518
+\c@biburllcpenalty=\count519
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count519
+\c@smartand=\count520
 )
 Package biblatex Info: Trying to load bibliography style 'numeric'...
 Package biblatex Info: ... file 'numeric.bbx' found.
@@ -1027,8 +1028,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.bbx
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count520
-\c@bbx:relatedtotal=\count521
+\c@bbx:relatedcount=\count521
+\c@bbx:relatedtotal=\count522
 ))
 Package biblatex Info: Trying to load citation style 'numeric'...
 Package biblatex Info: ... file 'numeric.cbx' found.
@@ -1057,7 +1058,7 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-02-20 L3 programming layer (loader) 
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count522
+\l__color_backend_stack_int=\count523
 \l__pdf_internal_box=\box87
 ))
 Package biblatex Info: ... and expl3
@@ -1096,16 +1097,16 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count523
+\scratchcounter=\count524
 \scratchdimen=\dimen340
 \scratchbox=\box88
-\nofMPsegments=\count524
-\nofMParguments=\count525
+\nofMPsegments=\count525
+\nofMParguments=\count526
 \everyMPshowfont=\toks65
-\MPscratchCnt=\count526
+\MPscratchCnt=\count527
 \MPscratchDim=\dimen341
-\MPnumerator=\count527
-\makeMPintoPDFobject=\count528
+\MPnumerator=\count528
+\makeMPintoPDFobject=\count529
 \everyMPtoPDFconversion=\toks66
 ) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1115,4 +1116,153 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 )) (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata.sty
-Package: pdflscape-nometadata 2022-10-28 v0.13 Display 
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(99.58464pt, 415.12572pt, 99.58464pt)
+* v-part:(T,H,B)=(113.81102pt, 567.34795pt, 113.81102pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=415.12572pt
+* \textheight=567.34795pt
+* \oddsidemargin=27.31465pt
+* \evensidemargin=27.31465pt
+* \topmargin=4.54103pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring OFF on input line 21.
+(main.out) (main.out)
+\@outlinefile=\write5
+\openout5 = `main.out'.
+
+
+Couldn't patch \deferred@thm@head!
+\c@lstlisting=\count530
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: longtable package is loaded.
+(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: wrapfig package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package biblatex Info: Trying to load language 'danish'...
+Package biblatex Info: ... file 'danish.lbx' found.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\danish.lbx
+File: danish.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout4 = `main.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'main.bbl' found.
+ (main.bbl)
+Package biblatex Info: Reference section=0 on input line 21.
+Package biblatex Info: Reference segment=0 on input line 21.
+ (Opsætning/forside.tex
+<Opsætning/DTULogo.png, id=150, 469.9959pt x 685.6014pt>
+File: Opsætning/DTULogo.png Graphic file (type png)
+<use Opsætning/DTULogo.png>
+Package pdftex.def Info: Opsætning/DTULogo.png  used on input line 17.
+(pdftex.def)             Requested size: 70.49634pt x 102.83577pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+{C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Opsætning/DTULogo.png>]) (main.toc)
+\tf@toc=\write6
+\openout6 = `main.toc'.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.24 \newpage
+              [1] [2] (sections/Fundamentale_koncepter.tex
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 18.
+ [3] (exampleCodes/valid1.fsx [4])) [5] (exampleCodes/rational.fsi) [6] (../modules/number.fsi [7]) [8]
+Overfull \hbox (19.87704pt too wide) in paragraph at lines 222--223
+ [][] 
+ []
+
+
+Overfull \hbox (28.18134pt too wide) in paragraph at lines 257--258
+ [][] 
+ []
+
+
+Overfull \hbox (28.18134pt too wide) in paragraph at lines 292--293
+ [][] 
+ []
+
+[9] [10]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 330.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 330.
+ (../modules/Expression.fsi) [11] [12] (sections/vektorer_og_matricer.tex [13] [14] [15] [16] [17] [18] [19]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 391.
+ (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 391.
+ [20] [21] [22]) [23] [24] 
+enddocument/afterlastpage: lastpage setting LastPage.
+(main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+ ***********
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 11E425B50252BAE707EAE3C4E7D18B70;5871.
+Package logreq Info: Writing requests to 'main.run.xml'.
+\openout1 = `main.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 39960 strings out of 474457
+ 741459 string characters out of 5742755
+ 2270190 words of memory out of 5000000
+ 61082 multiletter control sequences out of 15000+600000
+ 569333 words of font info for 78 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 99i,18n,134p,1284b,2304s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (25 pages, 581310 bytes).
+PDF statistics:
+ 1100 PDF objects out of 1200 (max. 8388607)
+ 525 named destinations out of 1000 (max. 500000)
+ 306 words of extra memory for PDF output out of 10000 (max. 10000000)
+

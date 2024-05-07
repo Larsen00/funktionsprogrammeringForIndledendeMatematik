@@ -11,3 +11,5 @@
 * Et polynomie kan være en vector i monomie basen
 
 * man kan lave matricer om til lister af expressions og så dermed have sqrt
+
+I beskrivelsen af vektor række operationer læg vægt på det er vektore matematik - evt i en konklusion som noget af det de fleste studerende ikke ved.

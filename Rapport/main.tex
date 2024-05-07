@@ -22,15 +22,26 @@
 \input{Opsætning/forside}
 \tableofcontents
 \newpage
-\section{Introduktion}
+% \section{Introduktion}
 
 
-I 2023 valgte Danmarks Tekniske Universitet at anvende Python som et hjælpeværktøj i deres grundlæggende matematikkursus "01001 Matematik 1a (Polyteknisk grundlag)". Python er et af de mest anvendte programmeringssprog \footcitetitle{statista2023}, kun overgået af to sprog, der primært bruges sammen til at udvikle hjemmesider. Derfor har Python, med en række matematiske programudvidelser som SymPy \footcitetitle{sympy}, været et oplagt valg som programmeringssprog til det grundlæggende matematikkursus tilbudt af DTU.
+% I 2023 valgte Danmarks Tekniske Universitet at anvende Python som et hjælpeværktøj i deres grundlæggende matematikkursus "01001 Matematik 1a (Polyteknisk grundlag)". Python er et af de mest anvendte programmeringssprog \footcitetitle{statista2023}, kun overgået af to sprog, der primært bruges sammen til at udvikle hjemmesider. Derfor har Python, med en række matematiske programudvidelser som SymPy \footcitetitle{sympy}, været et oplagt valg som programmeringssprog til det grundlæggende matematikkursus tilbudt af DTU.
 
-Projektet vil undersøge, hvordan et funktionsprogrammeringssprog, kan gavne de studerendes forståelse af de grundlæggende matematiske koncepter. Formålet er at guide læseren gennem opbygningen af en række funktionsprogrammer baseret på grundlæggende matematik \footcitetitle{mat1apage} og dermed illustrere anvendelser. Projektet beskriver en generel struktur til opbygning og anvendelse af et funktions programmeringsprogram. Der tages udgangspunkt i F\# \footcitetitle{fsharp}, men beskrivelserne af programmerne vil også kunne anvendes i lignende funktionsprogrammeringssprog.
+% Projektet vil undersøge, hvordan et funktionsprogrammeringssprog, kan gavne de studerendes forståelse af de grundlæggende matematiske koncepter. Formålet er at guide læseren gennem opbygningen af en række funktionsprogrammer baseret på grundlæggende matematik \footcitetitle{mat1apage} og dermed illustrere anvendelser. Projektet beskriver en generel struktur til opbygning og anvendelse af et funktions programmeringsprogram. Der tages udgangspunkt i F\# \footcitetitle{fsharp}, men beskrivelserne af programmerne vil også kunne anvendes i lignende funktionsprogrammeringssprog.
 
-Rapporten begynder med at forklare nogle Fundamentale koncepter inden for funktionsprogrammering samt metoder til validering af programmerne. 
+% Projektet vil guide en læser med en forståelse af den grundlæggende matematik, til opbygningen af et funktionsprogrammerings program der kan repræsentere matematiske udtryk og matricer. Dermed udvide læsernes forståelse af hvordan funktionsprogrammering kan anvendes til at løse matematiske problemer.
 
+\section{Introduktion} 
+
+Dette projekt fokuserer på funktionel modellering af matematiske systemer ved brug af programmeringssproget F\#. I en tid, hvor programmeringssprog som Python dominerer i tekniske og videnskabelige miljøer, undersøger dette projekt potentialet og fordelene ved funktionel programmering i matematiske sammenhænge. I 2023 valgte Danmarks Tekniske Universitet at anvende Python som et hjælpeværktøj i deres grundlæggende matematikkursus "01001 Matematik 1a (Polyteknisk grundlag)". Imidlertid åbner funktionel programmering op for et andet perspektiv og metoder, som kan berige og muligvis forbedre forståelsen af matematiske koncepter hos studerende.
+
+Projektet har til formål at demonstrere, hvordan funktionel programmering, specifikt gennem F\#, kan anvendes til at opbygge og manipulere matematiske udtryk og systemer. Ved at introducere læserne til grundlæggende såvel som avancerede funktioner og teknikker i F\#, vil rapporten guide dem gennem opbygningen af funktionelle programmer, der kan løse matematiske problemer. 
+
+Rapporten vil først og fremmest dykke ned i konstruktionen af et specifikt modul for håndtering af symbolske matematiske udtryk og matrix manipulering, og deres anvendelser i forskellige matematiske kontekster. Projektets struktur og metodologi har til formål at give læseren en dybdegående forståelse af, hvordan funktionel programmering kan benyttes strategisk i matematiske discipliner, og hvordan det adskiller sig fra mere traditionelle imperative programmeringstilgange.
+
+Gennem en systematisk tilgang til design og implementering af matematiske moduler vil rapporten udforske, hvordan matematiske og logiske principper kan integreres direkte i softwareudvikling gennem funktionel programmering. Dette vil ikke kun fremme en bedre forståelse af teoretiske koncepter gennem praktisk anvendelse, men også demonstrere F\#'s kapacitet og effektivitet i behandlingen af matematiske egenskaber.
+ 
+\newpage
 \input{sections/Fundamentale_koncepter}
 
 \section{Symbolske udtryk}
@@ -133,7 +144,7 @@ Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I in
 
  
 
-\subsubsection{Udtryk som træer}
+\subsubsection{Udtryk som træer} \label{sec:expression_as_trees}
 Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ Figur \ref{fig:expression_tree}. 
 
 
@@ -297,8 +308,9 @@ Postorder Traversal blive anvendt til at kunne rekursivt simplificere og evaluer
 Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificeret Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
 
 
-\subsubsection{Udtryks mondulet} \label{sec:expression_module}
-Efter at have udviklet et modul til repræsentation af talmængder, er det nu muligt at videreudvikle et modul til at repræsentere udtryk. Vi starter med at definere en polymorfisk type for et udtryk, som vist i Listing \ref{expr_type}. Denne type inkluderer flere konstruktører, der hver især repræsenterer de matematiske operationer, vi ønsker at anvende. Desuden indfører vi konstruktøren N til at repræsentere en matematisk struktur; i dette tilfælde anvender vi vores talmængder (se Listing \ref{number_type}). Det er dog muligt at udvide dette til at omfatte andre matematiske strukturer, hvor det er muligt at definere de samme operationer. Sidst haves en konstruktør X til repræsentation af variable.
+\subsubsection{Udtryksmodulet}\label{sec:expression_module}
+Efter udviklingen af et modul til repræsentation af talmængder er vi nu klar til at udvide med et modul for matematiske udtryk. Vi starter med at definere en polymorf type for udtryk, som beskrevet i Listing \ref{expr_type}. Denne type omfatter flere konstruktører, hver tilknyttet specifikke matematiske operationer vi ønsker at implementere. Desuden introducerer vi konstruktøren \texttt{N} til at repræsentere numeriske værdier ved at anvende talmængder defineret i Listing \ref{number_type}. Til sidst tilføjer vi konstruktøren \texttt{X} for variable. Således lagres matematiske udtryk i en træstruktur, se \ref{sec:expression_as_trees}, eftersom hver konstruktør for en operation indeholder et eller to underudtryk af samme type.
+
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -315,7 +327,7 @@ type Expr<'a> =
     | Div of Expr<'a> * Expr<'a>
 \end{lstlisting}
 
-Expr\textless'a\textgreater{}  typen er dermed en polymorfisk type, hvor 'a er typen for den matematiske struktur hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i \ref{lst:expr_example}. 
+Expr\textless'a\textgreater{}  typen er dermed en polymorfisk type, hvor 'a er typen for den tal mængde hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i Listing \ref{lst:expr_example}. Her ses det at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres er det i prefix notation.
 
 \begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen tree bliver beskrevet i \ref{sec:expression_generation}.}]
 > tree "-(3*x-5)*2";;
@@ -361,18 +373,88 @@ let mul e1 e2:Expr<Number> =
 
 
 \subsubsection{Generering af udtryk}\label{sec:expression_generation}
-% KAN lave PBT dvs eval tree ExpressionToInfix x = x
-    
+Det er ønkes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverser. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver test i sektion \ref{sec:PBT_infix_prefix}.
+
+\vspace{0.5cm}
+\begin{egenskab}[Invers morphism\footcitetitle{Inverse_function} mellem infix og prefix]\label{egenskab:infix_prefix}
+    Lad $Q^n$ være mængden af rationelle infix udtryk repræsenteret som en string, med $n$ variable, så defineres følgende:
+    \begin{align*}
+      \text{tree}&: Q^n \to \text{Expr} \\
+      \text{tree}^{-1}&: \text{Expr} \to  Q^n  
+    \end{align*}
+    Dermed gælder følgende egenskaber
+    \begin{align*}
+      \text{tree}^{-1} &\circ \text{tree} = id_{Q^n} \\
+      \text{tree} &\circ \text{tree}^{-1} = id_{\text{Expr}}
+    \end{align*}
+    Hvor $id_{x}$ er identitetsfunktionen på mængden $x$.
+\end{egenskab}
+
+Vi begynder med at betragte den inverse funktion, som konverterer fra en expression til infix notation. Funktionen \textcolor{red}{etf} se Listing \ref{lst:expression_to_infix} fortager denne konventering ved at lave en modificeret Inorder Traversal på udtrykket, som beskrevet i \ref{sec:expression_as_trees}. Den modificeret del er at håndtere parenteser samt håndtere negation som var det en binær node i træet hvor det venstre barn er et tomt udtryk.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:expression_to_infix}, 
+  caption={konventering fra expression til infix notation}
+  ]
+// parenthesis: bool -> string -> string
+let parenthesis b f = if b then "(" + f + ")" else f
+
+// etf: Expr<Number> -> bool -> string
+let rec etf e p =
+    match e with
+    | N a -> toString a
+    | X a -> string a
+    | Neg a -> "-" + etf a true |> parenthesis p
+    | Add(a, b) -> 
+      parenthesis p <| etf a false + "+" + etf b false |> parenthesis p
+    | Sub(a, b) -> 
+      parenthesis p <| etf a false + "-" + etf b true  |> parenthesis p
+    | Mul(a, b) -> 
+      parenthesis p <| etf a true  + "*" + etf b true  |> parenthesis p
+    | Div(a, b) -> 
+      parenthesis p <| etf a true  + "/" + etf b true  |> parenthesis p
+
+// infixExpression: Expr<Number> -> string
+let infixExpression e = etf e false
+\end{lstlisting}
+
+Funktionen \textcolor{red}{\texttt{tree}}, som foretager konverteringen fra infix notation til et udtrykstræ, er baseret på algoritmen beskrevet i \cite{convert_expression}\footcitetitle{convert_expression}. Først konverteres en udtryksstreng til en liste af tokens. Disse tokens beskriver, om en karakter i udtrykket er en operand, en operator, eller en konstant, hvor en operator også indeholder information om præcedens og associativitet\footcitetitle{precedens_associativity}. Typen for disse tokens kan ses i Listing \ref{lst:infix_to_expression_types}. Herefter anvendes to stacks: én for operatorer og én for udtryk. Der anvendes en række regler, som beskrevet i \cite{convert_expression}, for hvornår der skal udføres pop og push på disse to stacks. Det skal bemærkes, at når en operator pushes til udtryksstacken, da navnet på operatorkonstruktøren på udtrykket står skrevet fra venstre mod højre, vil udtryksstacken være i prefix notation og ikke postfix notation som beskrevet i kilden. Funktionen \textcolor{red}{\texttt{tree}} er at finde i Appendiks \ref{sec:treeGenerator.fs}.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:infix_to_expression_types}, 
+  caption={Konvertering fra infix til udtrykstræ}
+]
+type Associative = | Left | Right
+type Precedence = int
+type Operator = char * Precedence * Associative
+type Token =
+    | Operand of char
+    | Operator of Operator
+    | Constant of int
+type OperatorList = Operator list
+\end{lstlisting}
+
+
 \subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
+
+
+
+
+
 \subsubsection{Evaluering af udtryk}
-\subsubsection{PBT af simplifikationen} % Beskriv hvordan man laver property based testen før simplifikationen
 
 \subsection{differentiering af udtryk}
+
+\subsection{PBT af udtryk} % Beskriv hvordan man laver property based testen før simplifikationen
+\subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
 
 \section{Vektorer og Matricer}
 \input{sections/vektorer_og_matricer}
 
 \section{Appendiks}
+\subsection{TreeGenerator.fs} \label{sec:treeGenerator.fs}
 \subsection{Matrix.fs} \label{sec:matrix.fs}
 \newpage
 \printbibliography

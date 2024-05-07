@@ -85,6 +85,7 @@
 % Anvender theorem-stilen
 \theoremstyle{break}
 \newtheorem{theorem}{Sætning}
+\newtheorem{egenskab}{Egenskab}
 \newtheorem{definition}{Defination} % Definerer 'definition' miljøet
 
 % -------------------------------------------
@@ -126,7 +127,7 @@
 \definecolor{bluekeywords}{rgb}{0.13, 0.13, 1}
 \definecolor{greencomments}{rgb}{0, 0.5, 0}
 \definecolor{red}{rgb}{0.9, 0, 0.6}
-\definecolor{liteblue}{rgb}{0.13, 0.58, 1}
+\definecolor{liteblue}{rgb}{0.28,0.46,1.0}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -145,7 +146,7 @@
     let!, return!, do!, yield!, use!, from, select, where, by, val },
   keywordstyle=\color{codepurple},
   sensitive=true,
-  basicstyle=\ttfamily\small,
+  basicstyle=\ttfamily\footnotesize,
   breaklines=true,
   xleftmargin=\parindent,
   aboveskip=\bigskipamount,
@@ -159,9 +160,10 @@
   emph={[2]let, rec, def, raise, member, static, type, of, }, % Let og var er blå
   emphstyle={[2]\color{bluekeywords}},
   %emph={[3]Rational, rational, Number, int, Int}, % Typer
-  %emphstyle={[3]\color{liteblue}},
+  emphstyle={[3]\color{liteblue}},
+  emph={[3]Mul, Add, N, Sub, X, Div, Neg },
   emph={
-    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval, add, mul, sub, neg, dimMatrix, matrixValidMajor, matrixVectorLength, scalarVector, scalarMatrix, map, orthogonalBacis, Gram_Schmidt, sumProj, not, vectorOf, proj, extendMatrix, correctOrder, corectOrderCheck, map2,vectorMulElementWise, conjugateVector, innerProduct, conjugate, fold, length, performRowOperationGen, multipleRowOperationsGen, getIndependetBacisGen, empty, getBacismatrixGen, choose, standardBacis, oneof, rowOperation, isOrthogonalBacis, gramSchmidtIsOrthogonal, classify, addVector, subVector, addMatrix, giveMatrixHaveSameOrder, sumRows, matrixToVector, matrix, matrixMulVector, matrixProduct, numberGen, vectorGen, matrixGen
+    zero, one, two, isZero, isOne, isNegative, abs, greaterThan, tryMakeInt, toString, sumList, factorial, failwith, ValueError, make, equal, posetive, isInt, makeRatInt, absRational, propositional_formula, neg, operation, makeRational, eval, add, mul, sub, neg, dimMatrix, matrixValidMajor, matrixVectorLength, scalarVector, scalarMatrix, map, orthogonalBacis, Gram_Schmidt, sumProj, not, vectorOf, proj, extendMatrix, correctOrder, corectOrderCheck, map2,vectorMulElementWise, conjugateVector, innerProduct, conjugate, fold, length, performRowOperationGen, multipleRowOperationsGen, getIndependetBacisGen, empty, getBacismatrixGen, choose, standardBacis, oneof, rowOperation, isOrthogonalBacis, gramSchmidtIsOrthogonal, classify, addVector, subVector, addMatrix, giveMatrixHaveSameOrder, sumRows, matrixToVector, matrix, matrixMulVector, matrixProduct, numberGen, vectorGen, matrixGen, parenthesis, ExpressionToInfix,infixExpression, string, etf
     }, % Dit funktionsnavn her (purple)
   emphstyle=\color{red},
   xleftmargin=2em,

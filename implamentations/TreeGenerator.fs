@@ -1,37 +1,32 @@
 module TreeGenerator
-// #r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
-// #load "modules/rantionalAndComplex.fs"
-// #load "modules/Number.fs"
-// #load "modules/Expression.fs"
 open Number
 open Expression
 
 type Associative = | Left | Right
-type Operator = char * int * Associative
-type Symbol =
+type Precedence = int
+type Operator = char * Precedence * Associative
+type Token =
     | Operand of char
     | Operator of Operator
     | Konstant of int
-
 type OperatorList = Operator list
 
 
-let rec infixToSymbolList s =
-    mapToSymbol (Seq.toList s) true false
-and mapToSymbol l allowUnary allowOperator=
-    //printfn "%A-%A-%A" l allowUnary allowOperator
+let rec infixToTokenList s =
+    mapToToken (Seq.toList s) true false
+and mapToToken l allowUnary allowOperator=
     match l with
     | [] -> []
-    | x::tail when x = ' ' -> mapToSymbol tail allowUnary allowOperator
-    | x::tail when allowOperator && x = '/' || x = '*' -> Operator (x, 2, Left)::mapToSymbol tail false false 
-    | x::tail when allowOperator && (x = '+' || (x = '-' && not allowUnary)) -> Operator (x, 1, Left)::mapToSymbol tail false false
-    | x::tail when  (x = '-' && allowUnary) -> Operator ('~', 2, Right)::mapToSymbol tail true false
-    | x::tail when x = '(' -> Operator (x, -1, Left)::mapToSymbol tail true true
-    | x::tail when x = ')' -> Operator (x, -1, Left)::mapToSymbol tail false true
+    | x::tail when x = ' ' -> mapToToken tail allowUnary allowOperator
+    | x::tail when allowOperator && x = '/' || x = '*' -> Operator (x, 2, Left)::mapToToken tail false false 
+    | x::tail when allowOperator && (x = '+' || (x = '-' && not allowUnary)) -> Operator (x, 1, Left)::mapToToken tail false false
+    | x::tail when  (x = '-' && allowUnary) -> Operator ('~', 2, Right)::mapToToken tail true false
+    | x::tail when x = '(' -> Operator (x, -1, Left)::mapToToken tail true true
+    | x::tail when x = ')' -> Operator (x, -1, Left)::mapToToken tail false true
     | x::_ when System.Char.IsDigit(x) -> 
         let (k, tail) = foundInt l ""
-        Konstant (int k):: mapToSymbol tail false true
-    | x::tail when System.Char.IsLetter x -> Operand x::mapToSymbol tail false true
+        Konstant (int k):: mapToToken tail false true
+    | x::tail when System.Char.IsLetter x -> Operand x::mapToToken tail false true
     | x::_ -> failwith ("Invalid syntax at: " + string x) 
 and foundInt l s =
     match l with
@@ -40,68 +35,63 @@ and foundInt l s =
 
 
 
-let popPostfixStack op postfix =
-    //printfn "%A :op %A :postix" op postfix 
-    match op, postfix with
+let popprefixStack op prefix =
+    match op, prefix with
     | x, e1::e2::tail when x = '+' -> Add(e2, e1)::tail
     | x, e1::e2::tail when x = '-' -> Sub(e2, e1)::tail
     | x, e1::e2::tail when x = '*' -> Mul(e2, e1)::tail
     | x, e1::e2::tail when x = '/' -> Div(e2, e1)::tail
     | x, e::tail when x = '~' -> Neg(e)::tail
-    | x, _ when x = '(' -> postfix
+    | x, _ when x = '(' -> prefix
     |_,_ -> failwith "match not found"
 
 
-let rec generateExpresion c (stack:OperatorList) postfix =
-    // printfn "c:\n%A\n" c
-    // printfn "Stack:\n%A\n\npostfix:\n%A" stack postfix 
+let rec generateExpresion c (stack:OperatorList) prefix =
     match c, stack with
-    | [], [] -> postfix
-    | [], (s,_,_)::stack_tail  -> generateExpresion c stack_tail (popPostfixStack s postfix)  
-    | Operand x :: tail, _ -> generateExpresion tail stack (X x::postfix)
-    | Konstant x :: tail, _ -> generateExpresion tail stack (N (Int x)::postfix)
+    | [], [] -> prefix
+    | [], (s,_,_)::stack_tail  -> generateExpresion c stack_tail (popprefixStack s prefix)  
+    | Operand x :: tail, _ -> generateExpresion tail stack (X x::prefix)
+    | Konstant x :: tail, _ -> generateExpresion tail stack (N (Int x)::prefix)
     | Operator (x, prec, lr)::tail, _ 
         when x = '(' 
-        -> generateExpresion tail ((x, prec, lr)::stack) postfix
+        -> generateExpresion tail ((x, prec, lr)::stack) prefix
     | Operator (x, _, _)::tail, _
         when x = ')' 
         ->  match stack with
-            | [] -> generateExpresion tail stack postfix
+            | [] -> generateExpresion tail stack prefix
             | (s,_,_)::stack_tail 
                 when s = '(' 
-                -> generateExpresion tail stack_tail postfix
+                -> generateExpresion tail stack_tail prefix
             | (s,_,_)::stack_tail 
-                -> generateExpresion c stack_tail (popPostfixStack s postfix)
-    | Operator e::tail, [] -> generateExpresion tail (e::stack) postfix
+                -> generateExpresion c stack_tail (popprefixStack s prefix)
+    | Operator e::tail, [] -> generateExpresion tail (e::stack) prefix
     | Operator e::tail, s::stack_tail 
         ->  match e, s with
             | (x, precX, lr), (y, precY, _) 
                 when precX < precY || (precX = precY && lr = Left)
-                -> generateExpresion c stack_tail (popPostfixStack y postfix)
-            | _, _ -> generateExpresion tail (e::stack) postfix
+                -> generateExpresion c stack_tail (popprefixStack y prefix)
+            | _, _ -> generateExpresion tail (e::stack) prefix
 
 
 let tree s =
-    // printfn "Tree\n%A" s
-    match generateExpresion (infixToSymbolList s) [] [] with
+    match generateExpresion (infixToTokenList s) [] [] with
     | [] -> failwith "Tree is empty" 
     |tree::_ -> tree
 
 
+
+let parenthesis b f = if b then "(" + f + ")" else f
+
 // uses modified inorder traversal to generate infix string from expression tree
-let rec ExpressionToInfix e p =
+let rec etf e p =
     match e with
     | N a -> toString a
     | X a -> string a
-    | Neg a when p -> "- (" + ExpressionToInfix a false + ")"
-    | Neg a -> "-" + ExpressionToInfix a true
-    | Add(a, b) when p -> "(" + (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false) + ")"
-    | Add(a, b) -> (ExpressionToInfix a false) + "+" + (ExpressionToInfix b false)
-    | Sub(a, b) when p -> "(" + (ExpressionToInfix a false) + "-" + (ExpressionToInfix b true) + ")"
-    | Sub(a, b) -> (ExpressionToInfix a false) + "-" + (ExpressionToInfix b true)
-    | Mul(a, b) when p -> "(" + (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) + ")"
-    | Mul(a, b) -> (ExpressionToInfix a true) + "*" + (ExpressionToInfix b true) 
-    | Div(a, b) when p -> "(" + (ExpressionToInfix a true) + "/" + (ExpressionToInfix b true) + ")"
-    | Div(a, b) -> (ExpressionToInfix a true)  + "/" + (ExpressionToInfix b true)
+    | Neg a -> "-" + etf a true |> parenthesis p
+    | Add(a, b) -> parenthesis p <| etf a false + "+" + etf b false |> parenthesis p
+    | Sub(a, b) -> parenthesis p <| etf a false + "-" + etf b true |> parenthesis p
+    | Mul(a, b) -> parenthesis p <| etf a true + "*" + etf b true |> parenthesis p
+    | Div(a, b) -> parenthesis p <| etf a true + "/" + etf b true |> parenthesis p
 
-let InfixExpression e = ExpressionToInfix e false
+
+let infixExpression e = etf e false

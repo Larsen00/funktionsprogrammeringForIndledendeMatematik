@@ -331,7 +331,7 @@ type NumberGen =
             override _.Generator = numberGen
             override _.Shrinker _ = Seq.empty}   
 \end{lstlisting}
-\begin{theorem}[Vektor Aksiomer\footnote{theorem 7.2 i mat 1 noterne}]\label{vector_space_axioms}
+\begin{egenskab}[Vektor Aksiomer\footnote{theorem 7.2 i mat 1 noterne}]\label{vector_space_axioms}
     Lad $c, d \in \mathbb{F}$ og $v_i \in \mathbb{F}^n$ for $i = 1 \dots m$ så gælder:
     \begin{enumerate}
         \item $(v_1 + \dots + v_{m-1}) + v_m = v_1 + (v_2 + \dots + v_m)$
@@ -347,7 +347,7 @@ type NumberGen =
         
         \item $c \cdot (v_1 + \dots +v_m) = c \cdot v_1 + \dots +c \cdot v_m$
     \end{enumerate}
-\end{theorem}
+\end{egenskab}
 
 Vi kan dermed nu lave definere egenskaberne fra sætning \ref{vector_space_axioms} som nogle funktioner, og teste dem med PBT.
 

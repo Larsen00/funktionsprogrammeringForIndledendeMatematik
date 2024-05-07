@@ -97,6 +97,22 @@
       \field{title}{Functional Programming Using F\#}
       \field{year}{2013}
     \endentry
+    \entry{Inverse_function}{online}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{title}{Inverse function}
+      \field{urlday}{6}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Inverse_function
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Inverse_function
+      \endverb
+    \endentry
     \entry{mat1b}{online}{}
       \name{author}{1}{}{%
         {{hash=6d18a27c701cb27bec7a538ea273a347}{%

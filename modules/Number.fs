@@ -115,3 +115,8 @@ let conjugate n =
 
 let inv n =
     one / n
+
+let isInt n = 
+    match n with
+    | Int _ -> true
+    | _ -> false

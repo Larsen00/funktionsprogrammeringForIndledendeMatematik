@@ -31,7 +31,7 @@ let simpPBT (se:SmallEnv) =
     |> Prop.classify (result = 2) "DivideByZeroExceptions"
     |> Prop.classify (result = 3) "OverflowException"
 
-
+printfn "Simplified expression equals original expression"
 let _ = Check.Quick simpPBT
 
 let generatesCorrectTree env (e:Expr<Number>) =

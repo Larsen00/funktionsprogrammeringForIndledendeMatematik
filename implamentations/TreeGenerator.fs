@@ -11,9 +11,11 @@ type Token =
     | Konstant of int
 type OperatorList = Operator list
 
-
+// Converts a infix string to a list of tokens
 let rec infixToTokenList s =
     mapToToken (Seq.toList s) true false
+
+// maps a token to its corresponding token type
 and mapToToken l allowUnary allowOperator=
     match l with
     | [] -> []
@@ -27,14 +29,16 @@ and mapToToken l allowUnary allowOperator=
         let (k, tail) = foundInt l ""
         Konstant (int k):: mapToToken tail false true
     | x::tail when System.Char.IsLetter x -> Operand x::mapToToken tail false true
-    | x::_ -> failwith ("Invalid syntax at: " + string x) 
+    | x::_ -> failwith ("Invalid syntax at: " + string x)
+
+// Allowing more than one digit in a number
 and foundInt l s =
     match l with
     | x::tail when System.Char.IsDigit(x) -> foundInt tail (s + string x)
     | _ -> (s, l)
 
 
-
+// pops the last operator from the stack and adds it to the prefix list
 let popprefixStack op prefix =
     match op, prefix with
     | x, e1::e2::tail when x = '+' -> Add(e2, e1)::tail
@@ -45,7 +49,7 @@ let popprefixStack op prefix =
     | x, _ when x = '(' -> prefix
     |_,_ -> failwith "match not found"
 
-
+// Runs the algorithm to generate the expression tree
 let rec generateExpresion c (stack:OperatorList) prefix =
     match c, stack with
     | [], [] -> prefix
@@ -72,26 +76,27 @@ let rec generateExpresion c (stack:OperatorList) prefix =
                 -> generateExpresion c stack_tail (popprefixStack y prefix)
             | _, _ -> generateExpresion tail (e::stack) prefix
 
-
+// Converts a infix string to a expression tree
 let tree s =
     match generateExpresion (infixToTokenList s) [] [] with
     | [] -> failwith "Tree is empty" 
     |tree::_ -> tree
 
+// Adds parenthesis to a string if a boolean is true
+let parenthesis b f = 
+    if b then "(" + f + ")" else f
 
-
-let parenthesis b f = if b then "(" + f + ")" else f
-
-// uses modified inorder traversal to generate infix string from expression tree
+// Converts a expression tree to a infix string
 let rec etf e p =
     match e with
+    | N a when not <| isInt a -> parenthesis p <| toString a
     | N a -> toString a
     | X a -> string a
-    | Neg a -> "-" + etf a true |> parenthesis p
-    | Add(a, b) -> parenthesis p <| etf a false + "+" + etf b false |> parenthesis p
-    | Sub(a, b) -> parenthesis p <| etf a false + "-" + etf b true |> parenthesis p
-    | Mul(a, b) -> parenthesis p <| etf a true + "*" + etf b true |> parenthesis p
-    | Div(a, b) -> parenthesis p <| etf a true + "/" + etf b true |> parenthesis p
+    | Neg a ->  parenthesis p <| "-" + etf a (not p) 
+    | Add(a, b) -> parenthesis p <| etf a false + "+" + etf b false
+    | Sub(a, b) -> parenthesis p <| etf a false + "-" + etf b true
+    | Mul(a, b) -> parenthesis p <| etf a true + "*" + etf b true
+    | Div(a, b) -> parenthesis p <| etf a true + "/" + etf b true
 
-
+// Converts a expression tree to a infix string
 let infixExpression e = etf e false

@@ -9,91 +9,93 @@ open commutativeMulDiv
 
 
 
-
-
 ////////////////////////////////////////
 /// SIMPLIFICATION FUNCTIONS ///////////
 ////////////////////////////////////////
 
-// simplifies a negation expression
-let neg e:Expr<Number> =
-    match e with
-    | Neg a -> a
-    | _ -> Neg e
-
-// simplifies a addition expression
-let rec add e1 e2 =
-    match e1 + e2 with
-    | Neg a -> neg a
-    | Add(a, b) -> add_simp a b
+let rec simplifyOperation e1 e2 f = 
+    match f e1 e2 with
+    | Neg a -> commutativeMulDiv.applyCommutative (Neg a) |> commutativeAddSub.applyCommutative
+    | Add(a, b) when isAdd f -> commutativeAddSub.applyCommutative (Add(a, b))
+    | Sub(a, b) when isSub f -> commutativeAddSub.applyCommutative (Sub(a, b))
+    | Mul(a, b) when isMul f -> commutativeMulDiv.applyCommutative (Mul(a, b))
+    | Div(a, b) when isDiv f -> commutativeMulDiv.applyCommutative (Div(a, b))
+    | Add(a, b) -> simplifyOperation a b (+)
+    | Sub(a, b) -> simplifyOperation a b (-)
+    | Mul(a, b) -> simplifyOperation a b (*)
+    | Div(a, b) -> simplifyOperation a b (/)
     | a -> a
-
-and add_simp e1 e2:Expr<Number> = 
-    match e1, e2 with
-    | a, b when a = b -> Mul (N two, b)
-    | Neg a, Neg b -> neg (add a b) 
-    | a, Neg b -> a - b
-    | _, _ -> commutativeAddSub.applyCommutative (Add(e1, e2))
-
-// simplifies a subtraction expression
-let rec sub e1 e2 =
-    match e1 - e2 with
-    | Neg a -> neg a
-    | Add(a, b) -> add a b
-    | Sub(a, b) -> sub_simp a b
-    | a -> a
-and sub_simp e1 e2:Expr<Number>=
-    match e1, e2 with
-    | Neg a, Neg b -> neg (sub a b)
-    | _, _ -> commutativeAddSub.applyCommutative (Sub(e1, e2))
-
-
-
-
-
-// simplifies a multiplication expression
-let rec mul e1 e2:Expr<Number> =
-    //printfn "\n 81 - %A" (ExpressionToInfix (Mul (e1, e2)) false)
-    match e1 ,e2 with
-    | N _, N _ -> e1 * e2
-    | N a, _ when Number.isOne a -> e2
-    | _, N a when Number.isOne a -> e1
-    | N a, _ when Number.isZero a  -> N zero
-    | _, N a when Number.isZero a  -> N zero
-    | Neg a, Neg b                   -> mul a b
-    | Neg a, b | a, Neg b            -> neg (mul a b)
-    | Div (a, b), Div (c, d) -> div (mul a c) (mul b d)
-    | _, _ -> commutativeMulDiv.applyCommutative (Mul(e1, e2))
-
-
-
-// simplifies a division expression
-and div e1 e2:Expr<Number> =
-    // printfn "%A / %A" e1 e2
-    match e1, e2 with
-    | _, _ when e1 = e2 -> N one
-    | _, N a when Number.isOne a -> e1
-    |N a, _ when Number.isZero a -> N zero
-    | _, N a when Number.isZero a ->  raise (System.DivideByZeroException("SymbolicManipolation.div: Cannot divide by zero!"))
-    |N a, N b -> N(a / b)
-    | Neg a, Neg b -> div a b
-    | a, Neg b -> neg (div a b)  
-    | Div(a, b), c            -> div a (mul b c)                  
-    | _,_ -> commutativeMulDiv.applyCommutative (Div(e1, e2))
-
 
 
 // Simplifies an Expression 
 let rec simplifyExpr e =
     match e with
     | N a when Number.isNegative a -> Neg (N (Number.absNumber a))
-    | N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
-    | Neg a     -> neg (simplifyExpr a)
-    | Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
-    | Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 
-    | Mul(a, b) -> mul (simplifyExpr a) (simplifyExpr b) 
-    | Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
+    | N (Rational(R(a, b))) -> simplifyOperation (simplifyExpr (N (Int a))) (simplifyExpr (N (Int b))) (/)
+    | Neg a     -> - (simplifyExpr a)
+    | Add(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (+)
+    | Sub(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (-)
+    | Mul(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (*)
+    | Div(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (/)
     | _ -> e 
+
+
+
+
+// // simplifies a addition expression
+// let rec add e1 e2 =
+//     match e1 + e2 with
+//     | Neg a -> neg a
+//     | Add(a, b) -> commutativeAddSub.applyCommutative (Add(a, b))
+//     | Mul(a, b) -> mul a b
+//     | Sub(a, b) -> sub a b
+//     | Div(a, b) -> div a b
+//     | a -> a
+
+// // simplifies a subtraction expression
+// and sub e1 e2 =
+//     match e1 - e2 with
+//     | Neg a -> neg a
+//     | Add(a, b) -> add a b
+//     | Mul(a, b) -> mul a b
+//     | Sub(a, b) -> commutativeAddSub.applyCommutative (Sub(a, b))
+//     | a -> a
+
+// // simplifies a multiplication expression
+// and mul e1 e2:Expr<Number> =
+//     match e1 * e2 with
+//     | Neg a -> neg a
+//     | Add(a, b) -> add a b
+//     | Sub(a, b) -> sub a b
+//     | Div(a, b) -> div a b
+//     | Mul(a, b) -> commutativeMulDiv.applyCommutative (Mul(a, b))
+//     | a -> a
+
+// // simplifies a division expression
+// and div e1 e2:Expr<Number> =
+//     match e1 / e2 with
+//     | Neg a -> neg a
+//     | Add(a, b) -> add a b
+//     | Sub(a, b) -> sub a b
+//     | Mul(a, b) -> mul a b            
+//     | Div(a, b) -> commutativeMulDiv.applyCommutative (Div(a, b))
+//     | a -> a
+
+
+
+
+
+// // Simplifies an Expression 
+// let rec simplifyExpr e =
+//     match e with
+//     | N a when Number.isNegative a -> Neg (N (Number.absNumber a))
+//     | N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
+//     | Neg a     -> neg (simplifyExpr a)
+//     | Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
+//     | Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 
+//     | Mul(a, b) -> mul (simplifyExpr a) (simplifyExpr b) 
+//     | Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
+//     | _ -> e 
 
 // insert envirement into an expression
 let rec insertEnv e env =

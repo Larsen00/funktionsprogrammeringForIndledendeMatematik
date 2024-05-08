@@ -10,11 +10,17 @@ type Expr<'a> =
             | Mul of Expr<'a> * Expr<'a>
             | Div of Expr<'a> * Expr<'a>
 
-// negates an expression
-let neg e:Expr<Number> =
+// negates an expression (Wants to avoid negative N)
+let rec neg e:Expr<Number> =
     match e with
-    | N a -> N (-a)
-    | _ -> Neg(e) 
+    | Neg a -> whileNeg a
+    | _ -> Neg e 
+and whileNeg e =
+    match e with
+    | Neg a -> neg a
+    | _ -> e
+
+
 
 // multiplies two expressions with simplification 
 let rec mul e1 e2:Expr<Number> =
@@ -22,7 +28,9 @@ let rec mul e1 e2:Expr<Number> =
     |N a, N b                       -> N (a * b)
     |N a, b | b, N a when isOne a   -> b
     |N a, _ | _, N a when isZero a  -> N zero
-    |Div(a, b), c | c, Div(a, b) -> Div (mul a c, b)
+    |Div(a, b), c | c, Div(a, b)    -> Div (mul a c, b)
+    |Div (a, b), Div (c, d)         -> Div ((mul a c), (mul b d))
+    |Neg a, Neg b                   -> mul a b
     | _, _                          -> Mul(e1, e2)
 
 // adds two expressions
@@ -30,7 +38,9 @@ let rec add e1 e2:Expr<Number>  =
     match e1, e2 with
     | N a, N b                            -> N (a + b)
     | N a, b | b, N a when isZero a       -> b
-    | Neg a, b | b, Neg a                 -> sub b a
+    | a, b when a = b                     -> Mul (N two, b)
+    | Neg a, Neg b                        -> neg (add a b) 
+    | Neg a, b | b, Neg a                 -> Sub (b, a)
     | Mul(a, X b), Mul(c, X d) 
     | Mul(X b, a), Mul(c, X d)
     | Mul(a, X b), Mul(X d, c) 
@@ -38,7 +48,7 @@ let rec add e1 e2:Expr<Number>  =
     | _, _                                -> Add(e1, e2)
 
 // subtracts two expressions
-and sub a b:Expr<Number>  =
+let rec sub a b:Expr<Number>  =
     match a, b with
     | _, _ when a = b -> N zero
     | N x, N y  when greaterThan y x -> Neg (N (y - x)) // Want to avoid negative numbers
@@ -46,6 +56,7 @@ and sub a b:Expr<Number>  =
     | N a, b when isZero a -> Neg b
     | a, N b when isZero b -> a
     | a, Neg b -> add a b 
+    | Neg a, Neg b -> neg (sub a b)
     | Mul(a, X b), Mul(c, X d) 
     | Mul(X b, a), Mul(c, X d)
     | Mul(a, X b), Mul(X d, c) 
@@ -61,6 +72,8 @@ let rec div e1 e2:Expr<Number> =
     | _, N a when isOne a     -> e1
     | N a, _ when isZero a    -> N zero
     | N a, N b                -> N (a / b)
+    | Neg a, Neg b            -> div a b
+    | a, Neg b | Neg a, b     -> neg (div a b) 
     | Div(a, b), c            -> div a (mul b c) 
     | _, _                    -> Div(e1, e2)  
 
@@ -99,3 +112,20 @@ let getVariable (e:Expr<Number>) =
     match e with
     | X x -> x
     | _ -> raise (System.Exception("Expression.getChar: Expression is not a variable!"))
+
+
+// functions for equality check on operations
+let isAdd (f:(Expr<Number> -> Expr<Number> -> Expr<Number>)) = 
+    f (X 'x') (X 'y') = Add(X 'x', X 'y')
+
+let isSub (f:(Expr<Number> -> Expr<Number> -> Expr<Number>)) =
+    f (X 'x') (X 'y') = Sub(X 'x', X 'y')
+
+let isMul (f:(Expr<Number> -> Expr<Number> -> Expr<Number>)) =
+    f (X 'x') (X 'y') = Mul(X 'x', X 'y')
+
+let isDiv (f:(Expr<Number> -> Expr<Number> -> Expr<Number>)) = 
+    f (X 'x') (X 'y') = Div(X 'x', X 'y')
+
+let isNeg (f:(Expr<Number> -> Expr<Number>)) = 
+    f (X 'x') = Neg(X 'x')

@@ -386,7 +386,7 @@ Derudover skal det om negation også gælde at:
 \end{egenskab}
 
 
-Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Preorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number mondulet. 
+Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number mondulet. 
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -417,8 +417,8 @@ Det er ønkes at kunne konvertere udtryk frem og tilbage mellem prefix notation,
     \end{align*}
     Dermed gælder følgende egenskaber
     \begin{align*}
-      \text{tree}^{-1} &\circ \text{tree} = id_{Q^n} \\
-      \text{tree} &\circ \text{tree}^{-1} = id_{\text{Expr}}
+      \text{tree}^{-1} \circ \text{tree} &= id_{Q^n} \\
+      \text{tree} \circ \text{tree}^{-1} &= id_{\text{Expr}}
     \end{align*}
     Hvor $id_{x}$ er identitetsfunktionen på mængden $x$.
 \end{egenskab}
@@ -436,17 +436,15 @@ let parenthesis b f = if b then "(" + f + ")" else f
 // etf: Expr<Number> -> bool -> string
 let rec etf e p =
     match e with
-    | N a -> toString a
-    | X a -> string a
-    | Neg a -> "-" + etf a true |> parenthesis p
-    | Add(a, b) -> 
-      parenthesis p <| etf a false + "+" + etf b false |> parenthesis p
-    | Sub(a, b) -> 
-      parenthesis p <| etf a false + "-" + etf b true  |> parenthesis p
-    | Mul(a, b) -> 
-      parenthesis p <| etf a true  + "*" + etf b true  |> parenthesis p
-    | Div(a, b) -> 
-      parenthesis p <| etf a true  + "/" + etf b true  |> parenthesis p
+    | N a when not <| isInt a -> parenthesis p <| toString a
+    | N a   -> toString a
+    | X a   -> string a
+    | Neg a -> parenthesis p <| "-" + etf a (not p) 
+    | Add(a, b) -> parenthesis p <| etf a false + "+" + etf b false
+    | Sub(a, b) -> parenthesis p <| etf a false + "-" + etf b true
+    | Mul(a, b) -> parenthesis p <| etf a true  + "*" + etf b true
+    | Div(a, b) -> parenthesis p <| etf a true  + "/" + etf b true
+
 
 // infixExpression: Expr<Number> -> string
 let infixExpression e = etf e false
@@ -473,8 +471,34 @@ type OperatorList = Operator list
 
 
 \subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
-Vi skal nu betragte en sytematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendig at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplification skal overholde.
+Vi skal nu betragte en sytematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendig at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplification skal overholde. Egenskaben vil blive testet i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter simplifikationen da det ikke er kompleks opgave at skulle sammenligne og evaluere to udtryk er ækvivalente.
+\vspace{0.5cm}
+\begin{egenskab}[Simplifikation af udtryk]\label{egenskab:simplification}
+Lad $e$ være et udtryk, så gælder følgende:
+\begin{align*}
+  \text{eval}(e) = \text{eval}(\text{simplifyExpr}(e))
+\end{align*}
+\end{egenskab}
 
+Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. På den måde sikre sig at når en operation bliver simplificeret, vil dens børn allerede være simplificeret. 
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:simplify_expr}, 
+  caption={Simplifikation af et udtryk}
+  ]
+// simplifyExpr: Expr<Number> -> Expr<Number>
+let rec simplifyExpr e =
+match e with
+| N a when Number.isNegative a -> Neg (N (Number.absNumber a))
+| N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
+| Neg a     -> neg (simplifyExpr a)
+| Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
+| Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 
+| Mul(a, b) -> mul (simplifyExpr a) (simplifyExpr b) 
+| Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
+| _ -> e 
+\end{lstlisting}
 
 
 
@@ -485,6 +509,7 @@ Vi skal nu betragte en sytematisk metode til at kunne simplificere matematiske u
 \subsection{PBT af udtryk} % Beskriv hvordan man laver property based testen før simplifikationen
 \subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
 \subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
+\subsubsection{Simplifikation af udtryk}\label{sec:PBT_simplification}
 
 \section{Vektorer og Matricer}
 \input{sections/vektorer_og_matricer}

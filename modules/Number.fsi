@@ -29,3 +29,4 @@ val tryReduce    : Number -> Number
 val toString     : Number -> string
 val conjugate    : Number -> Number
 val inv          : Number -> Number
+val isInt        : Number -> bool

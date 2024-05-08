@@ -20,3 +20,8 @@ val eval : Expr<Number> -> Map<char,Number> -> Number
 val containsX : Expr<Number> -> Expr<Number> -> bool
 val getNumber : Expr<Number> -> Number
 val getVariable : Expr<Number> -> char
+val isAdd : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
+val isSub : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
+val isMul : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
+val isDiv : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
+val isNeg : (Expr<Number> -> Expr<Number>) -> bool

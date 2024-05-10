@@ -37,6 +37,7 @@ let rec flatTree e =
     | Neg a -> Neg (N one) :: flatTree a
     | Mul (a, b) -> flatTree a @ flatTree b
     | Div (N a, N b) -> [N (a / b)]
+    | Div (Neg a, b) | Div (a, Neg b) -> Neg (N one) :: flatTree (Div (a, b))
     | Div (a, N b) -> N (one / b) :: flatTree a
     | Div (a, b) -> Div (N one, b) :: flatTree a 
 
@@ -59,7 +60,6 @@ let rec removeElem e l =
 // reduces a commutativ list
 let rec reduce l =
     let sorted = divCancelling (sort l)
-    // printfn "sorted: %A" sorted
     if signList sorted 1 > 0 then rebuildTree sorted else Neg (rebuildTree sorted)
 
 // initiates the division cancelling

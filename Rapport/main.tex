@@ -480,27 +480,166 @@ Lad $e$ være et udtryk, så gælder følgende:
 \end{align*}
 \end{egenskab}
 
-Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. På den måde sikre sig at når en operation bliver simplificeret, vil dens børn allerede være simplificeret. 
+Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. På den måde sikre sig at når en node i udtrykstræet bliver simplificeret, vil dens børn allerede være simplificeret. 
 
 \begin{lstlisting}[
   language={FSharp}, 
   label={lst:simplify_expr}, 
   caption={Simplifikation af et udtryk}
   ]
-// simplifyExpr: Expr<Number> -> Expr<Number>
+  //simplifyOperation: Expr<Number> -> Expr<Number> -> (Expr<Number> -> Expr<Number> -> Expr<Number>) -> Expr<Number>
+  let rec simplifyOperation e1 e2 f = 
+  match f e1 e2 with
+  | Neg a -> 
+    commutativeMulDiv.applyCommutative (Neg a) |> commutativeAddSub.applyCommutative
+  | Add(a, b) when isAdd f -> commutativeAddSub.applyCommutative (Add(a, b))
+  | Sub(a, b) when isSub f -> commutativeAddSub.applyCommutative (Sub(a, b))
+  | Mul(a, b) when isMul f -> commutativeMulDiv.applyCommutative (Mul(a, b))
+  | Div(a, b) when isDiv f -> commutativeMulDiv.applyCommutative (Div(a, b))
+  | Add(a, b) -> simplifyOperation a b (+)
+  | Sub(a, b) -> simplifyOperation a b (-)
+  | Mul(a, b) -> simplifyOperation a b (*)
+  | Div(a, b) -> simplifyOperation a b (/)
+  | a -> a
+
+
+//simplifyExpr: Expr<Number> -> Expr<Number>
 let rec simplifyExpr e =
-match e with
-| N a when Number.isNegative a -> Neg (N (Number.absNumber a))
-| N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
-| Neg a     -> neg (simplifyExpr a)
-| Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
-| Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 
-| Mul(a, b) -> mul (simplifyExpr a) (simplifyExpr b) 
-| Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
-| _ -> e 
+  match e with
+  | N a when Number.isNegative a -> Neg (N (Number.absNumber a))
+  | N (Rational(R(a, b))) -> 
+    simplifyOperation (simplifyExpr (N (Int a))) (simplifyExpr (N (Int b))) (/)
+  | Neg a     -> - (simplifyExpr a)
+  | Add(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (+)
+  | Sub(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (-)
+  | Mul(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (*)
+  | Div(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (/)
+  | _ -> e 
 \end{lstlisting}
 
+Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen af et givet udtryk. Funktionen tager som input to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk simplifikation, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk simplifikation resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk simplifikation ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere simplifikation af de to udtryk. Denne dybere simplifikation udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationssimplifikation på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
 
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},]
+      \node {*}
+        child { node {/}
+          child { node {*}
+            child { node {*}
+              child { node {3}
+              }
+              child { node {y}
+              }
+            }
+            child { node {-}
+              child { node {2}
+              }
+            }
+          }
+          child { node {-}
+            child { node {x}
+            }
+          }
+        }
+        child { node {x}
+        };
+    \end{tikzpicture}
+    \caption{Udtrykket $(3 \cdot y \cdot (-2)/-x) \cdot x$ som et træ}
+    \label{fig:original-tree}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      every node/.style={draw, circle, align=center},]
+      \node {*}
+        child { node {6} }
+        child { node {y} };
+    \end{tikzpicture}
+    \caption{Det resuterende simplificerede efter at have anvendt CommutativeMulDiv.\textcolor{red}{applyCommutative} på udtrykket i Figur \ref{fig:original-tree}}
+    \label{fig:simplified-tree}
+  \end{subfigure}
+  \caption{Før og efter simplifikation af et udtryk ved brug af CommutativeMulDiv.\textcolor{red}{applyCommutative}}
+  \label{fig:expression-trees}
+\end{figure}
+
+
+% Flattened Tree
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[level distance=1.5cm,
+      level 1/.style={sibling distance=1cm},
+      level 2/.style={sibling distance=0.7cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},]89
+      \node {*}
+        child{ node {-} 
+          child { node {1}}}
+        child { node {/}
+          child { node {1}
+          }
+          child { node {x}}
+        }
+        child { node {3}
+        }
+        child { node {y}
+        }
+        child { node {-}
+          child { node {1}
+          }
+        }
+        child { node {2}
+        }
+        child { node {x}
+        };
+    \end{tikzpicture}
+    \caption{Det udfladede træ}
+    \label{fig:sub1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[level distance=1.5cm,
+      level 1/.style={sibling distance=1cm},
+      level 2/.style={sibling distance=0.75cm},
+      level 3/.style={sibling distance=1cm},
+      every node/.style={draw, circle, align=center},]
+      \node {*}
+        child { node {-}
+          child { node {1} }
+        }
+        child { node {-}
+          child { node {1} }
+        }
+        child { node {3} }
+        child { node {2} }
+        child { node {y} }
+        child { node {x} }
+        child { node {/}
+          child { node {1} }
+          child { node {x} }
+        };
+    \end{tikzpicture}
+    \caption{Det sorterede træ fra venstre mod højre}
+    \label{fig:sub2}
+  \end{subfigure}
+  \caption{Det udfladede og sorterede af udtrykket $(3 \cdot y \cdot (-2)/-x) \cdot x$ i processen af kommutativ simplifikation}
+  \label{fig:trees}
+\end{figure}
+
+Generelt, når det gælder simplificering af udtryk, skal man være opmærksom på ikke at ende i et uendeligt loop. Derfor er det vigtigt ikke at definere nogle overfladiske simplificeringer, som er hinandens inverse funktioner. Desuden forsøger funktionerne i dette program altid at skubbe negation af udtryk så langt ud som muligt i håb om, at de kan ophæve hinanden. Dette illustreres blandt andet i figur \ref{fig:trees}, hvor ved udfladning af træet, hvis et af de kommutative udtryk for multiplikation er negativt, fjernes negationen, og der tilføjes i stedet en negation af tallet 1, som ved sortering skubbes til venstre.
 
 
 
@@ -515,8 +654,12 @@ match e with
 \input{sections/vektorer_og_matricer}
 
 \section{Appendiks}
+Hele projektet kan findes på Github, på følgende reference \cite{github_repo}. Udvalgte filer som omtaltes fra projektet er vedlagt i følgende sektioner.
 \subsection{TreeGenerator.fs} \label{sec:treeGenerator.fs}
+\subsection{CommutativeAddSub.fs} \label{sec:commutativeAddSub.fs}
+\subsection{CommutativeMulDiv.fs} \label{sec:commutativeMulDiv.fs}
 \subsection{Matrix.fs} \label{sec:matrix.fs}
+
 \newpage
 \printbibliography
 \end{document}

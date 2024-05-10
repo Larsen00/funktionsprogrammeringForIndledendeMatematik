@@ -25,6 +25,5 @@
     <Compile Include="modules/Matrix.fs" />
     <Compile Include="PBT/Generators.fs" />
     <Compile Include="api.fs" />
-    <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>

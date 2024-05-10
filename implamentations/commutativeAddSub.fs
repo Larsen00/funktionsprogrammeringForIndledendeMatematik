@@ -17,7 +17,6 @@ let expressionSortRank e1 =
 
 // Flattens a expression tree with respect to addition and subtraction
 let rec flatTree e =
-    // printfn "ft %A" e
     match e with
     | Add (a, b) -> flatTree a @ flatTree b
     | Sub (a, b) -> flatTree a @ flatTree (Neg b)

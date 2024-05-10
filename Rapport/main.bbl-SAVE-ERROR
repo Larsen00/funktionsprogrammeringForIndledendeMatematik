@@ -51,6 +51,18 @@
       \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
       \endverb
     \endentry
+    \entry{github_repo}{online}{}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labeltitlesource}{title}
+      \field{title}{Github repository for the project}
+      \verb{urlraw}
+      \verb https://github.com/Larsen00/funktionsprogrammeringForIndledendeMatematik
+      \endverb
+      \verb{url}
+      \verb https://github.com/Larsen00/funktionsprogrammeringForIndledendeMatematik
+      \endverb
+    \endentry
     \entry{gcd}{online}{}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}

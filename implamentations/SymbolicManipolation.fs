@@ -40,63 +40,6 @@ let rec simplifyExpr e =
     | _ -> e 
 
 
-
-
-// // simplifies a addition expression
-// let rec add e1 e2 =
-//     match e1 + e2 with
-//     | Neg a -> neg a
-//     | Add(a, b) -> commutativeAddSub.applyCommutative (Add(a, b))
-//     | Mul(a, b) -> mul a b
-//     | Sub(a, b) -> sub a b
-//     | Div(a, b) -> div a b
-//     | a -> a
-
-// // simplifies a subtraction expression
-// and sub e1 e2 =
-//     match e1 - e2 with
-//     | Neg a -> neg a
-//     | Add(a, b) -> add a b
-//     | Mul(a, b) -> mul a b
-//     | Sub(a, b) -> commutativeAddSub.applyCommutative (Sub(a, b))
-//     | a -> a
-
-// // simplifies a multiplication expression
-// and mul e1 e2:Expr<Number> =
-//     match e1 * e2 with
-//     | Neg a -> neg a
-//     | Add(a, b) -> add a b
-//     | Sub(a, b) -> sub a b
-//     | Div(a, b) -> div a b
-//     | Mul(a, b) -> commutativeMulDiv.applyCommutative (Mul(a, b))
-//     | a -> a
-
-// // simplifies a division expression
-// and div e1 e2:Expr<Number> =
-//     match e1 / e2 with
-//     | Neg a -> neg a
-//     | Add(a, b) -> add a b
-//     | Sub(a, b) -> sub a b
-//     | Mul(a, b) -> mul a b            
-//     | Div(a, b) -> commutativeMulDiv.applyCommutative (Div(a, b))
-//     | a -> a
-
-
-
-
-
-// // Simplifies an Expression 
-// let rec simplifyExpr e =
-//     match e with
-//     | N a when Number.isNegative a -> Neg (N (Number.absNumber a))
-//     | N (Rational(R(a, b))) -> div (N (Int a)) (N (Int b))
-//     | Neg a     -> neg (simplifyExpr a)
-//     | Add(a, b) -> add (simplifyExpr a) (simplifyExpr b) 
-//     | Sub(a, b) -> sub (simplifyExpr a) (simplifyExpr b) 
-//     | Mul(a, b) -> mul (simplifyExpr a) (simplifyExpr b) 
-//     | Div(a, b) -> div (simplifyExpr a) (simplifyExpr b)
-//     | _ -> e 
-
 // insert envirement into an expression
 let rec insertEnv e env =
     match e with

@@ -1,0 +1,15 @@
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\bin\Debug\net7.0\main.deps.json
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\bin\Debug\net7.0\main.runtimeconfig.json
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.AssemblyInfoInputs.cache
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.AssemblyInfo.cs
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets\msbuild.main.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets\msbuild.build.main.props
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.main.props
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.main.props
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\scopedcss\bundle\main.styles.css
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.csproj.Up2Date
+C:\Users\jonas\OneDrive - Danmarks Tekniske Universitet\DTU\Bachelorprojekt\main\obj\Debug\net7.0\main.genruntimeconfig.cache

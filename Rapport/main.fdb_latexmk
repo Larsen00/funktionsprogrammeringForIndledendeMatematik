@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber main"] 1715259542.95731 "main.bcf" "main.bbl" "main" 1715264779.26574 0
-  "main.bcf" 1715264778 108852 bec7302add8ada3f08eec87815d069c2 "pdflatex"
-  "references.bib" 1715254452 3326 ae8702df99e9f03dc964ca18363dc84e ""
+["biber main"] 1715361760.19441 "main.bcf" "main.bbl" "main" 1715362206.52538 0
+  "main.bcf" 1715362206 109034 c56ada38513eea552bdc10d0a3417cf6 "pdflatex"
+  "references.bib" 1715342482 3470 4956a82aaa462bd5b0b55769c6df80d9 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1715264774.70391 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715264779.26653 0
+["pdflatex"] 1715362203.08338 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715362206.52595 0
   "../modules/Expression.fsi" 1715168534 1083 28336de5a3a3dbf3ec9513325a005718 ""
-  "../modules/number.fsi" 1715184224 893 be8acf11948a81caff5bcb33710988d9 ""
+  "../modules/number.fsi" 1715355862 854 3de5d4c72bea5dd6354557695ef69d08 ""
   "C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1711822995 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/jonas/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1709377753 24231886 174baf2f21389c9876119ca6be5d82d6 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -26,6 +26,7 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx6.tfm" 1136765053 1344 8a0be4fe4d376203000810ad4dc81558 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx7.tfm" 1136765053 1336 3125ccb448c1a09074e3aa4a9832f130 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx8.tfm" 1136765053 1332 1fde11373e221473104d6cc5993f046e ""
+  "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbxti10.tfm" 1136765053 1532 9162035f4e7176612125649e348e2195 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmcsc10.tfm" 1136765053 1300 63a6111ee6274895728663cf4b4e7e81 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi6.tfm" 1136765053 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi8.tfm" 1136765053 1520 eccf95517727cb11801f4f1aee3a21b4 ""
@@ -46,6 +47,7 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmtt9.tfm" 1136765053 764 c98a2af25c99b73a368cf7336e255190 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1247596666 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
+  "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb" 1247596667 36554 b67dc2cfa451409e100b3fcf5f506509 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb" 1247596667 32001 6aeea3afe875097b1eb0da29acd61e28 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1247596667 30251 6afa5cb1d0204815a708a080681d4674 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1247596667 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
@@ -275,17 +277,17 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "Opsætning/DTULogo.png" 1709375398 71324 08d7a624ec2f9f1df696ed86b2d8893d ""
-  "Opsætning/Pakker.tex" 1715243963 8141 b8e9977d74e7b62ff27dfe21a5c8ac8f ""
+  "Opsætning/Pakker.tex" 1715360522 8250 687059877d2822e2be7b28f03e73f70d ""
   "Opsætning/forside.tex" 1711819024 2148 c278081412b431856ee7aa61dfa55a2c ""
-  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715262877 35946 faabc6e8ffe2a2ddaf2ad16227390438 ""
+  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715362202 48500 ec3d38ea06b1684ada2cbcf120daf66f ""
   "exampleCodes/rational.fsi" 1710006846 1158 0ae0d1def194755e712e9dce626f4df7 ""
   "exampleCodes/valid1.fsx" 1710682578 174 1c793f2026d3f274ba30a14fa979c2cc ""
-  "main.aux" 1715264778 21761 545b79af081a838470ea49c92e10617b "pdflatex"
-  "main.bbl" 1715259545 10279 559c4cc3f6d32ed300fc0d17c4038074 "biber main"
-  "main.out" 1715264778 6676 7bb8d3ea3c6015c653fc0cdc41648146 "pdflatex"
-  "main.run.xml" 1715264778 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
-  "main.tex" 1715262877 35946 faabc6e8ffe2a2ddaf2ad16227390438 ""
-  "main.toc" 1715264778 3655 8813003cdd42018f35e6a4a35a484430 "pdflatex"
+  "main.aux" 1715362206 23956 913782440c73009bbd47a92760799b42 "pdflatex"
+  "main.bbl" 1715361762 10807 3333cb441b78c1280c1ab774eeaa1202 "biber main"
+  "main.out" 1715362206 7374 81dae61ef6c3fc5480f87d381e5f9ca7 "pdflatex"
+  "main.run.xml" 1715362206 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
+  "main.tex" 1715362202 48500 ec3d38ea06b1684ada2cbcf120daf66f ""
+  "main.toc" 1715362206 4032 dc2a9da9ee89b07fbc35cf11b23fd169 "pdflatex"
   "sections/Fundamentale_koncepter.tex" 1715264771 10101 7286d5d3a8cf0a8cadb389398d204929 ""
   "sections/vektorer_og_matricer.tex" 1714989359 23796 f357ad973493b545ffc071b54c007c5d ""
   (generated)

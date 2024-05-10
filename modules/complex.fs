@@ -5,8 +5,8 @@ type complex = | C of rational * rational
 
 let newComplex (a, b) = C(a, b)
 
-// division of a complex number with a number
-let complexDivNumber c (n) = 
+// division of a complex number with a rational number
+let complexDivRational c (n) = 
     match c with
     | _ when isZero n ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
     | C (a, b) -> C (a / n, b / n) 
@@ -22,7 +22,7 @@ let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
 
 // Division of complex numbers
 let divComplex z1 z2 =
-    complexDivNumber (mulComplex z1 (conjugate z2)) <| mulConjugate z2
+    complexDivRational (mulComplex z1 (conjugate z2)) <| mulConjugate z2
 
 type complex with
     static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)
@@ -30,7 +30,7 @@ type complex with
     static member (*)  (n, C(a, b))       =  C(n * a, n * b)
     static member (*)  (C(a, b), n)       =  C(n * a, n * b)
     static member (*)  (z1, z2)           =  mulComplex z1 z2
-    static member (/)  (z, n)             =  complexDivNumber z n
+    static member (/)  (z, n)             =  complexDivRational z n
     static member (/)  (z1, z2)           =  divComplex z1 z2 
     static member (~-) (C(a, b))          =  C(-a, -b)
 

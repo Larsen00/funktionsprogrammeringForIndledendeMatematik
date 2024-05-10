@@ -35,6 +35,22 @@
       \verb https://www.geeksforgeeks.org/%20convert-infix-expression-to-postfix-expression/
       \endverb
     \endentry
+    \entry{diff}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Differentiation Rules}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Differentiation_rules
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Differentiation_rules
+      \endverb
+    \endentry
     \entry{fpe}{online}{}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}

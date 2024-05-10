@@ -4,3 +4,7 @@
 * Til devision er det en ide at lave en funktion som laver en list af alt som ganges sammen eller divs, så skubbe alle N frem, så X, så divs. der efter gang alle Numbers sammen.
     => den kan burges til reducering af Mul.
     => Den kan bruges til reducering af DIV
+
+* diskussion's emner:
+    - bedre overflow håndtering 
+    - lade complex være af 

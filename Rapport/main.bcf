@@ -2366,18 +2366,21 @@
     <bcf:citekey order="3" intorder="1">fpe</bcf:citekey>
     <bcf:citekey order="4" intorder="1">Rational_number</bcf:citekey>
     <bcf:citekey order="5" intorder="1">gcd</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">Polsk_notation</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">tree_algo</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">Inverse_function</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">convert_expression</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">convert_expression</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">precedens_associativity</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">mat1a</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">mat1a</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">Polsk_notation</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">tree_algo</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">Inverse_function</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">convert_expression</bcf:citekey>
     <bcf:citekey order="12" intorder="1">convert_expression</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">major_order</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">list_comprehension</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">mat1a</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">mat1b</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">github_repo</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">precedens_associativity</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">convert_expression</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">diff</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">major_order</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">list_comprehension</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">mat1a</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">mat1b</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">github_repo</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

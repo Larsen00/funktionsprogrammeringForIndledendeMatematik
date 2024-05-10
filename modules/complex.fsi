@@ -2,7 +2,7 @@ module complex
 open rational
 
 type complex = | C of rational * rational
-    with
+with
     static member ( + )  : complex * complex -> complex
     static member ( - )  : complex * complex -> complex
     static member ( * )  : rational * complex -> complex

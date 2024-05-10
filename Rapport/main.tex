@@ -10,11 +10,11 @@
 
 % Definer en tilpasset kommando til at citere kun med titlen i en fodnote
 \DeclareCiteCommand{\footcitetitle}[\mkbibfootnote]
-  {\usebibmacro{prenote}}
+  {\usebibmacro{prenote}} % Pre-note handler, her kan du indsætte information før selve citatet
   {\usebibmacro{citeindex}%
    \printtext[bibhyperref]{\printfield{title}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+  {\multicitedelim} % Håndterer separator mellem flere citationer
+  {\usebibmacro{postnote}} % Tilføjer post-note, bruges til at indsætte sidetal eller lignende efter citatet
 
 
 
@@ -22,14 +22,6 @@
 \input{Opsætning/forside}
 \tableofcontents
 \newpage
-% \section{Introduktion}
-
-
-% I 2023 valgte Danmarks Tekniske Universitet at anvende Python som et hjælpeværktøj i deres grundlæggende matematikkursus "01001 Matematik 1a (Polyteknisk grundlag)". Python er et af de mest anvendte programmeringssprog \footcitetitle{statista2023}, kun overgået af to sprog, der primært bruges sammen til at udvikle hjemmesider. Derfor har Python, med en række matematiske programudvidelser som SymPy \footcitetitle{sympy}, været et oplagt valg som programmeringssprog til det grundlæggende matematikkursus tilbudt af DTU.
-
-% Projektet vil undersøge, hvordan et funktionsprogrammeringssprog, kan gavne de studerendes forståelse af de grundlæggende matematiske koncepter. Formålet er at guide læseren gennem opbygningen af en række funktionsprogrammer baseret på grundlæggende matematik \footcitetitle{mat1apage} og dermed illustrere anvendelser. Projektet beskriver en generel struktur til opbygning og anvendelse af et funktions programmeringsprogram. Der tages udgangspunkt i F\# \footcitetitle{fsharp}, men beskrivelserne af programmerne vil også kunne anvendes i lignende funktionsprogrammeringssprog.
-
-% Projektet vil guide en læser med en forståelse af den grundlæggende matematik, til opbygningen af et funktionsprogrammerings program der kan repræsentere matematiske udtryk og matricer. Dermed udvide læsernes forståelse af hvordan funktionsprogrammering kan anvendes til at løse matematiske problemer.
 
 \section{Introduktion} 
 
@@ -45,50 +37,182 @@ Gennem en systematisk tilgang til design og implementering af matematiske module
 \input{sections/Fundamentale_koncepter}
 
 \section{Symbolske udtryk}
-Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et mondul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
-Vi begynder med opbygningen af et mondul som kan repræsentere tal mængder. Typen for tal, består af tre konstruktører, for henholdvis heltal, rationale tal og komplekse tal. Dog er mondulet lavet med henblik på at kunne udvides med flere typer af tal. Måden resten af programmet er lavet på, gør de eneste grav til tal er at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Samt at tallet inden for addition og multiplikation er associative. Dette gælder blandt andet ikke for en vektor, derfor vil vi senere betragte at udvide programmet med en type for vektorer. En udvidelse kunne være for reele tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for ikke at komplicere programmet vil vi i denne opgave ikke betragte floats.  
+Vi begynder med opbygningen af et modul, der kan repræsentere talgrupper. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal. Dog er modulet designet med henblik på, at det kan udvides med flere taltyper. Ved udvidelse er det eneste krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Desuden skal tallene inden for addition og multiplikation være associative. Dette gælder for eksempel ikke for en vektor, hvorfor vi senere vil overveje at udvide programmet med en type for vektorer. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
 
-\subsubsection{Rationelle tal Mondul}
-Repræsentationen af rationale tal kan laves ved hjælp af danne et par af integers, hvor den ene integer er tælleren og den anden er nævneren. 
+\subsubsection{Rationelle tal modul}
+Repræsentationen af rationale tal kan laves ved hjælp af at danne et par af heltal, hvor det ene heltal er tælleren, og det andet er nævneren.
 
-\begin{lstlisting}
-    [language={FSharp}, 
+
+\begin{lstlisting}[language={FSharp}, 
     label={type_rationel},
     caption={Typen for rationelle tal}]
 type rational = R of int * int
 \end{lstlisting}
+Nedenfor er der givet en signaturfil for rational modulet \ref{rational_fsi}. I implementeringsfilen overloades de matematiske operatorer ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}.
 
-Nedestående er der givet en signatur fil for rational mondulet \ref{rational_fsi}. i Implementerings filen overloades de matematiske operatorer, ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}. 
 \lstinputlisting[
     language=FSharp,
     label={rational_fsi},
-    caption={Signatur filen for rational mondulet}
+    caption={Signaturfilen for rational-modulet}
 ]{exampleCodes/rational.fsi}
-
-For at kunne sammenligne, men også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simpleste from. Dette kan gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Der udover er det vigtigt at være opmærksom på man ikke foretager nul division. Derfor vil implementerings filen kaste en "System.DivideByZeroException" hvis nævneren er eller bliver nul. Signatur filen indeholder en række funktioner som bliver anvendt af andre filer. 
+For at kunne sammenligne og også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simplest form. Dette gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Derudover er det vigtigt at være opmærksom på ikke at foretage nul division. Derfor vil implementeringsfilen kaste en "System.DivideByZeroException", hvis nævneren er eller bliver nul. Signaturfilen indeholder en række funktioner, som anvendes af andre filer. Det vil desuden være nødvendigt at kunne håndtere overflow, idet heltallene, der repræsenterer de rationelle tal, under eller efter operationen kan blive for store til korrekt at blive repræsenteret af 32-bit. Da denne rapport fokuserer på implementeringen af matematiske koncepters og ikke numeriske algoritmer, vil modulet blot rapportere en fejl, hvis der opstår overflow.
  
-\subsubsection{Komplekse tal Mondul}
+% \subsubsection{Komplekse tal modul}
+% Vi skal nu dykke lidt mere ned i selve impamenteringen af et mondul for komplekse tal. Derfor er signaturfilen \textit{complex.fsi} givet i Appendiks \ref{sec:complex.fsi}. Først defineres en type for komplekse tal, som består af to rationale tal, henholdsvis for real- og imaginærdelen se Listing \ref{type_complex}.
 
-\subsubsection{Tal Mondulet}
-Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Vi begynder med at definere en type for tal \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
+% \begin{lstlisting}[language={FSharp}, 
+%     label={type_complex},
+%     caption={Typen for komplekse tal}]
+% type complex = C of rational * rational
+% \end{lstlisting}
 
-% TODO: Tilføj komplekte tal når det er implementeret
+% Vi bygynder dermed med at opskrive en række regne regler i Defination \ref{def:complex} for operationer på komplekse tal, og betragter deres korisponderende implementering i mondulet. 
+% \vspace{0.5cm}
+% \begin{definition}[Regne regler for komplekse tal]\label{def:complex}
+%   Lad $a, b, c, d \in \mathbb{Q}$ Så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
+%   \begin{enumerate}
+%     \item \textbf{Addition} \\ $(a + bi) + (c + di) = (a + c) + (b + d)i$
+%     \item \textbf{Subtraktion} \\ $(a + bi) - (c + di) = (a - c) + (b - d)i$
+%     \item \textbf{Multiplikation} \\ $(a + bi) \cdot (c + di) = (ac - bd) + (bc + ad)i$
+%     \item \textbf{Kvadratisk form} \\ $ (a + bi) \cdot (a - bi) = a^2 + b^2$
+%     \item \textbf{Konjugering} \\ $\overline{a + bi} = a - bi$
+%     \item \textbf{Division} \\ $\frac{a + bi}{c + di} = \frac{(a + bi)\cdot(c - di)}{c^2 + d^2}$
+%   \end{enumerate}
+% \end{definition}
+
+% Ved implamenteringen se Listing \ref{complex_operations} af additon, subtraktion, multiplikation samt skalering med et rationelt tal som kan udledes udfra multiplication ved at lade den imaginærdelen være $0$. Er simple operationer som ikke behøves at defineres i særskilte funktioner, men kan anvendes direkte på overloadingen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion da den skal anvendes af divisions funktionen. 
+
+% \begin{lstlisting}[language={FSharp}, 
+%     label={complex_operations},
+%     caption={Overloadning af operationer på komplekse tal}]
+% // complexDivRational: complex -> rational -> complex
+% let complexDivRational c (n) = 
+%     match c with
+%     | _ when isZero n ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
+%     | C (a, b) -> C (a / n, b / n) 
+
+% // mulConjugate: complex -> rational
+% let mulConjugate (C(a, b)) = a*a + b*b
+
+% // conjugate: complex -> complex
+% let conjugate (C (a, b)) = C (a, -b)
+
+% // mulComplex: complex -> complex -> complex
+% let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
+
+% // divComplex: complex -> complex -> complex
+% let divComplex z1 z2 =
+%     complexDivRational (mulComplex z1 (conjugate z2)) <| mulConjugate z2
+
+% type complex with
+%     static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)
+%     static member (-)  (C(a, b), C(c, d)) =  C(a - c, b - d)
+%     static member (*)  (n, C(a, b))       =  C(n * a, n * b)
+%     static member (*)  (C(a, b), n)       =  C(n * a, n * b)
+%     static member (*)  (z1, z2)           =  mulComplex z1 z2
+%     static member (/)  (z, n)             =  complexDivRational z n
+%     static member (/)  (z1, z2)           =  divComplex z1 z2 
+%     static member (~-) (C(a, b))          =  C(-a, -b)
+% \end{lstlisting}    
+
+% Borset fra division af to komplekse tal, ligner de resuterende overloadning på operationerne deres respektive matematiske definitioner. Men nærstudere vi divisionen af to komplekse tal, ser vi at den også gør der er bare brug for lidt funktioner til at kunne udføre divisionen. Først konjugeres nævneren dertil multiplikeres resultatet med tælleren. Sidst divideres resultatet af multiplikationen med kvadratet af nævneren.
+
+\subsubsection{Komplekse tal-modul}
+Vi skal nu dykke lidt mere ned i implementeringen af et modul for komplekse tal. Derfor er signaturfilen \textit{complex.fsi} givet i Appendiks \ref{sec:complex.fsi}. Først defineres en type for komplekse tal, som består af et rationale tal par, henholdsvis for realdelen og imaginærdelen, se Listing \ref{type_complex}.
+
+\begin{lstlisting}[language={FSharp}, 
+    label={type_complex},
+    caption={Typen for komplekse tal}]
+type complex = C of rational * rational
+\end{lstlisting}
+
+Vi begynder dermed med at opskrive en række regneregler i Definition \ref{def:complex} for operationer på komplekse tal, og betragter deres tilsvarende implementering i modulet. 
+\vspace{0.5cm}
+\begin{definition}[Regneregler for komplekse tal]\label{def:complex}
+  Lad $a, b, c, d \in \mathbb{Q}$ Så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
+  \begin{enumerate}
+    \item \textbf{Addition} \\ $(a + bi) + (c + di) = (a + c) + (b + d)i$
+    \item \textbf{Subtraktion} \\ $(a + bi) - (c + di) = (a - c) + (b - d)i$
+    \item \textbf{Multiplikation} \\ $(a + bi) \cdot (c + di) = (ac - bd) + (bc + ad)i$
+    \item \textbf{Kvadratisk form} \\ $ (a + bi) \cdot (a - bi) = a^2 + b^2$
+    \item \textbf{Konjugering} \\ $\overline{a + bi} = a - bi$
+    \item \textbf{Division} \\ $\frac{a + bi}{c + di} = \frac{(a + bi)\cdot(c - di)}{c^2 + d^2}$
+  \end{enumerate}
+\end{definition}
+
+Ved implementeringen, se Listing \ref{complex_operations}, af addition, subtraktion, multiplikation samt skalering med et rationelt tal, som kan udledes fra multiplikation ved at lade den imaginære del være $0$, er simple operationer, som ikke behøver at defineres i særskilte funktioner, men kan anvendes direkte på overskrivningen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion, da den skal anvendes af divisionsfunktionen. 
+
+\begin{lstlisting}[language={FSharp}, 
+    label={complex_operations},
+    caption={Overskrivning af operationer på komplekse tal}]
+// complexDivRational: complex -> rational -> complex
+let complexDivRational c (n) = 
+    match c with
+    | _ when isZero n ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
+    | C (a, b) -> C (a / n, b / n) 
+
+// mulConjugate: complex -> rational
+let mulConjugate (C(a, b)) = a*a + b*b
+
+// conjugate: complex -> complex
+let conjugate (C (a, b)) = C (a, -b)
+
+// mulComplex: complex -> complex -> complex
+let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
+
+// divComplex: complex -> complex -> complex
+let divComplex z1 z2 =
+    complexDivRational (mulComplex z1 (conjugate z2)) <| mulConjugate z2
+
+type complex with
+    static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)
+    static member (-)  (C(a, b), C(c, d)) =  C(a - c, b - d)
+    static member (*)  (n, C(a, b))       =  C(n * a, n * b)
+    static member (*)  (C(a, b), n)       =  C(n * a, n * b)
+    static member (*)  (z1, z2)           =  mulComplex z1 z2
+    static member (/)  (z, n)             =  complexDivRational z n
+    static member (/)  (z1, z2)           =  divComplex z1 z2 
+    static member (~-) (C(a, b))          =  C(-a, -b)
+\end{lstlisting}    
+
+Bortset fra division af to komplekse tal, ligner de resulterende overbelastninger på operationerne deres respektive matematiske definitioner. Men når vi nærmere studerer divisionen af to komplekse tal, ser vi, at der blot er brug for få funktioner til at kunne udføre divisionen. Først konjugeres nævneren, derefter multiplikeres resultatet med tælleren. Til sidst divideres resultatet af multiplikationen med kvadratet af nævneren. Da komplekse tal som en talmængde indeholder heltal og rationale tal, vil vi i det følgende afsnit omkring tal modulet anvende komplekse tal til udføre de matematiske operationer i modulet.
+
+
+\subsubsection{Tal modulet}
+Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive testet i sektion \ref{sec:PBT_number}.
+
+\vspace{0.5cm}
+\begin{egenskab}[Egenskaber for tal]\label{egenskab:tal}
+Lad $a, b, c \in $ Number, så gælder følgende egenskaber\footcitetitle[se. Side 60 Theorem 3.10 og Theorem 3.11]{mat1a}:
+\begin{enumerate}
+  \item Addition og multiplikation er \textbf{associativitet} \\ $a + (b + c) = (a + b) + c \land a \cdot (b \cdot c) = (a \cdot b) \cdot c$ 
+  \item Addition og multiplikation er \textbf{Kommutativitet} \\ $a + b = b + a \land a \cdot b = b \cdot a$
+  \item \textbf{Distributivitet} af multiplikation over addition\\ $a \cdot (b + c) = a \cdot b + a \cdot c$
+  \item Addition og multiplikation har et \textbf{neutral element} \\ $a + 0 = a \land a \cdot 1 = a$
+  \item \textbf{Omvendt funktion} eksistere til addition \\ $a + (-a) = 0$
+  \item \textbf{Omvendt funktion} eksistere til multiplikation for $a \in$ Number \textbackslash \{0\} \\ $a \cdot a^{-1} = 1$
+\end{enumerate}
+\end{egenskab}
+
+Vi begynder med at definere en type for tal \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
+
 \begin{lstlisting}[
     language={FSharp}, 
     label={number_type}, 
     caption={Typen for Number}
     ]
-    type Number = | Int of int | Rational of rational
+    type Number = | Int of int | Rational of rational | Complex of complex
 \end{lstlisting}
 
-Betragtes signatur filen for Number mondulet \ref{Number_fsi}, ses det at der igen er defineret overloading af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
+Betragtes signatur filen for Number modulet \ref{Number_fsi}, ses det at der igen er defineret overloading af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
 
 \lstinputlisting[
     language=FSharp,
     label={Number_fsi},
-    caption={Signatur filen for Number mondulet}
+    caption={Signatur filen for Number modulet}
 ]{../modules/number.fsi}
 
 Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som parameter. Funktionen vil derefter matche på de to tal og anvende den operation på de to tal. 
@@ -130,7 +254,7 @@ type Number with
   static member (~-) (a)   = neg a |> tryMakeInt
 \end{lstlisting}
 
-Dermed har vi et mondul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
+Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
 
 \subsection{Matematiske udtryk}
 \subsubsection{Polsk notation}
@@ -302,7 +426,7 @@ Det skal bemærkes der er forskel på den unære og binære operator '$-$' i tr�
 \end{figure}
 
 
-Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et mondul som kan repræsentere udtryk ved brug af prefix notation.
+Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et modul som kan repræsentere udtryk ved brug af prefix notation.
 Postorder Traversal blive anvendt til at kunne rekursivt simplificere og evaluere udtryk.
 
 Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificeret Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
@@ -339,7 +463,7 @@ Signatur filen indeholder overloadings på de matematiske operationer, så de ka
 \lstinputlisting[
     language=FSharp,
     label={Expression.fsi},
-    caption={Signatur filen for Expression mondulet}
+    caption={Signatur filen for Expression modulet}
     ]{../modules/Expression.fsi}
 
 
@@ -386,7 +510,7 @@ Derudover skal det om negation også gælde at:
 \end{egenskab}
 
 
-Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number mondulet. 
+Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number modulet. 
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -642,19 +766,100 @@ Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen 
 Generelt, når det gælder simplificering af udtryk, skal man være opmærksom på ikke at ende i et uendeligt loop. Derfor er det vigtigt ikke at definere nogle overfladiske simplificeringer, som er hinandens inverse funktioner. Desuden forsøger funktionerne i dette program altid at skubbe negation af udtryk så langt ud som muligt i håb om, at de kan ophæve hinanden. Dette illustreres blandt andet i figur \ref{fig:trees}, hvor ved udfladning af træet, hvis et af de kommutative udtryk for multiplikation er negativt, fjernes negationen, og der tilføjes i stedet en negation af tallet 1, som ved sortering skubbes til venstre.
 
 
+% \subsection{Differentiering af udtryk}
+% Vi kan nu betragte den første implementering der benytter vores udtryks modul som sammentidig vil understege vigtigheden af at kunne simplificere udtryk. Vi bygynder igen med at opskive nogle linaritets algebraiske egenskaber som differentiering skal overholde. Egenskaberne vil blive testet i sektion \ref{sec:PBT_differentiation}.
+% \vspace{0.5cm}
+% \begin{egenskab}[linearitetsbetingelserne\footcitetitle{diff}]\label{egenskab:differentiation}
+%   Lad $f$ og $g$ være udtryk, $a$ og $b$ være fra tal modulet, så gælder følgende:
+%   \begin{enumerate}
+%     \item \textbf{Skaleringsreglen} \\
+%     \(\frac{d}{dx}(af) = a\frac{df}{dx}\)
+%     \item \textbf{Sumreglen} \\
+%     \(\frac{d}{dx}(f+g) = \frac{df}{dx} + \frac{dg}{dx}\)
+%     \item \textbf{Subtraktionsreglen} \\
+%     \(\frac{d}{dx}(f-g) = \frac{df}{dx} - \frac{dg}{dx}\)
+%     \item \textbf{Produktreglen} \\
+%     \(\frac{d}{dx}(fg) = \frac{df}{dx}g + f\frac{dg}{dx}\)
+%     \item \textbf{Kvotientreglen} \\
+%     \(\frac{d}{dx}\left(\frac{f}{g}\right) = \frac{\frac{df}{dx}g - f\frac{dg}{dx}}{g^2}\)
+% \end{enumerate}
 
-\subsection{differentiering af udtryk}
+%   \end{egenskab}
+
+% Vi kan nu betragte funktion for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, som tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionsprogrammers sprog, da det ses hvordan 4 af reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte som de står skrevet. 
+
+% \begin{lstlisting}[
+%   language={FSharp}, 
+%   label={lst:diff_expr}, 
+%   caption={Differentiering af et udtryk}
+%   ]
+% // diff: Expr<Number> -> char -> Expr<Number>
+% let rec diff e dx = 
+%     match e with
+%     | X f when f = dx -> N (Int 1)
+%     | X _ -> N (Int 0)
+%     | N _ -> N (Int 0)
+%     | Neg f -> diff (Mul (N (Int 1), f)) dx
+%     | Add(f, g) -> Add(diff f dx, diff g dx)
+%     | Sub(f, g) -> Sub(diff f dx, diff g dx)
+%     | Mul(f, g) -> Add(Mul(diff f dx, g), Mul(f, diff g dx))
+%     | Div(f, g) -> Div(Sub(Mul(diff f dx, g), Mul(f, diff g dx)), Mul(g, g))
+% \end{lstlisting}
+\subsection{Differentiering af udtryk}
+Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, som samtidig vil understrege vigtigheden af at kunne simplificere udtryk. Vi begynder igen med at opskrive nogle algebraiske linearitetsegenskaber, som differentieringen skal overholde. Disse egenskaber vil blive testet i sektion \ref{sec:PBT_differentiation}.
+\vspace{0.5cm}
+\begin{egenskab}[Linearitetsbetingelserne\footcitetitle{diff}]\label{egenskab:differentiation}
+  Lad $f$ og $g$ være udtryk, og $a$ og $b$ være tal fra talmodulet, så gælder følgende:
+  \begin{enumerate}
+    \item \textbf{Skaleringsreglen} \\
+    \(\frac{d}{dx}(af) = a\frac{df}{dx}\)
+    \item \textbf{Sumreglen} \\
+    \(\frac{d}{dx}(f+g) = \frac{df}{dx} + \frac{dg}{dx}\)
+    \item \textbf{Subtraktionsreglen} \\
+    \(\frac{d}{dx}(f-g) = \frac{df}{dx} - \frac{dg}{dx}\)
+    \item \textbf{Produktreglen} \\
+    \(\frac{d}{dx}(fg) = \frac{df}{dx}g + f\frac{dg}{dx}\)
+    \item \textbf{Kvotientreglen} \\
+    \(\frac{d}{dx}\left(\frac{f}{g}\right) = \frac{\frac{df}{dx}g - f\frac{dg}{dx}}{g^2}\)
+  \end{enumerate}
+\end{egenskab}
+
+Funktionen for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, som tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionelt programmeringssprog, da det ses, hvordan fire af reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte, som de er beskrevet.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:diff_expr}, 
+  caption={Differentiering af et udtryk}
+  ]
+// diff: Expr<Number> -> char -> Expr<Number>
+let rec diff e dx = 
+    match e with
+    | X f when f = dx -> N (Int 1)
+    | X _ -> N (Int 0)
+    | N _ -> N (Int 0)
+    | Neg f -> diff (Mul (N (Int 1), f)) dx
+    | Add(f, g) -> Add(diff f dx, diff g dx)
+    | Sub(f, g) -> Sub(diff f dx, diff g dx)
+    | Mul(f, g) -> Add(Mul(diff f dx, g), Mul(f, diff g dx))
+    | Div(f, g) -> Div(Sub(Mul(diff f dx, g), Mul(f, diff g dx)), Mul(g, g))
+\end{lstlisting}
+
+
+\subsection{Multivariable polynomialer af første grad}
 
 \subsection{PBT af udtryk} % Beskriv hvordan man laver property based testen før simplifikationen
+\subsubsection{Tal modulet}\label{sec:PBT_number}
 \subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
 \subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
 \subsubsection{Simplifikation af udtryk}\label{sec:PBT_simplification}
+\subsubsection{Differentiering af udtryk}\label{sec:PBT_differentiation}
 
 \section{Vektorer og Matricer}
 \input{sections/vektorer_og_matricer}
 
 \section{Appendiks}
 Hele projektet kan findes på Github, på følgende reference \cite{github_repo}. Udvalgte filer som omtaltes fra projektet er vedlagt i følgende sektioner.
+\subsection{complex.fsi} \label{sec:complex.fsi}
 \subsection{TreeGenerator.fs} \label{sec:treeGenerator.fs}
 \subsection{CommutativeAddSub.fs} \label{sec:commutativeAddSub.fs}
 \subsection{CommutativeMulDiv.fs} \label{sec:commutativeMulDiv.fs}

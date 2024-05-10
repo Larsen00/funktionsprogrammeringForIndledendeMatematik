@@ -1,5 +1,4 @@
 module Number
-// open rantionalAndComplex
 open rational
 open complex
 
@@ -7,15 +6,12 @@ type Number =
     | Int of int
     | Rational of rational
     | Complex of complex
-    with
+with
     static member ( + )  : Number * Number -> Number
     static member ( - )  : Number * Number -> Number 
     static member ( * )  : Number * Number -> Number 
     static member ( / )  : Number * Number -> Number
     static member ( ~- ) : Number -> Number
-
-
-
 
 val zero         : Number
 val one          : Number 

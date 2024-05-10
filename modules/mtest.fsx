@@ -3,6 +3,7 @@ open Number
 open Matrix
 open rational
 open complex
+open Expression
 
 // let v1 = vector [Int 3; Int 0; Int 0]
 // let v2 = vector [Int 1; Int 2; Int 0]
@@ -15,16 +16,12 @@ open complex
 
 // Axequalb m1 b
 
-let m = M ([V ([Int 1; Int 0; Int 0; Int 0; Int 0; Int 0; Int 0], Matrix.R);
-    V ([Int 2; Int 1; Int 0; Rational (R (2, 3)); Int 0; Int 0; Int 0], Matrix.R);
-    V ([Int 0; Int 0; Int 1; Int 0; Int 0; Int 0; Int 0], Matrix.R);
-    V ([Int 0; Complex (C (R (-5, 2), R (-1, 1))); Int 0;
-        Complex (C (R (-2, 3), R (-2, 3))); Int 0; Int 0; Int 0], Matrix.R);
-    V ([Int 0; Complex (C (R (-5, 3), R (-2, 3))); Int 0;
-        Complex (C (R (-4, 9), R (-4, 9))); Int 1; Int 0; Int 0], Matrix.R)], Matrix.R)
+let m = M ([V ([Int 0; Int 0; Rational (R (-1, 3)); Int 1], Matrix.R);
+            V ([Int -2; Complex (C (R (5, 1), R (6, 1))); Int 0;
+                Complex (C (R (-3, 1), R (-1, 1)))],  Matrix.R);
+            V ([Int 0; Int 0; Int 1; Int 0],  Matrix.R);
+            V ([Int -1; Complex (C (R (2, 1), R (3, 1))); Rational (R (8, 3)); Int 1],  Matrix.R)],
+         Matrix.R)
 
-let tm = transposeMatrix m
-// printfn "%A" (stringMatrix tm)
-let um = orthogonalBacis tm
-// isOrthogonalBacis um |> printfn "%A"
-hasSameSpan tm um |> printfn "hassamespan: %A"
+
+printfn "%A" (stringMatrix <| rowEchelonForm m)

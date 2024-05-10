@@ -28,15 +28,4 @@ let _ = Check.Quick gramSchmidtIsOrthogonal2
 printfn "fullRankedMatrixIsFullRanked"
 let _ = Check.Quick fullRankedMatrixIsFullRanked
 
-(*
-#TODO
-fullRankedMatrixIsFullRanked
-Falsifiable, after 66 tests (0 shrinks) (StdGen (1421224008, 297328343)):
-Original:
-M ([V ([Int 0; Int 0; Rational (R (-1, 3)); Int 1], R);
-    V ([Int -2; Complex (C (R (5, 1), R (6, 1))); Int 0;
-        Complex (C (R (-3, 1), R (-1, 1)))], R);
-    V ([Int 0; Int 0; Int 1; Int 0], R);
-    V ([Int -1; Complex (C (R (2, 1), R (3, 1))); Rational (R (8, 3)); Int 1], R)],
-   R)
-*)
+

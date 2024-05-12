@@ -53,28 +53,30 @@ let rec insertEnv e env =
 
 
 // Finds X in an expression and returns the reverse expression
-let rec expressionOnX t v =
-    match t with
-    | N _ | X _ -> fun a -> a
-    | Neg(x) when x = v -> fun a -> Neg a
-    | Add(x, y) | Add(y, x) | Sub(y, x) when x = v -> fun a -> Sub(a, y)
-    | Sub(x, y) when x = v -> fun a -> Add(a, y)
-    | Mul(x, y) | Mul(y, x) when x = v -> fun a -> Div(a, y)
-    | Div(x, y) when x = v -> fun a -> Mul(a, y)
-    | Div(_, x) when x = v -> fun a -> Mul(a, x)
-    | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) -> fun a -> expressionOnX x v a |> expressionOnX y v 
-    | Neg(x) -> fun a -> expressionOnX x v a
+let rec expressionOnX hs x =
+    match hs with
+    | N _ | X _ -> fun e -> e
+    | Neg(a) when a = x -> fun e -> Neg e
+    | Sub(a, b) when a = x -> fun e -> Add(e, b)
+    | Div(a, b) when a = x -> fun e -> Mul(e, b)
+    | Div(_, a) when a = x -> fun e -> Mul(e, a)
+    | Mul(a, b) | Mul(b, a) when a = x -> fun e -> Div(e, b)
+    | Add(a, b) | Add(b, a) | Sub(b, a) when a = x -> fun e -> Sub(e, b)
+    | Add(a, b) | Sub(a, b) | Mul(a, b) | Div(a, b) -> fun e -> expressionOnX a x e |> expressionOnX b x 
+    | Neg(a) -> fun e -> expressionOnX a x e
 
 // Isolates X in an equation
 // Cant handle to complex equations, well suited for multivariable polynomials of degree 1
-let rec isolateX lhs rhs v =
+let rec isolateX lhs rhs x =
     let operation = 
-        if containsX lhs v 
-        then expressionOnX lhs v
-        elif containsX rhs v 
-        then expressionOnX rhs v
-        else failwith "Variable not found in either side of the equation"
+        if containsX lhs x 
+            then expressionOnX lhs x
+        elif containsX rhs x 
+            then expressionOnX rhs x
+        else 
+            failwith "Variable not found in either side of the equation"
     match operation lhs |> simplifyExpr, operation rhs |> simplifyExpr with
-    | x, y | y, x when x = v -> (x, y)
-    | x, y -> isolateX x y v
+    | a, b | b, a when a = x -> (a, b)
+    | a, b -> isolateX a b x
+
 

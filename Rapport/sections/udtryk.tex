@@ -1,0 +1,814 @@
+
+\section{Symbolske udtryk}
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+
+\subsection{Tal mængder}
+Vi begynder med opbygningen af et modul, der kan repræsentere talgrupper. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal. Dog er modulet designet med henblik på, at det kan udvides med flere taltyper. Ved udvidelse er det eneste krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Desuden skal tallene inden for addition og multiplikation være associative. Dette gælder for eksempel ikke for en vektor, hvorfor vi senere vil overveje at udvide programmet med en type for vektorer. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
+
+\subsubsection{Rationelle tal modul}
+Repræsentationen af rationale tal kan laves ved hjælp af at danne et par af heltal, hvor det ene heltal er tælleren, og det andet er nævneren.
+
+
+\begin{lstlisting}[language={FSharp}, 
+    label={type_rationel},
+    caption={Typen for rationelle tal}]
+type rational = R of int * int
+\end{lstlisting}
+Nedenfor er der givet en signaturfil for rational modulet \ref{rational_fsi}. I implementeringsfilen overloades de matematiske operatorer ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}.
+
+\lstinputlisting[
+    language=FSharp,
+    label={rational_fsi},
+    caption={Signaturfilen for rational-modulet}
+]{exampleCodes/rational.fsi}
+For at kunne sammenligne og også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simplest form. Dette gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Derudover er det vigtigt at være opmærksom på ikke at foretage nul division. Derfor vil implementeringsfilen kaste en "System.DivideByZeroException", hvis nævneren er eller bliver nul. Signaturfilen indeholder en række funktioner, som anvendes af andre filer. Det vil desuden være nødvendigt at kunne håndtere overflow, idet heltallene, der repræsenterer de rationelle tal, under eller efter operationen kan blive for store til korrekt at blive repræsenteret af 32-bit. Da denne rapport fokuserer på implementeringen af matematiske koncepters og ikke numeriske algoritmer, vil modulet blot rapportere en fejl, hvis der opstår overflow.
+ 
+% \subsubsection{Komplekse tal modul}
+% Vi skal nu dykke lidt mere ned i selve impamenteringen af et mondul for komplekse tal. Derfor er signaturfilen \textit{complex.fsi} givet i Appendiks \ref{sec:complex.fsi}. Først defineres en type for komplekse tal, som består af to rationale tal, henholdsvis for real- og imaginærdelen se Listing \ref{type_complex}.
+
+% \begin{lstlisting}[language={FSharp}, 
+%     label={type_complex},
+%     caption={Typen for komplekse tal}]
+% type complex = C of rational * rational
+% \end{lstlisting}
+
+% Vi bygynder dermed med at opskrive en række regne regler i Defination \ref{def:complex} for operationer på komplekse tal, og betragter deres korisponderende implementering i mondulet. 
+% \vspace{0.5cm}
+% \begin{definition}[Regne regler for komplekse tal]\label{def:complex}
+%   Lad $a, b, c, d \in \mathbb{Q}$ Så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
+%   \begin{enumerate}
+%     \item \textbf{Addition} \\ $(a + bi) + (c + di) = (a + c) + (b + d)i$
+%     \item \textbf{Subtraktion} \\ $(a + bi) - (c + di) = (a - c) + (b - d)i$
+%     \item \textbf{Multiplikation} \\ $(a + bi) \cdot (c + di) = (ac - bd) + (bc + ad)i$
+%     \item \textbf{Kvadratisk form} \\ $ (a + bi) \cdot (a - bi) = a^2 + b^2$
+%     \item \textbf{Konjugering} \\ $\overline{a + bi} = a - bi$
+%     \item \textbf{Division} \\ $\frac{a + bi}{c + di} = \frac{(a + bi)\cdot(c - di)}{c^2 + d^2}$
+%   \end{enumerate}
+% \end{definition}
+
+% Ved implamenteringen se Listing \ref{complex_operations} af additon, subtraktion, multiplikation samt skalering med et rationelt tal som kan udledes udfra multiplication ved at lade den imaginærdelen være $0$. Er simple operationer som ikke behøves at defineres i særskilte funktioner, men kan anvendes direkte på overloadingen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion da den skal anvendes af divisions funktionen. 
+
+% \begin{lstlisting}[language={FSharp}, 
+%     label={complex_operations},
+%     caption={Overloadning af operationer på komplekse tal}]
+% // complexDivRational: complex -> rational -> complex
+% let complexDivRational c (n) = 
+%     match c with
+%     | _ when isZero n ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
+%     | C (a, b) -> C (a / n, b / n) 
+
+% // mulConjugate: complex -> rational
+% let mulConjugate (C(a, b)) = a*a + b*b
+
+% // conjugate: complex -> complex
+% let conjugate (C (a, b)) = C (a, -b)
+
+% // mulComplex: complex -> complex -> complex
+% let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
+
+% // divComplex: complex -> complex -> complex
+% let divComplex z1 z2 =
+%     complexDivRational (mulComplex z1 (conjugate z2)) <| mulConjugate z2
+
+% type complex with
+%     static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)
+%     static member (-)  (C(a, b), C(c, d)) =  C(a - c, b - d)
+%     static member (*)  (n, C(a, b))       =  C(n * a, n * b)
+%     static member (*)  (C(a, b), n)       =  C(n * a, n * b)
+%     static member (*)  (z1, z2)           =  mulComplex z1 z2
+%     static member (/)  (z, n)             =  complexDivRational z n
+%     static member (/)  (z1, z2)           =  divComplex z1 z2 
+%     static member (~-) (C(a, b))          =  C(-a, -b)
+% \end{lstlisting}    
+
+% Borset fra division af to komplekse tal, ligner de resuterende overloadning på operationerne deres respektive matematiske definitioner. Men nærstudere vi divisionen af to komplekse tal, ser vi at den også gør der er bare brug for lidt funktioner til at kunne udføre divisionen. Først konjugeres nævneren dertil multiplikeres resultatet med tælleren. Sidst divideres resultatet af multiplikationen med kvadratet af nævneren.
+
+\subsubsection{Komplekse tal-modul}
+Vi skal nu dykke lidt mere ned i implementeringen af et modul for komplekse tal. Derfor er signaturfilen \textit{complex.fsi} givet i Appendiks \ref{sec:complex.fsi}. Først defineres en type for komplekse tal, som består af et rationale tal par, henholdsvis for realdelen og imaginærdelen, se Listing \ref{type_complex}.
+
+\begin{lstlisting}[language={FSharp}, 
+    label={type_complex},
+    caption={Typen for komplekse tal}]
+type complex = C of rational * rational
+\end{lstlisting}
+
+Vi begynder dermed med at opskrive en række regneregler i Definition \ref{def:complex} for operationer på komplekse tal, og betragter deres tilsvarende implementering i modulet. 
+\vspace{0.5cm}
+\begin{definition}[Regneregler for komplekse tal]\label{def:complex}
+  Lad $a, b, c, d \in \mathbb{Q}$ Så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
+  \begin{enumerate}
+    \item \textbf{Addition} \\ $(a + bi) + (c + di) = (a + c) + (b + d)i$
+    \item \textbf{Subtraktion} \\ $(a + bi) - (c + di) = (a - c) + (b - d)i$
+    \item \textbf{Multiplikation} \\ $(a + bi) \cdot (c + di) = (ac - bd) + (bc + ad)i$
+    \item \textbf{Kvadratisk form} \\ $ (a + bi) \cdot (a - bi) = a^2 + b^2$
+    \item \textbf{Konjugering} \\ $\overline{a + bi} = a - bi$
+    \item \textbf{Division} \\ $\frac{a + bi}{c + di} = \frac{(a + bi)\cdot(c - di)}{c^2 + d^2}$
+  \end{enumerate}
+\end{definition}
+
+Ved implementeringen, se Listing \ref{complex_operations}, af addition, subtraktion, multiplikation samt skalering med et rationelt tal, som kan udledes fra multiplikation ved at lade den imaginære del være $0$, er simple operationer, som ikke behøver at defineres i særskilte funktioner, men kan anvendes direkte på overskrivningen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion, da den skal anvendes af divisionsfunktionen. 
+
+\begin{lstlisting}[language={FSharp}, 
+    label={complex_operations},
+    caption={Overskrivning af operationer på komplekse tal}]
+// complexDivRational: complex -> rational -> complex
+let complexDivRational c (n) = 
+    match c with
+    | _ when isZero n ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
+    | C (a, b) -> C (a / n, b / n) 
+
+// mulConjugate: complex -> rational
+let mulConjugate (C(a, b)) = a*a + b*b
+
+// conjugate: complex -> complex
+let conjugate (C (a, b)) = C (a, -b)
+
+// mulComplex: complex -> complex -> complex
+let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
+
+// divComplex: complex -> complex -> complex
+let divComplex z1 z2 =
+    complexDivRational (mulComplex z1 (conjugate z2)) <| mulConjugate z2
+
+type complex with
+    static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)
+    static member (-)  (C(a, b), C(c, d)) =  C(a - c, b - d)
+    static member (*)  (n, C(a, b))       =  C(n * a, n * b)
+    static member (*)  (C(a, b), n)       =  C(n * a, n * b)
+    static member (*)  (z1, z2)           =  mulComplex z1 z2
+    static member (/)  (z, n)             =  complexDivRational z n
+    static member (/)  (z1, z2)           =  divComplex z1 z2 
+    static member (~-) (C(a, b))          =  C(-a, -b)
+\end{lstlisting}    
+
+Bortset fra division af to komplekse tal, ligner de resulterende overbelastninger på operationerne deres respektive matematiske definitioner. Men når vi nærmere studerer divisionen af to komplekse tal, ser vi, at der blot er brug for få funktioner til at kunne udføre divisionen. Først konjugeres nævneren, derefter multiplikeres resultatet med tælleren. Til sidst divideres resultatet af multiplikationen med kvadratet af nævneren. Da komplekse tal som en talmængde indeholder heltal og rationale tal, vil vi i det følgende afsnit omkring tal modulet anvende komplekse tal til udføre de matematiske operationer i modulet.
+
+
+\subsubsection{Tal modulet}
+Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive testet i sektion \ref{sec:PBT_number}.
+
+\vspace{0.5cm}
+\begin{egenskab}[Egenskaber for tal]\label{egenskab:tal}
+Lad $a, b, c \in $ Number, så gælder følgende egenskaber\footcitetitle[se. Side 60 Theorem 3.10 og Theorem 3.11]{mat1a}:
+\begin{enumerate}
+  \item Addition og multiplikation er \textbf{associativitet} \\ $a + (b + c) = (a + b) + c \land a \cdot (b \cdot c) = (a \cdot b) \cdot c$ 
+  \item Addition og multiplikation er \textbf{Kommutativitet} \\ $a + b = b + a \land a \cdot b = b \cdot a$
+  \item \textbf{Distributivitet} af multiplikation over addition\\ $a \cdot (b + c) = a \cdot b + a \cdot c$
+  \item Addition og multiplikation har et \textbf{neutral element} \\ $a + 0 = a \land a \cdot 1 = a$
+  \item \textbf{Omvendt funktion} eksistere til addition \\ $a + (-a) = 0$
+  \item \textbf{Omvendt funktion} eksistere til multiplikation for $a \in$ Number \textbackslash \{0\} \\ $a \cdot a^{-1} = 1$
+\end{enumerate}
+\end{egenskab}
+
+Vi begynder med at definere en type for tal \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={number_type}, 
+    caption={Typen for Number}
+    ]
+    type Number = | Int of int | Rational of rational | Complex of complex
+\end{lstlisting}
+
+Betragtes signatur filen for Number modulet \ref{Number_fsi}, ses det at der igen er defineret overloading af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
+
+\lstinputlisting[
+    language=FSharp,
+    label={Number_fsi},
+    caption={Signatur filen for Number modulet}
+]{../modules/number.fsi}
+
+Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som parameter. Funktionen vil derefter matche på de to tal og anvende den operation på de to tal. 
+
+\begin{lstlisting}[
+    language={FSharp},
+    label={operation}, 
+    caption={Number.operation funktionen}
+    ]
+// makeRational: Number -> rational
+let makeRational a =
+    match a with
+    | Int x       -> make(x, 1)
+    | Rational x  -> x
+
+// operation: Number -> Number -> (rational -> rational -> rational) -> Number
+let operation a b f =
+    f (makeRational a) (makeRational b) |> Rational
+\end{lstlisting}
+
+Det vil her til være oplagt på alle de matematiske operationer at anvende en funktionen til at forsøge at konvenere tal typen til den simpleste talmængde, som i vores tilfælde er heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryMakeInt} på alle de matematiske operations overloadnings \ref{overloads_number}.
+
+\begin{lstlisting}[
+    language={FSharp},
+    label={overloads_number}, 
+    caption={Overloadnings funktionerne for Number}
+    ]
+// tryMakeInt: Number -> Number
+let tryMakeInt r =
+    match r with
+    | Rational a when isInt a -> Int (makeRatInt a)
+    | _ -> r
+    
+type Number with
+  static member (+) (a, b) = operation a b (+) |> tryMakeInt
+  static member (-) (a, b) = operation a b (-) |> tryMakeInt
+  static member (*) (a, b) = operation a b (*) |> tryMakeInt
+  static member (/) (a, b) = operation a b (/) |> tryMakeInt
+  static member (~-) (a)   = neg a |> tryMakeInt
+\end{lstlisting}
+
+Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
+
+\subsection{Matematiske udtryk}
+\subsubsection{Polsk notation}
+Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. 
+
+\begin{align*}
+    \text{Infix Notation:} \quad & (A + B) \cdot C \\
+    \text{Prefix Notation:} \quad &  \cdot + A B C  \\
+    \text{Postfix Notation:} \quad & A \, B \, + \, C \, \cdot
+\end{align*}
+
+ 
+
+\subsubsection{Udtryk som træer} \label{sec:expression_as_trees}
+Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ Figur \ref{fig:expression_tree}. 
+
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    level distance=1.5cm,
+    level 1/.style={sibling distance=3.5cm},
+    level 2/.style={sibling distance=2cm},
+    level 3/.style={sibling distance=1.5cm},
+    every node/.style={ align=center}
+  ]
+  \node {*}
+    child {
+      node {-}
+      child {
+        node {-}
+        child {
+          node {*}
+          child {
+            node {3}
+          }
+          child {
+            node {x}
+          }
+        }
+        child {
+          node {5}
+        }
+      }
+    }
+    child {
+      node {2}
+    };
+\end{tikzpicture}
+\caption{Et binært træ der repræsenterer udtrykket $-(3 \cdot x - 5) \cdot 2$}
+\label{fig:expression_tree}
+\end{figure}
+Det skal bemærkes der er forskel på den unære og binære operator '$-$' i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for et matematisk udtryk, vil det være muligt omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footcitetitle{tree_algo}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.32\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},
+    ]
+      \node[label={[label distance=0.1cm, text=red]165:7}] {*}
+        child {
+          node[label={[label distance=0.1cm, text=red]165:1}] {-}
+          child {
+            node[label={[label distance=0.1cm, text=red]165:5}] {-}
+            child {
+              node[label={[label distance=0.1cm, text=red]165:3}] {*}
+              child {
+                node[label={[label distance=0.1cm, text=red]165:2}] {3}
+              }
+              child {
+                node[label={[label distance=0.1cm, text=red]15:4}] {x}
+              }
+            }
+            child {
+              node[label={[label distance=0.1cm, text=red]15:6}] {5}
+            }
+          }
+        }
+        child {
+          node[label={[label distance=0.1cm, text=red]15:8}] {2}
+        };
+    \end{tikzpicture}
+    \caption{\\Modificeret Inorder Travesal}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.3\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},
+    ]
+      \node[label={[label distance=0.1cm, text=red]165:1}] {*}
+        child {
+          node[label={[label distance=0.1cm, text=red]165:2}] {-}
+          child {
+            node[label={[label distance=0.1cm, text=red]165:3}] {-}
+            child {
+              node[label={[label distance=0.1cm, text=red]165:4}] {*}
+              child {
+                node[label={[label distance=0.1cm, text=red]165:5}] {3}
+              }
+              child {
+                node[label={[label distance=0.1cm, text=red]15:6}] {x}
+              }
+            }
+            child {
+              node[label={[label distance=0.1cm, text=red]15:7}] {5}
+            }
+          }
+        }
+        child {
+          node[label={[label distance=0.1cm, text=red]15:8}] {2}
+        };
+    \end{tikzpicture}
+    \caption{\\Preorder Traversal}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.3\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},
+    ]
+      \node[label={[label distance=0.1cm, text=red]165:8}] {*}
+        child {
+          node[label={[label distance=0.1cm, text=red]165:6}] {-}
+          child {
+            node[label={[label distance=0.1cm, text=red]165:5}] {-}
+            child {
+              node[label={[label distance=0.1cm, text=red]165:3}] {*}
+              child {
+                node[label={[label distance=0.1cm, text=red]165:1}] {3}
+              }
+              child {
+                node[label={[label distance=0.1cm, text=red]15:2}] {x}
+              }
+            }
+            child {
+              node[label={[label distance=0.1cm, text=red]15:4}] {5}
+            }
+          }
+        }
+        child {
+          node[label={[label distance=0.1cm, text=red]15:7}] {2}
+        };
+    \end{tikzpicture}
+    \caption{\\Postorder Traversal}
+  \end{subfigure}
+  \begin{align*}
+      \text{Modificeret Inorder Traversal:} \quad & - (3 \cdot x - 5) \cdot 2 \\
+      \text{Preorder Traversal:} \quad &  \cdot - - \cdot 3\, x\, 5\, 2  \\
+      \text{Postorder Traversal:} \quad & 3\, x\, \cdot 5\, - -  2\, \cdot
+  \end{align*}
+  \caption{Træet fra Figur \ref{fig:expression_tree} med forskellige travesal metoder}
+  \label{fig:expression_tree_traversal}
+\end{figure}
+
+
+Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et modul som kan repræsentere udtryk ved brug af prefix notation.
+Postorder Traversal bliver blandt andet anvendt til at kunne rekursivt simplificere og evaluere udtryk.
+
+Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificeret Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
+
+
+\subsubsection{Udtryksmodulet}\label{sec:expression_module}
+Efter udviklingen af et modul til repræsentation af talmængder er vi nu klar til at udvide programmet med et modul for matematiske udtryk. Vi starter med at definere en polymorf type for udtryk, som beskrevet i Listing \ref{expr_type}. Denne type omfatter flere konstruktører, hver tilknyttet specifikke matematiske operationer vi ønsker at implementere. Desuden introducerer vi konstruktøren \texttt{N} til at repræsentere numeriske værdier ved at anvende talmængder defineret i Listing \ref{number_type}. Til sidst tilføjer vi konstruktøren \texttt{X} for variable. Således lagres matematiske udtryk i en træstruktur, se \ref{sec:expression_as_trees}, eftersom hver konstruktør for en operation indeholder et eller to underudtryk af samme type.
+
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={expr_type}, 
+    caption={Typen for Expr}
+    ]
+type Expr<'a> = 
+    | X of char
+    | N of 'a
+    | Neg of Expr<'a>
+    | Add of Expr<'a> * Expr<'a>
+    | Sub of Expr<'a> * Expr<'a>
+    | Mul of Expr<'a> * Expr<'a>
+    | Div of Expr<'a> * Expr<'a>
+\end{lstlisting}
+
+Expr\textless'a\textgreater{}  typen er dermed en polymorfisk type, hvor 'a er typen for den tal mængde hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i Listing \ref{lst:expr_example}. Her ses det at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres er det i prefix notation.
+
+\begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen tree bliver beskrevet i \ref{sec:expression_generation}.}]
+> tree "-(3*x-5)*2";;
+val it: Expr<Number> = 
+  Mul (Neg (Sub (Mul (N (Int 3), X 'x'), N (Int 5))), N (Int 2))
+\end{lstlisting}
+
+Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes på udtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et udtryk beskrevet i \ref{sec:eval}. 
+\lstinputlisting[
+    language=FSharp,
+    label={Expression.fsi},
+    caption={Signatur filen for Expression modulet}
+    ]{../modules/Expression.fsi}
+
+
+
+De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evaluering vil sige at de individuelle funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som input, mullige implementeringer af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:mul_expr}, 
+  caption={Addition og multiplikation af to udtryk}
+  ]
+// mul: Expr<Number> -> Expr<Number> -> Expr<Number>
+let rec mul e1 e2:Expr<Number> =
+  match e1, e2 with
+  |N a, N b                       -> N (a * b)
+  |N a, b | b, N a when isOne a   -> b
+  |N a, _ | _, N a when isZero a  -> N zero
+  |Div(a, b), c | c, Div(a, b)    -> Div (mul a c, b)
+  |Div (a, b), Div (c, d)         -> Div ((mul a c), (mul b d))
+  |Neg a, Neg b                   -> mul a b
+  | _, _                          -> Mul(e1, e2)
+
+// add: Expr<Number> -> Expr<Number> -> Expr<Number>
+let rec add e1 e2:Expr<Number>  =
+  match e1, e2 with
+  | N a, N b                            -> N (a + b)
+  | N a, b | b, N a when isZero a       -> b
+  | a, b when a = b                     -> Mul (N two, b)
+  | Neg a, Neg b                        -> neg (add a b) 
+  | Neg a, b | b, Neg a                 -> Sub (b, a)
+  | Mul(a, X b), Mul(c, X d) 
+  | Mul(X b, a), Mul(c, X d)
+  | Mul(a, X b), Mul(X d, c) 
+  | Mul(X b, a), Mul(X d, c) when b = d -> Mul(add a c, X b)
+  | _, _                                -> Add(e1, e2)
+
+\end{lstlisting}
+
+\subsection{Evaluering af udtryk}\label{sec:eval}
+Vi vil nu betragte hvordan vi kan evaluere et udtryk, ved hjælp af et miljø som indeholder værdier for variable som er indeholdt i udtrykket. Evalueringen af udtryk skal kunne opfylde følgende homomorfiske egenskaber \ref{prop:eval_homomorphism}. Egenskaben vil blive testet i sektion \ref{sec:PBT_eval_homomorphism}.
+\vspace{0.5cm}
+\begin{egenskab}[Homomorfisme af evaluering]\label{prop:eval_homomorphism}
+Lad $\oplus \in \{+, -, \times, /\}$ sættet af binære operationer, $e1$ og $e2$ være udtryk, så gælder følgende:
+\begin{align*}
+    \text{eval}(e1 \oplus e2) = \text{eval}(e1) \oplus \text{eval}(e2)
+\end{align*}
+Derudover skal det om negation også gælde at:
+\begin{align*}
+    \text{eval}(-e) = -\text{eval}(e)
+\end{align*}
+\end{egenskab}
+
+
+Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number modulet. 
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:eval_expr}, 
+  caption={Evaluering af et udtryk}
+  ]
+// eval: Expr<Number> -> Map<char, Number> -> Number
+let rec eval (e:Expr<Number>) (env) =
+  match e with
+  | X x -> Map.find x env
+  | N n -> n
+  | Neg a -> - eval a env
+  | Add (a, b) -> eval a env + eval b env
+  | Sub (a, b) -> eval a env - eval b env
+  | Mul (a, b) -> eval a env * eval b env
+  | Div (a, b) -> eval a env / eval b env
+\end{lstlisting}
+
+\subsection{Konventering mellem udtryks notation}\label{sec:expression_generation}
+Det er ønkes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverser. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver test i sektion \ref{sec:PBT_infix_prefix}.
+
+\vspace{0.5cm}
+\begin{egenskab}[Invers morphism\footcitetitle{Inverse_function} mellem infix og prefix]\label{egenskab:infix_prefix}
+    Lad $Q^n$ være mængden af rationelle infix udtryk repræsenteret som en string, med $n$ variable, så defineres følgende:
+    \begin{align*}
+      \text{tree}&: Q^n \to \text{Expr} \\
+      \text{tree}^{-1}&: \text{Expr} \to  Q^n  
+    \end{align*}
+    Dermed gælder følgende egenskaber
+    \begin{align*}
+      \text{tree}^{-1} \circ \text{tree} &= id_{Q^n} \\
+      \text{tree} \circ \text{tree}^{-1} &= id_{\text{Expr}}
+    \end{align*}
+    Hvor $id_{x}$ er identitetsfunktionen på mængden $x$.
+\end{egenskab}
+
+Vi begynder med at betragte den inverse funktion, som konverterer fra en expression til infix notation. Funktionen \textcolor{red}{etf} se Listing \ref{lst:expression_to_infix} fortager denne konventering ved at lave en modificeret Inorder Traversal på udtrykket, som beskrevet i \ref{sec:expression_as_trees}. Den modificeret del er at håndtere parenteser samt håndtere negation som var det en binær node i træet hvor det venstre barn er et tomt udtryk.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:expression_to_infix}, 
+  caption={konventering fra expression til infix notation}
+  ]
+// parenthesis: bool -> string -> string
+let parenthesis b f = if b then "(" + f + ")" else f
+
+// etf: Expr<Number> -> bool -> string
+let rec etf e p =
+    match e with
+    | N a when not <| isInt a -> parenthesis p <| toString a
+    | N a   -> toString a
+    | X a   -> string a
+    | Neg a -> parenthesis p <| "-" + etf a (not p) 
+    | Add(a, b) -> parenthesis p <| etf a false + "+" + etf b false
+    | Sub(a, b) -> parenthesis p <| etf a false + "-" + etf b true
+    | Mul(a, b) -> parenthesis p <| etf a true  + "*" + etf b true
+    | Div(a, b) -> parenthesis p <| etf a true  + "/" + etf b true
+
+
+// infixExpression: Expr<Number> -> string
+let infixExpression e = etf e false
+\end{lstlisting}
+
+Funktionen \textcolor{red}{\texttt{tree}}, som foretager konverteringen fra infix notation til et udtrykstræ, er baseret på algoritmen beskrevet i \cite{convert_expression}\footcitetitle{convert_expression}. Først konverteres en udtryksstreng til en liste af tokens. Disse tokens beskriver, om en karakter i udtrykket er en operand, en operator, eller en konstant, hvor en operator også indeholder information om præcedens og associativitet\footcitetitle{precedens_associativity}. Typen for disse tokens kan ses i Listing \ref{lst:infix_to_expression_types}. Herefter anvendes to stacks: én for operatorer og én for udtryk. Der anvendes en række regler, som beskrevet i \cite{convert_expression}, for hvornår der skal udføres pop og push på disse to stacks. Det skal bemærkes, at når en operator pushes til udtryksstacken, da navnet på operatorkonstruktøren på udtrykket står skrevet fra venstre mod højre, vil udtryksstacken være i prefix notation og ikke postfix notation som beskrevet i kilden. Funktionen \textcolor{red}{\texttt{tree}} er at finde i Appendiks \ref{sec:treeGenerator.fs}.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:infix_to_expression_types}, 
+  caption={Konvertering fra infix til udtrykstræ}
+]
+type Associative = | Left | Right
+type Precedence = int
+type Operator = char * Precedence * Associative
+type Token =
+    | Operand of char
+    | Operator of Operator
+    | Constant of int
+type OperatorList = Operator list
+\end{lstlisting}
+
+
+
+
+\subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
+Vi skal nu betragte en sytematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendig at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplification skal overholde. Egenskaben vil blive testet i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter simplifikationen da det ikke er kompleks opgave at skulle sammenligne og evaluere to udtryk er ækvivalente.
+\vspace{0.5cm}
+\begin{egenskab}[Simplifikation af udtryk]\label{egenskab:simplification}
+Lad $e$ være et udtryk, så gælder følgende:
+\begin{align*}
+  \text{eval}(e) = \text{eval}(\text{simplifyExpr}(e))
+\end{align*}
+\end{egenskab}
+
+Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. På den måde sikre sig at når en node i udtrykstræet bliver simplificeret, vil dens børn allerede være simplificeret. 
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:simplify_expr}, 
+  caption={Simplifikation af et udtryk}
+  ]
+  //simplifyOperation: Expr<Number> -> Expr<Number> -> (Expr<Number> -> Expr<Number> -> Expr<Number>) -> Expr<Number>
+  let rec simplifyOperation e1 e2 f = 
+  match f e1 e2 with
+  | Neg a -> 
+    commutativeMulDiv.applyCommutative (Neg a) |> commutativeAddSub.applyCommutative
+  | Add(a, b) when isAdd f -> commutativeAddSub.applyCommutative (Add(a, b))
+  | Sub(a, b) when isSub f -> commutativeAddSub.applyCommutative (Sub(a, b))
+  | Mul(a, b) when isMul f -> commutativeMulDiv.applyCommutative (Mul(a, b))
+  | Div(a, b) when isDiv f -> commutativeMulDiv.applyCommutative (Div(a, b))
+  | Add(a, b) -> simplifyOperation a b (+)
+  | Sub(a, b) -> simplifyOperation a b (-)
+  | Mul(a, b) -> simplifyOperation a b (*)
+  | Div(a, b) -> simplifyOperation a b (/)
+  | a -> a
+
+
+//simplifyExpr: Expr<Number> -> Expr<Number>
+let rec simplifyExpr e =
+  match e with
+  | N a when Number.isNegative a -> Neg (N (Number.absNumber a))
+  | N (Rational(R(a, b))) -> 
+    simplifyOperation (simplifyExpr (N (Int a))) (simplifyExpr (N (Int b))) (/)
+  | Neg a     -> - (simplifyExpr a)
+  | Add(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (+)
+  | Sub(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (-)
+  | Mul(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (*)
+  | Div(a, b) -> simplifyOperation (simplifyExpr a) (simplifyExpr b) (/)
+  | _ -> e 
+\end{lstlisting}
+
+Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen af et givet udtryk. Funktionen tager som input to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk simplifikation, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk simplifikation resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk simplifikation ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere simplifikation af de to udtryk. Denne dybere simplifikation udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationssimplifikation på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      level 2/.style={sibling distance=2cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},]
+      \node {*}
+        child { node {/}
+          child { node {*}
+            child { node {*}
+              child { node {3}
+              }
+              child { node {y}
+              }
+            }
+            child { node {-}
+              child { node {2}
+              }
+            }
+          }
+          child { node {-}
+            child { node {x}
+            }
+          }
+        }
+        child { node {x}
+        };
+    \end{tikzpicture}
+    \caption{Udtrykket $(3 \cdot y \cdot (-2)/-x) \cdot x$ som et træ}
+    \label{fig:original-tree}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      level distance=1.5cm,
+      level 1/.style={sibling distance=2cm},
+      every node/.style={draw, circle, align=center},]
+      \node {*}
+        child { node {6} }
+        child { node {y} };
+    \end{tikzpicture}
+    \caption{Det resuterende simplificerede efter at have anvendt CommutativeMulDiv.\textcolor{red}{applyCommutative} på udtrykket i Figur \ref{fig:original-tree}}
+    \label{fig:simplified-tree}
+  \end{subfigure}
+  \caption{Før og efter simplifikation af et udtryk ved brug af CommutativeMulDiv.\textcolor{red}{applyCommutative}}
+  \label{fig:expression-trees}
+\end{figure}
+
+
+% Flattened Tree
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[level distance=1.5cm,
+      level 1/.style={sibling distance=1cm},
+      level 2/.style={sibling distance=0.7cm},
+      level 3/.style={sibling distance=1.5cm},
+      every node/.style={draw, circle, align=center},]89
+      \node {*}
+        child{ node {-} 
+          child { node {1}}}
+        child { node {/}
+          child { node {1}
+          }
+          child { node {x}}
+        }
+        child { node {3}
+        }
+        child { node {y}
+        }
+        child { node {-}
+          child { node {1}
+          }
+        }
+        child { node {2}
+        }
+        child { node {x}
+        };
+    \end{tikzpicture}
+    \caption{Det udfladede træ}
+    \label{fig:sub1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[level distance=1.5cm,
+      level 1/.style={sibling distance=1cm},
+      level 2/.style={sibling distance=0.75cm},
+      level 3/.style={sibling distance=1cm},
+      every node/.style={draw, circle, align=center},]
+      \node {*}
+        child { node {-}
+          child { node {1} }
+        }
+        child { node {-}
+          child { node {1} }
+        }
+        child { node {3} }
+        child { node {2} }
+        child { node {y} }
+        child { node {x} }
+        child { node {/}
+          child { node {1} }
+          child { node {x} }
+        };
+    \end{tikzpicture}
+    \caption{Det sorterede træ fra venstre mod højre}
+    \label{fig:sub2}
+  \end{subfigure}
+  \caption{Det udfladede og sorterede af udtrykket $(3 \cdot y \cdot (-2)/-x) \cdot x$ i processen af kommutativ simplifikation}
+  \label{fig:trees}
+\end{figure}
+
+Generelt, når det gælder simplificering af udtryk, skal man være opmærksom på ikke at ende i et uendeligt loop. Derfor er det vigtigt ikke at definere nogle overfladiske simplificeringer, som er hinandens inverse funktioner. Desuden forsøger funktionerne i dette program altid at skubbe negation af udtryk så langt ud som muligt i håb om, at de kan ophæve hinanden. Dette illustreres blandt andet i figur \ref{fig:trees}, hvor ved udfladning af træet, hvis et af de kommutative udtryk for multiplikation er negativt, fjernes negationen, og der tilføjes i stedet en negation af tallet 1, som ved sortering skubbes til venstre.
+
+
+\subsection{Differentiering af udtryk}
+Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, som samtidig vil understrege vigtigheden af at kunne simplificere udtryk. Vi begynder igen med at opskrive nogle algebraiske linearitetsegenskaber, som differentieringen skal overholde. Disse egenskaber vil blive testet i sektion \ref{sec:PBT_differentiation}.
+\vspace{0.5cm}
+\begin{egenskab}[Linearitetsbetingelserne\footcitetitle{diff}]\label{egenskab:differentiation}
+  Lad $f$ og $g$ være udtryk, og $a$ og $b$ være tal fra talmodulet, så gælder følgende:
+  \begin{enumerate}
+    \item \textbf{Skaleringsreglen} \\
+    \(\frac{d}{dx}(af) = a\frac{df}{dx}\)
+    \item \textbf{Sumreglen} \\
+    \(\frac{d}{dx}(f+g) = \frac{df}{dx} + \frac{dg}{dx}\)
+    \item \textbf{Subtraktionsreglen} \\
+    \(\frac{d}{dx}(f-g) = \frac{df}{dx} - \frac{dg}{dx}\)
+    \item \textbf{Produktreglen} \\
+    \(\frac{d}{dx}(fg) = \frac{df}{dx}g + f\frac{dg}{dx}\)
+    \item \textbf{Kvotientreglen} \\
+    \(\frac{d}{dx}\left(\frac{f}{g}\right) = \frac{\frac{df}{dx}g - f\frac{dg}{dx}}{g^2}\)
+  \end{enumerate}
+\end{egenskab}
+
+Funktionen for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, som tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionelt programmeringssprog, da det ses, hvordan fire af reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte, som de er beskrevet.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:diff_expr}, 
+  caption={Differentiering af et udtryk}
+  ]
+// diff: Expr<Number> -> char -> Expr<Number>
+let rec diff e dx = 
+    match e with
+    | X f when f = dx -> N (Int 1)
+    | X _ -> N (Int 0)
+    | N _ -> N (Int 0)
+    | Neg f -> diff (Mul (N (Int 1), f)) dx
+    | Add(f, g) -> Add(diff f dx, diff g dx)
+    | Sub(f, g) -> Sub(diff f dx, diff g dx)
+    | Mul(f, g) -> Add(Mul(diff f dx, g), Mul(f, diff g dx))
+    | Div(f, g) -> Div(Sub(Mul(diff f dx, g), Mul(f, diff g dx)), Mul(g, g))
+\end{lstlisting}
+
+
+\subsection{Multivariable polynomier af første grad}
+Da vi senere i projektet skal betragte matricer, vil vi i den forbindelse også lave en løsning af lineære ligningssystemer i sektion \ref{sec:lin_eq}. Det kræver derfor, at vi kan isolere variable i et multivariabelt polynomium af første grad. Vi betragter derfor nu to simple funktioner til at udføre denne isolation, se Listing \ref{lst:isolate}. Funktionen \textcolor{red}{isolateX} undersøger først, om den variabel, som skal isoleres, befinder sig på højre eller venstre side, derefter kaldes funktionen \textcolor{red}{expressionOnX}, som fungerer ved at evaluere til en funktion, der giver den omvendte operation af den operation, som variablen er involveret i. Dertil anvendes den omvendte funktion på begge sider af ligningen, hvor hvis variablen er isoleret, gives et udtrykspar, hvor det første udtryk er den isolerede variabel. Hvis variablen ikke er isoleret, kaldes funktionen rekursivt med de nye højre og venstre sider.
+
+\begin{lstlisting}[
+  language={FSharp}, 
+  label={lst:isolate}, 
+  caption={Isolering af variable i et udtryk}
+  ]
+// expressionOnX: Expr<'a> -> Expr<'a> -> (Expr<'a> -> Expr<'a>)
+let rec expressionOnX hs x =
+  match hs with
+  | N _ | X _ -> fun e -> e
+  | Neg(a) when a = x -> fun e -> Neg e
+  | Sub(a, b) when a = x -> fun e -> Add(e, b)
+  | Div(a, b) when a = x -> fun e -> Mul(e, b)
+  | Div(_, a) when a = x -> fun e -> Mul(e, a)
+  | Mul(a, b) | Mul(b, a) when a = x -> fun e -> Div(e, b)
+  | Add(a, b) | Add(b, a) | Sub(b, a) when a = x -> fun e -> Sub(e, b)
+  | Add(a, b) | Sub(a, b) | Mul(a, b) | Div(a, b) -> fun e -> expressionOnX a x e |> expressionOnX b x 
+  | Neg(a) -> fun e -> expressionOnX a x e
+
+// isolateX: Expr<Number> -> Expr<Number> -> Expr<Number> -> Expr<Number> * Expr<Number> 
+let rec isolateX lhs rhs x =
+  let operation = 
+      if containsX lhs x 
+          then expressionOnX lhs x
+      elif containsX rhs x 
+          then expressionOnX rhs x
+      else 
+          failwith "Variable not found in either side of the equation"
+  match operation lhs |> simplifyExpr, operation rhs |> simplifyExpr with
+  | a, b | b, a when a = x -> (a, b)
+  | a, b -> isolateX a b x
+\end{lstlisting}
+
+Da funktionen kun betragter operationen på den variable, der ønskes isoleret, eksisterer der mange tilfælde, hvor funktionen ikke vil kunne isolere variablen. Men den fungerer til at løse ligninger af formen \(a_1x_1 + a_2x_2 + \ldots + a_nx_n = b\), hvilket er tilstrækkeligt for vores formål.

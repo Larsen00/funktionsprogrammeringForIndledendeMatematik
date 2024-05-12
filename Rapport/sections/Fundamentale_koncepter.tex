@@ -74,7 +74,7 @@ val it: int = 720
 % En tuple som kun består af to typer, kaldes et par. \\I F\# er det ikke nødvendigt at anvende parenteser som i andre programmeringssprog. De vil derfor kun anvendes hvor det er nødvendige, gennem rapporten. Når man laver en tuple er det nødvendigt.
 % Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$ betyder den tager et udtryk af typen $T_1$ som giver en funktion af typen $T_2 \rightarrow T_3$ hvor evalueringen af funktionen giver $T_3$
  
-\subsubsection{Typer}
+\subsection{Typer}
 I F\#, i modsætning til Python, er typer tildelt ved kompileringstidspunktet, ikke under kørsel. Alle udtryk, inklusiv funktioner, har en defineret type. Typen for funktionen i Listing \textcolor{red}{\ref{lst:fsharp_factorial}} er $int \rightarrow int$. Det betyder, at det ikke er muligt at kalde funktionen med et argument, der ikke er af typen $int$. Typen for funktionen beskrives som $Factorial: int \rightarrow int$. Vi kan derfor formulere følgende omkring typer\footcitetitle[14]{HansenRischelFSharp}:
 \begin{gather*}
     f: T_1 \rightarrow T_2 \\

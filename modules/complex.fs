@@ -1,7 +1,7 @@
 module complex
 
 open rational
-type complex = | C of rational * rational
+type complex = C of rational * rational
 
 let newComplex (a, b) = C(a, b)
 

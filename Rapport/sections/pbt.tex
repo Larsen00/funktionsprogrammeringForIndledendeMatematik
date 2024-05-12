@@ -1,0 +1,185 @@
+\section{PBT af programmet} 
+\subsection{PBT af udtryk}
+\subsubsection{Tal modulet}\label{sec:PBT_number}
+\subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
+\subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
+\subsubsection{Simplifikation af udtryk}\label{sec:PBT_simplification}
+\subsubsection{Differentiering af udtryk}\label{sec:PBT_differentiation}
+\subsection{PBT af vektorer og matricer}
+
+\subsubsection{PBT af matrix operationer}
+Det er nu muligt at opstille nogle PBT af der sikre at matricerne overholder matematiske egenskaber i sætning \ref{vector_space_axioms}. Først defineres en generator for matricer, som generere matricer med tilfældige tal fra vores talmængde \ref{number_type}.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={generators}, 
+    caption={Generatorene anvendt til PBT af matrix operationer i }
+    ]
+// vectorGen : int -> Gen<Vector>
+let vectorGen n =
+    Gen.listOfLength n numberGen |> Gen.map (fun x -> vector x)
+
+// matrixGen : Gen<Matrix>
+let matrixGen =
+    gen {
+        let! row = Gen.choose(1, 6)
+        let! col = Gen.choose(1, 6)
+        let! vectors = Gen.listOfLength col (vectorGen row)
+        return matrix vectors
+    }
+
+type MaxtrixGen =
+    static member Matrix() =
+        {new Arbitrary<Matrix>() with
+            override _.Generator = matrixGen
+            override _.Shrinker _ = Seq.empty}
+
+type NumberGen =
+    static member Number() =
+        {new Arbitrary<Number>() with
+            override _.Generator = numberGen
+            override _.Shrinker _ = Seq.empty}   
+\end{lstlisting}
+
+
+Vi kan dermed nu lave definere egenskaberne fra \ref{vector_space_axioms} som nogle funktioner, og teste dem med PBT.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={lst:vector_space_axioms}, 
+    caption={Egenskaberne fra sætning \ref{vector_space_axioms} som funktioner}
+    ]
+vectorCom : Matrix -> bool
+let vectorCom m =
+    sumRows m = sumRows (flip m)
+
+vectorScalarAss : Matrix -> Number -> Number -> bool
+let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
+    n1 * (n2 * m) = (n1 * n2) * m
+
+vectorAssCom : Matrix -> Number -> bool
+let vectorAssCom m (c:Number) =
+    c * (sumRows m) = sumRows (c * m)
+\end{lstlisting}
+
+\begin{lstlisting}[
+    style=output, 
+    label={lst:vector_space_axioms_pbt}, 
+    caption={Outputtet fra PBT af vektor Listing \ref{lst:vector_space_axioms}}
+    ]
+- Arb.register<MaxtrixGen>()
+- Arb.register<NumberGen>()
+- let _ = Check.Quick vectorCom
+- let _ = Check.Quick vectorScalarAss
+- let _ = Check.Quick vectorAssCom;;
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+\end{lstlisting}
+
+\subsubsection{PBT af Gram-Schmidt}\label{sec:pbt_gram_schmidt}
+Udfrodringen ved at lave en PBT af Gram-Schmidt er at vektorsættet skal være lineært uafhængige. Derfor laves der en generator som ved at udføre tilfældige række operationer på en diagonal matrix, kan generere en matrix med lineært uafhængige vektorer. 
+\#TODO : Lav et bevis for det beholder enskaben for lineært uafhængighed.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={generators_gram_schmidt}, 
+    caption={Generatorene anvendt til PBT af Gram-Schmidt}
+    ]
+// getBacismatrixGen : int -> Gen<Matrix>
+let getBacismatrixGen n =
+    Gen.map (fun x -> standardBacis x) (Gen.choose (2, n))
+
+// performRowOperationGen : Matrix -> Gen<Matrix>
+let performRowOperationGen m =
+    let (D(n, _)) = dimMatrix m
+    gen { 
+        let! i = Gen.choose(1, n)
+        let! j = match i with
+            | 1 -> Gen.choose(2, n)
+            | _ when i = n -> Gen.choose(1, n-1)
+            | _ -> Gen.oneof [
+                    Gen.choose(1, i-1); 
+                    Gen.choose(i+1, n)]
+        let! a = numberGen
+        return rowOperation i j a m }
+
+
+// multipleRowOperationsGen : Matrix -> int -> Gen<Matrix>
+let rec multipleRowOperationsGen m count =
+    if count <= 0 then Gen.constant m
+    else
+        gen {
+            let! newMatrix = performRowOperationGen m
+            return! multipleRowOperationsGen newMatrix (count - 1)
+        }
+
+// getIndependetBacisGen : Gen<Matrix>
+let getIndependetBacisGen =
+    gen { 
+        let! m = getBacismatrixGen 5
+        let! numberOfOperations = Gen.choose(1, 10)
+        let! span = multipleRowOperationsGen m numberOfOperations
+        return span }
+
+type IndependetBacis = Matrix
+type IndependetBacisGen =
+    static member IndependetBacis() =
+        {new Arbitrary<Matrix>() with
+            override _.Generator = getIndependetBacisGen
+            override _.Shrinker _ = Seq.empty}
+\end{lstlisting}
+
+Listing \ref{generators_gram_schmidt} viser de forskellige generatorer, som anvendes til PBT (Property-Based Testing) af Gram-Schmidt-processen. Først genereres en tilfældig basis matrix. Dernæst udvælges to tilfældige rækker, \(i\) og \(j\), hvorefter der udføres en rækkeoperation på \(R_j\), således at \(R_j \leftarrow R_j - aR_i\), hvor $a$ er et tilfældigt Number. Denne proces gentages et tilfældigt antal gange.
+
+Dernæst skal vi bruge en funktion til at tjekke om en matrix er en ortogonal basis. \textcolor{red}{isOrthogonalBacis} i Listing \ref{check_orthogonal_basis} tjekker om alle vektorerne i en matrix er ortogonale, ved at tjekke om søjle $v_i$ er ortogonal med $v_{i+1}$, for alle $i \in [1, n-1]$ hvor $n$ er længden på søjlerne. To søjler er ortogonale hvis deres indreprodukt er 0.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={check_orthogonal_basis}, 
+    caption={Funktion til at tjekke om søjlerne i en matrix er en ortogonal basis}
+    ]
+// isOrthogonalBacis : Matrix -> bool
+let rec isOrthogonalBacis (M(vl, o)) =
+    if not <| corectOrderCheck (M(vl, o)) C 
+    then isOrthogonalBacis <| correctOrder (M(vl, o)) C
+    else
+    match vl with
+    | [] -> true
+    | _::[] -> true
+    | v::vnext::vrest -> innerProduct v vnext = zero && isOrthogonalBacis (M(vnext::vrest, o))
+\end{lstlisting}
+%TODO: ET bevis for denne kunne være nice
+
+PB testen \textcolor{red}{gramSchmidtIsOrthogonal} bliver derfor blot at tjekke om en matrix bestående af lineært uafhængige vektorer, der udspænder et underrum, er orthogonale efter Gram-Schmidt processen er blevet anvendt. Grundet tilfældige matematiske operationer, opstår der en støre mængde opstå overflow fejl, derfor godtages disse men klassificeres som overflow.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={pbt_gram_schmidt}, 
+    caption={PBT af Gram-Schmidt processen}
+    ]
+let gramSchmidtIsOrthogonal (m:IndependetBacis) =
+    let res =
+        try 
+            if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
+        with
+            | :? System.OverflowException -> 2
+    (res = 1 || res = 2)
+    |> Prop.classify (res = 1) "PropertyHolds"
+    |> Prop.classify (res = 2) "OverflowException"
+\end{lstlisting}
+
+\begin{lstlisting}[
+    style=output,
+    label = {output_gram_schmidt},
+    caption = {Output fra PBT af Gram-Schmidt processen}
+]
+- Arb.register<IndependetBacisGen>()
+- let _ = Check.Quick gramSchmidtIsOrthogonal;;
+Ok, passed 100 tests.
+69% PropertyHolds.
+31% OverflowException.
+\end{lstlisting}
+
+Outputtet fra PBT af Gram-Schmidt processen kan ses i Listing \ref{output_gram_schmidt}. Som sædvanligt indikere testen kun korrekthed, men ikke garanteret korrekthed.
+

@@ -141,3 +141,7 @@ næste gang:
 næste gang:
     * tænk over fremtidig arbejde
     * inden næste møde 13 maj, send rapporten til jakob og micahel
+
+# møde 11:
+    * har primært skrevet rapport.
+    * Bør jeg skive de matematiske teori op for matric operationer (ved skalering add sub)

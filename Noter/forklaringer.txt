@@ -8,3 +8,4 @@
 * diskussion's emner:
     - bedre overflow håndtering 
     - lade complex være af 
+    - sammenlign hvordan man ville lave exprission typen i python og en general match på en expression

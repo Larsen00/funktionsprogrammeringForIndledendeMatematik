@@ -1,7 +1,7 @@
 
 \section{Fundamentale koncepter}
 \subsection{Introduktion til Funktions Programmering}
-Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten.
+Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten. Vi begynder derfor med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
 
 \begin{equation}
     \label{Fakultet}
@@ -12,8 +12,7 @@ Det forventes, at læseren har kendskab til programmering. Der gives derfor kun 
            \end{cases}
 \end{equation}
 
-Vi begynder derfor med at betragte funktionen for fakultet Ligning \ref{Fakultet}. Et eksempel på en implementering i F\# er givet i Listing \ref{lst:fsharp_factorial}, som kan sammenlignes med Python-koden i Listing \ref{lst:python_factorial}, da Python og pseudokode er næsten det samme.
-
+Et eksempel på en implementering i F\# er givet i Listing \ref{lst:fsharp_factorial}, som kan sammenlignes med Python-koden i Listing \ref{lst:python_factorial}, da Python og pseudokode er næsten det samme.
 
 
 \begin{lstlisting}[language={FSharp}, label={lst:fsharp_factorial}, caption={Eksempel på Fakultet i F\#}]
@@ -25,7 +24,7 @@ let rec factorial n =
     | _             -> failwith "Negative argument"
 \end{lstlisting}
 
-\begin{lstlisting}[language={Python}, label={lst:python_factorial}, caption={Eksempel på Fakultet i Python}]
+\begin{lstlisting}[language={FSharp}, label={lst:python_factorial}, caption={Eksempel på Fakultet i Python}]
 # Fakultet i Python
 def factorial(n):
     if n == 0:
@@ -40,7 +39,7 @@ I F\# anvendes \textcolor{blue}{let} til at definere en ny variabel eller, i det
     
 I F\#, er det som udgangspunkt ikke nødvendigt at anvende parenteser som i andre programmeringssprog. Derfor vil de kun blive anvendt, hvor det er nødvendigt gennem rapporten, typisk i sammenhænge med kædning af funktioner. For at undgå brugen af parenteser kan man i F\# benytte pipe-operatorerne, $|>$ og $<|$, som fører resultatet fra en udledning direkte ind i den næste funktion. Nedenstående eksempel viser tre ækvivalente udtryk, der demonstrerer anvendelsen af disse operatorer.
 
-\begin{lstlisting}[style=output, label={lst:pipe_operator}, caption={Eksempel på anvendelse af pipe-operatorer i F\#}]
+\begin{lstlisting}[style=output, label={lst:pipe_operator}, caption={Eksempel på anvendelse af pipe-operatorer i F\# ved udregning af $(3!)! = 6! = 720 $.}]
 > factorial (factorial 3);;
 val it: int = 720
 
@@ -57,25 +56,8 @@ val it: int = 720
 % Dette betyder, at det kan genkende alle udtryk, men vi er ikke interesseret i at anvende værdien. I dette tilfælde kan det tredje mønster på linje 6 kun køres, når \(n\) er negativ.
 
 
-% \subsubsection{Typer}
-% Typer er tildelt ved kompilering, i modsætning til python som kør det under kørsel. Alle udtryk funktioner inkluderet har en type i F\#, typen for Listing \textcolor{red}{factorial}\ref{lst:fsharp_factorial} er $int \rightarrow int$. Det er derfor ikke muligt at kalde funktionen med et argument der ikke er af typen $int$. Typen for funktionen skrives som $Factorial: int \rightarrow int$. Vi kan dermed formulere følgende omkring typer\footcitetitle[14]{HansenRischelFSharp}:
-% \begin{gather*}
-%     f: T_1 \rightarrow T_2 \\
-%     f e : T_2 \iff e : T_1
-% \end{gather*}
-% % => f(e) ville give en fejl hvis ikke e er af typen T2 
-% % <= per defination så er f(e) :T2 hvis e:T1
-
-% Er en funktion kaldt med et argument der ikke passer til funktionens type, gives en fejlmeddelelse. Derudover kan en type også være bestående at en tuple af typer.
-% \begin{gather*}
-%     f: T_1 * T_2 * .. * T_n \rightarrow T_{n+1}\\
-%     f (e_1, e_2, .., e_n) :T_{n+1} \iff e_1 : T_1 \land e_2 : T_2 \land .. \land e_n : T_n
-% \end{gather*}
-% En tuple som kun består af to typer, kaldes et par. \\I F\# er det ikke nødvendigt at anvende parenteser som i andre programmeringssprog. De vil derfor kun anvendes hvor det er nødvendige, gennem rapporten. Når man laver en tuple er det nødvendigt.
-% Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$ betyder den tager et udtryk af typen $T_1$ som giver en funktion af typen $T_2 \rightarrow T_3$ hvor evalueringen af funktionen giver $T_3$
- 
 \subsection{Typer}
-I F\#, i modsætning til Python, er typer tildelt ved kompileringstidspunktet, ikke under kørsel. Alle udtryk, inklusiv funktioner, har en defineret type. Typen for funktionen i Listing \textcolor{red}{\ref{lst:fsharp_factorial}} er $int \rightarrow int$. Det betyder, at det ikke er muligt at kalde funktionen med et argument, der ikke er af typen $int$. Typen for funktionen beskrives som $Factorial: int \rightarrow int$. Vi kan derfor formulere følgende omkring typer\footcitetitle[14]{HansenRischelFSharp}:
+I F\#, i modsætning til Python, er typer tildelt ved kompileringstidspunktet, ikke under kørsel. Alle udtryk, inklusiv funktioner, har en defineret type. Typen for funktionen i Listing \textcolor{red}{\ref{lst:fsharp_factorial}} er $int \rightarrow int$. Det betyder, at det ikke er muligt at kalde funktionen med et argument, der ikke er af typen $int$. Typen for funktionen beskrives som $Factorial: int \rightarrow int$. Det ses dermed tydeligt hvordan f\# benytter notationen for afbildninger i mattematik, da den matematiske funktion for fakultet er en afbildning $f: \mathbb{Z} \to \mathbb{Z}$. Vi kan derfor formulere følgende omkring typer\footcitetitle[14]{HansenRischelFSharp}:
 \begin{gather*}
     f: T_1 \rightarrow T_2 \\
     f(e) : T_2 \iff e : T_1
@@ -88,7 +70,15 @@ Hvis en funktion kaldes med et argument, der ikke matcher funktionens type, gene
     f: T_1 * T_2 * .. * T_n \rightarrow T_{n+1}\\
     f (e_1, e_2, .., e_n) :T_{n+1} \iff e_1 : T_1 \land e_2 : T_2 \land .. \land e_n : T_n
 \end{gather*}
-En tuple, der kun består af to typer, kaldes et par. Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$, betyder dette, at den tager et udtryk af typen $T_1$, som giver en funktion af typen $T_2 \rightarrow T_3$, hvor evalueringen af funktionen resulterer i $T_3$.
+En tuple, der kun består af to typer, kaldes et par. Givet en funktion $g: T_1 \rightarrow T_2 \rightarrow T_3$, betyder dette, at den tager et udtryk af typen $T_1$, som giver en funktion af typen $T_2 \rightarrow T_3$, hvor evalueringen af funktionen resulterer i $T_3$. Som eksempel på dette kan vi definere en multivariable funktion $f(x, y) = \sqrt{x! + y!}$ som er en afbildning $f: \mathbb{Z}^2 \to \mathbb{R}$ samt $g(y) = f(3, y) = \sqrt{3! + y!}$ som afbilder $g: \mathbb{Z} \to \mathbb{R}$, de tilsvarende F\# funktion kan defineres på følgende måder:
+\begin{lstlisting}[language={FSharp}, label={lst:multivariable_function}, caption={Eksempel typerne for en multivariable funktion i F\#}]
+// f: int -> int -> float
+let f x y = sqrt <| float(factorial x + factorial y)
+
+// g: int -> float
+let g = f 3
+\end{lstlisting}
+
 
 
 

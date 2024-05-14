@@ -20,7 +20,7 @@ Nedenfor er der givet en signaturfil for rational modulet \ref{rational_fsi}. I 
     language=FSharp,
     label={rational_fsi},
     caption={Signaturfilen for rational-modulet}
-]{exampleCodes/rational.fsi}
+]{../modules/rational.fsi}
 For at kunne sammenligne og også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simplest form. Dette gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Derudover er det vigtigt at være opmærksom på ikke at foretage nul division. Derfor vil implementeringsfilen kaste en "System.DivideByZeroException", hvis nævneren er eller bliver nul. Signaturfilen indeholder en række funktioner, som anvendes af andre filer. Det vil desuden være nødvendigt at kunne håndtere overflow, idet heltallene, der repræsenterer de rationelle tal, under eller efter operationen kan blive for store til korrekt at blive repræsenteret af 32-bit. Da denne rapport fokuserer på implementeringen af matematiske koncepters og ikke numeriske algoritmer, vil modulet blot rapportere en fejl, hvis der opstår overflow.
  
 % \subsubsection{Komplekse tal modul}

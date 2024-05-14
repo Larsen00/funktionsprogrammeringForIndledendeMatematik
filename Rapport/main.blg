@@ -1,0 +1,18 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'main.blg'
+[132] biber-MSWIN64:340> INFO - === 
+[176] Biber.pm:419> INFO - Reading 'main.bcf'
+[308] Biber.pm:979> INFO - Found 16 citekeys in bib section 0
+[321] Biber.pm:4419> INFO - Processing section 0
+[332] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[393] bibtex.pm:1713> INFO - LaTeX decoding ...
+[407] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[474] UCollate.pm:68> INFO - Overriding locale 'da-DK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[474] UCollate.pm:68> INFO - Overriding locale 'da-DK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[474] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'da-DK'
+[487] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[490] bbl.pm:763> INFO - Output to main.bbl
+[490] Biber.pm:131> WARN - ISBN '9781107019027, 1107019028' in entry 'HansenRischelFSharp' is invalid - run biber with '--validate_datamodel' for details.
+[490] Biber.pm:131> WARN - BibTeX subsystem: C:\Users\jonas\AppData\Local\Temp\biber_tmp_BGQG\33e59b5ca9ec342068223d604c3f8d55_26704.utf8, line 44, warning: 22 characters of junk seen at toplevel
+[490] Biber.pm:131> WARN - BibTeX subsystem: C:\Users\jonas\AppData\Local\Temp\biber_tmp_BGQG\33e59b5ca9ec342068223d604c3f8d55_26704.utf8, line 94, warning: 1 characters of junk seen at toplevel
+[490] Biber.pm:133> INFO - WARNINGS: 3

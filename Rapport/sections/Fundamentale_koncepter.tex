@@ -84,26 +84,26 @@ let g = f 3
 
 
 \subsection{Signatur filer og implementerings filer}
-En standard F\# fil er lavet med .fs extension, denne fil indeholder alt den kode som er nødigt for at kunne køre programmet. En implementerings fil kan have en signatur fil med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementerings filen som er tilgængelige for andre filer. En signatur fil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replicere implementerings filen. I andre programmerings sprog vil man anse funktionerne i signatur filen som værende "public" og de funktioner der ikke er i signatur filen, men er i implementerings filen som værende "private". 
+En standard F\# fil er lavet med .fs extension, denne fil indeholder alt den kode som er nødigt for at kunne køre programmet. En implementeringsfil kan have en signaturfil med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementeringsfilen som er tilgængelige for andre filer. En signaturfil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replicere implementeringsfilen. I andre programmerings sprog vil man anse funktionerne i signaturfilen, som værende de funktioner der er tilgængelige ved åbning af modulet.
 
-\subsection{Overloading af operatorer}
+\subsection{Overskrivning af operatorer}
 I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler.
 
 \subsection{Property Based Testing}
 Property Based Test (PBT) er en teknik til at teste korrekthed af egenskaber som man ved altid skal være opfyldt. Ved PBT genereres en række tilfældige input til en funktion, hvorefter det kontrolleres, om en given egenskab holder. 
 
-På DTU lærer de matematiske studerende først om logik, hvor det introduceres, at en udsagnslogisk formel er gyldig (en tautologi), hvis den altid er sand. Der findes mange teknikker til at påvise gyldigheden af en udsagnslogisk formel. I de indledende matematiske kurser på DTU lærer man at anvende sandhedstabeller, som demonstrerer gyldigheden af en formel. Eksempelvis vises hvordan \ref{udsagnslogik} er gyldig.
+På DTU lærer de studerende først om logik, hvor det introduceres, at en udsagnslogisk formel er gyldig (en tautologi), hvis den altid er sand. Der findes mange teknikker til at påvise gyldigheden af en udsagnslogisk formel. I "01001 Matematik 1a" på DTU lærer man at anvende sandhedstabeller, som demonstrerer gyldigheden af en formel. Eksempelvis vises hvordan \eqref{udsagnslogik} er gyldig.
 \begin{gather}
     P \land (Q \land R) \iff (P \land Q) \land R
     \label{udsagnslogik}
 \end{gather}
 
-Vi kan også bruge PBT til at undersøge, om (\ref{udsagnslogik}) holder, ved at definere egenskaben som en funktion af $P, Q$ og $R$, som vist i Listing 3 (\ref{valid1}).
+Vi kan også bruge PBT til at undersøge, om \eqref{udsagnslogik} holder, ved at definere egenskaben som en funktion af $P, Q$ og $R$, som vist i Listing \ref{valid1}.
 
 \lstinputlisting[
     language=FSharp,
     label={valid1},
-    caption={PBT af ligning \ref{udsagnslogik}. Begge sider er omgivet af parenteser da $=$ har en højere præcedens end $\&\&$}
+    caption={PBT af ligning \eqref{udsagnslogik}. Begge sider er omgivet af parenteser da $=$ har en højere præcedens end $\&\&$}
 ]{exampleCodes/valid1.fsx}
 
 \begin{lstlisting}[style=output, label={lst:output_example}, caption={Output ved PBT af (\ref{udsagnslogik})}]
@@ -111,5 +111,6 @@ Vi kan også bruge PBT til at undersøge, om (\ref{udsagnslogik}) holder, ved at
 Ok, passed 100 tests.
 \end{lstlisting}
 
-Check.Quick er en del af "FsCheck" biblioteket, den tager en funktion som argument, og generere en række tilfældige input til funktionen på baggrund af funktionens type. Hvis funktionen returnere "true" for alle input, vil testen lykkedes. Hvis funktionen returnere "false" for et input, vil testen fejle og give et eksempel på et input der fejlede. I Listing \ref{valid1} er der anvendt "Check.Quick" til at teste om (\ref{udsagnslogik}) er gyldig. Funktionen "Check.Quick" returnere "Ok, passed 100 tests." hvilket indikerer at (\ref{udsagnslogik}) er gyldig. Det vigtigt her at forstå dette ikke er det samme som at bevise at den er gyldig, da ikke alle muligheder er blevet testet. 
-I nogle tilfælde vil det være en fordel at opskrive en PBT før implementeringen af en funktion som man ved skal overholde en egenskab, på den måde anvende Test Driven Development (TDD) \footcitetitle{TDD} til at teste om ens egenskab forbliver overholdt, under implementering.
+Check.Quick er en del af "FsCheck"-biblioteket. Den tager en funktion som argument og genererer en række tilfældige input til funktionen på baggrund af funktionens type. Hvis funktionen returnerer "true" for alle input, vil testen lykkes. Hvis funktionen returnerer "false" for et input, vil testen fejle og give et eksempel på et input, der fejlede. I Listing \ref{valid1} er der anvendt "Check.Quick" til at teste, om \eqref{udsagnslogik} er gyldig. Funktionen "Check.Quick" returnerer "Ok, passed 100 tests," hvilket indikerer, at (\ref{udsagnslogik}) er gyldig. Det er vigtigt her at forstå, at dette ikke er det samme som at bevise, at \eqref{udsagnslogik} er gyldig, da ikke alle muligheder er blevet testet.
+
+I nogle tilfælde vil det være en fordel at opskrive en PBT før implementeringen af en funktion, som man ved skal overholde en egenskab. På den måde anvendes Test Driven Development (TDD)\footcitetitle{TDD} til at teste, om ens egenskab forbliver overholdt under implementeringen.

@@ -1,9 +1,8 @@
-
 \section{Symbolske udtryk}
-Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vil derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tanke gangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktion som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
-Vi begynder med opbygningen af et modul, der kan repræsentere talgrupper. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal. Dog er modulet designet med henblik på, at det kan udvides med flere taltyper. Ved udvidelse er det eneste krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Desuden skal tallene inden for addition og multiplikation være associative. Dette gælder for eksempel ikke for en vektor, hvorfor vi senere vil overveje at udvide programmet med en type for vektorer. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
+Vi begynder med opbygningen af et modul, der kan repræsentere talgrupper. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal hvor real- og imaginærdelen er rationale. 
 
 \subsubsection{Rationelle tal modul}
 Repræsentationen af rationale tal kan laves ved hjælp af at danne et par af heltal, hvor det ene heltal er tælleren, og det andet er nævneren.
@@ -23,65 +22,7 @@ Nedenfor er der givet en signaturfil for rational modulet \ref{rational_fsi}. I 
 ]{../modules/rational.fsi}
 For at kunne sammenligne og også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simplest form. Dette gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Derudover er det vigtigt at være opmærksom på ikke at foretage nul division. Derfor vil implementeringsfilen kaste en "System.DivideByZeroException", hvis nævneren er eller bliver nul. Signaturfilen indeholder en række funktioner, som anvendes af andre filer. Det vil desuden være nødvendigt at kunne håndtere overflow, idet heltallene, der repræsenterer de rationelle tal, under eller efter operationen kan blive for store til korrekt at blive repræsenteret af 32-bit. Da denne rapport fokuserer på implementeringen af matematiske koncepters og ikke numeriske algoritmer, vil modulet blot rapportere en fejl, hvis der opstår overflow.
  
-% \subsubsection{Komplekse tal modul}
-% Vi skal nu dykke lidt mere ned i selve impamenteringen af et mondul for komplekse tal. Derfor er signaturfilen \textit{complex.fsi} givet i Appendiks \ref{sec:complex.fsi}. Først defineres en type for komplekse tal, som består af to rationale tal, henholdsvis for real- og imaginærdelen se Listing \ref{type_complex}.
 
-% \begin{lstlisting}[language={FSharp}, 
-%     label={type_complex},
-%     caption={Typen for komplekse tal}]
-% type complex = C of rational * rational
-% \end{lstlisting}
-
-% Vi bygynder dermed med at opskrive en række regne regler i Defination \ref{def:complex} for operationer på komplekse tal, og betragter deres korisponderende implementering i mondulet. 
-% \vspace{0.5cm}
-% \begin{definition}[Regne regler for komplekse tal]\label{def:complex}
-%   Lad $a, b, c, d \in \mathbb{Q}$ Så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
-%   \begin{enumerate}
-%     \item \textbf{Addition} \\ $(a + bi) + (c + di) = (a + c) + (b + d)i$
-%     \item \textbf{Subtraktion} \\ $(a + bi) - (c + di) = (a - c) + (b - d)i$
-%     \item \textbf{Multiplikation} \\ $(a + bi) \cdot (c + di) = (ac - bd) + (bc + ad)i$
-%     \item \textbf{Kvadratisk form} \\ $ (a + bi) \cdot (a - bi) = a^2 + b^2$
-%     \item \textbf{Konjugering} \\ $\overline{a + bi} = a - bi$
-%     \item \textbf{Division} \\ $\frac{a + bi}{c + di} = \frac{(a + bi)\cdot(c - di)}{c^2 + d^2}$
-%   \end{enumerate}
-% \end{definition}
-
-% Ved implamenteringen se Listing \ref{complex_operations} af additon, subtraktion, multiplikation samt skalering med et rationelt tal som kan udledes udfra multiplication ved at lade den imaginærdelen være $0$. Er simple operationer som ikke behøves at defineres i særskilte funktioner, men kan anvendes direkte på overloadingen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion da den skal anvendes af divisions funktionen. 
-
-% \begin{lstlisting}[language={FSharp}, 
-%     label={complex_operations},
-%     caption={Overloadning af operationer på komplekse tal}]
-% // complexDivRational: complex -> rational -> complex
-% let complexDivRational c (n) = 
-%     match c with
-%     | _ when isZero n ->  raise (System.DivideByZeroException("Complex.divRational: Cannot divide by zero!"))
-%     | C (a, b) -> C (a / n, b / n) 
-
-% // mulConjugate: complex -> rational
-% let mulConjugate (C(a, b)) = a*a + b*b
-
-% // conjugate: complex -> complex
-% let conjugate (C (a, b)) = C (a, -b)
-
-% // mulComplex: complex -> complex -> complex
-% let mulComplex (C (a, b)) (C (c, d)) = C(a*c-b*d, b*c+a*d)
-
-% // divComplex: complex -> complex -> complex
-% let divComplex z1 z2 =
-%     complexDivRational (mulComplex z1 (conjugate z2)) <| mulConjugate z2
-
-% type complex with
-%     static member (+)  (C(a, b), C(c, d)) =  C(a + c, b + d)
-%     static member (-)  (C(a, b), C(c, d)) =  C(a - c, b - d)
-%     static member (*)  (n, C(a, b))       =  C(n * a, n * b)
-%     static member (*)  (C(a, b), n)       =  C(n * a, n * b)
-%     static member (*)  (z1, z2)           =  mulComplex z1 z2
-%     static member (/)  (z, n)             =  complexDivRational z n
-%     static member (/)  (z1, z2)           =  divComplex z1 z2 
-%     static member (~-) (C(a, b))          =  C(-a, -b)
-% \end{lstlisting}    
-
-% Borset fra division af to komplekse tal, ligner de resuterende overloadning på operationerne deres respektive matematiske definitioner. Men nærstudere vi divisionen af to komplekse tal, ser vi at den også gør der er bare brug for lidt funktioner til at kunne udføre divisionen. Først konjugeres nævneren dertil multiplikeres resultatet med tælleren. Sidst divideres resultatet af multiplikationen med kvadratet af nævneren.
 
 \subsubsection{Komplekse tal-modul}
 Vi skal nu dykke lidt mere ned i implementeringen af et modul for komplekse tal. Derfor er signaturfilen \textit{complex.fsi} givet i Appendiks \ref{sec:complex.fsi}. Først defineres en type for komplekse tal, som består af et rationale tal par, henholdsvis for realdelen og imaginærdelen, se Listing \ref{type_complex}.
@@ -145,22 +86,23 @@ Bortset fra division af to komplekse tal, ligner de resulterende overbelastninge
 
 
 \subsubsection{Tal modulet}
-Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive testet i sektion \ref{sec:PBT_number}.
+Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type "Number" kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive testet i sektion \ref{sec:PBT_number}.
 
 \vspace{0.5cm}
-\begin{egenskab}[Egenskaber for tal]\label{egenskab:tal}
-Lad $a, b, c \in $ Number, så gælder følgende egenskaber\footcitetitle[se. Side 60 Theorem 3.10 og Theorem 3.11]{mat1a}:
-\begin{enumerate}
-  \item Addition og multiplikation er \textbf{associativitet} \\ $a + (b + c) = (a + b) + c \land a \cdot (b \cdot c) = (a \cdot b) \cdot c$ 
-  \item Addition og multiplikation er \textbf{Kommutativitet} \\ $a + b = b + a \land a \cdot b = b \cdot a$
-  \item \textbf{Distributivitet} af multiplikation over addition\\ $a \cdot (b + c) = a \cdot b + a \cdot c$
-  \item Addition og multiplikation har et \textbf{neutral element} \\ $a + 0 = a \land a \cdot 1 = a$
-  \item \textbf{Omvendt funktion} eksistere til addition \\ $a + (-a) = 0$
-  \item \textbf{Omvendt funktion} eksistere til multiplikation for $a \in$ Number \textbackslash \{0\} \\ $a \cdot a^{-1} = 1$
+\begin{egenskab}[Egenskaber for Number-typen]\label{egenskab:tal}
+  Lad $a, b, c \in \text{Number}$, så gælder følgende egenskaber\footcitetitle[se. Side 124 Definition 6.1]{mat1a}:
+  \begin{enumerate}
+    \item Addition og multiplikation er \textbf{associative} \\ $a + (b + c) = (a + b) + c$ og $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+    \item Addition og multiplikation er \textbf{kommutative} \\ $a + b = b + a$ og $a \cdot b = b \cdot a$
+    \item \textbf{Distributivitet} af multiplikation over addition \\ $a \cdot (b + c) = a \cdot b + a \cdot c$
+    \item Addition og multiplikation har et \textbf{neutralt element} \\ $a + 0 = a$ og $a \cdot 1 = a$
+    \item \textbf{Omvendt funktion} eksisterer til addition \\ $a + (-a) = 0$
+    \item \textbf{Omvendt funktion} eksisterer til multiplikation for $a \in \text{Number} \setminus \{0\}$ \\ $a \cdot a^{-1} = 1$
 \end{enumerate}
 \end{egenskab}
+  
 
-Vi begynder med at definere en type for tal \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
+Vi begynder med at definere typen for tal i Listing \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -170,7 +112,10 @@ Vi begynder med at definere en type for tal \ref{number_type}, som indeholder ko
     type Number = | Int of int | Rational of rational | Complex of complex
 \end{lstlisting}
 
-Betragtes signatur filen for Number modulet \ref{Number_fsi}, ses det at der igen er defineret overloading af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
+Typen Number er designet med henblik på, at den kan udvides med flere taltyper. Ved udvidelse er det et krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Den nye Number type skal derudover forsat opfylde egenskaberne \ref{egenskab:tal}. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
+
+
+Betragtes signatur filen for Number modulet i Listing \ref{Number_fsi}, ses det at der igen er defineret overloading af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
 
 \lstinputlisting[
     language=FSharp,
@@ -178,7 +123,7 @@ Betragtes signatur filen for Number modulet \ref{Number_fsi}, ses det at der ige
     caption={Signatur filen for Number modulet}
 ]{../modules/number.fsi}
 
-Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som parameter. Funktionen vil derefter matche på de to tal og anvende den operation på de to tal. 
+Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som parameter. Funktionen vil derefter matche på de to tal og anvende den operation på de to tal. Dermed bliver heltal og rationale tal konverteret til vores komplekse tal type, før operationen udføres.
 
 \begin{lstlisting}[
     language={FSharp},
@@ -196,7 +141,7 @@ let operation a b f =
     f (makeRational a) (makeRational b) |> Rational
 \end{lstlisting}
 
-Det vil her til være oplagt på alle de matematiske operationer at anvende en funktionen til at forsøge at konvenere tal typen til den simpleste talmængde, som i vores tilfælde er heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryMakeInt} på alle de matematiske operations overloadnings \ref{overloads_number}.
+Det vil her til være oplagt på alle de matematiske operationer at anvende en funktionen til at forsøge at konvenere tal typen til den simpleste talmængde, som i vores tilfælde er heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryMakeInt} på alle de matematiske operationers overloadnings \ref{overloads_number}. 
 
 \begin{lstlisting}[
     language={FSharp},
@@ -217,7 +162,9 @@ type Number with
   static member (~-) (a)   = neg a |> tryMakeInt
 \end{lstlisting}
 
-Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et lignings udtryk.
+Ved at have implementeret de matematiske operationer på denne måde, er det blandt andet muligt at fortage heltales division, da det vil resulterer i et rationalt tal.
+
+Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et matematisk udtryk.
 
 \subsection{Matematiske udtryk}
 \subsubsection{Polsk notation}

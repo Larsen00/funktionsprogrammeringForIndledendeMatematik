@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1715672190.86966 -1
-  "main.bcf" 1715672190 109156 69e9e12ac73b66a7934b3bf8bc985990 "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1715672249.0127 -1
+  "main.bcf" 1715672248 109156 69e9e12ac73b66a7934b3bf8bc985990 "pdflatex"
   "references.bib" 1715431334 3476 78ebb11ca7ecbb92b0548d8b6a147b99 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1715672186.6633 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715672190.87029 0
+["pdflatex"] 1715672245.19226 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715672249.01326 0
   "../implamentations/TreeGenerator.fs" 1715197181 4297 f450987475e4b76026bb62009c0f3daf ""
   "../implamentations/commutativeAddSub.fs" 1715247772 2894 4846019dfd9385d70143726dbba1150a ""
   "../implamentations/commutativeMulDiv.fs" 1715259067 3380 7d60453d247e151a38b47d85133a6022 ""
@@ -284,15 +284,15 @@
   "Opsætning/DTULogo.png" 1709375398 71324 08d7a624ec2f9f1df696ed86b2d8893d ""
   "Opsætning/Pakker.tex" 1715429345 8310 b9957207903f9d2cc8b31afbe141e022 ""
   "Opsætning/forside.tex" 1711819024 2148 c278081412b431856ee7aa61dfa55a2c ""
-  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715671855 1380 6aaf78a666c494e9e083f260a7e1b553 ""
+  "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715672240 1366 beb4b8bf8106a747dd54dc8c1dedf81b ""
   "exampleCodes/rational.fsi" 1710006846 1158 0ae0d1def194755e712e9dce626f4df7 ""
   "exampleCodes/valid1.fsx" 1710682578 174 1c793f2026d3f274ba30a14fa979c2cc ""
-  "main.aux" 1715672190 25863 952dddef69e60af6aac4588e4bd0a724 "pdflatex"
+  "main.aux" 1715672248 25760 027e0829125e4201622e0015f2e0f1cb "pdflatex"
   "main.bbl" 1715511642 10919 ec741cae4cf323c5e4f38ad2c29dc623 "biber main"
-  "main.out" 1715672190 8083 747a0efce5d4d24163f76a7c57d77b61 "pdflatex"
-  "main.run.xml" 1715672190 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
-  "main.tex" 1715671855 1380 6aaf78a666c494e9e083f260a7e1b553 ""
-  "main.toc" 1715672190 4433 bba10d469f10749eb2664bb7396aba0a "pdflatex"
+  "main.out" 1715672248 8019 61783b2028f0cac7826c3bc4a007a355 "pdflatex"
+  "main.run.xml" 1715672248 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
+  "main.tex" 1715672240 1366 beb4b8bf8106a747dd54dc8c1dedf81b ""
+  "main.toc" 1715672248 4373 82b4f0dbaf8699116cd36f99c6f3e1b5 "pdflatex"
   "sections/Appendiks.tex" 1715430900 971 7f4859c72c29bcc0abeebd804eae273d ""
   "sections/Fundamentale_koncepter.tex" 1715434636 10098 acbca54a2ed32275ad7a844be0cb6415 ""
   "sections/Introduction.tex" 1715430416 1980 49236bda4b58c257bd66e34a1bfe75df ""

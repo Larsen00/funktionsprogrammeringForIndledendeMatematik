@@ -22,6 +22,7 @@ val isSub : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
 val isMul : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
 val isDiv : (Expr<Number> -> Expr<Number> -> Expr<Number>) -> bool
 val isNeg : (Expr<Number> -> Expr<Number>) -> bool
+val isZero : Expr<Number> -> bool
 val containsX : Expr<Number> -> Expr<Number> -> bool
 val getNumber : Expr<Number> -> Number
 val getVariable : Expr<Number> -> char

@@ -396,6 +396,14 @@ let scalarIthVector c i (M(m, o)) =
     
     M(sIV c m i 0 [], o)
 
+// Alters row j with Rj <- Rj - c * Ri
+let rec rowOperation i j c m = 
+    if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
+    elif not <| corectOrderCheck m R then rowOperation i j c <| correctOrder m R
+    else
+    replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
+
+
 // row echelon form of a matrix
 let rec rowEchelonForm A = 
     if not <| corectOrderCheck A R then rowEchelonForm (correctOrder A R)
@@ -456,14 +464,6 @@ let fullrankedDiagonalMatrix n m =
             frdm (i - 1) <| extendMatrix frm zeroV
     frdm (m - n) <| standardBacis n
 
-
-
-// Alters row j with Rj <- Rj - c * Ri
-let rec rowOperation i j c m = 
-    if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
-    elif not <| corectOrderCheck m R then rowOperation i j c <| correctOrder m R
-    else
-    replaceMatrixIthVector (j-1) m <| getMatrixIthVector (j-1) m - c * getMatrixIthVector (i-1) m 
 
 // Checks if a matrix is upper triangular
 let rec isUpperTriangular (M(vl, o)) = 
@@ -541,10 +541,10 @@ type ExprVector = list<Expr<Number>>
 let scalarWithExpr (V(nl, _)) e=
         List.map (fun x -> N x * e) nl
 
-// matrix multiplication with expresion vector
-let matrixMulExprList vl el =
-    let znl = (vectorOf zero (List.length el)) 
-    let zeroExprList = scalarWithExpr  znl (N zero) // zero expr vector
+// matrix product with expresion vector
+let matrixProductExprList vl el =
+    let znl = List.head vl |> vectorLength |> vectorOf zero 
+    let zeroExprList = scalarWithExpr znl (N zero) // zero expr vector
     List.map2 (fun mc n -> scalarWithExpr n mc) el vl 
     |> List.fold (fun a b -> (List.map2 (+) a b)) zeroExprList
 
@@ -566,25 +566,30 @@ let rec vectorEnv n env =
 let rec solveEquations el bl cl =
         match el, bl, cl with
         | [], [], [] -> Map.empty
-        | e::es, b::bs, c::cs -> 
+        | e::es, b::bs, _ when isZero e && isZero b -> 
+            solveEquations es bs cl
+        | e::es, b::bs, c::cs ->
                             let env = solveEquations es bs cs
                             let (lhs, rhs) = isolateX (insertEnv e env) b c
                             Map.add (getVariable lhs) (getNumber rhs) env
         | _, _, _ -> failwith "solveEquations: The number of equations and variables must be the same"
 
 // Solves the equation Ax = b
-let Axequalb A (V(nlb, ob)) =
+let matrixEquation A (V(nlb, ob)) =
     let (D(r, c)) = dimMatrix A
-    if r <> c then failwith "Axequalb: A must be a square matrix"
-    elif r <> List.length nlb ||  ob = R then failwith "Axequalb: b must be a column or have same length as rows of A"
-    else
+    
+    if r <> List.length nlb ||  ob = R then 
+        failwith "matrixEquation: b must be a column or have same length as rows of A"
+    
+    // Perform row echelon form on the matrix and separate the last vector
     let (V(ef_b, _), M(ef_vl, o)) = correctOrder (rowEchelonForm <| extendMatrix A nlb) C |> extractlastVector
-    if not <| isUpperTriangular (M(ef_vl, o)) then failwith "Axequalb: There dont exitst a single solution"
-    else
+
+    if not <| hasFullRank (M(ef_vl, o)) then 
+        failwith "matrixEquation: There dont exitst a single solution"
+    
     let varlist = charVector c
     let b = scalarWithExpr (vector ef_b) (N one)
-    solveEquations (matrixMulExprList ef_vl varlist) b varlist
-    |> vectorEnv c 
+    solveEquations (matrixProductExprList ef_vl varlist) b varlist |> vectorEnv c 
 
 
     

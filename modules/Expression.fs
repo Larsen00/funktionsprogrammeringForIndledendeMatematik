@@ -113,6 +113,10 @@ let getVariable (e:Expr<Number>) =
     | X x -> x
     | _ -> raise (System.Exception("Expression.getChar: Expression is not a variable!"))
 
+let isZero (e:Expr<Number>) =
+    match e with
+    | N n ->  Number.isZero n
+    | _ -> false
 
 // functions for equality check on operations
 let isAdd (f:(Expr<Number> -> Expr<Number> -> Expr<Number>)) = 

@@ -381,7 +381,40 @@ Funktionen \textcolor{red}{Gram\_Schmidt}, tager en matrix hvor søjlerne er de 
 Funktionen \textcolor{red}{orthogonalBacis} tager en matrix og tjekker om matricen er i kolonnefølge, hvis ikke kalder funktionen sig selv, med den korrekte lagringsordning. Ellers kaldes \textcolor{red}{Gram\_Schmidt} med matricen og en tom akkumulator. Resultatet bliver derfor en matrix med en ortogonal basis for underrummet udspændt af de givne vektorer, givet at vektorerne er lineært uafhængige.
 
 \subsection{Række-echelon form}
-I forbindelse med udførelsen af PBT til Gram-Schmidt metoden vil vi blandt andet anvende række-echelon form til at sikre os, at et sæt af vektorer er lineært uafhængige. Derfor vil vi i denne sektion betragte implementeringen af række-echelon form, ud fra "Algorithm 9 for computing a row echelon form of a matrix" angivet på side 142 af noterne til "01001 Mathematics 1a"\footcitetitle[s. 142]{mat1a}. Efter at have udført PBT af Gram-Schmidt metoden, slog den i første omgang fejl, hvilket efter nærmere undersøgelse viste sig at være grundet en mindre fejl i Algorithm 9. Linje 14 burde være "b ← the j'th entry of the i-th row of B". 
+I forbindelse med udførelsen af PBT til Gram-Schmidt metoden vil vi blandt andet anvende række-echelon form til at sikre os, at et sæt af vektorer er lineært uafhængige. Derfor vil vi i denne sektion betragte implementeringen af række-echelon form, ud fra "Algorithm 9 for computing a row echelon form of a matrix" angivet på side 142 af noterne til "01001 Mathematics 1a"\footcitetitle[s. 142]{mat1a}. Efter at have udført PBT af Gram-Schmidt metoden, slog den i første omgang fejl, hvilket efter nærmere undersøgelse viste sig at være grundet en mindre fejl i Algorithm 9. Linje 14 burde være "b ← the j'th entry of the i-th row of B".  Listing \ref{row_echelon} viser implementeringen af række-echelon form, lavet ud fra psudokoden "Algorithm 9".
 
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={row_echelon}, 
+    caption={Funktion til at finde række-echelon form}
+    ]
+// rowEchelonForm : Matrix -> Matrix
+let rec rowEchelonForm A = 
+    if not <| corectOrderCheck A R then rowEchelonForm (correctOrder A R)
+    else
+    let (D(r, c)) = dimMatrix A
+    match A with
+    |M([], _) -> A
+    | _ when isZeroMatrix A -> A
+    | M(v::_, _) when r = 1 -> firstNonZero v |> inv |> scalarMatrix A  
+    | M(_, o) ->
+        let (i, j) = firstNonZeroIndexMatrix A 0 (-1 ,-1)
+        let (M(B, _)) = swapFirstWith A i
+        let b = List.head B |> firstNonZero
+        let (M(B, _)) = scalarIthVector (inv b) 0 (M(B, o))
+        let R1 = List.head B
+        let R2m = List.tail B
+        let B = rowOps j 1 r R1 (M(R2m, o))
+        let (M(Cm, _)) = rowEchelonForm B
+        M(R1::Cm, o)
+
+// rowOps: int -> int -> int -> Vector -> Matrix -> Matrix  
+and rowOps coloumn i nrows R1 acc_m  =
+    if i >= nrows then acc_m else
+    let Ri = getMatrixIthVector (i - 1) acc_m
+    let b = getVectorIthNumber coloumn Ri
+    rowOps coloumn (i + 1) nrows R1 <| replaceMatrixIthVector (i-1) acc_m (Ri - b * R1)
+\end{lstlisting}
 
 \subsection{linært lignings system}\label{sec:lin_eq}
+Som den sidste del i implementerede anvendelse af matricer, vil vi beskrive hvordan vi kan løse et linært lignings system 

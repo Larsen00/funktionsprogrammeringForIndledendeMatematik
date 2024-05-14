@@ -323,7 +323,7 @@ Evalueringen af det standard indre produkt \textcolor{red}{innerProduct} mellem 
 Til sidst kan funktionen \textcolor{red}{proj} skrives direkte som den er defineret i definition \ref{def:proj}.
 
 
-\subsection{Række-echelon form}
+
 \subsection{Gram-Schmidt}\label{sec:gram_schmidt}
 Vi kan nu betragte implementeringen af Gram-Schmidt processen. Denne proces kan anvendes rekursivt til at finde en ortonormal basis for et underrum udspændt af en liste af vektorer $v_1, v_2, \ldots, v_n$. Processen kan implementeres rekursivt idet de nye vektorer $w_k$ for $k = 2, 3, \ldots, n$ konstrueres baseret på alle de tidligere vektorer $w_1, \ldots, w_{k-1}$. 
 
@@ -379,5 +379,9 @@ Funktionen \textcolor{red}{\texttt{sumProj}} tager en liste med vektorer \(w\), 
 Funktionen \textcolor{red}{Gram\_Schmidt}, tager en matrix hvor søjlerne er de vektore som ønskes at finde en ortogonal basis for. Der udover tager den en akkumulerende funktion som indeholder de behandlede vektorer. Hvis der ikke er flere vektorer i matricen, gives den akkumulerede funktion. Hvis der ikke er nogle vektorer i akkumulatoren, tages den første vektor fra matricen og tilføjes til akkumulatoren. Hvis der er vektorer i både akkumulatoren og matricen, kaldes \textcolor{red}{sumProj} på den akkumulerede liste og den første vektor i matricen. Resultatet trækkes fra den første vektor i matricen, og dette bliver den nye vektor som tilføjes til akkumulatoren. 
 
 Funktionen \textcolor{red}{orthogonalBacis} tager en matrix og tjekker om matricen er i kolonnefølge, hvis ikke kalder funktionen sig selv, med den korrekte lagringsordning. Ellers kaldes \textcolor{red}{Gram\_Schmidt} med matricen og en tom akkumulator. Resultatet bliver derfor en matrix med en ortogonal basis for underrummet udspændt af de givne vektorer, givet at vektorerne er lineært uafhængige.
+
+\subsection{Række-echelon form}
+I forbindelse med udførelsen af PBT til Gram-Schmidt metoden vil vi blandt andet anvende række-echelon form til at sikre os, at et sæt af vektorer er lineært uafhængige. Derfor vil vi i denne sektion betragte implementeringen af række-echelon form, ud fra "Algorithm 9 for computing a row echelon form of a matrix" angivet på side 142 af noterne til "01001 Mathematics 1a"\footcitetitle[s. 142]{mat1a}. Efter at have udført PBT af Gram-Schmidt metoden, slog den i første omgang fejl, hvilket efter nærmere undersøgelse viste sig at være grundet en mindre fejl i Algorithm 9. Linje 14 burde være "b ← the j'th entry of the i-th row of B". 
+
 
 \subsection{linært lignings system}\label{sec:lin_eq}

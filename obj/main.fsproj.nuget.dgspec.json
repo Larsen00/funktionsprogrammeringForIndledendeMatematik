@@ -49,11 +49,6 @@
               "target": "Package",
               "version": "[2.16.6, )",
               "generatePathProperty": true
-            },
-            "Giraffe": {
-              "target": "Package",
-              "version": "[6.4.0, )",
-              "generatePathProperty": true
             }
           },
           "imports": [
@@ -86,9 +81,6 @@
             }
           ],
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

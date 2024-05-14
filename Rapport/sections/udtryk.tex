@@ -128,17 +128,19 @@ Ved implementeringen af de matematiske operationer, hvis der eksistere en konstr
 \begin{lstlisting}[
     language={FSharp},
     label={operation}, 
-    caption={Number.operation funktionen}
+    caption={operation funktionen til udførelse af matematiske operationer}
     ]
-// makeRational: Number -> rational
-let makeRational a =
-    match a with
-    | Int x       -> make(x, 1)
-    | Rational x  -> x
+// makeComplex: Number -> complex
+let makeComplex n =
+  match n with
+  | Int x -> newComplex (newRational(x, 1), newRational(0, 1))
+  | Rational x -> newComplex (x, newRational(0, 1))
+  | Complex x -> x
 
-// operation: Number -> Number -> (rational -> rational -> rational) -> Number
+// operation: Number -> Number -> (complex -> complex -> complex) -> Number
 let operation a b f =
-    f (makeRational a) (makeRational b) |> Rational
+    f (makeComplex a) (makeComplex b) |> Complex
+
 \end{lstlisting}
 
 Det vil her til være oplagt på alle de matematiske operationer at anvende en funktionen til at forsøge at konvenere tal typen til den simpleste talmængde, som i vores tilfælde er heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryMakeInt} på alle de matematiske operationers overloadnings \ref{overloads_number}. 

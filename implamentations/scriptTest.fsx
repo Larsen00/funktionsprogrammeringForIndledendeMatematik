@@ -56,4 +56,4 @@ printfn "%A" ft
 printfn "%A" (sort ft)
 printfn "%A" (commutativeMulDiv.applyCommutative e)
 
-printfn "%A" <| tree "1--1"
+printfn "%A" <| tree "1-1"

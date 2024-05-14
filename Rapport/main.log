@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  14 MAY 2024 14:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  14 MAY 2024 15:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1215,34 +1215,34 @@ l.44 ...{\numberline {7}Konklusion}{32}{section.7}
  [2] (sections/Introduction.tex) [3] (sections/Fundamentale_koncepter.tex
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 18.
  [4] [5] (exampleCodes/valid1.fsx)) [6] (sections/udtryk.tex (../modules/rational.fsi [7]) [8] [9] (../modules/number.fsi [10]) [11] [12]
-Overfull \hbox (19.87704pt too wide) in paragraph at lines 256--257
+Overfull \hbox (19.87704pt too wide) in paragraph at lines 258--259
  [][] 
  []
 
 
-Overfull \hbox (28.18134pt too wide) in paragraph at lines 291--292
+Overfull \hbox (28.18134pt too wide) in paragraph at lines 293--294
  [][] 
  []
 
 
-Overfull \hbox (28.18134pt too wide) in paragraph at lines 326--327
+Overfull \hbox (28.18134pt too wide) in paragraph at lines 328--329
  [][] 
  []
 
 [13]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 364.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 366.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 364.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 366.
  (../modules/Expression.fsi) [14] [15] [16] [17]
-Underfull \hbox (badness 1635) in paragraph at lines 610--610
+Underfull \hbox (badness 1635) in paragraph at lines 612--612
 []\OT1/cmr/m/n/9 (b) |Det re-su-te-ren-de sim-pli-fi-ce-re-de ef-
  []
 
 
-Underfull \hbox (badness 4416) in paragraph at lines 613--613
+Underfull \hbox (badness 4416) in paragraph at lines 615--615
 []\OT1/cmr/m/n/10 Figur 3: |F^^\r og ef-ter sim-pli-fi-ka-tion af et ud-tryk ved brug af Com-muta-ti-ve-Mul-
  []
 
@@ -1250,12 +1250,12 @@ Underfull \hbox (badness 4416) in paragraph at lines 613--613
 Missing character: There is no 8 in font nullfont!
 Missing character: There is no 9 in font nullfont!
 
-Overfull \hbox (1.18591pt too wide) in paragraph at lines 648--649
+Overfull \hbox (1.18591pt too wide) in paragraph at lines 650--651
  [][] 
  []
 
 
-Overfull \hbox (11.8557pt too wide) in paragraph at lines 675--676
+Overfull \hbox (11.8557pt too wide) in paragraph at lines 677--678
  [][] 
  []
 
@@ -1284,23 +1284,23 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B4E5C3A2E2B2056E5F4FB2B45C32FBA3;7994.
+(rerunfilecheck)             Checksum: 6CA94022FCA880B2FCBAA634C2025816;7994.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 41809 strings out of 474457
- 771784 string characters out of 5742755
+ 41821 strings out of 474457
+ 771954 string characters out of 5742755
  2522190 words of memory out of 5000000
- 61798 multiletter control sequences out of 15000+600000
- 570938 words of font info for 84 fonts, out of 8000000 for 9000
+ 61802 multiletter control sequences out of 15000+600000
+ 571273 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,134p,1841b,2305s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (51 pages, 899477 bytes).
+ <C:\Users\jonas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (51 pages, 902782 bytes).
 PDF statistics:
- 2633 PDF objects out of 2984 (max. 8388607)
- 1624 named destinations out of 1728 (max. 500000)
+ 2649 PDF objects out of 2984 (max. 8388607)
+ 1631 named destinations out of 1728 (max. 500000)
  410 words of extra memory for PDF output out of 10000 (max. 10000000)
 

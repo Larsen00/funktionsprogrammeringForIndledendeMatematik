@@ -1,15 +1,12 @@
 module Number
 open rational
 open complex
-// open rantionalAndComplex
-
 
 type Number = 
         | Int of int
         | Rational of rational
         | Complex of complex
         
-// #TODO med tiden vil man kunne tilføje funktionalitet sådan at man kan mixe int rationalle tal her ville man lave en makeR complex måske. og en try makeR rational.
 
 // Creates a rational number from an Number
 let makeRational a =

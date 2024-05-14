@@ -326,14 +326,6 @@ let rec orthogonalBacis m =
         
     Gram_Schmidt m (fun _ -> M([], C))
 
-// checks is if every vector has inner product of zero with the next vector
-let rec isOrthogonalBacis (M(vl, o)) =
-    if not <| corectOrderCheck (M(vl, o)) C then isOrthogonalBacis <| correctOrder (M(vl, o)) C
-    else
-    match vl with
-    | [] -> true
-    | _::[] -> true
-    | v::vnext::vrest -> innerProduct v vnext = zero && isOrthogonalBacis (M(vnext::vrest, o))
 
 
 // Checks if a vector is a zero vector
@@ -465,6 +457,7 @@ let fullrankedDiagonalMatrix n m =
     frdm (m - n) <| standardBacis n
 
 
+
 // Alters row j with Rj <- Rj - c * Ri
 let rec rowOperation i j c m = 
     if i = j then failwith "rowOperation: Row i and j must be diffrent j <> i"
@@ -487,7 +480,19 @@ let rec isUpperTriangular (M(vl, o)) =
 // determines if a matrix has full rank
 let hasFullRank m = 
     rowEchelonForm m |> isUpperTriangular
-      
+
+
+// checks is if every vector has inner product of zero with the next vector
+let rec isOrthogonalBacis m =
+    let isob (M(vl, o)) = 
+        match vl with
+        | [] -> true
+        | _::[] -> true
+        | v::vnext::vrest -> innerProduct v vnext = zero && isOrthogonalBacis (M(vnext::vrest, o))
+    isob <| correctOrder m C && hasFullRank m
+
+
+
 // split a matric into two matrices
 let rec splitMatrix o i m =
     if not <| corectOrderCheck m o then splitMatrix o i (correctOrder m o)

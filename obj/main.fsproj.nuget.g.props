@@ -14,7 +14,6 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\jonas\.nuget\packages\fsharp.core\8.0.200</PkgFSharp_Core>
-    <PkgGiraffe Condition=" '$(PkgGiraffe)' == '' ">C:\Users\jonas\.nuget\packages\giraffe\6.4.0</PkgGiraffe>
     <PkgFsCheck Condition=" '$(PkgFsCheck)' == '' ">C:\Users\jonas\.nuget\packages\fscheck\2.16.6</PkgFsCheck>
   </PropertyGroup>
 </Project>

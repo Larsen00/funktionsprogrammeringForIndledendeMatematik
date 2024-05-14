@@ -1,7 +1,5 @@
 module Generators
-#if !FABLE_COMPILER
 open FsCheck
-
 open rational
 open complex
 open Number
@@ -235,4 +233,3 @@ let fullRankedMatrixIsFullRanked (m:IndependetBacis) =
     |> Prop.classify (res = 1) "PropertyHolds"
     |> Prop.classify (res = 2) "OverflowException"
 
-#endif

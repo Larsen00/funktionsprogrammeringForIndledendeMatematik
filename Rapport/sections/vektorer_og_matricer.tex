@@ -1,4 +1,4 @@
-
+\section{Vektorer og Matricer}
 Vi vil nu betragte opbyggelsen af et modul for vektorer og matricer. Eftersom en vektor også kan opfattes som en matrix, vil vi i det følgende, når begge dele omtales, udelukkende referere til matricer. For systematik at kunne håndtere matricer, starter vi med at definere en type for lagringsordning Listing \ref{Order}.
 
 \begin{lstlisting}[
@@ -418,4 +418,4 @@ Funktionen \textcolor{red}{Gram\_Schmidt}, tager en matrix hvor søjlerne er de 
 
 Funktionen \textcolor{red}{orthogonalBacis} tager en matrix og tjekker om matricen er i kolonnefølge, hvis ikke kalder funktionen sig selv, med den korrekte lagringsordning. Ellers kaldes \textcolor{red}{Gram\_Schmidt} med matricen og en tom akkumulator. Resultatet bliver derfor en matrix med en ortogonal basis for underrummet udspændt af de givne vektorer, givet at vektorerne er lineært uafhængige.
 
-\subsection{linært lignings system}\label {sec:lin_eq}
+\subsection{linært lignings system}\label{sec:lin_eq}

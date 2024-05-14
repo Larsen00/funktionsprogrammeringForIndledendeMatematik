@@ -1,50 +1,51 @@
 \babel@toc {danish}{}\relax 
-\contentsline {section}{\numberline {1}Introduktion}{3}{section.1}%
-\contentsline {section}{\numberline {2}Fundamentale koncepter}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Introduktion til Funktions Programmering}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Typer}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Signatur filer og implementerings filer}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Overloading af operatorer}{5}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Property Based Testing}{5}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Symbolske udtryk}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Tal mængder}{6}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Rationelle tal modul}{7}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Komplekse tal-modul}{8}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Tal modulet}{9}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Matematiske udtryk}{11}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Polsk notation}{11}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Udtryk som træer}{12}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Udtryksmodulet}{13}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Evaluering af udtryk}{15}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Konventering mellem udtryks notation}{16}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Simplifikation af udtryk}{17}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Differentiering af udtryk}{20}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Multivariable polynomier af første grad}{20}{subsection.3.7}%
-\contentsline {section}{\numberline {4}Vektorer og Matricer}{22}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Matrix operationer}{22}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Matematiske operationer}{23}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Skalering af en matrix}{23}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Addition af matricer}{23}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Matrix multiplikation}{24}{subsubsection.4.2.3}%
-\contentsline {subsubsection}{\numberline {4.2.4}Projektion af en vektor}{26}{subsubsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.3}Række-echelon form}{27}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Gram-Schmidt}{27}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}linært lignings system}{29}{subsection.4.5}%
-\contentsline {section}{\numberline {5}PBT af programmet}{29}{section.5}%
-\contentsline {subsection}{\numberline {5.1}PBT af udtryk}{29}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Tal modulet}{29}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Homomorfisme af evaluering}{29}{subsubsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.3}Invers morphism mellem infix og prefix}{29}{subsubsection.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.1.4}Simplifikation af udtryk}{29}{subsubsection.5.1.4}%
-\contentsline {subsubsection}{\numberline {5.1.5}Differentiering af udtryk}{29}{subsubsection.5.1.5}%
-\contentsline {subsection}{\numberline {5.2}PBT af vektorer og matricer}{29}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}PBT af matrix operationer}{29}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}PBT af Gram-Schmidt}{30}{subsubsection.5.2.2}%
-\contentsline {section}{\numberline {6}Diskussion}{32}{section.6}%
-\contentsline {section}{\numberline {7}Konklusion}{32}{section.7}%
-\contentsline {section}{\numberline {8}Appendiks}{34}{section.8}%
-\contentsline {subsection}{\numberline {8.1}complex.fsi}{34}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}TreeGenerator.fs}{34}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}CommutativeAddSub.fs}{36}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}CommutativeMulDiv.fs}{38}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}Matrix.fs}{40}{subsection.8.5}%
+\contentsline {section}{\numberline {1}test}{3}{section.1}%
+\contentsline {section}{\numberline {2}Introduktion}{4}{section.2}%
+\contentsline {section}{\numberline {3}Fundamentale koncepter}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Introduktion til Funktions Programmering}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Typer}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Signatur filer og implementerings filer}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Overloading af operatorer}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Property Based Testing}{7}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Symbolske udtryk}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Tal mængder}{8}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Rationelle tal modul}{8}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Komplekse tal-modul}{9}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Tal modulet}{11}{subsubsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.2}Matematiske udtryk}{13}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Polsk notation}{13}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Udtryk som træer}{13}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Udtryksmodulet}{14}{subsubsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Evaluering af udtryk}{16}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Konventering mellem udtryks notation}{17}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Simplifikation af udtryk}{18}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Differentiering af udtryk}{21}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Multivariable polynomier af første grad}{21}{subsection.4.7}%
+\contentsline {section}{\numberline {5}Vektorer og Matricer}{23}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Matrix operationer}{23}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Matematiske operationer}{24}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Skalering af en matrix}{24}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Addition af matricer}{24}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Matrix multiplikation}{25}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Projektion af en vektor}{27}{subsubsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.3}Række-echelon form}{28}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Gram-Schmidt}{28}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}linært lignings system}{30}{subsection.5.5}%
+\contentsline {section}{\numberline {6}PBT af programmet}{30}{section.6}%
+\contentsline {subsection}{\numberline {6.1}PBT af udtryk}{30}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Tal modulet}{30}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Homomorfisme af evaluering}{30}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Invers morphism mellem infix og prefix}{30}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Simplifikation af udtryk}{30}{subsubsection.6.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.5}Differentiering af udtryk}{30}{subsubsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.2}PBT af vektorer og matricer}{30}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}PBT af matrix operationer}{30}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}PBT af Gram-Schmidt}{31}{subsubsection.6.2.2}%
+\contentsline {section}{\numberline {7}Diskussion}{33}{section.7}%
+\contentsline {section}{\numberline {8}Konklusion}{33}{section.8}%
+\contentsline {section}{\numberline {9}Appendiks}{35}{section.9}%
+\contentsline {subsection}{\numberline {9.1}complex.fsi}{35}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}TreeGenerator.fs}{35}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}CommutativeAddSub.fs}{37}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}CommutativeMulDiv.fs}{39}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Matrix.fs}{41}{subsection.9.5}%

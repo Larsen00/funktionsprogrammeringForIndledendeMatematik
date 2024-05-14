@@ -196,13 +196,13 @@ let rec sumRows m =
 
 
 
-// multiplies a matrix and a vector A.v = b - Definition 7.10
-let rec matrixMulVector m v =
+// matrix vector product  A.v = b - Definition 7.10
+let rec matrixVectorProduct m v =
     let (D(rv, _)) = dimVector v
     let (D(_, cm)) = dimMatrix m
     if rv <> cm  
     then failwith "matrixVector: the number of columns of the matrix has to be the same as the number of entries in the vector."
-    elif not <| corectOrderCheck m C then matrixMulVector (correctOrder m C) v
+    elif not <| corectOrderCheck m C then matrixVectorProduct (correctOrder m C) v
     else
     let (M(vl, _)) = m
     let (V(nl, _)) = v
@@ -225,7 +225,7 @@ let rec matrixProduct a b =
     else
     let (M(vlb, _)) = b
     let product = List.map (
-            fun bv -> matrixMulVector a bv |> matrixToVector ) vlb
+            fun bv -> matrixVectorProduct a bv |> matrixToVector ) vlb
     M(product, C)
 
 
@@ -243,7 +243,7 @@ type Matrix with
     static member (+) (n, m)  = dimMatrix m |> matrixOf n |> addMatrix m
     static member (*) (n, m)  = scalarMatrix m n
     static member (*) (m, n)  = scalarMatrix m n
-    static member (*) (m, v)  = matrixMulVector m v
+    static member (*) (m, v)  = matrixVectorProduct m v
     static member (*) (m1, m2) = matrixProduct m1 m2
     static member (/) (m, n)  = scalarMatrix m (inv n)
 

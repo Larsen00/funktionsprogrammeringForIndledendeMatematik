@@ -128,7 +128,7 @@ let rec sumRows m =
         matrix [List.fold (addVector) zeroVector vl]
 \end{lstlisting}
 
-Addition af vektorer reduceres til at udføre additionen elementvis, som vist i Listing \ref{add_matrix}, ved brug af List-funktionen \textcolor{red}{map2}. Vi kan bruge \textcolor{red}{addVector} til at definere matrix addition og subtraktion af vektorer. Vektor addition bruges også til at summere rækkerne i en matrix (\textcolor{red}{sumRows}), hvilket vil blive anvendt i implementeringen af matrix multiplikation i næste sektion og Gram-Schmidt-processen i sektion \ref{sec:gram_schmidt}. Funktionen bliver yderligere beskrevet i definition \ref{sumRows}.
+Addition af vektorer reduceres til at udføre additionen elementvis, som vist i Listing \ref{add_matrix}, ved brug af List-funktionen \textcolor{red}{map2}. Vi kan bruge \textcolor{red}{addVector} til at definere matrix addition og subtraktion af vektorer. Vektor addition bruges også til at summere rækkerne i en matrix (\textcolor{red}{sumRows}), hvilket vil blive anvendt i implementeringen af matrix produkt i næste sektion og Gram-Schmidt-processen i sektion \ref{sec:gram_schmidt}. Funktionen bliver yderligere beskrevet i definition \ref{sumRows}.
 
 \vspace{0.5cm}
 \begin{definition}[Summering af rækker i en matrix] \label{sumRows}
@@ -157,10 +157,10 @@ v = \begin{bmatrix}
 Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
 \end{definition}
 
-\subsubsection{Matrix multiplikation}
+\subsubsection{Matrix produkt}
 
 
-\begin{definition}[Matrix-Vektor Multiplikation] \label{def:matrix_vector_mul}
+\begin{definition}[Matrix-Vektor Produkt] \label{def:matrix_vector_pro}
     Lad $A$ være en matrix med $m$ rækker og $n$ søjler, hvor
     \[
     A = \begin{bmatrix}
@@ -200,7 +200,7 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
 \]
 \end{definition}
 
-\begin{theorem}[Matrix-Vektor Multiplikation] \label{matrix_vector_mul}
+\begin{theorem}[Matrix-Vektor Produkt] \label{matrix_vector_pro}
     Lad $A$ være en matrix med $m$ rækker og $n$ søjler, og lad $\mathbf{v}$ være en vektor med $n$ elementer. Så gælder der
     \[ Av = \textit{\textcolor{red}{sumRows}}
     \begin{bmatrix}
@@ -225,7 +225,7 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
         a_{m1}v_{1} & a_{m2}v_{2} & \cdots & a_{mn}v_{n}
     \end{bmatrix}
     \end{alignat*}
-    Ved brug af definition \ref{sumRows} for \textit{\textcolor{red}{sumRows}} og definition \ref{def:matrix_vector_mul} ses det at 
+    Ved brug af definition \ref{sumRows} for \textit{\textcolor{red}{sumRows}} og definition \ref{def:matrix_vector_pro} ses det at 
     \begin{alignat*}{2}
     \text{{\color{red}\textit{sumRows}}}(B) &= \begin{bmatrix}
         \sum_{j=1}^{n} a_{1j}v_{j} \\
@@ -235,19 +235,19 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
     \end{bmatrix} = A\mathbf{v}
     \end{alignat*}
 \end{proof}
-Vi kan dermed anvende Sætning \ref{matrix_vector_mul} til at definere en funktion \textcolor{red}{matrixMulVector} til matrix-vektor multiplikation se Listing \ref{mul_vector}. Denne funktion skalerer først søjlerne i matricen med de tilsvarende elementer i vektoren og summer derefter rækkerne i matricen.
+Vi kan dermed anvende sætning \ref{matrix_vector_pro} til at definere en funktion \textcolor{red}{matrixVectorProduct} til matrix-vektor produkt se Listing \ref{vecPro}. Denne funktion skalerer først søjlerne i matricen med de tilsvarende elementer i vektoren og summer derefter rækkerne i matricen.
 \begin{lstlisting}[
     language={FSharp}, 
-    label={mul_vector}, 
-    caption={Funktion til matrix-vektor multiplikation}
+    label={vecPro}, 
+    caption={Funktion til matrix-vektor produkt}
     ]
-// matrixMulVector : Matrix -> Vector -> Matrix
-let rec matrixMulVector (M(vl, _)) (V(nl, _)) =
+// matrixVectorProduct : Matrix -> Vector -> Matrix
+let rec matrixVectorProduct (M(vl, _)) (V(nl, _)) =
     M (List.map2 (fun mc n -> scalarVector n mc) vl nl, C) 
     |> sumRows
 \end{lstlisting}
 
-\begin{definition}[Matrix multiplikation]\label{def:matrix_matrix_mul}
+\begin{definition}[Matrix produkt]\label{def:matrix_matrix_pro}
     Lad $A \in \mathbb{F}^{m \times n}$ og $B \in \mathbb{F}^{n \times \ell}$. Lad søjlerne i $B$ er være givet ved $b_1, \ldots, b_\ell \in \mathbb{F}^n$, dermed\footcitetitle[Definition 7.12
  s. 162]{mat1a}
     \[
@@ -266,29 +266,20 @@ Så defineres matrixproduktet som
     \end{bmatrix}.
     \]
 \end{definition}
-Ud fra definition \ref{def:matrix_matrix_mul} ses det, at funktionen \textcolor{red}{matrixProduct} i Listing \ref{mul_matrix} til at multiplicere to matricer, derfor indebærer matrix-vektor multiplikation på hver søjle i matricen. Da \textcolor{red}{matrixMulVector} evaluere til en matrix, skal der bruges en funktion til at konvertere matricen til en vektor, hvilket \textcolor{red}{matrixToVector} gør.
+Ud fra definition \ref{def:matrix_matrix_pro} ses det, at funktionen \textcolor{red}{matrixProduct} i Listing \ref{pro_matrix} til at tage produktet af to matricer, ved at udfører matrix-vektor produkt på hver søjle i matricen. Da \textcolor{red}{matrixVectorProduct} evaluere til en matrix, skal der bruges en funktion til at konvertere matricen til en vektor, hvilket \textcolor{red}{matrixToVector} gør.
 \begin{lstlisting}[
     language={FSharp}, 
-    label={mul_matrix}, 
-    caption={Funktion til at multiplicere matricer}
+    label={pro_matrix}, 
+    caption={Funktion til at tage produktet af to matricer}
     ]
 // matrixProduct : Matrix -> Matrix -> Matrix
 let rec matrixProduct a (M(vlb, _)) =
     let product = List.map (
-        fun bv -> matrixMulVector a bv |> matrixToVector ) vlb
+        fun bv -> matrixVectorProduct a bv |> matrixToVector ) vlb
     M(product, C)
 \end{lstlisting}
         
 \subsubsection{Projektion af en vektor}
-% Som beskrevet i afsnit 2.3 'Projections onto a line' i 'Mathematics 1b' \footcitetitle[s. 40]{mat1b}, kan projektionen af en vektor defineres som følgende, hvor $Y = \text{span}\{y\}$.
-% \begin{align}
-%     \text{proj}_Y : V \rightarrow V, \quad \text{proj}_Y(x) = \frac{\langle x, y \rangle}{\langle y, y \rangle} y
-%     \label{proj}
-% \end{align}
-% Med det standard indreprodukt 
-% \begin{align}
-%     \langle x, y \rangle = y^* x =\sum_{k=1}^{n} x_k \overline{y}_k
-% \end{align}
 
 \begin{definition}[Projektion af en vektor]\label{def:proj}
 Projektionen af en vektor på en linje defineres i som følgende, hvor $Y = \text{span}\{y\}$\footcitetitle[s. 40]{mat1b}.
@@ -301,35 +292,6 @@ hvor det standard indre produkt er defineret som:
 \end{align}
 \end{definition}
     
-
-% Den første funktion vi skal bruge er derfor en funktionen til at konjugere en vektor \textcolor{red}{conjugateVector}, det gøres ved at konjugere elementerne i vektoren. Udover dette defineres en funktion til at multiplikere to vektorer element vis \textcolor{red}{vectorMulElementWise}. 
-
-% \begin{lstlisting}[
-%     language={FSharp}, 
-%     label={proj_fun}, 
-%     caption={Funktioner til projektere en vektor på en anden}
-%     ]
-% // vectorMulElementWise : Vector -> Vector -> Vector
-% let vectorMulElementWise (V(u, o1)) (V(v, o2)) =
-%     V (List.map2 (*) u v, o1)
-
-% // conjugateVector : Vector -> Vector
-% let conjugateVector (V(v, o)) = 
-%     V (List.map conjugate v, o)
-
-% // innerProduct : Vector -> Vector -> Number
-% let innerProduct u v =
-%     let (V(w, _)) = conjugateVector v |> vectorMulElementWise u
-%     List.fold (+) zero w
-
-% // proj : Vector -> Vector -> Vector   
-% let proj y x =
-%     scalarVector (innerProduct x y / innerProduct y y) y
-% \end{lstlisting}
-
-% 
-
-% Sidst kan funktionen \textcolor{red}{proj} skrives direkte som den er defineres i ligning \ref{proj}.
 
 For at kunne projektere en vektor, som defineret i destination \ref{def:proj} skal vi først kunne konjugere en vektor. Funktionen \textcolor{red}{conjugateVector} konjugerer elementerne i en vektor. Derudover defineres en funktion til at multiplicere to vektorer elementvis (\textcolor{red}{vectorMulElementWise}).
 

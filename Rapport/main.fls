@@ -526,6 +526,11 @@ INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm100
 INPUT .\sections\pbt.tex
 INPUT .\sections\pbt.tex
 INPUT sections\pbt.tex
+INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
+INPUT C:\Users\jonas\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
+INPUT ..\PBT\numberPBT.fsx
+INPUT ..\PBT\numberPBT.fsx
+INPUT ..\PBT\numberPBT.fsx
 INPUT .\sections\Appendiks.tex
 INPUT .\sections\Appendiks.tex
 INPUT sections\Appendiks.tex

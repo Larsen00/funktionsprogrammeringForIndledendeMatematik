@@ -10,16 +10,11 @@ open Matrix
 let max = 3
 let min = -3
 
-// generate a random natural abs( number ) between 1 and 100
+// generate a random natural abs( number ) 
 let noneZeroGen = 
     Gen.oneof [ 
         Gen.choose(1, max) ;
         Gen.choose(min, -1)]
-
-// picks a random variable from a list of variables
-let varGen xlist = 
-    gen { let! i = Gen.choose(0, List.length xlist - 1)
-        return xlist.[i] }
 
 // generate a random Number
 let numberGen =
@@ -32,19 +27,25 @@ let numberGen =
 let numberInExprGen = 
     Gen.map (fun x -> N x) numberGen
 
+// picks a random variable from a list of variables
+let randomListElement xlist = 
+    gen { let! i = Gen.choose(0, List.length xlist - 1)
+        return xlist.[i] }
+
 // generate a random variable (a Expresion leaf)
-let XGen xlist = Gen.map X (varGen xlist)
+let variableGen xlist = Gen.map X (randomListElement xlist)
 
 // generate a random leaf
 let leafGen xlist =
     if xlist <> [] then
-        Gen.oneof [numberInExprGen; XGen xlist]
+        Gen.oneof [numberInExprGen; variableGen xlist]
     else
         numberInExprGen
 
+// generate a random leaf with only integer values
 let onlyIntleafGen xlist :Gen<Expr<Number>> = 
     if xlist <> [] then
-        Gen.oneof [Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10)); XGen xlist]
+        Gen.oneof [Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10)); variableGen xlist]
     else
         Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10))
 

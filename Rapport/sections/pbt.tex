@@ -1,6 +1,155 @@
 \section{PBT af programmet} 
 \subsection{PBT af udtryk}
+Før vi begynder at udføre PBT på alle egenskaber vedrørende udtryk, skal vi først bygge en generator for vores talmængde og udtryk.
+
+Vi begynder med at definere en række generatorer, som kan generere blade i vores udtrykstræer i Listing \ref{generator1}.
+
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={generator1}, 
+    caption={Generatorene anvendt til PBT af udtryk}
+    ]
+let max = 3
+let min = -3
+
+// noneZeroGen: Gen<int>
+let noneZeroGen = 
+    Gen.oneof [ 
+        Gen.choose(1, max) ;
+        Gen.choose(min, -1)]
+
+// numberGen: Gen<Number>
+let numberGen =
+    Gen.oneof [
+        Gen.map2 (fun x y -> newRational(x, y) |> Rational |> tryReduce ) (Gen.choose(min, max)) noneZeroGen;
+        Gen.map (fun x -> Int x) (Gen.choose(min, max));
+        Gen.map4 (fun a b c d -> newComplex (newRational(a, b), newRational(c, d)) |> Complex |> tryReduce ) (Gen.choose(min, max)) noneZeroGen (Gen.choose(min, max)) noneZeroGen]
+
+// numberInExprGen: Gen<Expr<Number>>
+let numberInExprGen = 
+    Gen.map (fun x -> N x) numberGen
+
+// randomListElement: list<'a> -> Gen<'a>
+let randomListElement xlist = 
+    gen { let! i = Gen.choose(0, List.length xlist - 1)
+        return xlist.[i] }
+
+// variableGen: list<char> -> Gen<Expr<'a>>
+let variableGen xlist = Gen.map X (randomListElement xlist)
+
+// leafGen: list<char> -> Gen<Expr<Number>>
+let leafGen xlist =
+    if xlist <> [] then
+        Gen.oneof [numberInExprGen; variableGen xlist]
+    else
+        numberInExprGen
+
+// onlyIntleafGen: list<char> -> Gen<Expr<Number>>
+let onlyIntleafGen xlist :Gen<Expr<Number>> = 
+    if xlist <> [] then
+        Gen.oneof [Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10)); variableGen xlist]
+    else
+        Gen.map (fun x -> N <| Int x) (Gen.choose(-10, 10))
+
+// charsSeqGen: char -> char -> seq<Gen<char>>
+let charsSeqGen c1 c2 = seq { for c in c1 .. c2 do
+                                yield gen { return c} }
+
+// charGen: Gen<char>
+let charGen = gen { return! Gen.oneof (charsSeqGen 'A' 'Z')}
+
+// smallEnvGen: Gen<Map<char, Number> * list<char>>
+let smallEnvGen =
+    gen { 
+        let! i = Gen.choose (0, 5)
+        let! xlist = Gen.listOfLength i charGen
+        let! ns = Gen.listOfLength i numberGen
+        return (Map.ofList (List.zip xlist ns), xlist) }
+
+// exprGen: 'a -> int -> ('a -> Gen<Expr<'b>>) -> Gen<Expr<'b>> 
+let rec exprGen xlist n leafType = 
+    if n = 0 then
+        leafType xlist
+    else
+        Gen.oneof [
+            // leaf occurs twice becourse leaf is X or N giving the same probability for each expression 
+            leafType xlist; 
+            leafType xlist;
+            Gen.map2 (fun x y -> Add (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);
+            Gen.map2 (fun x y -> Mul (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);
+            Gen.map2 (fun x y -> Div (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);
+            Gen.map2 (fun x y -> Sub (x, y)) (exprGen xlist (n/2) leafType) (exprGen xlist (n/2) leafType);            
+            Gen.map (fun x -> Neg x) (exprGen xlist (n/2) leafType)]
+
+
+type SmallEnv = Map<char, Number> * char list
+type SmallEnvGen =
+    static member SmallEnv() =
+        {new Arbitrary<SmallEnv>() with
+            override _.Generator = smallEnvGen
+            override _.Shrinker _ = Seq.empty}
+
+type NumberGen =
+static member Number() =
+    {new Arbitrary<Number>() with
+        override _.Generator = numberGen
+        override _.Shrinker _ = Seq.empty}    
+\end{lstlisting}
+
+Vi begynder med at definere to variable, som alle funktioner har til rådighed, \texttt{max} og \texttt{min}, som definerer intervallet for de heltal, der kan anvendes i genereringen af Numbers. 
+Den første funktion, \textcolor{red}{noneZeroGen}, er en generator for et tilfældigt heltal fra sættet $S_1$:
+\begin{gather*}
+    S_1 = \{ x \mid x \in \mathbb{Z} \setminus \{0\}, \quad \texttt{min} \leq x \leq \texttt{max} \}.
+\end{gather*}
+Vi kan dermed bruge \textcolor{red}{noneZeroGen}, da vi ikke ønsker at generere rationale tal med nævneren 0. For at definere en generator for Numbers i form af \textcolor{red}{numberGen}, som genererer et gyldigt Number fra sættet $S_5$:
+\begin{align*}
+    S_2 &= \left\{ x \mid x \in \mathbb{Z}, \quad \texttt{min} \leq x \leq \texttt{max} \right\} \\
+    S_3 &= \left\{ \frac{x}{y} \mid x \in S_1, y \in S_2 \right\} \\
+    S_4 &= \left\{ x + yi \mid x, y \in S_3 \right\} \\
+    S_5 &= S_2 \cup S_3 \cup S_4
+\end{align*}
+
+Funktionen \textcolor{red}{numberInExprGen} er en generator, som ved brug af \textcolor{red}{numberGen} konverterer et \texttt{Number} til et \texttt{Expr<Number>}. Det er disse generatorer, der anvendes til at generere tal til vores talmængde.
+
+Dernæst kommer nogle generatorer til generering af variable. Først har vi \textcolor{red}{randomListElement}, som tager en liste af en vilkårlig type og udvælger et tilfældigt element fra listen. Derudover har vi \textcolor{red}{variableGen}, som tager en liste af karakterer og bruger \textcolor{red}{randomListElement} til at udvælge en af karaktererne og konvertere den til et \texttt{Expr<Number>}.
+
+Dermed er det nu muligt at lave en generator, som kan generere enten et tal eller en variabel fra konstruktørerne af \texttt{Expr<Number>}. Disse to konstruktører er også bladene i vores udtrykstræer. \textcolor{red}{leafGen} genererer et tilfældigt blad i vores udtrykstræ ud fra en liste af karakterer. \textcolor{red}{onlyIntleafGen} fungerer ud fra det samme princip, men genererer kun heltal fra intervallet -10 til 10.
+
+Funktionerne \textcolor{red}{charGen} og \textcolor{red}{charsSeqGen} er generatorer, som sammen genererer en tilfældig karakter mellem 'A' og 'Z'. Endelig har vi en miljøgenerator, \textcolor{red}{smallEnvGen}, som genererer et miljø, der indeholder variable og deres tilsvarende værdier.
+
+Den sidste generator, \textcolor{red}{exprGen}, vil i vores PBT tage en liste af variable, som den må generere blade ud fra, samt hvilken generator der skal anvendes til at generere bladene. Derudover vil den maksimale dybde af udtrykket være \(\log_2(n)\).
+
+Til sidst defineres tre typer, hvor \texttt{SmallEnvGen} og \texttt{NumberGen} gør det muligt inden kørsel af vores PBT at registrere generatorerne.
+
+Vi har dermed nu lavet fundamentet, til at kunne teste vores egenskaber vedrørende udtryk.
+
 \subsubsection{Tal modulet}\label{sec:PBT_number}
+De 6 egenskaber fra \ref{egenskab:tal} kan nu testes med PBT. Egenskaberne kan oversættes direkte til funktioner, grundet de overskrivninger vi har lavet på number typen i Listing \ref{pbt:number}. 
+
+\lstinputlisting[
+    language=FSharp, 
+    caption={\textit{numberPBT.fsx} - funktioner til test af egenskaberne i \ref{egenskab:tal}},
+    label={pbt:number}
+    ]{../PBT/numberPBT.fsx}
+I \textcolor{red}{inverseMultiplicative} anvender vi "Prop.classify" til at tillade, at egenskaben kan slå bestemte fejl. I dette tilfælde tillades det, at der opstår en "DivideByZeroException". Dette sker, fordi generatoren godt kan generere 0, som der ikke kan tages en invers af. For at teste ovensånde funktioner, køres \textit{.fsx} filen, og outputtet kan ses i Listing \ref{output:number}.
+\begin{lstlisting}[
+    style=output, 
+    label={output:number}, 
+    caption={Outputtet fra PBT af Number typer, ved kørsel af Listing \ref{pbt:number}}
+    ]        
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+Ok, passed 100 tests.
+94% PropertyHolds.
+6% DivideByZeroExceptions.
+\end{lstlisting}
+
+Dermed viser testen at alle egenskaberne fra \ref{egenskab:tal} holder. 
+
 \subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
 \subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
 \subsubsection{Simplifikation af udtryk}\label{sec:PBT_simplification}

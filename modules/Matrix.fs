@@ -535,6 +535,8 @@ let hasSameSpan m1 m2 =
 /////////////////////////////////
 
 type ExprVector = list<Expr<Number>>
+type ExprMatrix = list<ExprVector>
+
 
 
 // multiplies a expression with a vector and returns a Expr list
@@ -577,15 +579,20 @@ let rec solveEquations el bl cl =
 // Solves the equation Ax = b
 let matrixEquation A (V(nlb, ob)) =
     let (D(r, c)) = dimMatrix A
-    
     if r <> List.length nlb ||  ob = R then 
-        failwith "matrixEquation: b must be a column or have same length as rows of A"
+        failwith "matrixEquation: b must be a column vector or have same length as rows of A"
     
-    // Perform row echelon form on the matrix and separate the last vector
-    let (V(ef_b, _), M(ef_vl, o)) = correctOrder (rowEchelonForm <| extendMatrix A nlb) C |> extractlastVector
+    // Perform row echelon form on the total matrix
+    let ef_t = correctOrder (rowEchelonForm <| extendMatrix A nlb) C
 
-    if not <| hasFullRank (M(ef_vl, o)) then 
-        failwith "matrixEquation: There dont exitst a single solution"
+    // Extract the last vector of the matrix
+    let (V(ef_b, _), M(ef_vl, o)) = extractlastVector ef_t
+
+    // Check if the system of equations has a solution
+    if hasFullRank ef_t then 
+        failwith "matrixEquation: The system of equations has no solution"
+    elif not <| hasFullRank (M(ef_vl, o)) then 
+        failwith "matrixEquation: The system of equations has infinite solutions"
     
     let varlist = charVector c
     let b = scalarWithExpr (vector ef_b) (N one)

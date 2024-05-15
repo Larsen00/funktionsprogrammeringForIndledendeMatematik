@@ -416,5 +416,27 @@ and rowOps coloumn i nrows R1 acc_m  =
     rowOps coloumn (i + 1) nrows R1 <| replaceMatrixIthVector (i-1) acc_m (Ri - b * R1)
 \end{lstlisting}
 
-\subsection{linært lignings system}\label{sec:lin_eq}
-Som den sidste del i implementerede anvendelse af matricer, vil vi beskrive hvordan vi kan løse et linært lignings system 
+\subsection{Lineært ligningssystem}\label{sec:lin_eq}
+Som den sidste del i anvendelsen af matricer vil vi beskrive, hvordan vi kan løse et lineært ligningssystem af formen \(A \mathbf{x} = \mathbf{b}\). Ved at foretage række-echelon form på totalmatricen \(\left[ A \mid \mathbf{b} \right]\) kan vi finde en løsning til ligningssystemet, hvis ranken af \(A\) er forskellig fra ranken af den totale matrix\footcitetitle[Corollary 6.27 s. 146]{mat1a}. 
+
+Efter at have foretaget række-echelon form på totalmatricen, skal vi tage matrix-vektor-produktet af \(\text{ref}(A)\) og \(\mathbf{x}\) for at kunne have \(m\) ligninger med \(n\) ubekendte, hvis vi antager, at \(A \in \mathbb{F}^{m \times n}\).
+
+Den nemmeste tilgang vil være at introducere to nye typer for at repræsentere en vektor og matrix, som kan indeholde variable. Dette kan gøres ved hjælp af vores type for udtryk fra Listing \ref{expr_type}. Vi definerer derfor følgende typer i Listing \ref{expr_matric_type}.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={expr_matric_type}, 
+    caption={Typer for at repræsentere en vektor og matrix med variable}
+    ]
+type ExprVector = list<Expr<Number>>
+type ExprMatrix = list<ExprVector>
+\end{lstlisting}
+
+Det er her undladt at definere lagringsordningen for matricerne af udtryk, da vi ikke bruger dem til mere end en mellemregning i løsningen af ligningssystemet. Men alle funktioner, vi har lavet i Listing \ref{matrix}, ville man også kunne lave for udtryksmatricer, hvis man anvender en lagringsordning.
+
+Ved at have udtryksmatricer defineret som en liste af udtryk, kan vi anvende den samme teknik til at foretage matrix-vektor-produktet mellem \(\text{ref}(A)\) og \(\mathbf{x}\), som vi benyttede i Listing \ref{vecPro}. Dette vil resultere i en liste af udtryk, som vi ved hjælp af funktionen \textcolor{red}{isolateX} i Listing \ref{lst:isolate} kan bruge til at isolere \(x_i\) i den \(i\)'te ligning ved at sætte den lig med $b_i$ og indsætte det i ligningerne \(1\) til \(i - 1\).
+
+Den fulde implementering er at finde i appendiks \ref{sec:matrix.fs}. Det er værd at bemærke, at denne implementering vil resultere i en vektor af \texttt{Number}. Derfor vil den fejle, hvis der er flere ubekendte end ligninger, hvilket betyder, at koefficientmatricen $A$ skal have fuld rank.
+
+
+

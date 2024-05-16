@@ -39,7 +39,7 @@
 \contentsline {subsubsection}{\numberline {5.1.5}Differentiering af udtryk}{35}{subsubsection.5.1.5}%
 \contentsline {subsection}{\numberline {5.2}PBT af vektorer og matricer}{35}{subsection.5.2}%
 \contentsline {subsubsection}{\numberline {5.2.1}PBT af matrix operationer}{35}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}PBT af Gram-Schmidt}{36}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2}PBT af Gram-Schmidt}{37}{subsubsection.5.2.2}%
 \contentsline {section}{\numberline {6}Diskussion}{38}{section.6}%
 \contentsline {section}{\numberline {7}Konklusion}{38}{section.7}%
 \contentsline {section}{\numberline {8}Appendiks}{40}{section.8}%

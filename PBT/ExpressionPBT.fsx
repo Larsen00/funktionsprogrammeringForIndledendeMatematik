@@ -59,8 +59,6 @@ let _ = Check.Quick treePBT
 let evalOperation e1 e2 env f =
    eval (f e1 e2) env = (getNumber <| f (eval e1 env |> N) (eval e2 env |> N))
 
-
-
 let evalPBT ((env ,xlist):SmallEnv) = 
     let result = 
         try

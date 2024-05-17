@@ -1,12 +1,13 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1715784632.37379 -1
-  "main.bcf" 1715784632 109278 157e2642dcc299361b46c2eaf2645187 "pdflatex"
+["biber main"] 1715956409.54744 "main.bcf" "main.bbl" "main" 1715956452.38713 0
+  "main.bcf" 1715956451 109278 157e2642dcc299361b46c2eaf2645187 "pdflatex"
   "references.bib" 1715431334 3476 78ebb11ca7ecbb92b0548d8b6a147b99 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1715784627.99172 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715784632.37442 0
+["pdflatex"] 1715956446.30066 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1715956452.38793 0
+  "../PBT/diffPBT.fsx" 1715956451 1934 241ddc40f093c71a33da0fe0f2d3e103 ""
   "../PBT/numberPBT.fsx" 1715779819 1378 ca2adf91f8bb94bfc2e7e535930a586a ""
   "../implamentations/TreeGenerator.fs" 1715197181 4297 f450987475e4b76026bb62009c0f3daf ""
   "../implamentations/commutativeAddSub.fs" 1715247772 2894 4846019dfd9385d70143726dbba1150a ""
@@ -285,21 +286,21 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "Opsætning/DTULogo.png" 1709375398 71324 08d7a624ec2f9f1df696ed86b2d8893d ""
-  "Opsætning/Pakker.tex" 1715779768 8968 81a26fff1128ba3aec593b311a7932d1 ""
+  "Opsætning/Pakker.tex" 1715956129 9107 065839f49b902844855eeadc54874ed5 ""
   "Opsætning/forside.tex" 1711819024 2148 c278081412b431856ee7aa61dfa55a2c ""
   "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1715776528 1374 ae025464473e3b278c678aa78011dcc2 ""
   "exampleCodes/valid1.fsx" 1710682578 174 1c793f2026d3f274ba30a14fa979c2cc ""
-  "main.aux" 1715784632 28388 729b5dc3e3049186e214a7726fa83f5f "pdflatex"
-  "main.bbl" 1715782716 10919 ec741cae4cf323c5e4f38ad2c29dc623 "biber main"
-  "main.out" 1715784632 7991 2e250c24e01b8e6a582b11460151b455 "pdflatex"
-  "main.run.xml" 1715784632 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
+  "main.aux" 1715956451 30273 d35e32270fc489ea8a6fd8fa7f7089b2 "pdflatex"
+  "main.bbl" 1715956412 10919 ec741cae4cf323c5e4f38ad2c29dc623 "biber main"
+  "main.out" 1715956451 7991 a1ba09a1b9055b291acff102e38ff5e3 "pdflatex"
+  "main.run.xml" 1715956451 2304 41af75f93b44d1fd858e960569b25321 "pdflatex"
   "main.tex" 1715776528 1374 ae025464473e3b278c678aa78011dcc2 ""
-  "main.toc" 1715784632 4367 104e2b5c2801ae29a05ce73f90991b7f "pdflatex"
+  "main.toc" 1715956451 4367 aab6a0dcbc36dac2eaa6e1d8ab909e14 "pdflatex"
   "sections/Appendiks.tex" 1715430900 971 7f4859c72c29bcc0abeebd804eae273d ""
   "sections/Fundamentale_koncepter.tex" 1715683256 9300 0e0a04232598f168491036c22b3021b9 ""
   "sections/Introduction.tex" 1715673605 2037 411f10c1afeb24cbe2f10ff183a8ed4f ""
-  "sections/pbt.tex" 1715784627 17563 3f0596bb70abe064e0f30957c0fbdf7a ""
-  "sections/udtryk.tex" 1715782915 41796 c079b774b4bd827c1c5d0d30ddfef1c1 ""
+  "sections/pbt.tex" 1715956305 23558 616f87970f220d8c2c7518b22fda0bba ""
+  "sections/udtryk.tex" 1715956135 41810 916a6e33414cb0d5d16c5b9aa3777ec5 ""
   "sections/vektorer_og_matricer.tex" 1715763342 22130 05b632137a56e03433fc207440ae5eae ""
   (generated)
   "main.aux"

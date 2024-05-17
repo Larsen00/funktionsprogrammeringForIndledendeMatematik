@@ -195,10 +195,125 @@ Ok, passed 100 tests.
 18% DivideByZeroExceptions.
 6% OverflowException.
 \end{lstlisting}
+Vi ser her en større mængde af tests, som bliver klassificeret som "DivideByZeroExceptions". Dette skyldes, at vores generator godt kan generere udtryk som \(1/(0 \cdot X)\) og lignende, hvilket ikke er et lovligt udtryk. Derudover forekommer der også "OverflowExceptions", hvilket skyldes, at ved evaluering af udtryk kan vi godt ende med en kombination af operationer, som giver rationale tal, der, som beskrevet i sektion \ref{sec:rational}, kan resultere i en overflow. Samme form for klassificeringer vil vi løbende se i de kommende tests.
 
-\subsubsection{Invers morphism mellem infix og prefix}\label{sec:PBT_infix_prefix}
+
+
 \subsubsection{Simplifikation af udtryk}\label{sec:PBT_simplification}
+Det er vigtigt, at vores simplifikation altid er lig med det oprindelige udtryk. Vi kan derfor teste egenskab \ref{egenskab:simplification} ved at simplificere et udtryk og sammenligne evalueringen af det med det oprindelige udtryk ved hjælp af et miljø. Dette er gjort i Listing \ref{pbt:simplification}.
+
+\begin{lstlisting}[language={FSharp}, caption={PBT af egenskaben \ref{egenskab:simplification}}, label={pbt:simplification}]
+// compareSimpExpr: Map<char, Number> -> Expr<Number> -> bool
+let compareSimpExpr env (e:Expr<Number>) =
+    eval (simplifyExpr e) env = eval e env
+
+// simpEqualEval: SmallEnv -> int
+let simpEqualEval (env, xlist) = 
+    try
+        if Gen.sample 1 1 (exprGen xlist 10 leafGen) 
+            |> List.head 
+            |> compareSimpExpr env 
+        then 1 else 0
+    with
+        | :? System.DivideByZeroException as _ -> 2
+        | :? System.OverflowException as _ -> 3
+
+// simpPBT: SmallEnv -> Property
+let simpPBT (se:SmallEnv) =
+    let result = simpEqualEval se
+    (result = 1 || result = 2 || result = 3)
+    |> Prop.classify (result = 1) "Equal"
+    |> Prop.classify (result = 2) "DivideByZeroExceptions"
+    |> Prop.classify (result = 3) "OverflowException"   
+\end{lstlisting}
+
+Outputtet fra testen kan ses i Listing \ref{output:simplification}. Testen viser, at egenskaben holder.
+
+\begin{lstlisting}[
+    style=output, 
+    label={output:simplification}, 
+    caption={Outputtet fra PBT af egenskaben \ref{egenskab:simplification}}
+    ]
+> Arb.register<SmallEnvGen>()
+- let _ = Check.Quick simpPBT;;
+Ok, passed 100 tests.
+94% Equal.
+6% DivideByZeroExceptions.
+\end{lstlisting}
+
+\subsubsection{Invers morfisme mellem infix og prefix}\label{sec:PBT_infix_prefix}
+Nu skal det undersøges, hvorvidt egenskab \ref{egenskab:infix_prefix} holder. Vi beskrev i Listing \ref{lst:expression_to_infix} den inverse funktion til \textcolor{red}{tree}-funktionen, som benyttes til at opskrive egenskaben i Listing \ref{pbt:infix_prefix}.
+
+\begin{lstlisting}[language={FSharp}, caption={PBT af egenskaben \ref{egenskab:infix_prefix}}, label={pbt:infix_prefix}]
+// generatesCorrectTree: Map<char, Number> -> Expr<Number> -> bool
+let generatesCorrectTree env (e:Expr<Number>) =
+    eval e env = eval 
+        (simplifyExpr e 
+        |> infixExpression 
+        |> tree 
+        |> infixExpression 
+        |> tree ) env
+
+// treeEqualEval: SmallEnv -> int
+let treeEqualEval (env, xlist) =
+    try 
+        if Gen.sample 1 1 (exprGen xlist 10 onlyIntleafGen) 
+            |> List.head 
+            |> generatesCorrectTree env 
+        then 1 else 0
+    with
+        | :? System.DivideByZeroException as _ -> 2
+        | :? System.OverflowException as _ -> 3
+
+// treePBT: SmallEnv -> Property
+let treePBT (se:SmallEnv) =
+    let result = treeEqualEval se
+    (result = 1 || result = 2 || result = 3)
+    |> Prop.classify (result = 1) "Equal"
+    |> Prop.classify (result = 2) "DivideByZeroExceptions"
+    |> Prop.classify (result = 3) "OverflowException"
+\end{lstlisting}
+
+Funktionen \textcolor{red}{generatesCorrectTree} tager et miljø samt et udtryk og undersøger, om:
+\begin{gather}
+    \text{eval}(e) = \text{eval}(\text{tree}(\text{tree}^{-1}(\text{tree}(\text{tree}^{-1}(\text{simplifyExpr}(e))))))
+\end{gather}
+Det er gjort på denne måde, da det ikke er muligt igennem vores program at generere matematiske udtryk i infix-notation, som med sikkerhed har gyldig notation. I stedet vil vi anvende vores udtryksgenerator til at generere et udtryk, som vi så ved hjælp af et miljø kan tjekke, at egenskaben \ref{egenskab:infix_prefix} holder for alle \( x \in \texttt{Expr<Number>} \). 
+
+Udtrykket bliver simplificeret, før det konverteres til infix-notation, da der er valgt ikke at placere parenteser rundt om tal i udtrykket, for visualiseringens skyld. Dette betyder, at hvis udtrykket ikke simplificeres, kan der skabes udtryk som \texttt{Neg(N -1)}, som i infix-notation er \(--1\), hvilket ikke er en gyldig notation uden parenteser. Simplifikationen sørger for, at negative tal repræsenteres ved negationen af et positivt tal.
+ 
+
+Outputtet fra kørsel af testen kan ses i Listing \ref{output:infix_prefix}. Testen viser som forventet, at egenskaben holder for alle udtryk.
+\begin{lstlisting}[
+    style=output, 
+    label={output:infix_prefix}, 
+    caption={Outputtet fra PBT af egenskaben \ref{egenskab:infix_prefix}}
+    ]
+> Arb.register<SmallEnvGen>()                               
+- let _ = Check.Quick treePBT;;
+Ok, passed 100 tests.
+94% Equal.
+6% DivideByZeroExceptions.
+\end{lstlisting}
+
+
 \subsubsection{Differentiering af udtryk}\label{sec:PBT_differentiation}
+Selv om differentieringsfunktionen \textcolor{red}{diff} er implementeret ud fra egenskaberne i \ref{egenskab:differentiation}, er det stadig vigtigt at teste, om funktionen overholder de samme egenskaber. Dette er gjort i \textit{diffPBT.fsx}, se Listing \ref{pbt:differentiation}.
+
+\lstinputlisting[language=FSharp, caption={\textit{diffPBT.fsx} - funktioner til test af egenskaberne i \ref{egenskab:differentiation}}, label={pbt:differentiation}]{../PBT/diffPBT.fsx}
+
+Outputtet fra kørsel af testen kan ses i Listing \ref{output:differentiation}. Testen viser, at egenskaberne holder.
+
+\begin{lstlisting}[style=output, caption={Outputtet fra PBT af differentiering af udtryk}, label={output:differentiation}]
+Differentiation property based testing
+Ok, passed 100 tests.
+72% Property Holds.
+15% DivideByZeroExceptions.
+13% OverflowException.
+\end{lstlisting}
+
+
+
 \subsection{PBT af vektorer og matricer}
 
 \subsubsection{PBT af matrix operationer}

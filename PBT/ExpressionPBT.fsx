@@ -18,7 +18,10 @@ let compareSimpExpr env (e:Expr<Number>) =
 // samples and expression and test if the simplified expression is equal to the original expression
 let simpEqualEval (env, xlist) = 
     try
-        if Gen.sample 1 1 (exprGen xlist 10 leafGen) |> List.head |> compareSimpExpr env then 1 else 0
+        if Gen.sample 1 1 (exprGen xlist 10 leafGen) 
+            |> List.head 
+            |> compareSimpExpr env 
+        then 1 else 0
     with
         | :? System.DivideByZeroException as _ -> 2
         | :? System.OverflowException as _ -> 3
@@ -32,14 +35,23 @@ let simpPBT (se:SmallEnv) =
     |> Prop.classify (result = 3) "OverflowException"
 
 printfn "Simplified expression equals original expression"
+Arb.register<SmallEnvGen>()
 let _ = Check.Quick simpPBT
 
 let generatesCorrectTree env (e:Expr<Number>) =
-    eval e env = eval (simplifyExpr e |> infixExpression |> tree |> infixExpression |> tree ) env
+    eval e env = eval 
+        (simplifyExpr e 
+        |> infixExpression 
+        |> tree 
+        |> infixExpression 
+        |> tree ) env
 
 let treeEqualEval (env, xlist) =
     try 
-        if Gen.sample 1 1 (exprGen xlist 10 onlyIntleafGen) |> List.head |> generatesCorrectTree env then 1 else 0
+        if Gen.sample 1 1 (exprGen xlist 10 onlyIntleafGen) 
+            |> List.head 
+            |> generatesCorrectTree env 
+        then 1 else 0
     with
         | :? System.DivideByZeroException as _ -> 2
         | :? System.OverflowException as _ -> 3
@@ -52,6 +64,7 @@ let treePBT (se:SmallEnv) =
     |> Prop.classify (result = 3) "OverflowException"
 
 printfn "\nGenerates correct tree"
+Arb.register<SmallEnvGen>()
 let _ = Check.Quick treePBT
 
 

@@ -4,7 +4,7 @@ Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derf
 \subsection{Tal mængder}
 Vi begynder med opbygningen af et modul, der kan repræsentere talgrupper. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal hvor real- og imaginærdelen er rationale. 
 
-\subsubsection{Rationelle tal modul}
+\subsubsection{Rationelle tal modul}\label{sec:rational}
 Repræsentationen af rationale tal kan laves ved hjælp af at danne et par af heltal, hvor det ene heltal er tælleren, og det andet er nævneren.
 
 
@@ -689,7 +689,7 @@ Generelt, når det gælder simplificering af udtryk, skal man være opmærksom p
 Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, som samtidig vil understrege vigtigheden af at kunne simplificere udtryk. Vi begynder igen med at opskrive nogle algebraiske linearitetsegenskaber, som differentieringen skal overholde. Disse egenskaber vil blive testet i sektion \ref{sec:PBT_differentiation}.
 \vspace{0.5cm}
 \begin{egenskab}[Linearitetsbetingelserne\footcitetitle{diff}]\label{egenskab:differentiation}
-  Lad $f$ og $g$ være udtryk, og $a$ og $b$ være tal fra talmodulet, så gælder følgende:
+  Lad $f$ og $g$ være udtryk, og $a$ være tal fra talmodulet, så gælder følgende:
   \begin{enumerate}
     \item \textbf{Skaleringsreglen} \\
     \(\frac{d}{dx}(af) = a\frac{df}{dx}\)
@@ -717,7 +717,7 @@ let rec diff e dx =
     | X f when f = dx -> N (Int 1)
     | X _ -> N (Int 0)
     | N _ -> N (Int 0)
-    | Neg f -> diff (Mul (N (Int 1), f)) dx
+    | Neg f -> diff (Mul (N (Int -1), f)) dx
     | Add(f, g) -> Add(diff f dx, diff g dx)
     | Sub(f, g) -> Sub(diff f dx, diff g dx)
     | Mul(f, g) -> Add(Mul(diff f dx, g), Mul(f, diff g dx))

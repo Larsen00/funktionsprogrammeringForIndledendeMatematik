@@ -162,18 +162,18 @@ let getDiagonalMatrixGen maxRows =
         return fullrankedDiagonalMatrix n m }
         
 
-let getFullRankedMatrixGen =
+let getOrthogonalMatrixGen =
     gen { 
         let! m = getDiagonalMatrixGen 5
         let! numberOfOperations = Gen.choose(1, 10)
         let! span = multipleRowOperationsGen m numberOfOperations
-        return span }
+        return span |> transposeMatrix |> conjugateMatrix }
 
-type fullRankedMatrix = Matrix
-type fullRankedMatrixGen =
+type OrthogonalMatrix = Matrix
+type OrthogonalMatrixGen =
     static member fullRankedDiagonalMatrix() =
         {new Arbitrary<Matrix>() with 
-            override _.Generator = getFullRankedMatrixGen
+            override _.Generator = getOrthogonalMatrixGen
             override _.Shrinker _ = Seq.empty}
             
 
@@ -197,7 +197,7 @@ let transposeTwice (m:Matrix) =
     transposeMatrix m |> transposeMatrix = m
 
 // An independtent set of vectors is orthogonal after the Gram-Schmidt process
-let gramSchmidtIsOrthogonal (m:IndependetBacis) =
+let gramSchmidtIsOrthogonalOG (m:IndependetBacis) =
     let res =
         try 
             if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
@@ -209,12 +209,11 @@ let gramSchmidtIsOrthogonal (m:IndependetBacis) =
     |> Prop.classify (res = 2) "DivideByZeroExceptions"
     |> Prop.classify (res = 3) "OverflowException"
 
-let gramSchmidtIsOrthogonal2 (m:fullRankedMatrix) =
+let gramSchmidtIsOrthogonal (m:OrthogonalMatrix) =
     let res =
         try 
-            let tm = transposeMatrix m
-            let um = orthogonalBacis tm
-            if  isOrthogonalBacis um && hasSameSpan tm um then 1 else 0
+            let um = orthogonalBacis m
+            if  isOrthogonalBacis um && hasSameSpan m um then 1 else 0
         with
             | :? System.DivideByZeroException as _ -> 2
             | :? System.OverflowException as _ -> 3
@@ -224,7 +223,7 @@ let gramSchmidtIsOrthogonal2 (m:fullRankedMatrix) =
     |> Prop.classify (res = 2) "DivideByZeroExceptions"
     |> Prop.classify (res = 3) "OverflowException"
 
-let fullRankedMatrixIsFullRanked (m:IndependetBacis) =
+let OrthogonalMatrixIsFullRanked (m:IndependetBacis) =
     let res =
         try 
             if hasFullRank m then 1 else 0

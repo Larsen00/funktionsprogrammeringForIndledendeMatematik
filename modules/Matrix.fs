@@ -279,6 +279,10 @@ let vectorMulElementWise (V(u, o1)) (V(v, o2)) =
 let conjugateVector (V(v, o)) = 
     V (List.map conjugate v, o)
 
+// Conjugates a matrix
+let conjugateMatrix (M(m, o)) = 
+    M (List.map conjugateVector m, o)
+
 // Inner product of two vectors
 let innerProduct u v =
     let (V(w, _)) = conjugateVector v |> vectorMulElementWise u
@@ -476,22 +480,53 @@ let rec isUpperTriangular (M(vl, o)) =
         | x::xs when idx >= m -> isZeroVector x && iut xs (idx + 1)
         | x::xs -> firstNonZeroIndex x = idx && iut xs (idx + 1)
     iut vl 0
+
+// rank of a matrix
+let rank m =
+    let (D(r, c)) = dimMatrix m
+    let maxRank = if r < c then r else c
+    let rec ra m rowi =
+        if rowi > maxRank || isZeroMatrix m then 
+            rowi
+        else
+            match m with
+            | M([], _) -> rowi
+            | M(v::vl, o) -> 
+                let fnz = firstNonZeroIndex v
+                if fnz < rowi then 
+                    ra (M(vl, o)) rowi
+                else 
+                    ra (M(vl, o)) (rowi + 1)
+    ra (correctOrder (rowEchelonForm m) R) 0
             
 // determines if a matrix has full rank
 let hasFullRank m = 
-    rowEchelonForm m |> isUpperTriangular
+    let (D(r, c)) = dimMatrix m
+    let maxRank = if r < c then r else c
+    rank m = maxRank
 
+// determines if a list of numbers is all zero
+let isZeroNumberList nl =
+    List.forall (fun x -> Number.isZero x) nl
+
+// determines if a matrix is Identity matrix
+let isDiagonalMatrix m =
+    let (D(r, c)) = dimMatrix m
+    if r <> c then false
+    else
+    let rec iim m =
+        let nl, (M(vl, o)) = firstElemetsVectors m [] []
+        match vl, nl with
+        | [], [] -> true
+        | v::vTail, n::nTail -> 
+            isZeroVector v && isZeroNumberList nTail && not (Number.isZero n) && iim (M(vTail, o))
+        | _, _ -> false
+    iim m
 
 // checks is if every vector has inner product of zero with the next vector
 let rec isOrthogonalBacis m =
-    let isob (M(vl, o)) = 
-        match vl with
-        | [] -> true
-        | _::[] -> true
-        | v::vnext::vrest -> innerProduct v vnext = zero && isOrthogonalBacis (M(vnext::vrest, o))
-    isob <| correctOrder m C && hasFullRank m
-
-
+    let mt = transposeMatrix m |> conjugateMatrix
+    isDiagonalMatrix (m * mt) || isDiagonalMatrix (mt * m)
 
 // split a matric into two matrices
 let rec splitMatrix o i m =

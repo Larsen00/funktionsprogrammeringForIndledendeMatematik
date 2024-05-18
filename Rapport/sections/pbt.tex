@@ -315,14 +315,12 @@ Ok, passed 100 tests.
 
 
 \subsection{PBT af vektorer og matricer}
-
-\subsubsection{PBT af matrix operationer}
-Det er nu muligt at opstille nogle PBT af der sikre at matricerne overholder matematiske egenskaber i sætning \ref{vector_space_axioms}. Først defineres en generator for matricer, som generere matricer med tilfældige tal fra vores talmængde \ref{number_type}.
+Ligesom ved PBT af udtryk begynder vi med at lave end generatorer for matricer.
 
 \begin{lstlisting}[
     language={FSharp}, 
     label={generators}, 
-    caption={Generatorene anvendt til PBT af matrix operationer i }
+    caption={Generatorerne anvendt til PBT af matrixoperationer}
     ]
 // vectorGen : int -> Gen<Vector>
 let vectorGen n =
@@ -337,39 +335,42 @@ let matrixGen =
         return matrix vectors
     }
 
-type MaxtrixGen =
+type MatrixGen =
     static member Matrix() =
         {new Arbitrary<Matrix>() with
             override _.Generator = matrixGen
             override _.Shrinker _ = Seq.empty}
-
-type NumberGen =
-    static member Number() =
-        {new Arbitrary<Number>() with
-            override _.Generator = numberGen
-            override _.Shrinker _ = Seq.empty}   
 \end{lstlisting}
 
+Først defineres \textcolor{red}{vectorGen}, som laver en liste ved hjælp af den tidligere definerede funktion \textcolor{red}{numberGen}. Den laver en liste med en given længde af tilfældige tal fra vores talmængde. Dernæst passes listen videre til \textcolor{red}{vector}-funktionen, som laver en søjlelagret vektor ud fra listen. Funktionen \textcolor{red}{matrixGen} genererer en matrix af tilfældig størrelse, hvor antallet af rækker og kolonner er mellem 1 og 6 ved hjælp af \textcolor{red}{vectorGen}. Til sidst kan vi definere en type for matrixgeneratorerne, som gør det muligt at registrere dem før kørsel af PBT.
 
-Vi kan dermed nu lave definere egenskaberne fra \ref{vector_space_axioms} som nogle funktioner, og teste dem med PBT.
+\subsubsection{PBT af matrix operationer}
+Det er nu muligt at opstille nogle PBT af der sikre at matricerne overholder matematiske egenskaber i sætning \ref{vector_space_axioms}. 
+
+
+
+
+Vi kan dermed nu lave definere egenskaberne fra \ref{vector_space_axioms} som nogle funktioner i Listing \ref{lst:vector_space_axioms}.
 
 \begin{lstlisting}[
     language={FSharp}, 
     label={lst:vector_space_axioms}, 
     caption={Egenskaberne fra sætning \ref{vector_space_axioms} som funktioner}
     ]
-vectorCom : Matrix -> bool
+//vectorCom : Matrix -> bool
 let vectorCom m =
     sumRows m = sumRows (flip m)
 
-vectorScalarAss : Matrix -> Number -> Number -> bool
+//vectorScalarAss : Matrix -> Number -> Number -> bool
 let vectorScalarAss (m:Matrix) (n1:Number) (n2:Number) =
     n1 * (n2 * m) = (n1 * n2) * m
 
-vectorAssCom : Matrix -> Number -> bool
+//vectorAssCom : Matrix -> Number -> bool
 let vectorAssCom m (c:Number) =
     c * (sumRows m) = sumRows (c * m)
 \end{lstlisting}
+
+Listing \ref{lst:vector_space_axioms_pbt} viser outputtet fra kørsel af testene. Testene viser, at egenskaberne holder for alle matricer.
 
 \begin{lstlisting}[
     style=output, 
@@ -377,7 +378,6 @@ let vectorAssCom m (c:Number) =
     caption={Outputtet fra PBT af vektor Listing \ref{lst:vector_space_axioms}}
     ]
 - Arb.register<MaxtrixGen>()
-- Arb.register<NumberGen>()
 - let _ = Check.Quick vectorCom
 - let _ = Check.Quick vectorScalarAss
 - let _ = Check.Quick vectorAssCom;;
@@ -387,8 +387,7 @@ Ok, passed 100 tests.
 \end{lstlisting}
 
 \subsubsection{PBT af Gram-Schmidt}\label{sec:pbt_gram_schmidt}
-Udfrodringen ved at lave en PBT af Gram-Schmidt er at vektorsættet skal være lineært uafhængige. Derfor laves der en generator som ved at udføre tilfældige række operationer på en diagonal matrix, kan generere en matrix med lineært uafhængige vektorer. 
-\#TODO : Lav et bevis for det beholder enskaben for lineært uafhængighed.
+Udfrodringen ved at lave en PBT af Gram-Schmidt er at vektorsættet skal være lineært uafhængige. Derfor laves der en generator som ved at udføre tilfældige række operationer på en matrix , kan generere en matrix med lineært uafhængige vektorer. 
 
 \begin{lstlisting}[
     language={FSharp}, 

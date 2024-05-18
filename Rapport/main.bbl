@@ -237,6 +237,22 @@
       \verb https://www.w3schools.com/python/python_lists_comprehension.asp
       \endverb
     \endentry
+    \entry{rank}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Rank (linear algebra)}
+      \field{urlday}{18}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Rank_(linear_algebra)#:~:text=The%20column%20rank%20of%20A,row%20rank%20are%20always%20equal.
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Rank_(linear_algebra)#:~:text=The%20column%20rank%20of%20A,row%20rank%20are%20always%20equal.
+      \endverb
+    \endentry
     \entry{Rational_number}{online}{}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
@@ -302,6 +318,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{math1a}
 \endrefsection
 \endinput
 

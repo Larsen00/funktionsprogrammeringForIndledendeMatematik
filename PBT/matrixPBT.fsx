@@ -17,11 +17,11 @@ let _ = Check.Quick vectorScalarAss
 let _ = Check.Quick vectorAssCom
 let _ = Check.Quick transposeTwice
 
-Arb.register<OrthogonalMatrixGen>()
-printfn "gramSchmidtIsOrthogonal 2"
+Arb.register<independentBacisMatrixGen>()
+printfn "gramSchmidtIsOrthogonal"
 let _ = Check.Quick gramSchmidtIsOrthogonal
 
 printfn "fullRankedMatrixIsFullRanked"
-let _ = Check.Quick fullRankedMatrixIsFullRanked
+let _ = Check.Quick independentBacisMatrixHasFullRank
 
 

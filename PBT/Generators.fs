@@ -117,10 +117,6 @@ type MaxtrixGen =
             override _.Shrinker _ = Seq.empty}
 
 
-
-let getBacismatrixGen n =
-    Gen.map (fun x -> standardBacis x) (Gen.choose (2, n))
-
 let performRowOperationGen m =
     let (D(n, _)) = dimMatrix m
     gen { 
@@ -140,40 +136,26 @@ let rec multipleRowOperationsGen m count =
             return! multipleRowOperationsGen newMatrix (count - 1)
         }
 
-let getIndependetBacisGen =
-    gen { 
-        let! m = getBacismatrixGen 5
-        let! numberOfOperations = Gen.choose(1, 10)
-        let! span = multipleRowOperationsGen m numberOfOperations
-        return span }
-
-type IndependetBacis = Matrix
-type IndependetBacisGen =
-    static member IndependetBacis() =
-        {new Arbitrary<Matrix>() with
-            override _.Generator = getIndependetBacisGen
-            override _.Shrinker _ = Seq.empty}
-
 
 let getDiagonalMatrixGen maxRows =
     gen { 
-        let! n = Gen.choose(2, maxRows)
-        let! m = Gen.choose(n, n + 3)   
-        return fullrankedDiagonalMatrix n m }
+        let! m = Gen.choose(2, maxRows)
+        let! n = Gen.choose(m, m + 3)   
+        return fullrankedDiagonalMatrix m n }
         
 
-let getOrthogonalMatrixGen =
+let getIndependentBacisGen =
     gen { 
-        let! m = getDiagonalMatrixGen 5
+        let! A = getDiagonalMatrixGen 5
         let! numberOfOperations = Gen.choose(1, 10)
-        let! span = multipleRowOperationsGen m numberOfOperations
-        return span |> transposeMatrix |> conjugateMatrix }
+        let! span = multipleRowOperationsGen A numberOfOperations
+        return span |> transposeMatrix  }
 
-type OrthogonalMatrix = Matrix
-type OrthogonalMatrixGen =
-    static member fullRankedDiagonalMatrix() =
+type independentBacisMatrix = Matrix
+type independentBacisMatrixGen =
+    static member independentBacisMatrix() =
         {new Arbitrary<Matrix>() with 
-            override _.Generator = getOrthogonalMatrixGen
+            override _.Generator = getIndependentBacisGen
             override _.Shrinker _ = Seq.empty}
             
 
@@ -196,20 +178,8 @@ let vectorAssCom m (c:Number) =
 let transposeTwice (m:Matrix) =
     transposeMatrix m |> transposeMatrix = m
 
-// An independtent set of vectors is orthogonal after the Gram-Schmidt process
-let gramSchmidtIsOrthogonalOG (m:IndependetBacis) =
-    let res =
-        try 
-            if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
-        with
-            | :? System.DivideByZeroException as x -> 2
-            | :? System.OverflowException as _ -> 3
-    (res = 1 || res = 2 || res = 3)
-    |> Prop.classify (res = 1) "PropertyHolds"
-    |> Prop.classify (res = 2) "DivideByZeroExceptions"
-    |> Prop.classify (res = 3) "OverflowException"
 
-let gramSchmidtIsOrthogonal (m:OrthogonalMatrix) =
+let gramSchmidtIsOrthogonal (m:independentBacisMatrix) =
     let res =
         try 
             let um = orthogonalBacis m
@@ -223,7 +193,7 @@ let gramSchmidtIsOrthogonal (m:OrthogonalMatrix) =
     |> Prop.classify (res = 2) "DivideByZeroExceptions"
     |> Prop.classify (res = 3) "OverflowException"
 
-let OrthogonalMatrixIsFullRanked (m:IndependetBacis) =
+let independentBacisMatrixHasFullRank (m:independentBacisMatrix) =
     let res =
         try 
             if hasFullRank m then 1 else 0

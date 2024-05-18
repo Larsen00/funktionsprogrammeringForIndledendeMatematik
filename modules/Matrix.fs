@@ -456,17 +456,17 @@ let standardBacis n =
     matrix <| sb n
 
 // fullranked diagonal matrix
-let fullrankedDiagonalMatrix n m = 
-    if n > m then failwith "fullrankedDiagonalMatrix: number of rows must be less than or equal to the number of columns"
+let fullrankedDiagonalMatrix m n = 
+    if m > n then failwith "fullrankedDiagonalMatrix: number of rows must be less than or equal to the number of columns"
     else
     let rec frdm i frm = 
         match i with
         | _ when i < 0 -> failwith "fullrankedDiagonalMatrix: i must be greater than or equal to 0"
         | 0 -> frm
         | _ ->  
-            let (V(zeroV, _)) = vectorOf zero n
+            let (V(zeroV, _)) = vectorOf zero m
             frdm (i - 1) <| extendMatrix frm zeroV
-    frdm (m - n) <| standardBacis n
+    frdm (n - m) <| standardBacis m
 
 
 // Checks if a matrix is upper triangular
@@ -525,8 +525,7 @@ let isDiagonalMatrix m =
 
 // checks is if every vector has inner product of zero with the next vector
 let rec isOrthogonalBacis m =
-    let mt = transposeMatrix m |> conjugateMatrix
-    isDiagonalMatrix (m * mt) || isDiagonalMatrix (mt * m)
+    (transposeMatrix m |> conjugateMatrix) * m |> isDiagonalMatrix
 
 // split a matric into two matrices
 let rec splitMatrix o i m =
@@ -557,7 +556,7 @@ let hasSameSpan m1 m2 =
     
     let hSS m1 m2 =
         let s1, s2 = extendMatrixWithMatrix m1 m2 |> rowEchelonForm |> splitMatrix C (c-1)
-        hasFullRank s1 && dontHaveZeroCols s2 && hasFullRank s2
+        hasFullRank s1 && hasFullRank s2
     
     hSS m1 m2 && hSS m2 m1
 

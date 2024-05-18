@@ -377,7 +377,7 @@ Listing \ref{lst:vector_space_axioms_pbt} viser outputtet fra kørsel af testene
     label={lst:vector_space_axioms_pbt}, 
     caption={Outputtet fra PBT af vektor Listing \ref{lst:vector_space_axioms}}
     ]
-- Arb.register<MaxtrixGen>()
+> Arb.register<MaxtrixGen>()
 - let _ = Check.Quick vectorCom
 - let _ = Check.Quick vectorScalarAss
 - let _ = Check.Quick vectorAssCom;;
@@ -387,33 +387,26 @@ Ok, passed 100 tests.
 \end{lstlisting}
 
 \subsubsection{PBT af Gram-Schmidt}\label{sec:pbt_gram_schmidt}
-Udfrodringen ved at lave en PBT af Gram-Schmidt er at vektorsættet skal være lineært uafhængige. Derfor laves der en generator som ved at udføre tilfældige række operationer på en matrix , kan generere en matrix med lineært uafhængige vektorer. 
+Udfordringen ved at lave en PBT af Gram-Schmidt er, at vektorsættet skal være lineært uafhængigt. Derfor laves der en generator, som ved at udføre tilfældige rækkeoperationer på en diagonal matrix med \( m \) rækker og \( n \) søjler, hvorom det gælder, at \( n \geq m \). Dette sikrer os, at rækkerne i matricen er lineært uafhængige. Hertil vil den transponerede matrix have lineært uafhængige søjler, som vi kan bruge til at teste Gram-Schmidt processen\footcitetitle{rank}. Listing \ref{generators_gram_schmidt} viser de forskellige generatorer, som anvendes til PBT af Gram-Schmidt-processen.
 
 \begin{lstlisting}[
     language={FSharp}, 
     label={generators_gram_schmidt}, 
     caption={Generatorene anvendt til PBT af Gram-Schmidt}
     ]
-// getBacismatrixGen : int -> Gen<Matrix>
-let getBacismatrixGen n =
-    Gen.map (fun x -> standardBacis x) (Gen.choose (2, n))
-
-// performRowOperationGen : Matrix -> Gen<Matrix>
+// performRowOperationGen: Matrix -> Gen<Matrix>
 let performRowOperationGen m =
     let (D(n, _)) = dimMatrix m
     gen { 
         let! i = Gen.choose(1, n)
         let! j = match i with
-            | 1 -> Gen.choose(2, n)
-            | _ when i = n -> Gen.choose(1, n-1)
-            | _ -> Gen.oneof [
-                    Gen.choose(1, i-1); 
-                    Gen.choose(i+1, n)]
+                    | 1 -> Gen.choose(2, n)
+                    | _ when i = n -> Gen.choose(1, n-1)
+                    | _ -> Gen.oneof [Gen.choose(1, i-1); Gen.choose(i+1, n)]
         let! a = numberGen
         return rowOperation i j a m }
 
-
-// multipleRowOperationsGen : Matrix -> int -> Gen<Matrix>
+// multipleRowOperationsGen: Matrix -> int -> Gen<Matrix>
 let rec multipleRowOperationsGen m count =
     if count <= 0 then Gen.constant m
     else
@@ -422,25 +415,30 @@ let rec multipleRowOperationsGen m count =
             return! multipleRowOperationsGen newMatrix (count - 1)
         }
 
-// getIndependetBacisGen : Gen<Matrix>
-let getIndependetBacisGen =
+// getDiagonalMatrixGen: int -> Gen<Matrix>
+let getDiagonalMatrixGen maxRows =
     gen { 
-        let! m = getBacismatrixGen 5
+        let! m = Gen.choose(2, maxRows)
+        let! n = Gen.choose(m, m + 3)   
+        return fullrankedDiagonalMatrix m n }
+        
+// getIndependentBasisGen: Gen<Matrix>
+let getIndependentBasisGen =
+    gen { 
+        let! A = getDiagonalMatrixGen 5
         let! numberOfOperations = Gen.choose(1, 10)
-        let! span = multipleRowOperationsGen m numberOfOperations
-        return span }
+        let! span = multipleRowOperationsGen A numberOfOperations
+        return span |> transposeMatrix  }
 
-type IndependetBacis = Matrix
-type IndependetBacisGen =
-    static member IndependetBacis() =
-        {new Arbitrary<Matrix>() with
-            override _.Generator = getIndependetBacisGen
+type IndependentBasisMatrix = Matrix
+type IndependentBasisMatrixGen =
+    static member IndependentBasisMatrix() =
+        {new Arbitrary<Matrix>() with 
+            override _.Generator = getIndependentBasisGen
             override _.Shrinker _ = Seq.empty}
 \end{lstlisting}
 
-Listing \ref{generators_gram_schmidt} viser de forskellige generatorer, som anvendes til PBT (Property-Based Testing) af Gram-Schmidt-processen. Først genereres en tilfældig basis matrix. Dernæst udvælges to tilfældige rækker, \(i\) og \(j\), hvorefter der udføres en rækkeoperation på \(R_j\), således at \(R_j \leftarrow R_j - aR_i\), hvor $a$ er et tilfældigt Number. Denne proces gentages et tilfældigt antal gange.
-
-Dernæst skal vi bruge en funktion til at tjekke om en matrix er en ortogonal basis. \textcolor{red}{isOrthogonalBacis} i Listing \ref{check_orthogonal_basis} tjekker om alle vektorerne i en matrix er ortogonale, ved at tjekke om søjle $v_i$ er ortogonal med $v_{i+1}$, for alle $i \in [1, n-1]$ hvor $n$ er længden på søjlerne. To søjler er ortogonale hvis deres indreprodukt er 0.
+Funktionen \textcolor{red}{performRowOperationGen} tager en matrix, hvori der udvælges to tilfældige rækker, \(i\) og \(j\), hvorefter der udføres en rækkeoperation på \(R_j\), således at \(R_j \leftarrow R_j - aR_i\), hvor \(a\) er et tilfældigt tal. \textcolor{red}{multipleRowOperationsGen} gentager denne proces et givet antal gange. Funktionen \textcolor{red}{getDiagonalMatrixGen} laver en diagonal matrix med \(m\) rækker og \(n\) søjler, hvor \(n \geq m\). \textcolor{red}{getIndependentBasisGen} genererer en matrix, hvis søjler er lineært uafhængige. Vi kan dermed definere en funktionen til at undersøge om en matrix er en ortogonal basis, som vist i Listing \ref{check_orthogonal_basis}.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -448,33 +446,153 @@ Dernæst skal vi bruge en funktion til at tjekke om en matrix er en ortogonal ba
     caption={Funktion til at tjekke om søjlerne i en matrix er en ortogonal basis}
     ]
 // isOrthogonalBacis : Matrix -> bool
-let rec isOrthogonalBacis (M(vl, o)) =
-    if not <| corectOrderCheck (M(vl, o)) C 
-    then isOrthogonalBacis <| correctOrder (M(vl, o)) C
-    else
-    match vl with
-    | [] -> true
-    | _::[] -> true
-    | v::vnext::vrest -> innerProduct v vnext = zero && isOrthogonalBacis (M(vnext::vrest, o))
+let rec isOrthogonalBacis m =
+    (transposeMatrix m |> conjugateMatrix) * m |> isDiagonalMatrix
 \end{lstlisting}
-%TODO: ET bevis for denne kunne være nice
 
-PB testen \textcolor{red}{gramSchmidtIsOrthogonal} bliver derfor blot at tjekke om en matrix bestående af lineært uafhængige vektorer, der udspænder et underrum, er orthogonale efter Gram-Schmidt processen er blevet anvendt. Grundet tilfældige matematiske operationer, opstår der en støre mængde opstå overflow fejl, derfor godtages disse men klassificeres som overflow.
+
+
+Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal basis. \textcolor{red}{isOrthogonalBacis} i Listing \ref{check_orthogonal_basis} tjekker, om alle vektorerne i en matrix er ortogonale med hinanden. Dette kan gøres ved hjælp af følgende sætning:
+
+\vspace{0.5cm}
+\begin{theorem}
+    Lad \( A \) have søjlerne \( v_1, v_2, \ldots, v_n \), som udgør en ortogonal basis. Per definition gælder det, at det indre produkt mellem to ortogonale vektorer \( v_i \) og \( v_j \) er:
+    \begin{gather}
+        \langle v_i, v_j \rangle = 0 \quad \text{for} \quad i \neq j
+    \end{gather}
+    Lad så \( D \) være en kvadratisk diagonal matrix. Da gælder det, at:
+    \begin{gather}
+        D = A^* A
+    \end{gather}
+\end{theorem}
+\begin{proof}
+    Fra definitionen af matrixprodukt \ref{def:matrix_matrix_pro} ved vi, at:
+    \begin{gather}
+        A^*A = 
+        \begin{bmatrix}
+            | &  & | \\
+            A^* \cdot v_1 & \cdots & A^* \cdot v_n \\
+            | &  & | \\
+        \end{bmatrix}
+    \end{gather}
+    Fra definitionen af matrix-vektorprodukt \ref{def:matrix_vector_pro} ved vi, at:
+    \begin{gather}
+        A^* v_i = 
+        \begin{bmatrix}
+            - & \overline{v}_{1} & - \\ 
+            &\vdots& \\
+            - & \overline{v}_{n} & - 
+        \end{bmatrix}
+        \begin{bmatrix}
+            v_{1i} \\ \vdots \\ v_{ni}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \sum_{j=1}^{m} \overline{v}_{j1}v_{ji} \\
+            \sum_{j=1}^{m} \overline{v}_{j2}v_{ji} \\
+            \vdots \\
+            \sum_{j=1}^{m} \overline{v}_{jn}v_{ji}
+        \end{bmatrix}
+    \end{gather}
+    Hvilket ifølge definitionen af indre produkt \ref{def:proj} betyder 
+    \begin{gather}
+        A^* v_i = 
+        \begin{bmatrix}
+            \langle v_i, v_1 \rangle \\
+            \langle v_i, v_2 \rangle \\
+            \vdots \\
+            \langle v_i, v_n \rangle
+        \end{bmatrix}
+    \end{gather}
+    Hvilket betyder, at:
+    \begin{gather}
+        A^*A = 
+        \begin{bmatrix}
+            \langle v_1, v_1 \rangle & \langle v_2, v_1 \rangle & \cdots & \langle v_n, v_1 \rangle \\
+            \langle v_1, v_2 \rangle & \langle v_2, v_2 \rangle & \cdots & \langle v_n, v_2 \rangle \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \langle v_1, v_n \rangle & \langle v_2, v_n \rangle & \cdots & \langle v_n, v_n \rangle
+        \end{bmatrix}
+    \end{gather}
+    Derfor, hvis \( m > n \), så gælder det, at \( A^*A = D \), da hvis \( m < n \), ville $v_1, v_2 \cdots v_n$ ikke være lineært uafhængige vektorer.
+\end{proof}
+
+Der udover skal vi også undersøge om spannet er det samme dette gøres ved at undersøge følgende:
+
+\vspace{0.5cm}
+\begin{theorem}
+    Lad $w_1, w_2, \ldots, w_n$ være de nye vektorer efter Gram-Schmidt processen på $v_1, v_2, \ldots, v_n$, som er lineært uafhængige. 
+    Vi vil undersøge om  $\text{span}(v_1, v_2, \ldots, v_n) = \text{span}(w_1, w_2, \ldots, w_n)$ 
+
+    Lad derfor $B$ være echelonformen af $A$. Så gælder det, at
+    \begin{gather}
+        \text{rank}(B_{1..n}) = \text{rank}(B_{n+1..2n}) = n,
+    \end{gather}
+    hvor 
+    \begin{gather}
+        A = 
+        \begin{bmatrix}
+            | & | &  & | & | & | &  & | \\
+            w_1 & w_2 & \cdots & w_n & v_1 & v_2 & \cdots & v_n \\
+            | & | &  & | & | & | &  & |
+        \end{bmatrix}
+    \end{gather}
+    og
+    \begin{gather}
+        A = 
+        \begin{bmatrix}
+            | & | &  & | & | & | &  & | \\
+            v_1 & v_2 & \cdots & v_n & w_1 & w_2 & \cdots & w_n \\
+            | & | &  & | & | & | &  & |
+        \end{bmatrix}.
+    \end{gather}
+    Da for $k = 1, 2, \ldots, n$ er $w_k$ udelukkende lineært afhængig af $v_1, v_2, \ldots, v_k$.
+\end{theorem}
+
+Funktionen \textcolor{red}{hasSameSpan} i Listing 
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={same_span},
+    caption={Funktion til at undersøge om søjlerne i to matricer har samme span}
+    ]
+// hasSameSpan : Matrix -> Matrix -> bool
+let hasSameSpan m1 m2 = 
+    let (D(r, c)) = dimMatrix m1
+    if (D(r, c)) <> dimMatrix m2 then failwith "Matrices must have the same dimension"
+    else
+    
+    let hSS m1 m2 =
+        let s1, s2 = extendMatrixWithMatrix m1 m2 |> rowEchelonForm |> splitMatrix C (c-1)
+        hasFullRank s1 && hasFullRank s2
+    
+    hSS m1 m2 && hSS m2 m1
+\end{lstlisting}
+
+Dermed kan vi opskrive en en PBT af Gram-Schmidt processen i Listing \ref{pbt_gram_schmidt}.
+
 
 \begin{lstlisting}[
     language={FSharp}, 
     label={pbt_gram_schmidt}, 
     caption={PBT af Gram-Schmidt processen}
     ]
-let gramSchmidtIsOrthogonal (m:IndependetBacis) =
+let gramSchmidtIsOrthogonal (m:independentBacisMatrix) =
     let res =
         try 
-            if orthogonalBacis m |> isOrthogonalBacis then 1 else 0
+            let um = orthogonalBacis m
+            if  isOrthogonalBacis um && hasSameSpan m um then 
+                1 
+            else 
+                0
         with
-            | :? System.OverflowException -> 2
-    (res = 1 || res = 2)
+            | :? System.DivideByZeroException as _ -> 2
+            | :? System.OverflowException as _ -> 3
+
+    (res = 1 || res = 2 || res = 3)
     |> Prop.classify (res = 1) "PropertyHolds"
-    |> Prop.classify (res = 2) "OverflowException"
+    |> Prop.classify (res = 2) "DivideByZeroExceptions"
+    |> Prop.classify (res = 3) "OverflowException"
 \end{lstlisting}
 
 \begin{lstlisting}[
@@ -482,12 +600,50 @@ let gramSchmidtIsOrthogonal (m:IndependetBacis) =
     label = {output_gram_schmidt},
     caption = {Output fra PBT af Gram-Schmidt processen}
 ]
-- Arb.register<IndependetBacisGen>()
+> Arb.register<independentBacisMatrixGen>()
 - let _ = Check.Quick gramSchmidtIsOrthogonal;;
 Ok, passed 100 tests.
 69% PropertyHolds.
 31% OverflowException.
 \end{lstlisting}
 
-Outputtet fra PBT af Gram-Schmidt processen kan ses i Listing \ref{output_gram_schmidt}. Som sædvanligt indikere testen kun korrekthed, men ikke garanteret korrekthed.
+Outputtet fra PBT af Gram-Schmidt processen kan ses i Listing \ref{output_gram_schmidt}. Som sædvanligt indikerer testen kun korrekthed, men medfører ikke garanti for det.
 
+Som nævnt i sektion \ref{sec:gram_schmidt} var der en slåfejl i Algorithm 9 for echelonform i noterne til "01001 Mathematics 1a"\footcitetitle{math1a}. I forbindelse med at finde frem til denne fejl blev der lavet en PBT af echelonform af generatoren for lineært uafhængige vektorsæt. Egenskaben i \ref{eg:independtent} skal sikre, at både generatorens implementering er korrekt, og at funktionen til at finde echelonformen er det.
+
+\begin{egenskab}
+    Lad \( A \) være en matrix, hvor søjlerne er lineært uafhængige. Da gælder det, at \( A \) har fuld rank.
+\end{egenskab}
+
+Vi kan dermed opskrive en PBT af generatoren i Listing \ref{pbt_echelon_form}.
+
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={pbt_echelon_form}, 
+    caption={PBT af generatoren for lineært uafhængige vektorsæt}
+    ]
+// independentBacisMatrixHasFullRank : independentBacisMatrix -> bool
+let independentBacisMatrixHasFullRank (m:independentBacisMatrix) =
+    let res =
+        try 
+            if hasFullRank m then 1 else 0
+        with
+            | :? System.OverflowException -> 2
+    (res = 1 || res = 2)
+    |> Prop.classify (res = 1) "PropertyHolds"
+    |> Prop.classify (res = 2) "OverflowException"
+\end{lstlisting}
+
+Outputtet fra PBT af generatoren for lineært uafhængige vektorsæt kan ses i Listing \ref{output_echelon_form}. Testen viser, at egenskaben holder.
+
+\begin{lstlisting}[
+    style=output,
+    label = {output_echelon_form},
+    caption = {Output fra PBT af generatoren for lineært uafhængige vektorsæt}
+]
+> Arb.register<independentBacisMatrixGen>()
+- let _ = Check.Quick independentBacisMatrixHasFullRank;;
+Ok, passed 100 tests.
+87% PropertyHolds.
+13% OverflowException.
+\end{lstlisting}

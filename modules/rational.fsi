@@ -18,7 +18,7 @@ type rational = R of int * int
 
 val newRational         : int * int -> rational
 val equal        : rational * rational -> bool
-val posetive     : rational -> bool
+val positive     : rational -> bool
 val toString     : rational -> string
 val isZero      : rational -> bool
 val isOne        : rational -> bool

@@ -67,6 +67,22 @@
       \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
       \endverb
     \endentry
+    \entry{fsharp}{online}{}
+      \field{sortinit}{f}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labeltitlesource}{title}
+      \field{title}{fsharp.org}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://fsharp.org/
+      \endverb
+      \verb{url}
+      \verb https://fsharp.org/
+      \endverb
+    \endentry
     \entry{github_repo}{online}{}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
@@ -177,6 +193,22 @@
       \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
       \endverb
     \endentry
+    \entry{maple}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Maple}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.maplesoft.com/products/Maple/
+      \endverb
+      \verb{url}
+      \verb https://www.maplesoft.com/products/Maple/
+      \endverb
+    \endentry
     \entry{mat1a}{online}{}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
@@ -237,6 +269,22 @@
       \verb https://www.w3schools.com/python/python_lists_comprehension.asp
       \endverb
     \endentry
+    \entry{python_pop}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Python: The most popular language}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://datascientest.com/en/python-the-most-popular-language#:~:text=Python%20is%20also%20the%20most%20widely%20used%20language%20for%20Data,libraries%20and%20other%20numerical%20algorithms.
+      \endverb
+      \verb{url}
+      \verb https://datascientest.com/en/python-the-most-popular-language#:~:text=Python%20is%20also%20the%20most%20widely%20used%20language%20for%20Data,libraries%20and%20other%20numerical%20algorithms.
+      \endverb
+    \endentry
     \entry{rank}{online}{}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
@@ -285,6 +333,22 @@
       \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
       \endverb
     \endentry
+    \entry{ruby}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Ruby}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.ruby-lang.org/en/
+      \endverb
+      \verb{url}
+      \verb https://www.ruby-lang.org/en/
+      \endverb
+    \endentry
     \entry{TDD}{online}{}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
@@ -318,7 +382,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{math1a}
 \endrefsection
 \endinput
 

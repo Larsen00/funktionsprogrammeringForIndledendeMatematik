@@ -57,3 +57,10 @@ printfn "%A" (sort ft)
 printfn "%A" (commutativeMulDiv.applyCommutative e)
 
 printfn "%A" <| tree "1-1"
+
+
+type Test<'a, 'b> = T of 'a * 'b
+
+type N = | N1 of int | N2 of float
+
+type M = N |T2 of  Test<N ,N>

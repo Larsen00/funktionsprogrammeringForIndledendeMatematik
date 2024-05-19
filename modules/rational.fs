@@ -8,7 +8,7 @@ let isZero(R(a, _)) = a = 0
 let isZeroR64(R64(a, _)) = a = 0
 
 // checks if a rational number is posetive
-let posetive(R(a,b)) = a*b > 0
+let positive(R(a,b)) = a*b > 0
 
 // returns greatest common divisor
 // #TODO: make faster version

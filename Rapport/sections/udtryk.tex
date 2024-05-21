@@ -170,7 +170,7 @@ Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske opera
 
 \subsection{Matematiske udtryk}
 \subsubsection{Polsk notation}
-Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. 
+Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. Følgende er der givet et simpelt eksempel på de 3 notationer. 
 
 \begin{align*}
     \text{Infix Notation:} \quad & (A + B) \cdot C \\
@@ -181,7 +181,7 @@ Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I in
  
 
 \subsubsection{Udtryk som træer} \label{sec:expression_as_trees}
-Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ Figur \ref{fig:expression_tree}. 
+Et matematisk udtryk kan repræsenteres som et binært træ, hvor bladene er operander i det anvendte matematiske rum og alle andre noder er operationer. Som eksempel kan udtrykket $-(3 \cdot x - 5) \cdot 2$ repræsenteres som følgende træ i Figur \ref{fig:expression_tree}. 
 
 
 \begin{figure}[H]
@@ -345,7 +345,7 @@ Grundet præcedens regler i infix notation, er det nødvendigt at modificere Ino
 
 
 \subsubsection{Udtryksmodulet}\label{sec:expression_module}
-Efter udviklingen af et modul til repræsentation af talmængder er vi nu klar til at udvide programmet med et modul for matematiske udtryk. Vi starter med at definere en polymorf type for udtryk, som beskrevet i Listing \ref{expr_type}. Denne type omfatter flere konstruktører, hver tilknyttet specifikke matematiske operationer vi ønsker at implementere. Desuden introducerer vi konstruktøren \texttt{N} til at repræsentere numeriske værdier ved at anvende talmængder defineret i Listing \ref{number_type}. Til sidst tilføjer vi konstruktøren \texttt{X} for variable. Således lagres matematiske udtryk i en træstruktur, se \ref{sec:expression_as_trees}, eftersom hver konstruktør for en operation indeholder et eller to underudtryk af samme type.
+Efter udviklingen af et modul til repræsentation af talmængder er vi nu klar til at udvide programmet med et modul for matematiske udtryk. Vi starter med at definere en polymorf type for udtryk, givet i Listing \ref{expr_type}. Denne type omfatter flere konstruktører, hver tilknyttet specifikke matematiske operationer vi ønsker at implementere. Desuden introducerer vi konstruktøren \texttt{N} til at repræsentere numeriske værdier ved at anvende talmængder defineret i Listing \ref{number_type}. Til sidst tilføjer vi konstruktøren \texttt{X} for variable. Således lagres matematiske udtryk i en rekursiv datatype, der skal repræsentere udtryks træerne i sektion \ref{sec:expression_as_trees}. Dette skyldes at, hver konstruktør for en operation indeholder et eller to underudtryk af samme type.
 
 
 \begin{lstlisting}[
@@ -365,13 +365,13 @@ type Expr<'a> =
 
 Expr\textless'a\textgreater{}  typen er dermed en polymorfisk type, hvor 'a er typen for den tal mængde hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i Listing \ref{lst:expr_example}. Her ses det at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres er det i prefix notation.
 
-\begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen tree bliver beskrevet i \ref{sec:expression_generation}.}]
+\begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen \textcolor{red}{tree} bliver beskrevet i \ref{sec:expression_generation}.}]
 > tree "-(3*x-5)*2";;
 val it: Expr<Number> = 
   Mul (Neg (Sub (Mul (N (Int 3), X 'x'), N (Int 5))), N (Int 2))
 \end{lstlisting}
 
-Signatur filen indeholder overloadings på de matematiske operationer, så de kan anvendes på udtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et udtryk beskrevet i \ref{sec:eval}. 
+Signatur filen indeholder overskrivninger på de matematiske operationer, så de kan anvendes på udtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et udtryk beskrevet i \ref{sec:eval}. 
 \lstinputlisting[
     language=FSharp,
     label={Expression.fsi},
@@ -380,7 +380,7 @@ Signatur filen indeholder overloadings på de matematiske operationer, så de ka
 
 
 
-De overloadede matematiske operatorer i Expressions, laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evaluering vil sige at de individuelle funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som input, mullige implementeringer af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
+De overskrevne matematiske operatorer i implementeringsfilen for udtryk laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evaluering vil sige at de individuelle funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som input, implementeringerne af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -415,7 +415,7 @@ let rec add e1 e2:Expr<Number>  =
 \end{lstlisting}
 
 \subsection{Evaluering af udtryk}\label{sec:eval}
-Vi vil nu betragte hvordan vi kan evaluere et udtryk, ved hjælp af et miljø som indeholder værdier for variable som er indeholdt i udtrykket. Evalueringen af udtryk skal kunne opfylde følgende homomorfiske egenskaber \ref{prop:eval_homomorphism}. Egenskaben vil blive testet i sektion \ref{sec:PBT_eval_homomorphism}.
+Vi vil nu betragte hvordan vi kan evaluere et udtryk, ved hjælp af et miljø som indeholder værdier for variable som er indeholdt i udtrykket. Evalueringen af udtryk skal kunne opfylde følgende homomorfiske egenskaber \ref{prop:eval_homomorphism}. Egenskaben vil blive valideret i sektion \ref{sec:PBT_eval_homomorphism}.
 \vspace{0.5cm}
 \begin{egenskab}[Homomorfisme af evaluering]\label{prop:eval_homomorphism}
 Lad $\oplus \in \{+, -, \times, /\}$ sættet af binære operationer, $e1$ og $e2$ være udtryk, så gælder følgende:
@@ -449,7 +449,7 @@ let rec eval (e:Expr<Number>) (env) =
 \end{lstlisting}
 
 \subsection{Konventering mellem udtryks notation}\label{sec:expression_generation}
-Det er ønkes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverser. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver test i sektion \ref{sec:PBT_infix_prefix}.
+Det er ønskes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverse. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver valideret i sektion \ref{sec:PBT_infix_prefix}.
 
 \vspace{0.5cm}
 \begin{egenskab}[Invers morphism\footcitetitle{Inverse_function} mellem infix og prefix]\label{egenskab:infix_prefix}
@@ -466,7 +466,7 @@ Det er ønkes at kunne konvertere udtryk frem og tilbage mellem prefix notation,
     Hvor $id_{x}$ er identitetsfunktionen på mængden $x$.
 \end{egenskab}
 
-Vi begynder med at betragte den inverse funktion, som konverterer fra en expression til infix notation. Funktionen \textcolor{red}{etf} se Listing \ref{lst:expression_to_infix} fortager denne konventering ved at lave en modificeret Inorder Traversal på udtrykket, som beskrevet i \ref{sec:expression_as_trees}. Den modificeret del er at håndtere parenteser samt håndtere negation som var det en binær node i træet hvor det venstre barn er et tomt udtryk.
+Vi begynder med at betragte den inverse funktion, som konverterer et udtryk til infix notation. Funktionen \textcolor{red}{etf} i Listing \ref{lst:expression_to_infix} fortager denne konvertering ved at lave den modificeret Inorder Traversal på udtrykket, som blev beskrevet i \ref{sec:expression_as_trees}. Den modificeret del er at håndtere parentesersamt negation, som var det en binær node i træet hvor det venstre barn er et tomt udtryk.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -514,7 +514,7 @@ type OperatorList = Operator list
 
 
 \subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
-Vi skal nu betragte en sytematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendig at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplification skal overholde. Egenskaben vil blive testet i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter simplifikationen da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
+Vi skal nu betragte en systematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplifikation skal overholde. Egenskaben vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter simplifikationen, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
 \vspace{0.5cm}
 \begin{egenskab}[Simplifikation af udtryk]\label{egenskab:simplification}
 Lad $e$ være et udtryk, så gælder følgende:
@@ -523,15 +523,15 @@ Lad $e$ være et udtryk, så gælder følgende:
 \end{align*}
 \end{egenskab}
 
-Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. På den måde sikre sig at når en node i udtrykstræet bliver simplificeret, vil dens børn allerede være simplificeret. 
+Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. Hvilket betyder når en node i udtrykstræet skal simplificeres, vil dens børn allerede være simplificeret. 
 
 \begin{lstlisting}[
   language={FSharp}, 
   label={lst:simplify_expr}, 
   caption={Simplifikation af et udtryk}
   ]
-  //simplifyOperation: Expr<Number> -> Expr<Number> -> (Expr<Number> -> Expr<Number> -> Expr<Number>) -> Expr<Number>
-  let rec simplifyOperation e1 e2 f = 
+//simplifyOperation: Expr<Number> -> Expr<Number> -> (Expr<Number> -> Expr<Number> -> Expr<Number>) -> Expr<Number>
+let rec simplifyOperation e1 e2 f = 
   match f e1 e2 with
   | Neg a -> 
     commutativeMulDiv.applyCommutative (Neg a) |> commutativeAddSub.applyCommutative
@@ -544,7 +544,6 @@ Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i 
   | Mul(a, b) -> simplifyOperation a b (*)
   | Div(a, b) -> simplifyOperation a b (/)
   | a -> a
-
 
 //simplifyExpr: Expr<Number> -> Expr<Number>
 let rec simplifyExpr e =
@@ -560,7 +559,7 @@ let rec simplifyExpr e =
   | _ -> e 
 \end{lstlisting}
 
-Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen af et givet udtryk. Funktionen tager som input to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk simplifikation, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk simplifikation resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk simplifikation ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere simplifikation af de to udtryk. Denne dybere simplifikation udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationssimplifikation på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
+Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen af et givet udtryk. Funktionen tager som argumenter to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk simplifikation, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk simplifikation resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk simplifikation ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere simplifikation af de to udtryk. Denne dybere simplifikation udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationssimplifikation på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
 
 
 \begin{figure}[H]

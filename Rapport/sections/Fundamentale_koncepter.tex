@@ -3,10 +3,10 @@
 \subsection{Introduktion til Funktions Programmering}
 Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten. 
 
-F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på typed lambda calculus\footcitetitle{lambda_typed}. Typed lambda calculus er en udvidelse af lambda calculus\footcitetitle{lambda}, som er et formelt system til at udtrykke beregninger.
+F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på "typed lambda calculus"\footcitetitle{lambda_typed}. "Typed lambda calculus" er en udvidelse af "lambda calculus"\footcitetitle{lambda}, som er et formelt system til at udtrykke beregninger.
 
 
-Vi begynder derfor med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
+Vi begynder med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
 
 \begin{equation}
     \label{Fakultet}
@@ -30,7 +30,7 @@ let rec factorial n =
 
 I F\# anvendes \textcolor{blue}{let} til at definere en ny variabel eller, i dette tilfælde, en funktion kaldet \textcolor{red}{factorial}. Næste nøgleord er \textcolor{blue}{rec}, hvilket indikerer, at funktionen er rekursiv. Funktionen tager et argument \(n\), og i linje 3 starter et match-udtryk. Her er \(n\) vores udtryk, og efter \textcolor{codepurple}{with} begynder en række mønstre. Med tilhørende udtryk, der svare til de tre tilfælde i Ligning \eqref{Fakultet}. 
     
-I F\#, er det som udgangspunkt ikke nødvendigt at anvende parenteser som i andre programmeringssprog. Derfor vil de kun blive anvendt, hvor det er nødvendigt gennem rapporten, typisk i sammenhænge med kædning af funktioner. For at undgå brugen af parenteser kan man i F\# benytte pipe-operatorerne, $|>$ og $<|$, som fører resultatet fra en udledning direkte ind i den næste funktion. Nedenstående eksempel viser tre ækvivalente udtryk, der demonstrerer anvendelsen af disse operatorer.
+I F\#, er det som udgangspunkt ikke nødvendigt at anvende parenteser som i andre programmeringssprog. Derfor vil de kun blive anvendt, hvor det er passende gennem rapporten, typisk i sammenhænge med kædning af funktioner. For at undgå brugen af parenteser kan man i F\# benytte pipe-operatorerne, $|>$ og $<|$, som fører resultatet fra en udledning direkte ind i den næste funktion. Nedenstående eksempel viser tre ækvivalente udtryk, der demonstrerer anvendelsen af disse operatorer.
 
 \begin{lstlisting}[style=output, label={lst:pipe_operator}, caption={Eksempel på anvendelse af pipe-operatorer i F\# ved udregning af $(3!)! = 6! = 720 $.}]
 > factorial (factorial 3);;
@@ -83,15 +83,15 @@ I F\# har alle udtryk, inklusiv funktioner, en defineret type. Typen for funktio
 
 I matematik kan vi beskrive funktioner som afbildninger ved brug af domæner og co-domæner på følgende måde:
 \begin{gather*}
-    f: \mathbb{F} \to \mathbb{F} \\
-    g: \mathbb{F}^n \to \mathbb{F}
+    f: \mathbb{R} \to \mathbb{R} \\
+    g: \mathbb{R}^n \to \mathbb{R}
 \end{gather*}
 De tilsvarende funktioner i F\# vil have typerne:
 \begin{gather*}
     f: float \to float \\
     g: float * float * \ldots * float \to float
 \end{gather*}
-Hvor typekonstruktøren $*$ svarer til det kartesiske produkt, men kalder det for en tuple. I begge tilfælde skal senere definitioner og funktionsanvendelser overholde disse beskrivelser. 
+Hvor typekonstruktøren "$*$" svarer til det kartesiske produkt, og refereres til som en tuple. I begge tilfælde skal senere definitioner og funktionsanvendelser overholde disse beskrivelser. 
 
 % Derudover kan en type også bestå af en tuple af typer:
 % \begin{gather*}
@@ -108,9 +108,11 @@ Hvor typekonstruktøren $*$ svarer til det kartesiske produkt, men kalder det fo
 % let g = f 3
 % \end{lstlisting}
 
+En tuple, der kun består af to typer, kaldes et par. Givet en funktion $f: T_1 \rightarrow T_2 \rightarrow T_3$, betyder dette, at den tager et udtryk af typen $T_1$, som giver en funktion af typen $T_2 \rightarrow T_3$, hvor evalueringen af funktionen resulterer i $T_3$.
+
 Hvis en funktion kaldes med et argument, der ikke matcher funktionens type, genereres en fejlmeddelelse. For F\#'s vedkommende kontrolleres dette på oversættelsestidspunktet, hvilket er en af de store forskelle mellem F\# og Python, hvor typerne først kontrolleres under kørslen.
 
-\subsection{Induktivt definerede typer}
+\subsubsection{Induktivt definerede typer}
 I F\# defineres lister og træer induktivt ved brug af rekursive typer. Et eksempel på en rekursivt defineret type for et træ er givet i Listing \ref{lst:tree_ex}.
 
 \begin{lstlisting}[language={FSharp}, label={lst:tree_ex}, caption={Eksempel på en rekursivt defineret type for et træ i F\#}]
@@ -124,7 +126,7 @@ Rekursive typer lagres som en værdi og ikke en datastruktur.
 
 
 \subsection{Signatur filer og implementerings filer}
-En implementeringsfil i F\# er lavet med .fs extension. En implementeringsfil kan have en signaturfil med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementeringsfilen som er tilgængelige for andre filer. En signaturfil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replicere implementeringsfilen.
+En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en signaturfil med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementeringsfilen som er tilgængelige for andre filer. En signaturfil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replicere implementeringsfilen.
 
 \subsection{Overskrivning af operatorer}
 I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler.
@@ -132,26 +134,26 @@ I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på eg
 \subsection{Property Based Testing}
 Property Based Testing (PBT) er en teknik til at teste korrekthed af egenskaber som man ved altid skal være opfyldt. Ved PBT genereres en række tilfældige input til en funktion, hvorefter det kontrolleres, om en given egenskab holder. Fokusset ved PBT er de fundamentale egenskaber, som en funktion skal overholde, og ikke de specifikke tilfælde som ved eksempelvis unit tests\footcitetitle{unit_test}.
 
-På DTU lærer de studerende først om logik, hvor det introduceres, at en udsagnslogisk formel er gyldig (en tautologi), hvis den altid er sand. Der findes mange teknikker til at påvise gyldigheden af en udsagnslogisk formel. I "01001 Matematik 1a" på DTU lærer man at anvende sandhedstabeller, som demonstrerer gyldigheden af en formel. Eksempelvis vises hvordan Ligning \eqref{udsagnslogik} er gyldig.
+På DTU introduceres de studerende til logik, som det første emne i "01001 Matematik 1a". Her lærer de at en udsagnslogisk formel er gyldig (en tautologi), hvis den altid er sand. Der findes mange teknikker til at påvise gyldigheden af en udsagnslogisk formel. I "01001 Matematik 1a" anvendes blandt andet sandhedstabeller, som demonstrerer gyldigheden af en formel. Eksempelvis vises hvordan Formel \eqref{udsagnslogik} er gyldig.
 \begin{gather}
     P \land (Q \land Y) \iff (P \land Q) \land Y
     \label{udsagnslogik}
 \end{gather}
 
-Vi kan også bruge PBT til at undersøge, om Ligning \eqref{udsagnslogik} holder, ved at definere egenskaben som en funktion af $P, Q$ og $Y$, som vist i Listing \ref{valid1}.
+Vi kan også bruge PBT til at undersøge, om Formel \eqref{udsagnslogik} holder, ved at definere egenskaben som en funktion af $P, Q$ og $Y$, som vist i Listing \ref{valid1}.
 
 \lstinputlisting[
     language=FSharp,
     label={valid1},
-    caption={PBT af Ligning \eqref{udsagnslogik}. Begge sider skal være omgivet af parenteser, for at den er gyldig, da "$=$" har en højere præcedens end" $\&\&$"}
+    caption={PBT af Formel \eqref{udsagnslogik}. Begge sider skal være omgivet af parenteser, for at den er gyldig, da "$=$" har en højere præcedens end" $\&\&$"}
 ]{exampleCodes/valid1.fsx}
 
 \begin{lstlisting}[style=output, label={lst:output_example}, caption={Output ved PBT af (\ref{udsagnslogik})}]
-    > let _ = Check.Quick propositional_formula;;
-    Ok, passed 100 tests.
+> let _ = Check.Quick propositional_formula;;
+Ok, passed 100 tests.
 \end{lstlisting}
 
-"Check.Quick" er en del af "FsCheck"-biblioteket. Den tager en funktion som argument og genererer en række tilfældige input til funktionen baseret på funktionens type. Hvis funktionen returnerer "true" for alle input, vil testen lykkes. Hvis funktionen returnerer "false" for et input, vil testen fejle og give et eksempel på et input, der fejlede. I Listing \ref{valid1} er "Check.Quick" anvendt til at teste, om Ligning \eqref{udsagnslogik} er gyldig. Funktionen "Check.Quick" returnerer "Ok, passed 100 tests," hvilket indikerer, at (\ref{udsagnslogik}) er gyldig. Det er vigtigt at forstå, at dette ikke er det samme som at bevise, at Ligning \eqref{udsagnslogik} er gyldig, da testen ikke garanterer, at alle muligheder er testet. Generelt vil der være flere kombinationer af argumenter til en funktion, end de 100 test cases som genereres.
+"Check.Quick" er en del af "FsCheck"-biblioteket. Den tager en funktion som argument og genererer en række tilfældige input til funktionen baseret på funktionens type. Hvis funktionen returnerer "true" for alle input, vil testen lykkes. Hvis funktionen returnerer "false" for et input, vil testen fejle og give et eksempel på et input der fejlede. I Formel \ref{valid1} er "Check.Quick" anvendt til at teste, om Formel \eqref{udsagnslogik} er gyldig. Funktionen "Check.Quick" returnerer "Ok, passed 100 tests," hvilket indikerer, at (\ref{udsagnslogik}) er gyldig. Det er vigtigt at forstå, at dette ikke er det samme som at bevise, at Formel \eqref{udsagnslogik} er gyldig, da testen ikke garanterer, at alle muligheder er testet. Generelt vil der være flere kombinationer af argumenter til en funktion, end de 100 test cases som genereres.
 
 
 Vi kan også teste den ikke gyldige funktion \textcolor{red}{propositional\_formula\_invalid}, som vist i Listing \ref{output_invalid}, er den ikke gyldig og vi får givet et eksempel på en input kombination der fejlede.

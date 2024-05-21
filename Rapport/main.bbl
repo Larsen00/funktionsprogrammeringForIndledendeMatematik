@@ -163,6 +163,22 @@
       \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
       \endverb
     \endentry
+    \entry{lambda}{online}{}
+      \field{sortinit}{l}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labeltitlesource}{title}
+      \field{title}{lambda calculus}
+      \field{urlday}{20}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Lambda_calculus
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Lambda_calculus
+      \endverb
+    \endentry
     \entry{maple}{online}{}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
@@ -349,6 +365,22 @@
       \endverb
       \verb{url}
       \verb https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+      \endverb
+    \endentry
+    \entry{lambda_typed}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Typed lambda calculus}
+      \field{urlday}{20}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Typed_lambda_calculus
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Typed_lambda_calculus
       \endverb
     \endentry
     \entry{unit_test}{online}{}

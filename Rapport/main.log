@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  19 MAY 2024 22:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  20 MAY 2024 13:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1189,7 +1189,7 @@ Package biblatex Info: ... file 'main.bbl' found.
 Package biblatex Info: Reference section=0 on input line 21.
 Package biblatex Info: Reference segment=0 on input line 21.
  (Opsætning/forside.tex
-<Opsætning/DTULogo.png, id=202, 469.9959pt x 685.6014pt>
+<Opsætning/DTULogo.png, id=206, 469.9959pt x 685.6014pt>
 File: Opsætning/DTULogo.png Graphic file (type png)
 <use Opsætning/DTULogo.png>
 Package pdftex.def Info: Opsætning/DTULogo.png  used on input line 17.
@@ -1207,14 +1207,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.44 ...{\numberline {7}Konklusion}{46}{section.7}
+l.44 ...{\numberline {6}Diskussion}{45}{section.6}
                                                   % [1])
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
  [2] (sections/Introduction.tex) [3] (sections/Fundamentale_koncepter.tex
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 17.
- [4] [5] (exampleCodes/valid1.fsx)) [6] [7] (sections/udtryk.tex (../modules/rational.fsi [8]) [9] [10] (../modules/number.fsi [11]) [12] [13]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 22.
+ [4] [5] (exampleCodes/valid1.fsx) [6]) [7] (sections/udtryk.tex (../modules/rational.fsi [8]) [9] [10] (../modules/number.fsi [11]) [12] [13]
 Overfull \hbox (19.87704pt too wide) in paragraph at lines 258--259
  [][] 
  []
@@ -1301,23 +1301,23 @@ L3 programming layer <2024-02-20>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A1BA09A1B9055B291ACFF102E38FF5E3;7991.
+(rerunfilecheck)             Checksum: 1B248ADDAEE61FEE4606021B7837FBCA;8185.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42463 strings out of 474457
- 781910 string characters out of 5742755
+ 42511 strings out of 474457
+ 782742 string characters out of 5742755
  2523190 words of memory out of 5000000
- 62003 multiletter control sequences out of 15000+600000
+ 62032 multiletter control sequences out of 15000+600000
  571609 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,18n,134p,2200b,2305s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,18n,134p,2231b,2305s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\jonas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (67 pages, 1048113 bytes).
+Output written on main.pdf (67 pages, 1054721 bytes).
 PDF statistics:
- 3313 PDF objects out of 3580 (max. 8388607)
- 2064 named destinations out of 2073 (max. 500000)
- 410 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3350 PDF objects out of 3580 (max. 8388607)
+ 2083 named destinations out of 2487 (max. 500000)
+ 418 words of extra memory for PDF output out of 10000 (max. 10000000)
 

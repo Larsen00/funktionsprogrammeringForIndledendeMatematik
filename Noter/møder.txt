@@ -162,3 +162,7 @@ næste gang:
     * ref  6.1 istedet for 3.1 og 3.11 egenskab 1 lav evt til lemme
     * brug de rigtige mænger i mine egenskaber
     * vektore er ikek multiplikation men prik product 
+
+    # MØDE 12
+        * Er Functional Dependency og referential transparency det samme princip?
+        

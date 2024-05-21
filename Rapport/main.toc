@@ -3,9 +3,10 @@
 \contentsline {section}{\numberline {2}Fundamentale koncepter}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Introduktion til Funktions Programmering}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Typer}{5}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Signatur filer og implementerings filer}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Overskrivning af operatorer}{6}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Property Based Testing}{6}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.3}Induktivt definerede typer}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Signatur filer og implementerings filer}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Overskrivning af operatorer}{6}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Property Based Testing}{6}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Symbolske udtryk}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Tal mængder}{8}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Rationelle tal modul}{8}{subsubsection.3.1.1}%

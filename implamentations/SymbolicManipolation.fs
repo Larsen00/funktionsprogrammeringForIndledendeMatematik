@@ -3,10 +3,6 @@ module SymbolicManipolation
 open Expression
 open Number
 open rational
-open complex
-open commutativeAddSub
-open commutativeMulDiv
-
 
 
 ////////////////////////////////////////

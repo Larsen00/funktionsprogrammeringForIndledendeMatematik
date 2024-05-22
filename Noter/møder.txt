@@ -173,12 +173,12 @@ næste gang:
         +* konventering mellem udtryksformer sek3.4
         +* ret til forenkling af udtry i sek 3.5
         +* under tit2len på kapitlerne skal man, have en lille forklaring.
-        * ræsonering er simple fordi man undgår side effekter (eks. med globale var)
-        * evt et preface forord. med ioverblink
-        * fjek "jeg" fra diskussion og konklusion. 
+        +* ræsonering er simple fordi man undgår side effekter (eks. med globale var)
+        +* evt et preface forord. med ioverblink
+        +* https://studieinformation.dtu.dk/Bachelor/Matematik-og-Teknologi/Studieordning#Bachelorprojekt
+        +* studie ordningen har nogle ting man kunne under bachelor
+        +* hav vejledere med i forordet.
+        +* link til github i forord
+        +* fjek "jeg" fra diskussion og konklusion. 
         * der skal være et abstrakt.
-        * studie ordningen har nogle ting man kunne under bachelor
-        * https://studieinformation.dtu.dk/Bachelor/Matematik-og-Teknologi/Studieordning#Bachelorprojekt
-        * link til github i forord
-        * hav vejledere med i forordet.
     

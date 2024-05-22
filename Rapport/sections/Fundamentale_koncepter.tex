@@ -3,7 +3,7 @@
 Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten. 
 
 \subsection{Introduktion til Funktions Programmering}
-F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på "typed lambda calculus"\footcitetitle{lambda_typed}. "Typed lambda calculus" er en udvidelse af "lambda calculus"\footcitetitle{lambda}, som er et formelt system til at udtrykke beregninger.
+F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på "typed lambda calculus"\footcitetitle{lambda_typed}. "Typed lambda calculus" er en udvidelse af "lambda calculus"\footcitetitle{lambda}, som er et matematisk system. Det giver et formelt fundament for at definere og manipulere funktioner.
 
 Vi begynder med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
 
@@ -188,5 +188,17 @@ Vi kan derefter køre scriptfilen og få outputtet, som vist i Listing \ref{lst:
 \begin{lstlisting}[style=output, label={lst:output_test}, caption={Output ved kørsel af \textit{MyInt.fsx}}]
 I 720
 \end{lstlisting}
+
+\subsection{Ræsonnering omkring korrekthed}
+Ræsonnering omkring korrekthed i funktionel programmering indebærer flere begreber, der hjælper med at sikre, at programmer opfører sig som forventet. Et program "virker" først, når det er korrekt med hensyn til dets specifikationer\footcitetitle[Kapitel 6]{ML_reason}.
+
+Funktionsprogrammering har \textbf{Referential Transparency}, hvilket betyder, at en funktion altid vil producere det samme output givet det samme input uden bivirkninger. Dette gør koden mere forudsigelig og lettere at teste, da udtryk kan erstattes af deres værdier uden at ændre programmets adfærd\footcitetitle{Referential_transparency}. \textbf{Lambda calculus} er blandt andet med til at give funktionsprogrammering "Referential Transparency".
+
+F\# har et \textbf{stærkt typesystem}, som sikrer, at funktioner ikke kan kaldes med argumenter af forkerte typer. Dette bliver håndteret på kompileringstidspunktet og reducerer dermed mængden af køretidsfejl.
+
+\textbf{Induktivt definerede typer og rekursive funktioner} gør det muligt at bevise korrektheden af programmer ved hjælp af matematiske beviser. For eksempel kan rekursive funktioner bevises korrekte ved hjælp af induktionsbeviser\footcitetitle[Kapitel 6]{ML_reason}.
+
+Disse koncepter kombineret giver et stærkt grundlag for at skrive pålidelig og korrekt software, hvor mange fejl kan fanges tidligt i udviklingsprocessen.
+
 
 

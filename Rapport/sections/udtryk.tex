@@ -1,5 +1,5 @@
 \section{Symbolske udtryk}
-Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktioner som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt simplificere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktioner som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt reducere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
 Vi begynder med opbygningen af et modul, der kan repræsentere en talmængde. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal hvor real- og imaginærdelen er rationale. 
@@ -339,7 +339,7 @@ Det skal bemærkes der er forskel på den unære og binære operator '$-$' i tr�
 
 
 Vi vil i \ref{sec:expression_module} betragte hvordan vi kan implementere et modul som kan repræsentere udtryk ved brug af prefix notation.
-Postorder Traversal bliver blandt andet anvendt til at kunne rekursivt simplificere og evaluere udtryk.
+Postorder Traversal bliver blandt andet anvendt til at kunne rekursivt reducere og evaluere udtryk.
 
 Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificeret Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
 
@@ -380,7 +380,7 @@ Signatur filen indeholder overskrivninger på de matematiske operationer, så de
 
 
 
-De overskrevne matematiske operatorer i implementeringsfilen for udtryk laver overflade evalueringer samt simplifikationer på deres respektive argumenter. Overfalde evaluering vil sige at de individuelle funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som input, implementeringerne af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
+De overskrevne matematiske operatorer i implementeringsfilen for udtryk laver overflade evalueringer samt reduceringer på deres respektive argumenter. Overfalde evaluering vil sige at de individuelle funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som input, implementeringerne af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -448,7 +448,7 @@ let rec eval (e:Expr<Number>) (env) =
   | Div (a, b) -> eval a env / eval b env
 \end{lstlisting}
 
-\subsection{Konventering mellem udtryks notation}\label{sec:expression_generation}
+\subsection{Konventering mellem udtryksformer}\label{sec:expression_generation}
 Det er ønskes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverse. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver valideret i sektion \ref{sec:PBT_infix_prefix}.
 
 \vspace{0.5cm}
@@ -513,22 +513,22 @@ type OperatorList = Operator list
 
 
 
-\subsection{Simplifikation af udtryk} \label{sec:simplification_expression}
-Vi skal nu betragte en systematisk metode til at kunne simplificere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som simplifikation skal overholde. Egenskaben vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter simplifikationen, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
+\subsection{Reducering af udtryk} \label{sec:simplification_expression}
+Vi skal nu betragte en systematisk metode til at kunne reducere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykkene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som reduceringen skal overholde. Egenskaben vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter reduktion, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
 \vspace{0.5cm}
-\begin{egenskab}[Simplifikation af udtryk]\label{egenskab:simplification}
+\begin{egenskab}[Reducering af udtryk]\label{egenskab:simplification}
 Lad $e$ være et udtryk, så gælder følgende:
 \begin{align*}
   \text{eval}(e) = \text{eval}(\text{simplifyExpr}(e))
 \end{align*}
 \end{egenskab}
 
-Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som simplificerer et udtryk ved at foretage en Postorder Traversal på udtrykket. Hvilket betyder når en node i udtrykstræet skal simplificeres, vil dens børn allerede være simplificeret. 
+Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som reducere et udtryk ved at foretage en Postorder Traversal på udtrykket. Hvilket betyder når en node i udtrykstræet skal reduceres, vil dens børn allerede være reduceret. 
 
 \begin{lstlisting}[
   language={FSharp}, 
   label={lst:simplify_expr}, 
-  caption={Simplifikation af et udtryk}
+  caption={Reducering af et udtryk}
   ]
 //simplifyOperation: Expr<Number> -> Expr<Number> -> (Expr<Number> -> Expr<Number> -> Expr<Number>) -> Expr<Number>
 let rec simplifyOperation e1 e2 f = 
@@ -559,7 +559,7 @@ let rec simplifyExpr e =
   | _ -> e 
 \end{lstlisting}
 
-Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen af et givet udtryk. Funktionen tager som argumenter to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk simplifikation, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk simplifikation resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk simplifikation ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere simplifikation af de to udtryk. Denne dybere simplifikation udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationssimplifikation på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
+Det er \textcolor{red}{simplifyOperation}, som foretager selve reduceringen af et givet udtryk. Funktionen tager som argumenter to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk reducering, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk reducering resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk reducering ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere reducering af de to udtryk. Denne dybere reducering udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationsreducering på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
 
 
 \begin{figure}[H]
@@ -608,10 +608,10 @@ Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen 
         child { node {6} }
         child { node {y} };
     \end{tikzpicture}
-    \caption{Det resuterende simplificerede efter at have anvendt CommutativeMulDiv.\textcolor{red}{applyCommutative} på udtrykket i Figur \ref{fig:original-tree}}
+    \caption{Det resuterende reduceret udtryk, efter at have anvendt CommutativeMulDiv.\textcolor{red}{applyCommutative} på udtrykket i Figur \ref{fig:original-tree}}
     \label{fig:simplified-tree}
   \end{subfigure}
-  \caption{Før og efter simplifikation af et udtryk ved brug af CommutativeMulDiv.\textcolor{red}{applyCommutative}}
+  \caption{Før og efter reducering af et udtryk ved brug af CommutativeMulDiv.\textcolor{red}{applyCommutative}}
   \label{fig:expression-trees}
 \end{figure}
 
@@ -677,15 +677,15 @@ Det er \textcolor{red}{simplifyOperation}, som foretager selve simplificeringen 
     \caption{Det sorterede træ fra venstre mod højre}
     \label{fig:sub2}
   \end{subfigure}
-  \caption{Det udfladede og sorterede af udtrykket $(3 \cdot y \cdot (-2)/-x) \cdot x$ i processen af kommutativ simplifikation}
+  \caption{Det udfladede og sorterede af udtrykket $(3 \cdot y \cdot (-2)/-x) \cdot x$ i processen af kommutativ reducering}
   \label{fig:trees}
 \end{figure}
 
-Generelt, når det gælder simplificering af udtryk, skal man være opmærksom på ikke at ende i et uendeligt loop. Derfor er det vigtigt ikke at definere nogle overfladiske simplificeringer, som er hinandens inverse funktioner. Desuden forsøger funktionerne i dette program altid at skubbe negation af udtryk så langt ud som muligt i håb om, at de kan ophæve hinanden. Dette illustreres blandt andet i figur \ref{fig:trees}, hvor ved udfladning af træet, hvis et af de kommutative udtryk for multiplikation er negativt, fjernes negationen, og der tilføjes i stedet en negation af tallet 1, som ved sortering skubbes til venstre.
+Generelt, når det gælder reducering af udtryk, skal man være opmærksom på ikke at ende i et uendeligt loop. Derfor er det vigtigt ikke at definere nogle overfladiske reduceringer, som er hinandens inverse funktioner. Desuden forsøger funktionerne i dette program altid at skubbe negation af udtryk så langt ud som muligt i håb om, at de kan ophæve hinanden. Dette illustreres blandt andet i figur \ref{fig:trees}, hvor ved udfladning af træet, hvis et af de kommutative udtryk for multiplikation er negativt, fjernes negationen, og der tilføjes i stedet en negation af tallet 1, som ved sortering skubbes til venstre.
 
 
 \subsection{Differentiering af udtryk}
-Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, som samtidig vil understrege vigtigheden af at kunne simplificere udtryk. Vi begynder igen med at opskrive nogle algebraiske linearitetsegenskaber, som differentieringen skal overholde. Disse egenskaber vil blive testet i sektion \ref{sec:PBT_differentiation}.
+Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, som samtidig vil understrege vigtigheden af at kunne reducere udtryk. Vi begynder igen med at opskrive nogle algebraiske linearitetsegenskaber, som differentieringen skal overholde. Disse egenskaber vil blive testet i sektion \ref{sec:PBT_differentiation}.
 \vspace{0.5cm}
 \begin{egenskab}[Linearitetsbetingelserne\footcitetitle{diff}]\label{egenskab:differentiation}
   Lad $f$ og $g$ være udtryk, og $a$ være tal fra talmodulet, så gælder følgende:

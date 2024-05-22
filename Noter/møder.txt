@@ -165,4 +165,20 @@ næste gang:
 
     # MØDE 12
         * Er Functional Dependency og referential transparency det samme princip?
-        
+
+    Lav:
+        +* eks på fsi og fs fil. sammen med overloadning.
+        +* Kapitler starter på ny side
+        +* Open right til ny kapitel
+        +* konventering mellem udtryksformer sek3.4
+        +* ret til forenkling af udtry i sek 3.5
+        +* under tit2len på kapitlerne skal man, have en lille forklaring.
+        * ræsonering er simple fordi man undgår side effekter (eks. med globale var)
+        * evt et preface forord. med ioverblink
+        * fjek "jeg" fra diskussion og konklusion. 
+        * der skal være et abstrakt.
+        * studie ordningen har nogle ting man kunne under bachelor
+        * https://studieinformation.dtu.dk/Bachelor/Matematik-og-Teknologi/Studieordning#Bachelorprojekt
+        * link til github i forord
+        * hav vejledere med i forordet.
+    

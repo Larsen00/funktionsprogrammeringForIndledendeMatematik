@@ -1,10 +1,9 @@
 
 \section{Fundamentale koncepter}
-\subsection{Introduktion til Funktions Programmering}
 Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten. 
 
+\subsection{Introduktion til Funktions Programmering}
 F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på "typed lambda calculus"\footcitetitle{lambda_typed}. "Typed lambda calculus" er en udvidelse af "lambda calculus"\footcitetitle{lambda}, som er et formelt system til at udtrykke beregninger.
-
 
 Vi begynder med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
 
@@ -124,13 +123,6 @@ type Tree =
 Rekursive typer lagres som en værdi og ikke en datastruktur.
 
 
-
-\subsection{Signatur filer og implementerings filer}
-En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en signaturfil med .fsi extension, denne fil indeholder en beskrivelse af de typer og funktioner i implementeringsfilen som er tilgængelige for andre filer. En signaturfil kan derfor bruges som et blueprint for andre der ønsker at anvende eller replicere implementeringsfilen.
-
-\subsection{Overskrivning af operatorer}
-I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler.
-
 \subsection{Property Based Testing}
 Property Based Testing (PBT) er en teknik til at teste korrekthed af egenskaber som man ved altid skal være opfyldt. Ved PBT genereres en række tilfældige input til en funktion, hvorefter det kontrolleres, om en given egenskab holder. Fokusset ved PBT er de fundamentale egenskaber, som en funktion skal overholde, og ikke de specifikke tilfælde som ved eksempelvis unit tests\footcitetitle{unit_test}.
 
@@ -145,8 +137,8 @@ Vi kan også bruge PBT til at undersøge, om Formel \eqref{udsagnslogik} holder,
 \lstinputlisting[
     language=FSharp,
     label={valid1},
-    caption={PBT af Formel \eqref{udsagnslogik}. Begge sider skal være omgivet af parenteser, for at den er gyldig, da "$=$" har en højere præcedens end" $\&\&$"}
-]{exampleCodes/valid1.fsx}
+    caption={PBT af Formel \eqref{udsagnslogik}. Begge sider skal være omgivet af parenteser, for at den er gyldig, da "$=$" har en højere præcedens end" $\&\&$"}]{exampleCodes/valid1.fsx}
+
 
 \begin{lstlisting}[style=output, label={lst:output_example}, caption={Output ved PBT af (\ref{udsagnslogik})}]
 > let _ = Check.Quick propositional_formula;;
@@ -168,3 +160,33 @@ false
 \end{lstlisting}
 
 I nogle tilfælde vil det være en fordel at opskrive en PBT før implementeringen af en funktion, som man ved skal overholde en egenskab. På den måde anvendes Test-Driven Development (TDD)\footcitetitle{TDD} til at teste, om ens egenskab forbliver overholdt under implementeringen. I dette projekt vil vi anvende PBT til at validere, at de matematiske egenskaber bliver overholdt af programmet.
+
+
+
+\subsection{Overskrivning af operatorer}
+I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler. Et eksempel på overskrivning af operatorer er givet i næste sektion.
+
+\subsection{Signaturfiler og implementeringsfiler}
+En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en tilhørende signaturfil med .fsi extension. Denne fil indeholder en beskrivelse af de typer og funktioner i implementeringsfilen, som er tilgængelige for andre filer. En signaturfil kan derfor bruges som en arbejdstegning for andre, der ønsker at anvende eller replicere implementeringsfilen. Til sidst er der scriptfiler med .fsx extension, som kan bruges til at køre F\# kode uden at skulle kompilere den.
+
+Som et eksempel på de forskellige filtyper kan vi se signaturfilen i Listing \ref{lst:signatur_implementation}.
+
+\lstinputlisting[language={FSharp}, label={lst:signatur_implementation}, caption={Eksempel på en signaturfil \textit{MyInt.fsi}}]{exampleCodes/MyInt.fsi}
+
+Ud fra signaturfilen kan vi se, at implementeringsfilen i Listing \ref{lst:MyInt_fs} indeholder en type \textit{MyInt}, hvor der er defineret overskrivning af operatorerne multiplication og subtraction. Derudover er der defineret en funktion \textcolor{red}{factorial}. 
+
+\lstinputlisting[language={FSharp}, label={lst:MyInt_fs}, caption={Eksempel på en implementeringsfil \textit{MyInt.fs}}]{exampleCodes/MyInt.fs}
+
+I denne implementeringsfil finder vi overskrivningerne af operatorerne på typen \textit{MyInt}. Derudover er der også en implementering af en funktion \textcolor{red}{factorial}, som virker med typen \textit{MyInt}. 
+
+Til sidst kan vi åbne modulet i en scriptfil, som vist i Listing \ref{lst:MyInt_fsx}.
+
+\lstinputlisting[language={FSharp}, label={lst:MyInt_fsx}, caption={Eksempel på en scriptfil \textit{MyInt.fsx}}]{exampleCodes/MyInt.fsx}
+
+Vi kan derefter køre scriptfilen og få outputtet, som vist i Listing \ref{lst:output_test}.
+
+\begin{lstlisting}[style=output, label={lst:output_test}, caption={Output ved kørsel af \textit{MyInt.fsx}}]
+I 720
+\end{lstlisting}
+
+

@@ -18,23 +18,35 @@
   {\usebibmacro{postnote}} % Tilføjer post-note, bruges til at indsætte sidetal eller lignende efter citatet
 
 
+\newcommand{\newchapter}{
+    \cleardoublepage
+    \ifthenelse{\isodd{\value{page}}}{}{\hbox{}\newpage}
+}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\thepage}{\Roman{page}}
+    \fancyfoot[R]{\thepage}
+}
+
 \begin{document}
 \input{Opsætning/forside}
+\pagenumbering{roman}
+\pagestyle{plain}
 \tableofcontents
-\newpage
+\newchapter
 
 
-
-\newpage
+\pagenumbering{arabic}
+\newchapter
 \input{sections/Introduction.tex}
-\newpage
+\newchapter
 \input{sections/Fundamentale_koncepter.tex}
-\newpage
+\newchapter
 \input{sections/udtryk.tex}
-
-\newpage
+\newchapter
 \input{sections/vektorer_og_matricer.tex}
-\newpage
+\newchapter
 \input{sections/pbt.tex}
 
 \section{Diskussion}
@@ -71,11 +83,13 @@ type Number =
 \end{lstlisting}
 
 Denne ændring ville selvfølgelig medføre, at Number ville blive en rekursivt defineret type, hvilket skulle håndteres ansvarligt.
+
+\newchapter
 \section{Konklusion}
 Det primære fokuspunkt for rapporten er, at en læser skulle opnå en bedre forståelse af matematiske koncepter gennem at opbygge et matematisk program ved hjælp af funktionsprogrammering. Min erfaring fra samtaler med mine medstuderende er, at rekursive funktioner generelt er et svært koncept for mange. Derfor tror jeg også, at introducere de studerende til rekursivitet gennem et funktionelt programmeringssprog som F\# ved hjælp af matematiske koncepter, som de møder i kurserne "01001 Matematik 1a" og "01002 Matematik 1b", vil gavne de studerendes forståelse af både matematikken og programmeringssproget. Derudover vil kendskabet til funktionsprogrammering forbedre de studerendes evne til at skrive bedre programmer, for eksempel i Python. Noget jeg ser hos mine medstuderende på "Matematik og Teknologi", som har lært at programmere i Python gennem de to grundlæggende matematikkurser, er blandt andet de ikke definerer funktioner for at genbruge kode. I stedet kopierer og indsætter de kode, hvilket ikke er en god praksis.
 
 
-Selvom syntaksen for F\# kan være sværere at lære for nogle, tror jeg på, at gevinsten ved at lære den er stor.Implementeringen af dette program, fra hvordan man udfører operationer af komplekse tal til hvordan man ud fra simple matematiske regler kan simplificere udtryk, vil gavne forståelsen af matematikken. De studerende vil forstå, hvorfor diverse funktioner virker. Hvilket ikke altid er tilfældet i Python, hvor mange funktioner kan håndteres som en sort boks.
+Selvom syntaksen for F\# kan være sværere at lære for nogle, tror jeg på, at gevinsten ved at lære den er stor.Implementeringen af dette program, fra hvordan man udfører operationer af komplekse tal til hvordan man ud fra simple matematiske regler kan reducere udtryk, vil gavne forståelsen af matematikken. De studerende vil forstå, hvorfor diverse funktioner virker. Hvilket ikke altid er tilfældet i Python, hvor mange funktioner kan håndteres som en sort boks.
 
 
 Konklusionen er, at F\# måske ikke vil kunne erstatte Python i matematikkurserne på DTU, men det vil kunne være et godt supplement til at forbedre de studerendes forståelse af matematikken og programmering.

@@ -23,6 +23,8 @@
     <Compile Include="modules/Matrix.fsi" />
     <Compile Include="modules/Matrix.fs" />
     <Compile Include="PBT/Generators.fs" />
+    <Compile Include="Rapport/exampleCodes/MyInt.fsi" />
+    <Compile Include="Rapport/exampleCodes/MyInt.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>

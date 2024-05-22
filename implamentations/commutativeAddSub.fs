@@ -1,4 +1,4 @@
-module commutativeAddSub
+module CommutativeAddSub
 open Expression
 open Number
 

@@ -1,4 +1,4 @@
-module commutativeMulDiv
+module CommutativeMulDiv
 open Expression
 open Number
 

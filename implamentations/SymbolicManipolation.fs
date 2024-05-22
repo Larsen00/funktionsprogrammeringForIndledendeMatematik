@@ -11,11 +11,11 @@ open rational
 
 let rec simplifyOperation e1 e2 f = 
     match f e1 e2 with
-    | Neg a -> commutativeMulDiv.applyCommutative (Neg a) |> commutativeAddSub.applyCommutative
-    | Add(a, b) when isAdd f -> commutativeAddSub.applyCommutative (Add(a, b))
-    | Sub(a, b) when isSub f -> commutativeAddSub.applyCommutative (Sub(a, b))
-    | Mul(a, b) when isMul f -> commutativeMulDiv.applyCommutative (Mul(a, b))
-    | Div(a, b) when isDiv f -> commutativeMulDiv.applyCommutative (Div(a, b))
+    | Neg a -> CommutativeMulDiv.applyCommutative (Neg a) |> CommutativeAddSub.applyCommutative
+    | Add(a, b) when isAdd f -> CommutativeAddSub.applyCommutative (Add(a, b))
+    | Sub(a, b) when isSub f -> CommutativeAddSub.applyCommutative (Sub(a, b))
+    | Mul(a, b) when isMul f -> CommutativeMulDiv.applyCommutative (Mul(a, b))
+    | Div(a, b) when isDiv f -> CommutativeMulDiv.applyCommutative (Div(a, b))
     | Add(a, b) -> simplifyOperation a b (+)
     | Sub(a, b) -> simplifyOperation a b (-)
     | Mul(a, b) -> simplifyOperation a b (*)

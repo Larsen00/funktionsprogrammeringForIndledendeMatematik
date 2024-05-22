@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  21 MAY 2024 20:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  22 MAY 2024 15:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1080,24 +1080,24 @@ Package csquotes Info: Redefining alias 'default' -> 'danish'.
  (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count524
@@ -1122,7 +1122,7 @@ Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
 Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package csquotes Info: Redefining character " on input line 32.
+Package csquotes Info: Redefining character " on input line 33.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1158,11 +1158,9 @@ Package csquotes Info: Redefining character " on input line 32.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 32.
-(main.out) (main.out)
+Package hyperref Info: Link coloring OFF on input line 33.
 \@outlinefile=\write5
 \openout5 = `main.out'.
-
 
 Couldn't patch \deferred@thm@head!
 \c@lstlisting=\count530
@@ -1186,10 +1184,10 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
-Package biblatex Info: Reference section=0 on input line 32.
-Package biblatex Info: Reference segment=0 on input line 32.
+Package biblatex Info: Reference section=0 on input line 33.
+Package biblatex Info: Reference segment=0 on input line 33.
  (Opsætning/forside.tex
-<Opsætning/DTULogo.png, id=206, 469.9959pt x 685.6014pt>
+<Opsætning/DTULogo.png, id=6, 469.9959pt x 685.6014pt>
 File: Opsætning/DTULogo.png Graphic file (type png)
 <use Opsætning/DTULogo.png>
 Package pdftex.def Info: Opsætning/DTULogo.png  used on input line 17.
@@ -1203,30 +1201,211 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Opsætning/DTULogo.png>]) (main.toc [1])
+{C:/Users/jonas/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Opsætning/DTULogo.png>]) [1]
+<Opsætning/overblik.png, id=23, 482.80376pt x 671.50874pt>
+File: Opsætning/overblik.png Graphic file (type png)
+<use Opsætning/overblik.png>
+Package pdftex.def Info: Opsætning/overblik.png  used on input line 43.
+(pdftex.def)             Requested size: 332.10184pt x 461.9173pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <./Opsætning/overblik.png>] (sections/forord.tex) [3
+
+] [4
+
+]
+No file main.toc.
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [2] (sections/Introduction.tex)
+[5] [6
+
+] (sections/Introduction.tex)
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.43 \newchapter
+l.59 \newchapter
                  [1
-
 
 ] [2
 
 ] (sections/Fundamentale_koncepter.tex
+
+LaTeX Warning: Reference `Fakultet' on page 3 undefined on input line 8.
+
+
+LaTeX Warning: Reference `Fakultet' on page 3 undefined on input line 19.
+
+
+LaTeX Warning: Reference `lst:fsharp_factorial' on page 3 undefined on input line 19.
+
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 21.
- [3] [4] (exampleCodes/valid1.fsx) [5]
+
+LaTeX Warning: Reference `Fakultet' on page 3 undefined on input line 30.
+
+[3]
+
+LaTeX Warning: Reference `lst:pipe_operator' on page 4 undefined on input line 45.
+
+
+LaTeX Warning: Reference `lst:fsharp_factorial' on page 4 undefined on input line 81.
+
+[4]
+
+LaTeX Warning: Reference `lst:tree_ex' on page 5 undefined on input line 115.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 129.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 135.
+
+
+LaTeX Warning: Reference `valid1' on page 5 undefined on input line 135.
+
+(exampleCodes/valid1.fsx)
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 140.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 140.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 146.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 146.
+
+
+LaTeX Warning: Reference `valid1' on page 5 undefined on input line 148.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 148.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 148.
+
+
+LaTeX Warning: Reference `udsagnslogik' on page 5 undefined on input line 148.
+
+[5]
+
+LaTeX Warning: Reference `output_invalid' on page 6 undefined on input line 151.
+
+
 Overfull \hbox (4.10388pt too wide) in paragraph at lines 170--171
 \OT1/cmr/m/n/10 En im-ple-men-te-rings-fil i F# er la-vet med .fs exten-sion. Im-ple-men-te-rings-fi-len kan ha-ve en tilh^^\rende
  []
 
-(exampleCodes/MyInt.fsi) [6] (exampleCodes/MyInt.fs) (exampleCodes/MyInt.fsx)) [7] [8
 
-] (sections/udtryk.tex (../modules/rational.fsi [9]) [10] [11] (../modules/number.fsi [12]) [13] [14]
+LaTeX Warning: Reference `lst:signatur_implementation' on page 6 undefined on input line 172.
+
+(exampleCodes/MyInt.fsi) [6]
+
+LaTeX Warning: Reference `lst:MyInt_fs' on page 7 undefined on input line 176.
+
+(exampleCodes/MyInt.fs)
+
+LaTeX Warning: Reference `lst:MyInt_fsx' on page 7 undefined on input line 182.
+
+(exampleCodes/MyInt.fsx)
+
+LaTeX Warning: Reference `lst:output_test' on page 7 undefined on input line 186.
+
+sections/Fundamentale_koncepter.tex:195: Missing $ inserted.
+<inserted text> 
+                $
+l.195 ...\footcitetitle{Referential_transparency}.
+                                                   \textbf{Lambda calculus} ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+sections/Fundamentale_koncepter.tex:195: Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.195 ...\footcitetitle{Referential_transparency}.
+                                                   \textbf{Lambda calculus} ...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+sections/Fundamentale_koncepter.tex:195: Missing $ inserted.
+<inserted text> 
+                $
+l.195 ...\footcitetitle{Referential_transparency}.
+                                                   \textbf{Lambda calculus} ...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+sections/Fundamentale_koncepter.tex:195: Missing } inserted.
+<inserted text> 
+                }
+l.195 ...\footcitetitle{Referential_transparency}.
+                                                   \textbf{Lambda calculus} ...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[7]) [8] (sections/udtryk.tex
+
+LaTeX Warning: Reference `rational_fsi' on page 9 undefined on input line 16.
+
+(../modules/rational.fsi [9
+
+])
+
+LaTeX Warning: Reference `sec:complex.fsi' on page 10 undefined on input line 28.
+
+
+LaTeX Warning: Reference `type_complex' on page 10 undefined on input line 28.
+
+
+LaTeX Warning: Reference `def:complex' on page 10 undefined on input line 36.
+
+
+LaTeX Warning: Reference `complex_operations' on page 10 undefined on input line 50.
+
+[10]
+
+LaTeX Warning: Reference `egenskab:tal' on page 11 undefined on input line 89.
+
+
+LaTeX Warning: Reference `sec:PBT_number' on page 11 undefined on input line 89.
+
+[11]
+
+LaTeX Warning: Reference `number_type' on page 12 undefined on input line 105.
+
+
+LaTeX Warning: Reference `egenskab:tal' on page 12 undefined on input line 115.
+
+
+LaTeX Warning: Reference `Number_fsi' on page 12 undefined on input line 118.
+
+(../modules/number.fsi [12])
+
+LaTeX Warning: Reference `operation' on page 13 undefined on input line 126.
+
+
+LaTeX Warning: Reference `overloads_number' on page 13 undefined on input line 146.
+
+[13]
+
+LaTeX Warning: Reference `fig:expression_tree' on page 14 undefined on input line 184.
+
+
+LaTeX Warning: Reference `fig:expression_tree_traversal' on page 14 undefined on input line 222.
+
+[14]
 Overfull \hbox (19.87704pt too wide) in paragraph at lines 258--259
  [][] 
  []
@@ -1241,6 +1420,24 @@ Overfull \hbox (28.18134pt too wide) in paragraph at lines 328--329
  [][] 
  []
 
+
+LaTeX Warning: Reference `fig:expression_tree' on page 15 undefined on input line 336.
+
+
+LaTeX Warning: Reference `fig:expression_tree' on page 15 undefined on input line 336.
+
+
+LaTeX Warning: Reference `sec:expression_module' on page 15 undefined on input line 341.
+
+
+LaTeX Warning: Reference `expr_type' on page 15 undefined on input line 348.
+
+
+LaTeX Warning: Reference `number_type' on page 15 undefined on input line 348.
+
+
+LaTeX Warning: Reference `sec:expression_as_trees' on page 15 undefined on input line 348.
+
 [15]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 366.
  (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
@@ -1248,9 +1445,83 @@ File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 366.
- (../modules/Expression.fsi) [16] [17] [18] [19]
+
+
+LaTeX Warning: Reference `lst:expr_example' on page 16 undefined on input line 366.
+
+
+LaTeX Warning: Reference `sec:expression_generation' on page 16 undefined on input line 372.
+
+
+LaTeX Warning: Reference `sec:expression_generation' on page 16 undefined on input line 372.
+
+
+LaTeX Warning: Reference `sec:eval' on page 16 undefined on input line 374.
+
+(../modules/Expression.fsi) [16]
+
+LaTeX Warning: Reference `lst:mul_expr' on page 17 undefined on input line 383.
+
+
+LaTeX Warning: Reference `prop:eval_homomorphism' on page 17 undefined on input line 418.
+
+
+LaTeX Warning: Reference `sec:PBT_eval_homomorphism' on page 17 undefined on input line 418.
+
+
+LaTeX Warning: Reference `lst:eval_expr' on page 17 undefined on input line 432.
+
+[17]
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 18 undefined on input line 452.
+
+
+LaTeX Warning: Reference `sec:PBT_infix_prefix' on page 18 undefined on input line 452.
+
+
+LaTeX Warning: Reference `lst:expression_to_infix' on page 18 undefined on input line 469.
+
+
+LaTeX Warning: Reference `sec:expression_as_trees' on page 18 undefined on input line 469.
+
+[18]
+
+LaTeX Warning: Reference `lst:infix_to_expression_types' on page 19 undefined on input line 496.
+
+
+LaTeX Warning: Reference `sec:treeGenerator.fs' on page 19 undefined on input line 496.
+
+
+LaTeX Warning: Reference `sec:PBT_simplification' on page 19 undefined on input line 517.
+
+
+LaTeX Warning: Reference `lst:simplify_expr' on page 19 undefined on input line 526.
+
+[19]
+
+LaTeX Warning: Reference `sec:expression_module' on page 20 undefined on input line 562.
+
+
+LaTeX Warning: Reference `sec:commutativeAddSub.fs' on page 20 undefined on input line 562.
+
+
+LaTeX Warning: Reference `sec:commutativeMulDiv.fs' on page 20 undefined on input line 562.
+
+
+LaTeX Warning: Reference `fig:expression-trees' on page 20 undefined on input line 562.
+
+
+LaTeX Warning: Reference `fig:trees' on page 20 undefined on input line 562.
+
+
+LaTeX Warning: Reference `fig:original-tree' on page 20 undefined on input line 611.
+
+
+LaTeX Warning: Reference `fig:original-tree' on page 20 undefined on input line 611.
+
+
 Underfull \hbox (badness 7344) in paragraph at lines 614--614
-[]\OT1/cmr/m/n/10 Figur 3: |F^^\r og ef-ter re-du-ce-ring af et ud-tryk ved brug af Com-muta-ti-ve-Mul-
+[]\OT1/cmr/m/n/10 Figur 4: |F^^\r og ef-ter re-du-ce-ring af et ud-tryk ved brug af Com-muta-ti-ve-Mul-
  []
 
 [20]
@@ -1266,44 +1537,375 @@ Overfull \hbox (11.8557pt too wide) in paragraph at lines 676--677
  [][] 
  []
 
-[21] [22]) [23] [24
 
-] (sections/vektorer_og_matricer.tex [25] [26] [27] [28] [29]
+LaTeX Warning: Reference `fig:trees' on page 21 undefined on input line 684.
+
+
+LaTeX Warning: Reference `sec:PBT_differentiation' on page 21 undefined on input line 688.
+
+[21]
+
+LaTeX Warning: Reference `lst:diff_expr' on page 22 undefined on input line 706.
+
+
+LaTeX Warning: Reference `egenskab:differentiation' on page 22 undefined on input line 706.
+
+
+LaTeX Warning: Reference `sec:lin_eq' on page 22 undefined on input line 728.
+
+
+LaTeX Warning: Reference `lst:isolate' on page 22 undefined on input line 728.
+
+[22]) [23] [24
+
+] (sections/vektorer_og_matricer.tex
+
+LaTeX Warning: Reference `Order' on page 25 undefined on input line 2.
+
+
+LaTeX Warning: Reference `matrix' on page 25 undefined on input line 12.
+
+
+LaTeX Warning: Reference `dim' on page 25 undefined on input line 23.
+
+
+LaTeX Warning: Reference `dim_func' on page 25 undefined on input line 38.
+
+[25]
+
+LaTeX Warning: Reference `sec:matrix.fs' on page 26 undefined on input line 60.
+
+
+LaTeX Warning: Reference `vector_space_axioms' on page 26 undefined on input line 62.
+
+
+LaTeX Warning: Reference `scale_matrix' on page 26 undefined on input line 84.
+
+[26]
+
+LaTeX Warning: Reference `add_matrix' on page 27 undefined on input line 131.
+
+
+LaTeX Warning: Reference `sec:gram_schmidt' on page 27 undefined on input line 131.
+
+
+LaTeX Warning: Reference `sumRows' on page 27 undefined on input line 131.
+
+[27]
+
+LaTeX Warning: Reference `sumRows' on page 28 undefined on input line 228.
+
+
+LaTeX Warning: Reference `def:matrix_vector_pro' on page 28 undefined on input line 228.
+
+
+LaTeX Warning: Reference `matrix_vector_pro' on page 28 undefined on input line 238.
+
+
+LaTeX Warning: Reference `vecPro' on page 28 undefined on input line 238.
+
+[28]
+
+LaTeX Warning: Reference `def:matrix_matrix_pro' on page 29 undefined on input line 269.
+
+
+LaTeX Warning: Reference `pro_matrix' on page 29 undefined on input line 269.
+
+
+LaTeX Warning: Reference `def:proj' on page 29 undefined on input line 296.
+
+[29]
+
+LaTeX Warning: Reference `def:proj' on page 30 undefined on input line 323.
+
+
+LaTeX Warning: Reference `number_type' on page 30 undefined on input line 330.
+
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 330.
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 330.
 
+
+LaTeX Warning: Reference `eg:gs' on page 30 undefined on input line 332.
+
+
+LaTeX Warning: Reference `sec:pbt_gram_schmidt' on page 30 undefined on input line 332.
+
+
 Overfull \hbox (15.73872pt too wide) in paragraph at lines 335--337
 []\OT1/cmr/m/it/10 Lad $\OML/cmm/m/it/10 w[]; w[]; [] ; w[]$ \OT1/cmr/m/it/10 v^^Zre de nye vek-to-re som er dan-nes ud-fra gram-schmidt pro-ces-sen p^^Wa $\OML/cmm/m/it/10 v[]; v[]; [] ; v[]$
  []
 
-[30] [31]
+[30]
+
+LaTeX Warning: Reference `gram_schmidt' on page 31 undefined on input line 375.
+
+
+LaTeX Warning: Reference `row_echelon' on page 31 undefined on input line 384.
+
+[31]
 Overfull \hbox (1.95956pt too wide) in paragraph at lines 422--423
 []\OT1/cmr/m/n/10 Efter at ha-ve fo-re-ta-get r^^Zkke-echelon form p^^Wa to-tal-ma-tri-cen, skal vi ta-ge matrix-vektor-produktet
  []
 
-[32]) [33] [34
 
-] (sections/pbt.tex [35] [36] (../PBT/numberPBT.fsx [37]) [38] [39] [40] (../PBT/diffPBT.fsx [41]) [42] [43] [44] [45] [46]
+LaTeX Warning: Reference `expr_type' on page 32 undefined on input line 424.
+
+
+LaTeX Warning: Reference `expr_matric_type' on page 32 undefined on input line 424.
+
+
+LaTeX Warning: Reference `matrix' on page 32 undefined on input line 435.
+
+
+LaTeX Warning: Reference `vecPro' on page 32 undefined on input line 437.
+
+
+LaTeX Warning: Reference `lst:isolate' on page 32 undefined on input line 437.
+
+[32]
+
+LaTeX Warning: Reference `sec:matrix.fs' on page 33 undefined on input line 439.
+
+) [33] [34
+
+] (sections/pbt.tex
+
+LaTeX Warning: Reference `generator1' on page 35 undefined on input line 7.
+
+[35] [36]
+
+LaTeX Warning: Reference `egenskab:tal' on page 37 undefined on input line 130.
+
+
+LaTeX Warning: Reference `pbt:number' on page 37 undefined on input line 130.
+
+(../PBT/numberPBT.fsx [37])
+
+LaTeX Warning: Reference `egenskab:tal' on page 38 undefined on input line 136.
+
+
+LaTeX Warning: Reference `egenskab:tal' on page 38 undefined on input line 136.
+
+
+LaTeX Warning: Reference `output:number' on page 38 undefined on input line 137.
+
+
+LaTeX Warning: Reference `pbt:number' on page 38 undefined on input line 151.
+
+
+LaTeX Warning: Reference `pbt:number' on page 38 undefined on input line 151.
+
+[38]
+
+LaTeX Warning: Reference `egenskab:tal' on page 39 undefined on input line 153.
+
+
+LaTeX Warning: Reference `prop:eval_homomorphism' on page 39 undefined on input line 157.
+
+
+LaTeX Warning: Reference `pbt:eval_homomorphism' on page 39 undefined on input line 157.
+
+
+LaTeX Warning: Reference `prop:eval_homomorphism' on page 39 undefined on input line 184.
+
+
+LaTeX Warning: Reference `prop:eval_homomorphism' on page 39 undefined on input line 184.
+
+
+LaTeX Warning: Reference `output:eval_homomorphism' on page 39 undefined on input line 186.
+
+
+LaTeX Warning: Reference `prop:eval_homomorphism' on page 39 undefined on input line 199.
+
+
+LaTeX Warning: Reference `prop:eval_homomorphism' on page 39 undefined on input line 199.
+
+
+LaTeX Warning: Reference `sec:rational' on page 39 undefined on input line 200.
+
+
+LaTeX Warning: Reference `egenskab:simplification' on page 39 undefined on input line 205.
+
+
+LaTeX Warning: Reference `pbt:simplification' on page 39 undefined on input line 205.
+
+[39]
+
+LaTeX Warning: Reference `egenskab:simplification' on page 40 undefined on input line 230.
+
+
+LaTeX Warning: Reference `egenskab:simplification' on page 40 undefined on input line 230.
+
+
+LaTeX Warning: Reference `output:simplification' on page 40 undefined on input line 232.
+
+
+LaTeX Warning: Reference `egenskab:simplification' on page 40 undefined on input line 244.
+
+
+LaTeX Warning: Reference `egenskab:simplification' on page 40 undefined on input line 244.
+
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 40 undefined on input line 247.
+
+
+LaTeX Warning: Reference `lst:expression_to_infix' on page 40 undefined on input line 247.
+
+
+LaTeX Warning: Reference `pbt:infix_prefix' on page 40 undefined on input line 247.
+
+[40]
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 41 undefined on input line 277.
+
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 41 undefined on input line 277.
+
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 41 undefined on input line 283.
+
+
+LaTeX Warning: Reference `output:infix_prefix' on page 41 undefined on input line 288.
+
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 41 undefined on input line 299.
+
+
+LaTeX Warning: Reference `egenskab:infix_prefix' on page 41 undefined on input line 299.
+
+
+LaTeX Warning: Reference `egenskab:differentiation' on page 41 undefined on input line 303.
+
+
+LaTeX Warning: Reference `pbt:differentiation' on page 41 undefined on input line 303.
+
+(../PBT/diffPBT.fsx [41])
+
+LaTeX Warning: Reference `egenskab:differentiation' on page 42 undefined on input line 305.
+
+
+LaTeX Warning: Reference `egenskab:differentiation' on page 42 undefined on input line 305.
+
+
+LaTeX Warning: Reference `output:differentiation' on page 42 undefined on input line 307.
+
+[42]
+
+LaTeX Warning: Reference `vector_space_axioms' on page 43 undefined on input line 350.
+
+
+LaTeX Warning: Reference `vector_space_axioms' on page 43 undefined on input line 355.
+
+
+LaTeX Warning: Reference `lst:vector_space_axioms' on page 43 undefined on input line 355.
+
+
+LaTeX Warning: Reference `vector_space_axioms' on page 43 undefined on input line 373.
+
+
+LaTeX Warning: Reference `vector_space_axioms' on page 43 undefined on input line 373.
+
+[43]
+
+LaTeX Warning: Reference `lst:vector_space_axioms_pbt' on page 44 undefined on input line 375.
+
+
+LaTeX Warning: Reference `lst:vector_space_axioms' on page 44 undefined on input line 389.
+
+
+LaTeX Warning: Reference `lst:vector_space_axioms' on page 44 undefined on input line 389.
+
+
+LaTeX Warning: Reference `generators_gram_schmidt' on page 44 undefined on input line 392.
+
+[44]
+
+LaTeX Warning: Reference `check_orthogonal_basis' on page 45 undefined on input line 443.
+
+
+LaTeX Warning: Reference `check_orthogonal_basis' on page 45 undefined on input line 457.
+
+
+LaTeX Warning: Reference `def:matrix_matrix_pro' on page 45 undefined on input line 471.
+
+
+LaTeX Warning: Reference `def:matrix_vector_pro' on page 45 undefined on input line 480.
+
+[45]
+
+LaTeX Warning: Reference `def:proj' on page 46 undefined on input line 499.
+
+[46]
+
+LaTeX Warning: Reference `pbt_gram_schmidt' on page 47 undefined on input line 574.
+
+
+LaTeX Warning: Reference `output_gram_schmidt' on page 47 undefined on input line 612.
+
+
+LaTeX Warning: Reference `sec:gram_schmidt' on page 47 undefined on input line 614.
+
 
 LaTeX Warning: Reference `eg:independtent' on page 47 undefined on input line 614.
 
-[47]) [48] [49] [50
 
-] [51]
-Overfull \hbox (152.2627pt too wide) in paragraph at lines 100--100
+LaTeX Warning: Reference `pbt_echelon_form' on page 47 undefined on input line 621.
+
+[47]
+
+LaTeX Warning: Reference `output_echelon_form' on page 48 undefined on input line 640.
+
+) [48] (sections/diskussion.tex
+
+LaTeX Warning: Reference `lst:matrix_types_expr' on page 49 undefined on input line 10.
+
+[49
+
+]
+
+LaTeX Warning: Reference `lst:complex_type2' on page 50 undefined on input line 19.
+
+) [50] (sections/konklusion.tex) [51
+
+]
+Overfull \hbox (152.2627pt too wide) in paragraph at lines 77--77
 []\OT1/cmr/m/it/10 Github repo-si-tory for the pro-ject\OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : []$\OT1/cmtt/m/n/10 https : / / github . com / Larsen00 / funktionsprogrammeringForIndledendeMatematik$[]
  []
 
 
-Overfull \hbox (9.9264pt too wide) in paragraph at lines 100--100
+Overfull \hbox (9.9264pt too wide) in paragraph at lines 77--77
 \OT1/cmtt/m/n/10 20widely % 20used % 20language % 20for % 20Data ,[] libraries % 20and % 20other % 20numerical %
  []
 
-[52] (sections/Appendiks.tex (../modules/complex.fsi) (../implamentations/TreeGenerator.fs [53] [54]) (../implamentations/commutativeAddSub.fs [55] [56]) (../implamentations/commutativeMulDiv.fs [57] [58]) (../modules/Matrix.fs [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69])) [70] 
+c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex:77: Missing $ inserted.
+<inserted text> 
+                $
+l.77 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex:77: Missing $ inserted.
+<inserted text> 
+                $
+l.77 
+     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (27.90161pt too wide) in paragraph at lines 77--77
+[]\OT1/cmr/m/it/10 Referential$[]\OML/cmm/m/it/10 ransparency$\OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : []$\OT1/cmtt/m/n/10 https : / / en . wikipedia . org / wiki / Referential _ transparency$[]
+ []
+
+[52] [53] (sections/Appendiks.tex (../modules/complex.fsi) (../implamentations/TreeGenerator.fs [54] [55]) (../implamentations/commutativeAddSub.fs [56] [57]) (../implamentations/commutativeMulDiv.fs [58] [59]) (../modules/Matrix.fs [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70])) [71] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (main.aux)
  ***********
@@ -1314,24 +1916,41 @@ L3 programming layer <2024-02-20>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 657F8EBCE21CA55257358A2809268789;8141.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  B4823DB9B1795786B2296CDCB2CA268F;8522.
+
+Package lastpage Warning: Rerun to get the references right on input line 80.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                main
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42571 strings out of 474457
- 784005 string characters out of 5742755
- 2523190 words of memory out of 5000000
- 62051 multiletter control sequences out of 15000+600000
- 571609 words of font info for 87 fonts, out of 8000000 for 9000
+ 42566 strings out of 474457
+ 784381 string characters out of 5742755
+ 2524190 words of memory out of 5000000
+ 62026 multiletter control sequences out of 15000+600000
+ 571917 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,134p,2231b,2305s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\jonas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (73 pages, 1061406 bytes).
+ <C:\Users\jonas\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (78 pages, 1068490 bytes).
 PDF statistics:
- 3414 PDF objects out of 3580 (max. 8388607)
- 2117 named destinations out of 2487 (max. 500000)
- 418 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3122 PDF objects out of 3580 (max. 8388607)
+ 2133 named destinations out of 2487 (max. 500000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

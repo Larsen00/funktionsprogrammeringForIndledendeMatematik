@@ -1,0 +1,34 @@
+\section{Diskussion}
+Vi begyndte rapporten med at informere læseren om, at Python er blevet indført som et hjælpemiddel i matematikkurserne på DTU. En af fordelene ved Python er, at det er et meget mere udbredt programmeringssprog, hvilket gør det nemmere at finde hjælp og vejledninger til opbygning af et program eller løsning af en opgave. Under 1\% af udviklere i 2023 anvender F\#, hvilket er markant mindre end de næsten 50\%, som bruger Python\footcitetitle{statista2023}. Derfor har det været en udfordring i udviklingen af dette program at finde vejledning på internettet til de problemstillinger, der er opstået undervejs.
+
+Derimod, eftersom F\# er et stærkt typet sprog, har det været markant nemmere at finde fejl i programmet inden det bliver kørt, hvilket er en af de store fordele ved F\# frem for Python. Python er dynamisk typet, hvilket tillader at kalde funktioner med argumenter uden at specificere, hvilken type argumentet skal have. Programmer virker derfor kun, hvis argumentet har de metoder, som funktionen forventer. Det medfører, at man ofte skal tjekke, om en metode er til stede på et objekt, hvilket vi ikke behøver i F\#. Derudover kan objekter få tilføjet metoder under kørslen, hvilket kan have sine fordele, men som udvikler medfører det flere problemstillinger, blandt andet at når et objekt ikke har den forventede metode, vil programmet først fejle under kørslen.
+
+Mangel på typer sammenlignet med F\# betyder også, at det tager længere tid og kræver flere kommentarer at forstå, hvad et program gør. Denne udfordring har man ikke med F\#, så længe funktionsnavnet er sigende for, hvad funktionen gør. Kombineret med at kunne se typen for funktionen, behøver man ofte ikke at læse selve koden for at forstå, hvad funktionen gør. Dette medfører, at man som udvikler kan være mere effektiv.
+
+Vedrørende syntaksen af F\# sammenlignet med Python, som er kendt for at have en mere læsbar syntaks, hvilket er en af årsagerne til, at det er et mere begyndervenligt sprog. Især da F\#'s syntaks er forholdsvis anderledes end klassiske imperative programmeringssprog. Dog ligger syntaksen for mange af funktionerne i dette program meget tæt op ad matematiske notationer, især grundet muligheden for nemt at kunne overskrive operatorer på egne typer. Netop det, at mange af funktionerne ligner de matematiske funktioner gør, at implementeringen af dem burde medføre en bedre forståelse af, hvorfor mange af de matematiske metoder, den studerende lærer at udføre i hånden, er korrekte. Dette inkluderer især matrixoperationer, og hvordan matrix-matrix produkt er bygget på matrix-vektor produkt, hvor vi har gennemgået en række funktioner, som ved implementering gennem funktionsprogrammering gavner forståelsen af at udføre matrix-matrix produkt i hånden. Sammenhængen mellem matematiske domæner og typerne i F\# gør, at man også kan forstå domæner fra et andet synspunkt, hvilket kan være med til at give en bedre forståelse herom.
+
+Når det kommer til selve programmet, er der også både nogle udvidelser og forbedringer, der kunne laves. Først og fremmest, matricemodulet kunne være bygget med følgende typer som vist i Listing \ref{lst:matrix_types_expr}.
+
+\begin{lstlisting}[language={FSharp}, label={lst:matrix_types_expr}, caption={Eksempel på alternative typer for matrixmodulet}]
+type Vector = V of list<Expr<Number>> * Order
+type Matrix = M of list<Vector> * Order
+\end{lstlisting}
+
+Dette ville ikke have betydet store ændringer i funktionerne for modulet uden at ændre på funktionaliteten. Desuden ville det have gjort det nemmere at implementere løsninger til et lineært ligningssystem.
+
+Modulet for komplekse tal kunne også have haft en polymorfisk type som vist i Listing \ref{lst:complex_type2}.
+
+\begin{lstlisting}[language={FSharp}, label={lst:complex_type2}, caption={Eksempel på alternative typer for komplekse tal modulet}]
+type Complex<'a, 'b> = C of 'a * 'b
+\end{lstlisting}
+
+Som ville medføre, at Number-typen ville blive:
+
+\begin{lstlisting}[language={FSharp}, label={lst:number_type2}, caption={Eksempel på alternative typer for Number-typen}]
+type Number = 
+  | Int of int 
+  | Rational of Rational 
+  | Complex of Complex<Number, Number>
+\end{lstlisting}
+
+Denne ændring ville selvfølgelig medføre, at Number ville blive en rekursivt defineret type, hvilket skulle håndteres ansvarligt.

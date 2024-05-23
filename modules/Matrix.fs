@@ -364,6 +364,12 @@ let rec stringMatrix m =
     let (M(vl, _)) = m
     List.map (fun x -> stringVector x) vl |> String.concat "\n"
     
+// bool on index
+let rec vectorElementIs (V(nl, o)) i b =
+    match nl with
+    | [] -> false
+    | x::_ when i = 0 -> b x
+    | _::xs -> vectorElementIs (V(xs, o)) (i - 1) b
 
 // Index of the first non zero element of a matrix
 let rec firstNonZeroIndexMatrix (M(m, o)) idx (r, c) = 
@@ -481,6 +487,22 @@ let rec isUpperTriangular (M(vl, o)) =
         | x::xs -> firstNonZeroIndex x = idx && iut xs (idx + 1)
     iut vl 0
 
+// is upper triangular matrix with diagonal elements of 1
+let rec isUpperTriangularDiagonal1 (M(vl, o)) = 
+    if not <| corectOrderCheck (M(vl, o)) R then isUpperTriangular (correctOrder (M(vl, o)) R)
+    else
+    let (D(_, m)) = dimMatrix (M(vl, o))
+    let rec iut vl idx =
+        match vl with
+        | [] -> true
+        | x::xs when idx >= m -> isZeroVector x && iut xs (idx + 1)
+        | x::xs -> 
+            let fnz = firstNonZeroIndex x
+            vectorElementIs x fnz isOne && 
+            fnz = idx && 
+            iut xs (idx + 1)
+    iut vl 0
+
 // rank of a matrix
 let rank m =
     let (D(r, c)) = dimMatrix m
@@ -549,16 +571,21 @@ let rec dontHaveZeroCols m =
 
 
 // Determines if a matrix has the same span as another matrix
-let hasSameSpan m1 m2 = 
-    let (D(r, c)) = dimMatrix m1
-    if (D(r, c)) <> dimMatrix m2 then failwith "Matrices must have the same dimension"
+let hasSameSpanGS mV mW = 
+    let (D(r, c)) = dimMatrix mV
+    if (D(r, c)) <> dimMatrix mW then failwith "Matrices must have the same dimension"
     else
     
-    let hSS m1 m2 =
-        let s1, s2 = extendMatrixWithMatrix m1 m2 |> rowEchelonForm |> splitMatrix C (c-1)
-        hasFullRank s1 && hasFullRank s2
+    let Phi m1 m2 = 
+        let s1, s2 = 
+            extendMatrixWithMatrix m1 m2 
+            |> rowEchelonForm 
+            |> splitMatrix C (c-1)
+        isUpperTriangularDiagonal1 s1 && isUpperTriangularDiagonal1 s2
+
+    Phi mV mW && Phi mW mV
     
-    hSS m1 m2 && hSS m2 m1
+
 
 
 

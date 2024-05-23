@@ -1,0 +1,504 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{convert_expression}{online}{}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labeltitlesource}{title}
+      \field{title}{Convert Infix expression to Postfix expression}
+      \field{urlday}{17}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/ convert-infix-expression-to-postfix-expression/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/%20convert-infix-expression-to-postfix-expression/
+      \endverb
+    \endentry
+    \entry{diff}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{Differentiation Rules}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Differentiation_rules
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Differentiation_rules
+      \endverb
+    \endentry
+    \entry{fpe}{online}{}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labeltitlesource}{title}
+      \field{title}{Floating-point error}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Floating-point_error_mitigation
+      \endverb
+    \endentry
+    \entry{fsharp}{online}{}
+      \field{sortinit}{f}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labeltitlesource}{title}
+      \field{title}{fsharp.org}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://fsharp.org/
+      \endverb
+      \verb{url}
+      \verb https://fsharp.org/
+      \endverb
+    \endentry
+    \entry{VLA}{book}{}
+      \name{author}{2}{}{%
+        {{hash=5fda3f0833c91ff123bace8d0aea484e}{%
+           family={Garcia},
+           familyi={G\bibinitperiod},
+           given={Stephan\bibnamedelima Ramon},
+           giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=472bb8160d835c69b57bcf72a2e976f2}{%
+           family={Horn},
+           familyi={H\bibinitperiod},
+           given={Roger\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{1a4d0387a9f138bc5d251c14c90c5bbd}
+      \strng{fullhash}{1a4d0387a9f138bc5d251c14c90c5bbd}
+      \strng{bibnamehash}{1a4d0387a9f138bc5d251c14c90c5bbd}
+      \strng{authorbibnamehash}{1a4d0387a9f138bc5d251c14c90c5bbd}
+      \strng{authornamehash}{1a4d0387a9f138bc5d251c14c90c5bbd}
+      \strng{authorfullhash}{1a4d0387a9f138bc5d251c14c90c5bbd}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781107103818}
+      \field{title}{A Second Course in Linear Algebra}
+      \field{year}{2017}
+    \endentry
+    \entry{github_repo}{online}{}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labeltitlesource}{title}
+      \field{title}{Github repository for the project}
+      \field{urlday}{24}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/Larsen00/funktionsprogrammeringForIndledendeMatematik
+      \endverb
+      \verb{url}
+      \verb https://github.com/Larsen00/funktionsprogrammeringForIndledendeMatematik
+      \endverb
+    \endentry
+    \entry{gcd}{online}{}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labeltitlesource}{title}
+      \field{title}{Greatest common divisor wikipedia}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Greatest_common_divisor
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Greatest_common_divisor
+      \endverb
+    \endentry
+    \entry{Inverse_function}{online}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{title}{Inverse function}
+      \field{urlday}{6}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Inverse_function
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Inverse_function
+      \endverb
+    \endentry
+    \entry{mat1b}{online}{}
+      \name{author}{1}{}{%
+        {{hash=6d18a27c701cb27bec7a538ea273a347}{%
+           family={Jakob\bibnamedelima Lemvig},
+           familyi={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Ole\bibnamedelima Christensen},
+           giveni={O\bibinitperiod\bibinitdelim C\bibinitperiod},
+           prefix={og},
+           prefixi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{fullhash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{bibnamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authorbibnamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authornamehash}{6d18a27c701cb27bec7a538ea273a347}
+      \strng{authorfullhash}{6d18a27c701cb27bec7a538ea273a347}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mathematics 1b - Functions of several variables}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
+      \endverb
+      \verb{url}
+      \verb https://01002.compute.dtu.dk/_assets/notesvol2.pdf
+      \endverb
+    \endentry
+    \entry{lambda}{online}{}
+      \field{sortinit}{l}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labeltitlesource}{title}
+      \field{title}{lambda calculus}
+      \field{urlday}{20}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Lambda_calculus
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Lambda_calculus
+      \endverb
+    \endentry
+    \entry{maple}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Maple}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.maplesoft.com/products/Maple/
+      \endverb
+      \verb{url}
+      \verb https://www.maplesoft.com/products/Maple/
+      \endverb
+    \endentry
+    \entry{mat1a}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Mathematics 1a}
+      \field{urlday}{9}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+      \verb{url}
+      \verb https://01001.compute.dtu.dk/_assets/enotesvol1.pdf
+      \endverb
+    \endentry
+    \entry{precedens_associativity}{online}{}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labeltitlesource}{title}
+      \field{title}{Operator Precedence and Associativity in C}
+      \field{urlday}{17}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/operator-precedence-and-associativity-in-c/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/operator-precedence-and-associativity-in-c/
+      \endverb
+    \endentry
+    \entry{ML_reason}{book}{}
+      \name{author}{1}{}{%
+        {{hash=3c148717c5f0355213ec4ed493cbd64e}{%
+           family={Paulson},
+           familyi={P\bibinitperiod},
+           given={Lawrence\bibnamedelima C.},
+           giveni={L\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{3c148717c5f0355213ec4ed493cbd64e}
+      \strng{fullhash}{3c148717c5f0355213ec4ed493cbd64e}
+      \strng{bibnamehash}{3c148717c5f0355213ec4ed493cbd64e}
+      \strng{authorbibnamehash}{3c148717c5f0355213ec4ed493cbd64e}
+      \strng{authornamehash}{3c148717c5f0355213ec4ed493cbd64e}
+      \strng{authorfullhash}{3c148717c5f0355213ec4ed493cbd64e}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0521422256}
+      \field{title}{ML for the Working Programmer}
+      \field{year}{1992}
+    \endentry
+    \entry{Polsk_notation}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Polsk notation wikipedia}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Polish_notation
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Polish_notation
+      \endverb
+    \endentry
+    \entry{list_comprehension}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Python - List Comprehension}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.w3schools.com/python/python_lists_comprehension.asp
+      \endverb
+      \verb{url}
+      \verb https://www.w3schools.com/python/python_lists_comprehension.asp
+      \endverb
+    \endentry
+    \entry{python_pop}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labeltitlesource}{title}
+      \field{title}{Python: The most popular language}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://datascientest.com/en/python-the-most-popular-language#:~:text=Python%20is%20also%20the%20most%20widely%20used%20language%20for%20Data,libraries%20and%20other%20numerical%20algorithms.
+      \endverb
+      \verb{url}
+      \verb https://datascientest.com/en/python-the-most-popular-language#:~:text=Python%20is%20also%20the%20most%20widely%20used%20language%20for%20Data,libraries%20and%20other%20numerical%20algorithms.
+      \endverb
+    \endentry
+    \entry{rank}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Rank (linear algebra)}
+      \field{urlday}{18}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Rank_(linear_algebra)#:~:text=The%20column%20rank%20of%20A,row%20rank%20are%20always%20equal.
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Rank_(linear_algebra)#:~:text=The%20column%20rank%20of%20A,row%20rank%20are%20always%20equal.
+      \endverb
+    \endentry
+    \entry{Rational_number}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Rational Number wikipedia}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Rational_number
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Rational_number
+      \endverb
+    \endentry
+    \entry{Referential_transparency}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Referential Transparency}
+      \field{urlday}{22}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Referential_transparency
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Referential_transparency
+      \endverb
+    \endentry
+    \entry{major_order}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Row- and column-major order}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Row-_and_column-major_order
+      \endverb
+    \endentry
+    \entry{ruby}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labeltitlesource}{title}
+      \field{title}{Ruby}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.ruby-lang.org/en/
+      \endverb
+      \verb{url}
+      \verb https://www.ruby-lang.org/en/
+      \endverb
+    \endentry
+    \entry{statista2023}{online}{}
+      \name{author}{1}{}{%
+        {{hash=62182ca58a739daa8ddd8a48b7b19abb}{%
+           family={Statista},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{fullhash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{bibnamehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{authorbibnamehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{authornamehash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \strng{authorfullhash}{62182ca58a739daa8ddd8a48b7b19abb}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Most used programming languages among developers worldwide as of 2023}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
+      \endverb
+      \verb{url}
+      \verb https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/
+      \endverb
+    \endentry
+    \entry{TDD}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Test-Driven Development}
+      \field{urlday}{31}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Test-driven_development
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Test-driven_development
+      \endverb
+    \endentry
+    \entry{tree_algo}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Tree Traversal Techniques – Data Structure and Algorithm Tutorials}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+      \endverb
+    \endentry
+    \entry{lambda_typed}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{Typed lambda calculus}
+      \field{urlday}{20}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Typed_lambda_calculus
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Typed_lambda_calculus
+      \endverb
+    \endentry
+    \entry{unit_test}{online}{}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labeltitlesource}{title}
+      \field{title}{Unit Testing}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/Unit_testing
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Unit_testing
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -466,7 +466,6 @@ Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal b
     \begin{gather}
         D = A^* A
     \end{gather}
-\end{theorem}
 \begin{proof}
     Fra definitionen af matrixprodukt \ref{def:matrix_matrix_pro} ved vi, at:
     \begin{gather}
@@ -516,42 +515,243 @@ Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal b
             \langle v_1, v_n \rangle & \langle v_2, v_n \rangle & \cdots & \langle v_n, v_n \rangle
         \end{bmatrix}
     \end{gather}
-    Derfor, hvis \( m > n \), så gælder det, at \( A^*A = D \), da hvis \( m < n \), ville $v_1, v_2 \cdots v_n$ ikke være lineært uafhængige vektorer.
+    Derfor, hvis \( m \geq n \), så gælder det, at \( A^*A = D \), da hvis \( m < n \), ville $v_1, v_2 \cdots v_n$ ikke være lineært uafhængige vektorer.
 \end{proof}
-
-Der udover skal vi også undersøge om spannet er det samme dette gøres ved at undersøge følgende:
-
-\vspace{0.5cm}
-\begin{theorem}
-    Lad $w_1, w_2, \ldots, w_n$ være de nye vektorer efter Gram-Schmidt processen på $v_1, v_2, \ldots, v_n$, som er lineært uafhængige. 
-    Vi vil undersøge om  $\text{span}(v_1, v_2, \ldots, v_n) = \text{span}(w_1, w_2, \ldots, w_n)$ 
-
-    Lad derfor $B$ være echelonformen af $A$. Så gælder det, at
-    \begin{gather}
-        \text{rank}(B_{1..n}) = \text{rank}(B_{n+1..2n}) = n,
-    \end{gather}
-    hvor 
-    \begin{gather}
-        A = 
-        \begin{bmatrix}
-            | & | &  & | & | & | &  & | \\
-            w_1 & w_2 & \cdots & w_n & v_1 & v_2 & \cdots & v_n \\
-            | & | &  & | & | & | &  & |
-        \end{bmatrix}
-    \end{gather}
-    og
-    \begin{gather}
-        A = 
-        \begin{bmatrix}
-            | & | &  & | & | & | &  & | \\
-            v_1 & v_2 & \cdots & v_n & w_1 & w_2 & \cdots & w_n \\
-            | & | &  & | & | & | &  & |
-        \end{bmatrix}.
-    \end{gather}
-    Da for $k = 1, 2, \ldots, n$ er $w_k$ udelukkende lineært afhængig af $v_1, v_2, \ldots, v_k$.
 \end{theorem}
 
-Funktionen \textcolor{red}{hasSameSpan} i Listing 
+Derudover skal vi også undersøge, om spannet før og efter Gram-Schmidt processen forbliver det samme. Dette gøres ved brug af sætning \ref{span_theorem}.
+
+\vspace{0.5cm}
+% \begin{theorem}
+%     Lad 
+%     \begin{gather*}
+%         W = [\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n], \quad \mathbf{w}_k \in \mathbb{F}^m \text{ for } k = 1, \ldots, n
+%     \end{gather*}
+%     hvor søjlerne af \( W \) er de resulterende vektorer efter at have udført Gram-Schmidt processen uden normalisering på 
+%     \begin{gather*}
+%         V = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n], \quad \mathbf{v}_k \in \mathbb{F}^m \text{ for } k = 1, \ldots, n.
+%     \end{gather*}
+%     Da gælder det, at \( \text{span}(V) = \text{span}(W) \). Dette kan undersøges ved at verificere, at
+    
+%     \[ \Phi([V \; W]) = [\Phi(V) \; \Phi(W)] \]
+%     og 
+%     \[\Theta([W \; V]) = [\Theta(W) \; \Theta(V)] \]
+
+%     Hvor $\Phi : \mathbb{F}^{m \times s} \to \mathbb{F}^{m \times s}$ er den afbildning, som bringer $V$ i Række-echelon form (ref), dvs.
+    
+%     \[
+%         \Phi(V) = 
+%         \begin{bmatrix}
+%             1 & \varphi_{1,2} & \varphi_{1,3} & \cdots \\
+%             0 & 1 & \varphi_{2,3} & \cdots \\
+%             0 & 0 & 1 & \cdots \\
+%             0 & 0 & 0 & \ddots\\
+%             \vdots & \vdots & \vdots  \\
+%             0 & 0 & 0 & 
+%         \end{bmatrix} \in \mathbb{F}^{m \times n}
+%     \]
+
+%     Samt $\Theta : \mathbb{F}^{m \times s} \to \mathbb{F}^{m \times s}$ er den afbildning, som bringer $W$ i Række-echelon form (ref).
+
+%     Medføre at $\Phi(W)$ og $\Theta(V)$ er en øvre trekantsmatrix med 1 taller i diagonalerne.
+% \end{theorem}
+% \begin{proof}
+%     Hvis \( W \subseteq V \), gælder det, at \(\text{span}(W) \subseteq \text{span}(V)\). Hvis derudover \( V \subseteq W \), så medfører det, at \(\text{span}(V) = \text{span}(W)\)\footcitetitle[Theorem 1.4.10 s. 25]{VLA}. 
+
+%     \( W \) tilhører \(\text{span}(V)\), hvis \( \mathbf{w}_k \) for \( k = 1, \ldots, n \) er en linearkombination af vektorerne i \( V \). Da \(\mathbf{w}_k\) er resultatet af Gram-Schmidt processen uden normalisering, gælder det, at 
+%     \[
+%     \mathbf{w}_1 = \mathbf{v}_1
+%     \]
+%     og 
+%     \[
+%     \mathbf{w}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} \text{proj}_{\mathbf{w}_j}(\mathbf{v}_k) = \mathbf{v}_k - \sum_{j=1}^{k-1} \frac{\langle \mathbf{v}_k, \mathbf{w}_j \rangle}{\langle \mathbf{w}_j, \mathbf{w}_j \rangle} \mathbf{w}_j \quad \text{for } k = 2, \ldots, n.
+%     \]
+%     Ved at anvende Gram-Schmidt processen på vektorerne i \( V \) fås:
+%     \[
+%     \begin{cases}
+%         \mathbf{w}_1 = \mathbf{v}_1, \\
+%         \mathbf{w}_2 = \mathbf{v}_2 - c_{2,1} \mathbf{w}_1 = \mathbf{v}_2 - c_{2,1} \mathbf{v}_1, \\
+%         \mathbf{w}_3 = \mathbf{v}_3 - (c_{3,2} \mathbf{w}_2 + c_{3,1} \mathbf{w}_1) = \mathbf{v}_3 - (c_{3,2} \mathbf{v}_2 + (c_{3,1} - c_{3,2} c_{2,1}) \mathbf{v}_1), \\
+%         \quad \vdots \\
+%     \end{cases}
+%     \]
+%     hvilket betyder, at \( W \) er en linearkombination af \( V \) på formen:
+%     \[
+%     \mathbf{w}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} \alpha_{k,j} \mathbf{v}_j, \quad k = 1, \ldots, n.
+%     \]
+    
+%     $\Phi$  udfører en serie af rækkeoperationer som og er derfor lineær i rækkerne. Dermed gælder det at:
+%     \[ \Phi(w_k) = \Phi(v_k - \sum_{j=1}^{k-1} \alpha_{k,j} v_j) = \Phi(v_k) - \sum_{j=1}^{k-1} \alpha_{k,j} \Phi(v_j), \quad k = 1, \ldots, n. \]
+%     Hvor 
+%     \[ \Phi(v_k) = 
+%         \begin{bmatrix}
+%             \varphi_{k, 1} \\
+%             \vdots \\
+%             \varphi_{k, k - 1} \\
+%             1 \\
+%             0 \\
+%             \vdots
+%         \end{bmatrix}, \quad
+%         \text{For} \quad k = 2 \ldots n \quad \text{og} \quad
+%         \Phi(v_1) =
+%         \begin{bmatrix}
+%             1 \\
+%             0 \\
+%             \vdots
+%         \end{bmatrix}
+%     \]
+%     Derudover da $\sum_{j=1}^{k-1} \alpha_{k,j} \Phi(v_j)$ er summen af skalerede søjler $1$ til $k-1$ i $\Phi(V)$, gælder det at 
+%     \[ \sum_{j=1}^{k-1} \alpha_{k,j} \Phi(v_j) = 
+%         \begin{bmatrix}
+%             \beta_{k, 1} \\
+%             \vdots \\
+%             \beta_{k, k - 1} \\
+%             0 \\
+%             \vdots
+%         \end{bmatrix}
+%     \]
+
+%     \[
+%     \Phi\left( \begin{bmatrix} V & W \end{bmatrix} \right) = 
+%         \begin{bmatrix}
+%             A \\ 
+%             B
+%         \end{bmatrix}
+%     \]
+%     Hvor $B \in M_{m-n, 2n}$ er en nulmatrix og 
+%     \[ A = 
+%     \begin{bmatrix}
+%         1 & \varphi_{1,2} & \varphi_{1,3} & \cdots & \varphi_{1,n} & 1 & \psi_{1,2} & \psi_{1,3} & \cdots & \psi_{1,n} \\
+%         0 & 1 & \varphi_{2,3} & \cdots & \varphi_{2,n} & 0 & 1 & \psi_{2,3} & \cdots & \psi_{2,n} \\
+%         0 & 0 & 1 & \cdots & \varphi_{3,n} & 0 & 0 & 1 & \cdots & \psi_{3,n} \\
+%         \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+%         0 & 0 & 0 & \cdots & 1 & 0 & 0 & 0 & \cdots & 1 \\ 
+%     \end{bmatrix}
+%     \]
+%     Da $A_{n+1.. 2n}$ danner en øvre trekantsmatrix, betyder det at $ W \subseteq V$ og dermed at $\text{span}(W) \subseteq \text{span}(V)$. Men yderemere eftersom $A_{n+1.. 2n}$ også har 1'ere i diagonalen, betyder det at vi kan bruge den samme serie af rækker operationer som bruges til at bringe $V$ i række-echelon form til at bringe $W$ i række-echelon form. Derfor gælder det at
+%     \[
+%     \Phi([W \; V]) = [\Phi(W) \; \Phi(V)]   
+%     \]
+%     Hvilket betyder at $V \subseteq W$ og dermed gælder det at $\text{span}(V) = \text{span}(W)$.   
+% \end{proof}
+
+\vspace{0.5cm}
+\begin{theorem}\label{span_theorem}
+    Lad 
+    \begin{gather*}
+        W = [\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n], \quad \mathbf{w}_k \in \mathbb{F}^m \text{ for } k = 1, \ldots, n
+    \end{gather*}
+    hvor søjlerne af \( W \) er de resulterende vektorer efter at have udført Gram-Schmidt processen uden normalisering på 
+    \begin{gather*}
+        V = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n], \quad \mathbf{v}_k \in \mathbb{F}^m \text{ for } k = 1, \ldots, n.
+    \end{gather*}
+    Da gælder det, at \( \text{span}(V) = \text{span}(W) \). Dette kan undersøges ved at verificere, at
+    
+    \[ \Phi([V \; W]) = [\Phi(V) \; \Phi(W)] \]
+    og 
+    \[\Theta([W \; V]) = [\Theta(W) \; \Theta(V)] \]
+
+    hvor \(\Phi : \mathbb{F}^{m \times s} \to \mathbb{F}^{m \times s}\) er den afbildning, som bringer \(V\) i række-echelon form, dvs.
+    
+    \[
+        \Phi(V) = 
+        \begin{bmatrix}
+            1 & \varphi_{1,2} & \varphi_{1,3} & \cdots \\
+            0 & 1 & \varphi_{2,3} & \cdots \\
+            0 & 0 & 1 & \cdots \\
+            0 & 0 & 0 & \ddots\\
+            \vdots & \vdots & \vdots  \\
+            0 & 0 & 0 & 
+        \end{bmatrix} \in \mathbb{F}^{m \times n}
+    \]
+
+    samt \(\Theta : \mathbb{F}^{m \times s} \to \mathbb{F}^{m \times s}\) er den afbildning, som bringer \(W\) i række-echelon form.
+
+    Dette medfører, at \(\Phi(W)\) og \(\Theta(V)\) er øvre trekantsmatricer med 1-taller i diagonalerne.
+\end{theorem}
+
+\begin{proof}
+    Hvis \( W \subseteq V \), gælder det, at \(\text{span}(W) \subseteq \text{span}(V)\). Hvis derudover \( V \subseteq W \), så medfører det, at \(\text{span}(V) = \text{span}(W)\)\footcitetitle[Theorem 1.4.10 s. 25]{VLA}. 
+
+    \( W \) tilhører \(\text{span}(V)\), hvis \( \mathbf{w}_k \) for \( k = 1, \ldots, n \) er en linearkombination af vektorerne i \( V \). Da \(\mathbf{w}_k\) er resultatet af Gram-Schmidt processen uden normalisering, gælder det, at 
+    \[
+    \mathbf{w}_1 = \mathbf{v}_1
+    \]
+    og 
+    \[
+    \mathbf{w}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} \text{proj}_{\mathbf{w}_j}(\mathbf{v}_k) = \mathbf{v}_k - \sum_{j=1}^{k-1} \frac{\langle \mathbf{v}_k, \mathbf{w}_j \rangle}{\langle \mathbf{w}_j, \mathbf{w}_j \rangle} \mathbf{w}_j \quad \text{for } k = 2, \ldots, n.
+    \]
+    Ved at anvende Gram-Schmidt processen på vektorerne i \( V \) fås:
+    \[
+    \begin{cases}
+        \mathbf{w}_1 = \mathbf{v}_1, \\
+        \mathbf{w}_2 = \mathbf{v}_2 - c_{2,1} \mathbf{w}_1 = \mathbf{v}_2 - c_{2,1} \mathbf{v}_1, \\
+        \mathbf{w}_3 = \mathbf{v}_3 - (c_{3,2} \mathbf{w}_2 + c_{3,1} \mathbf{w}_1) = \mathbf{v}_3 - (c_{3,2} \mathbf{v}_2 + (c_{3,1} - c_{3,2} c_{2,1}) \mathbf{v}_1), \\
+        \quad \vdots \\
+    \end{cases}
+    \]
+    hvilket betyder, at \( W \) er en linearkombination af \( V \) på formen:
+    \[
+    \mathbf{w}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} \alpha_{k,j} \mathbf{v}_j, \quad k = 1, \ldots, n.
+    \]
+    
+    \(\Phi\) udfører en serie af rækkeoperationer og er derfor lineær i rækkerne. Dermed gælder det, at:
+    \[ \Phi(\mathbf{w}_k) = \Phi(\mathbf{v}_k - \sum_{j=1}^{k-1} \alpha_{k,j} \mathbf{v}_j) = \Phi(\mathbf{v}_k) - \sum_{j=1}^{k-1} \alpha_{k,j} \Phi(\mathbf{v}_j), \quad k = 1, \ldots, n. \]
+    hvor 
+    \[ \Phi(\mathbf{v}_k) = 
+        \begin{bmatrix}
+            \varphi_{k, 1} \\
+            \vdots \\
+            \varphi_{k, k - 1} \\
+            1 \\
+            0 \\
+            \vdots
+        \end{bmatrix}, \quad
+        \text{for} \quad k = 2 \ldots n \quad \text{og} \quad
+        \Phi(\mathbf{v}_1) =
+        \begin{bmatrix}
+            1 \\
+            0 \\
+            \vdots
+        \end{bmatrix}
+    \]
+    Derudover, da \(\sum_{j=1}^{k-1} \alpha_{k,j} \Phi(\mathbf{v}_j)\) er summen af skalerede søjler 1 til \(k-1\) i \(\Phi(V)\), gælder det, at 
+    \[ \sum_{j=1}^{k-1} \alpha_{k,j} \Phi(\mathbf{v}_j) = 
+        \begin{bmatrix}
+            \beta_{k, 1} \\
+            \vdots \\
+            \beta_{k, k - 1} \\
+            0 \\
+            \vdots
+        \end{bmatrix}
+    \]
+
+    \[
+    \Phi\left( \begin{bmatrix} V & W \end{bmatrix} \right) = 
+        \begin{bmatrix}
+            A \\ 
+            B
+        \end{bmatrix}
+    \]
+    hvor \(B \in \mathbb{F}^{(m-n) \times 2n}\) er en nulmatrix og 
+    \[ A = 
+    \begin{bmatrix}
+        1 & \varphi_{1,2} & \varphi_{1,3} & \cdots & \varphi_{1,n} & 1 & \psi_{1,2} & \psi_{1,3} & \cdots & \psi_{1,n} \\
+        0 & 1 & \varphi_{2,3} & \cdots & \varphi_{2,n} & 0 & 1 & \psi_{2,3} & \cdots & \psi_{2,n} \\
+        0 & 0 & 1 & \cdots & \varphi_{3,n} & 0 & 0 & 1 & \cdots & \psi_{3,n} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1 & 0 & 0 & 0 & \cdots & 1 \\ 
+    \end{bmatrix}
+    \]
+    Da \(A_{n+1..2n}\) danner en øvre trekantsmatrix, betyder det, at \( W \subseteq V\) og dermed, at \(\text{span}(W) \subseteq \text{span}(V)\). Men ydermere, eftersom \(A_{n+1..2n}\) også har 1'ere i diagonalen, betyder det, at vi kan bruge den samme serie af rækkeoperationer, som bruges til at bringe \(V\) i række-echelon form, til at bringe \(W\) i række-echelon form. Derfor gælder det, at
+    \[
+    \Phi([W \; V]) = [\Phi(W) \; \Phi(V)]   
+    \]
+    Hvilket betyder, at \(V \subseteq W\) og dermed gælder det, at \(\text{span}(V) = \text{span}(W)\).   
+\end{proof}
+
+
+I beviset til sætning \ref{span_theorem} viste vi at man vil kunne bruge de samme række operationer til at bringe \(W\) og \(V\) i række-echelon form. Dog da vi ikke gemmer rækkeoperation i vores implamentation vil vi nøjes med at lave en funktion \textcolor{red}{hasSameSpanGS} i Listing \ref{same_span}, som undersøger om at \(\Phi(W)\) og \(\Theta(V)\) er øvre trekantsmatricer med 1-taller i diagonalerne. 
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -559,16 +759,19 @@ Funktionen \textcolor{red}{hasSameSpan} i Listing
     caption={Funktion til at undersøge om søjlerne i to matricer har samme span}
     ]
 // hasSameSpan : Matrix -> Matrix -> bool
-let hasSameSpan m1 m2 = 
-    let (D(r, c)) = dimMatrix m1
-    if (D(r, c)) <> dimMatrix m2 then failwith "Matrices must have the same dimension"
+let hasSameSpanGS mV mW = 
+    let (D(r, c)) = dimMatrix mV
+    if (D(r, c)) <> dimMatrix mW then failwith "Matrices must have the same dimension"
     else
     
-    let hSS m1 m2 =
-        let s1, s2 = extendMatrixWithMatrix m1 m2 |> rowEchelonForm |> splitMatrix C (c-1)
-        hasFullRank s1 && hasFullRank s2
-    
-    hSS m1 m2 && hSS m2 m1
+    let Phi m1 m2 = 
+        let s1, s2 = 
+            extendMatrixWithMatrix m1 m2 
+            |> rowEchelonForm 
+            |> splitMatrix C (c-1)
+        isUpperTriangularDiagonal1 s1 && isUpperTriangularDiagonal1 s2
+
+    Phi mV mW && Phi mW mV
 \end{lstlisting}
 
 Dermed kan vi opskrive en en PBT af Gram-Schmidt processen i Listing \ref{pbt_gram_schmidt}.
@@ -583,7 +786,7 @@ let gramSchmidtIsOrthogonal (m:independentBacisMatrix) =
     let res =
         try 
             let um = orthogonalBacis m
-            if  isOrthogonalBacis um && hasSameSpan m um then 
+            if  isOrthogonalBacis um && hasSameSpanGS m um then 
                 1 
             else 
                 0
@@ -614,7 +817,7 @@ Outputtet fra PBT af Gram-Schmidt processen kan ses i Listing \ref{output_gram_s
 Som nævnt i sektion \ref{sec:gram_schmidt} var der en slåfejl i Algorithm 9 for echelonform i noterne til "01001 Mathematics 1a"\footcitetitle{mat1a}. I forbindelse med at finde frem til denne fejl blev der lavet en PBT af echelonform af generatoren for lineært uafhængige vektorsæt. Egenskaben i \ref{eg:independtent} skal sikre, at både generatorens implementering er korrekt, og at funktionen til at finde echelonformen er det.
 
 \vspace{0.5cm}
-\begin{egenskab}
+\begin{egenskab}\label{eg:independtent}
     Lad \( A \) være en matrix, hvor søjlerne er lineært uafhængige. Da gælder det, at \( A \) har fuld rank.
 \end{egenskab}
 

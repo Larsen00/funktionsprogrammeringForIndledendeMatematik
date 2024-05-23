@@ -181,4 +181,5 @@ næste gang:
         +* link til github i forord
         +* fjek "jeg" fra diskussion og konklusion. 
         * der skal være et abstrakt.
+        * kunne være man skal beskrive gramschimidt processen
     

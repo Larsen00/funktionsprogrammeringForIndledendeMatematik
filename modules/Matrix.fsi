@@ -42,5 +42,5 @@ val extendMatrix : Matrix -> list<Number> -> Matrix
 val fullrankedDiagonalMatrix : int -> int -> Matrix
 val hasFullRank : Matrix -> bool
 val transposeMatrix : Matrix -> Matrix
-val hasSameSpan : Matrix -> Matrix -> bool
+val hasSameSpanGS : Matrix -> Matrix -> bool
 val conjugateMatrix : Matrix -> Matrix

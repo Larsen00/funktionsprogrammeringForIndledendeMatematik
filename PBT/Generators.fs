@@ -183,7 +183,7 @@ let gramSchmidtIsOrthogonal (m:independentBacisMatrix) =
     let res =
         try 
             let um = orthogonalBacis m
-            if  isOrthogonalBacis um && hasSameSpan m um then 1 else 0
+            if  isOrthogonalBacis um && hasSameSpanGS m um then 1 else 0
         with
             | :? System.DivideByZeroException as _ -> 2
             | :? System.OverflowException as _ -> 3

@@ -1,10 +1,10 @@
 
 \section{Fundamentale koncepter}
+F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på "typed lambda calculus"\footcitetitle{lambda_typed}. "Typed lambda calculus" er en udvidelse af "lambda calculus"\footcitetitle{lambda}, som er et matematisk system. Det giver et formelt fundament for at definere og manipulere funktioner.
+
 Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten. 
 
 \subsection{Introduktion til Funktions Programmering}
-F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, som bygger på "typed lambda calculus"\footcitetitle{lambda_typed}. "Typed lambda calculus" er en udvidelse af "lambda calculus"\footcitetitle{lambda}, som er et matematisk system. Det giver et formelt fundament for at definere og manipulere funktioner.
-
 Vi begynder med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
 
 \begin{equation}
@@ -16,7 +16,7 @@ Vi begynder med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
            \end{cases}
 \end{equation}
 
-Et eksempel på en implementering af Ligning \eqref{Fakultet} i F\# er givet i Listing \ref{lst:fsharp_factorial}.
+Et eksempel på en implementering af Ligning \eqref{Fakultet} i F\#, er givet i Listing \ref{lst:fsharp_factorial}.
 
 \begin{lstlisting}[language={FSharp}, label={lst:fsharp_factorial}, caption={Eksempel på Fakultet i F\#}]
 // Fakultet i F#
@@ -29,7 +29,7 @@ let rec factorial n =
 
 I F\# anvendes \textcolor{blue}{let} til at definere en ny variabel eller, i dette tilfælde, en funktion kaldet \textcolor{red}{factorial}. Næste nøgleord er \textcolor{blue}{rec}, hvilket indikerer, at funktionen er rekursiv. Funktionen tager et argument \(n\), og i linje 3 starter et match-udtryk. Her er \(n\) vores udtryk, og efter \textcolor{codepurple}{with} begynder en række mønstre. Med tilhørende udtryk, der svare til de tre tilfælde i Ligning \eqref{Fakultet}. 
     
-I F\#, er det som udgangspunkt ikke nødvendigt at anvende parenteser som i andre programmeringssprog. Derfor vil de kun blive anvendt, hvor det er passende gennem rapporten, typisk i sammenhænge med kædning af funktioner. For at undgå brugen af parenteser kan man i F\# benytte pipe-operatorerne, $|>$ og $<|$, som fører resultatet fra en udledning direkte ind i den næste funktion. Nedenstående eksempel viser tre ækvivalente udtryk, der demonstrerer anvendelsen af disse operatorer.
+I F\#, er det som udgangspunkt ikke nødvendigt at anvende parenteser, som det er i andre programmeringssprog. Derfor vil de kun blive anvendt, hvor det er passende gennem rapporten, typisk i sammenhænge med kædning af funktioner. For at undgå brugen af parenteser kan man i F\# benytte pipe-operatorerne, $|>$ og $<|$, som fører resultatet fra en udledning direkte ind i den næste funktion. Nedenstående eksempel viser tre ækvivalente udtryk, der demonstrerer anvendelsen af disse operatorer.
 
 \begin{lstlisting}[style=output, label={lst:pipe_operator}, caption={Eksempel på anvendelse af pipe-operatorer i F\# ved udregning af $(3!)! = 6! = 720 $.}]
 > factorial (factorial 3);;
@@ -114,10 +114,10 @@ Hvis en funktion kaldes med et argument, der ikke matcher funktionens type, gene
 \subsubsection{Induktivt definerede typer}
 I F\# defineres lister og træer induktivt ved brug af rekursive typer. Et eksempel på en rekursivt defineret type for et træ er givet i Listing \ref{lst:tree_ex}.
 
-\begin{lstlisting}[language={FSharp}, label={lst:tree_ex}, caption={Eksempel på en rekursivt defineret type for et træ i F\#}]
+\begin{lstlisting}[language={FSharp}, label={lst:tree_ex}, caption={Eksempel på en rekursivt defineret type for et binært træ i F\#}]
 type Tree = 
     | Leaf of int
-    | Node of Tree * Tree
+    | Node of int * Tree * Tree
 \end{lstlisting}
 
 Rekursive typer lagres som en værdi og ikke en datastruktur.
@@ -137,7 +137,7 @@ Vi kan også bruge PBT til at undersøge, om Formel \eqref{udsagnslogik} holder,
 \lstinputlisting[
     language=FSharp,
     label={valid1},
-    caption={PBT af Formel \eqref{udsagnslogik}. Begge sider skal være omgivet af parenteser, for at den er gyldig, da "$=$" har en højere præcedens end" $\&\&$"}]{exampleCodes/valid1.fsx}
+    caption={PBT af Formel \eqref{udsagnslogik}. Begge sider af "$\iff$" skal være omgivet af parenteser, for at den er gyldig, da i F\# har "$=$" en højere præcedens end "$\&\&$"}]{exampleCodes/valid1.fsx}
 
 
 \begin{lstlisting}[style=output, label={lst:output_example}, caption={Output ved PBT af (\ref{udsagnslogik})}]
@@ -145,10 +145,10 @@ Vi kan også bruge PBT til at undersøge, om Formel \eqref{udsagnslogik} holder,
 Ok, passed 100 tests.
 \end{lstlisting}
 
-"Check.Quick" er en del af "FsCheck"-biblioteket. Den tager en funktion som argument og genererer en række tilfældige input til funktionen baseret på funktionens type. Hvis funktionen returnerer "true" for alle input, vil testen lykkes. Hvis funktionen returnerer "false" for et input, vil testen fejle og give et eksempel på et input der fejlede. I Formel \ref{valid1} er "Check.Quick" anvendt til at teste, om Formel \eqref{udsagnslogik} er gyldig. Funktionen "Check.Quick" returnerer "Ok, passed 100 tests," hvilket indikerer, at (\ref{udsagnslogik}) er gyldig. Det er vigtigt at forstå, at dette ikke er det samme som at bevise, at Formel \eqref{udsagnslogik} er gyldig, da testen ikke garanterer, at alle muligheder er testet. Generelt vil der være flere kombinationer af argumenter til en funktion, end de 100 test cases som genereres.
+"Check.Quick" er en del af "FsCheck"-biblioteket. Den tager en funktion som argument og genererer en række tilfældige input til funktionen baseret på funktionens type. Hvis funktionen evalueres til "true" for alle input, vil testen lykkes. Hvis funktionen evalueres til "false" for et input, vil testen fejle og give et eksempel på et input der fejlede. I Formel \ref{valid1} er "Check.Quick" anvendt til at teste, om Formel \eqref{udsagnslogik} er gyldig. Funktionen "Check.Quick" returnerer "Ok, passed 100 tests," hvilket indikerer, at (\ref{udsagnslogik}) er gyldig. Det er vigtigt at forstå, at dette ikke er det samme som at bevise gyldigheden, da testen ikke garanterer, at alle muligheder er tjekket. Generelt vil der være flere kombinationer af argumenter til en funktion, end de standard 100 tilfælde som genereres.
 
 
-Vi kan også teste den ikke gyldige funktion \textcolor{red}{propositional\_formula\_invalid}, som vist i Listing \ref{output_invalid}, er den ikke gyldig og vi får givet et eksempel på en input kombination der fejlede.
+Vi kan også teste den ikke gyldige funktion \textcolor{red}{propositional\_formula\_invalid}. Som vist i Listing \ref{output_invalid}, er den ikke gyldig efter to forsøg. Derudover får vi givet et eksempel på en input kombination der fejlede.
 
 \begin{lstlisting}[style=output, label={output_invalid}, caption={Output ved PBT af \textcolor{red}{propositional\_formula\_invalid}}]
 > let _ = Check.Quick propositional_formula_invalid;;
@@ -164,13 +164,13 @@ I nogle tilfælde vil det være en fordel at opskrive en PBT før implementering
 
 
 \subsection{Overskrivning af operatorer}
-I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler. Et eksempel på overskrivning af operatorer er givet i næste sektion.
+I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler. Et eksempel på overskrivning af operatorer er givet i næste del-sektion.
 
 \subsection{Signaturfiler og implementeringsfiler}
-En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en tilhørende signaturfil med .fsi extension. Denne fil indeholder en beskrivelse af de typer og funktioner i implementeringsfilen, som er tilgængelige for andre filer. En signaturfil kan derfor bruges som en arbejdstegning for andre, der ønsker at anvende eller replicere implementeringsfilen. Til sidst er der scriptfiler med .fsx extension, som kan bruges til at køre F\# kode uden at skulle kompilere den.
+En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en tilhørende signaturfil med .fsi extension. Denne fil indeholder en beskrivelse af de typer og funktioner der befinder sig i implementeringsfilen, og er tilgængelige for andre filer. En signaturfil kan derfor bruges som en arbejdstegning for andre, der ønsker at anvende eller replicere implementeringsfilen. Til sidst er der scriptfiler med .fsx extension, som kan bruges til at køre F\# kode uden at skulle kompilere den.
 
 Som et eksempel på de forskellige filtyper kan vi se signaturfilen i Listing \ref{lst:signatur_implementation}.
-
+\newpage
 \lstinputlisting[language={FSharp}, label={lst:signatur_implementation}, caption={Eksempel på en signaturfil \textit{MyInt.fsi}}]{exampleCodes/MyInt.fsi}
 
 Ud fra signaturfilen kan vi se, at implementeringsfilen i Listing \ref{lst:MyInt_fs} indeholder en type \textit{MyInt}, hvor der er defineret overskrivning af operatorerne multiplication og subtraction. Derudover er der defineret en funktion \textcolor{red}{factorial}. 
@@ -190,11 +190,11 @@ I 720
 \end{lstlisting}
 
 \subsection{Ræsonnering omkring korrekthed}
-Ræsonnering omkring korrekthed i funktionel programmering indebærer flere begreber, der hjælper med at sikre, at programmer opfører sig som forventet. Et program "virker" først, når det er korrekt med hensyn til dets specifikationer\footcitetitle[Kapitel 6]{ML_reason}.
+Ræsonnering omkring korrekthed i funktionel programmering indebærer flere begreber, der hjælper med at sikre, at programmer opfører sig som forventet. Et program "virker" først, når det er korrekt med hensyn til dens specifikationer\footcitetitle[Kapitel 6]{ML_reason}.
 
-Funktionsprogrammering har \textbf{Referential Transparency}, hvilket betyder, at en funktion altid vil producere det samme output givet det samme input uden bivirkninger. Dette gør koden mere forudsigelig og lettere at teste, da udtryk kan erstattes af deres værdier uden at ændre programmets adfærd\footcitetitle{Referential_transparency}. \textbf{Lambda calculus} er blandt andet med til at give funktionsprogrammering "Referential Transparency".
+Funktionsprogrammering har \textbf{Referential Transparency}, hvilket betyder, at en funktioner altid vil producere det samme output givet det samme input uden bivirkninger. Dette gør koden mere forudsigelig og lettere at teste, da udtryk kan erstattes af deres værdier uden at ændre programmets adfærd\footcitetitle{Referential_transparency}. \textbf{Lambda calculus} er blandt andet med til at give funktionsprogrammering "Referential Transparency".
 
-F\# har et \textbf{stærkt typesystem}, som sikrer, at funktioner ikke kan kaldes med argumenter af forkerte typer. Dette bliver håndteret på kompileringstidspunktet og reducerer dermed mængden af køretidsfejl.
+F\# har et \textbf{stærkt typesystem} som sikrer, at funktioner ikke kan kaldes med argumenter af forkerte typer. Dette bliver håndteret på oversættelsestidspunktet og reducerer dermed mængden af køretidsfejl.
 
 \textbf{Induktivt definerede typer og rekursive funktioner} gør det muligt at bevise korrektheden af programmer ved hjælp af matematiske beviser. For eksempel kan rekursive funktioner bevises korrekte ved hjælp af induktionsbeviser\footcitetitle[Kapitel 6]{ML_reason}.
 

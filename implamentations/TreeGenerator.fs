@@ -89,14 +89,14 @@ let parenthesis b f =
 // Converts a expression tree to a infix string
 let rec etf e p =
     match e with
-    | N a when not <| isInt a -> parenthesis p <| toString a
+    | N a when not <| isInt a -> toString a |> parenthesis p
     | N a -> toString a
     | X a -> string a
-    | Neg a ->  parenthesis p <| "-" + etf a (not p) 
-    | Add(a, b) -> parenthesis p <| etf a false + "+" + etf b false
-    | Sub(a, b) -> parenthesis p <| etf a false + "-" + etf b true
-    | Mul(a, b) -> parenthesis p <| etf a true + "*" + etf b true
-    | Div(a, b) -> parenthesis p <| etf a true + "/" + etf b true
+    | Neg a ->  "-" + etf a (not p) |> parenthesis p
+    | Add(a, b) -> etf a false + "+" + etf b false |> parenthesis p
+    | Sub(a, b) -> etf a false + "-" + etf b true |> parenthesis p
+    | Mul(a, b) -> etf a true + "*" + etf b true |> parenthesis p
+    | Div(a, b) -> etf a true + "/" + etf b true |> parenthesis p
 
 // Converts a expression tree to a infix string
 let infixExpression e = etf e false

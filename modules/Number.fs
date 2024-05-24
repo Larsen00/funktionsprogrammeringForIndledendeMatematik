@@ -51,8 +51,7 @@ let rec tryReduce n =
     | Complex a when isReal a -> realPart a |> Rational |> tryReduce
     | Rational a when isInt a -> makeInt a |> Int
     | _ -> n
-
-    
+ 
 type Number with
     static member (+)  (a, b) = operation a b (+) |> tryReduce
     static member (-)  (a, b) = operation a b (-) |> tryReduce

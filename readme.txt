@@ -1,0 +1,1 @@
+For at bygge projektet kan man kører "dotnet build -c Release" i terminalen. 

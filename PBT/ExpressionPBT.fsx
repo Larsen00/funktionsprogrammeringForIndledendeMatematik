@@ -1,4 +1,4 @@
-#r "C:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/bin/Release/net7.0/main.dll"
+#r "../bin/Release/net7.0/main.dll"
 #r "nuget: FsCheck"
 open FsCheck
 open Expression

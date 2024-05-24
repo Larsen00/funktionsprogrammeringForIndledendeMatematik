@@ -1,11 +1,11 @@
 \section{Symbolske udtryk}
-Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktioner som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt reducere dem. Vi begrænset os selv til at kun have matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktioner som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt reducere dem. Vi begrænser os selv til at kun anvende matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
 Vi begynder med opbygningen af et modul, der kan repræsentere en talmængde. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal hvor real- og imaginærdelen er rationale. 
 
 \subsubsection{Rationelle tal modul}\label{sec:rational}
-Repræsentationen af rationale tal kan laves ved hjælp af at danne et par af heltal, hvor det ene heltal er tælleren, og det andet er nævneren.
+Repræsentationen af rationale tal kan laves ved hjælp af et heltals talpar. Hvor det ene heltal er tælleren, og det andet er nævneren.
 
 
 \begin{lstlisting}[language={FSharp}, 
@@ -13,7 +13,7 @@ Repræsentationen af rationale tal kan laves ved hjælp af at danne et par af he
     caption={Typen for rationelle tal}]
 type rational = R of int * int
 \end{lstlisting}
-Nedenfor er der givet en signaturfil for rational modulet \ref{rational_fsi}. I implementeringsfilen overskrives de matematiske operatorer ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}.
+Nedenfor er der givet en signaturfil for rational modulet Listing \ref{rational_fsi}. I implementeringsfilen overskrives de matematiske operatorer ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}.
 
 \lstinputlisting[
     language=FSharp,

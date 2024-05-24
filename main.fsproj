@@ -15,11 +15,11 @@
     <Compile Include="modules/Number.fs" />
     <Compile Include="modules/Expression.fsi" />
     <Compile Include="modules/Expression.fs" />
-    <Compile Include="implamentations/TreeGenerator.fs" /> 
-    <Compile Include="implamentations/Differentiation.fs" />
-    <Compile Include="implamentations/CommutativeAddSub.fs" />
-    <Compile Include="implamentations/CommutativeMulDiv.fs" />
-    <Compile Include="implamentations/SymbolicManipolation.fs" />
+    <Compile Include="implementations/TreeGenerator.fs" /> 
+    <Compile Include="implementations/Differentiation.fs" />
+    <Compile Include="implementations/CommutativeAddSub.fs" />
+    <Compile Include="implementations/CommutativeMulDiv.fs" />
+    <Compile Include="implementations/SymbolicManipolation.fs" />
     <Compile Include="modules/Matrix.fsi" />
     <Compile Include="modules/Matrix.fs" />
     <Compile Include="PBT/Generators.fs" />

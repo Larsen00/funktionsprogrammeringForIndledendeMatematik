@@ -8,7 +8,7 @@ let rec diff e dx =
     | X f when f = dx -> N (Int 1)
     | X _ -> N (Int 0)
     | N _ -> N (Int 0)
-    | Neg f -> diff (Mul (N (Int -1), f)) dx
+    | Neg f -> Neg (diff f dx)
     | Add(f, g) -> Add(diff f dx, diff g dx)
     | Sub(f, g) -> Sub(diff f dx, diff g dx)
     | Mul(f, g) -> Add(Mul(diff f dx, g), Mul(f, diff g dx))

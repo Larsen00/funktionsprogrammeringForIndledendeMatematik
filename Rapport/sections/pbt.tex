@@ -2,7 +2,7 @@
 Vi skal nu validere vores program ved hjælp af PBT, ved at lave funktioner, som kan undersøge de egenskaber der løbende er blevet beskrevet i rapporten. 
 
 \subsection{PBT af udtryk}
-Før vi begynder at udføre PBT på alle egenskaber vedrørende udtryk, skal vi først bygge en generator for vores talmængde og udtryk. Da vi ikke altid kan sammenligne, om to udtrykstræer er ækvivalente, vil vi i alle vores PBT, hvor vi ønsker at sammenligne træer, gøre dette ved brug af et miljø, som indeholder værdier for variablene, og derefter evaluere udtrykene ved brug af \textcolor{red}{eval}-funktionen.
+Før vi begynder at udføre PBT på alle egenskaberne vedrørende udtryk, skal vi først bygge en generator for vores talmængde og udtryk. Da vi ikke altid kan sammenligne, om to udtrykstræer er ækvivalente, vil vi i alle vores PBT, hvor vi ønsker at sammenligne træer, gøre dette ved brug af et miljø, som indeholder værdier for variablene, og derefter evaluere udtrykene ved brug af \textcolor{red}{eval}-funktionen.
 
 Vi begynder med at definere en række generatorer, som kan generere blade i vores udtrykstræer i Listing \ref{generator1}.
 
@@ -99,7 +99,7 @@ static member Number() =
         override _.Shrinker _ = Seq.empty}    
 \end{lstlisting}
 
-Vi begynder med at definere to variable, som alle funktioner har til rådighed, \texttt{max} og \texttt{min}, som definerer intervallet for de heltal, der kan anvendes i genereringen af Numbers. 
+Først defineres to variable, som alle funktioner har til rådighed, \texttt{max} og \texttt{min}, som sætter intervallet for de heltal, der kan anvendes i genereringen af Numbers. 
 Den første funktion, \textcolor{red}{noneZeroGen}, er en generator for et tilfældigt heltal fra sættet $S_1$:
 \begin{gather*}
     S_1 = \{ x \mid x \in \mathbb{Z} \setminus \{0\}, \quad \texttt{min} \leq x \leq \texttt{max} \}.
@@ -138,7 +138,7 @@ I \textcolor{red}{inverseMultiplicative} anvender vi "Prop.classify" til at till
 \begin{lstlisting}[
     style=output, 
     label={output:number}, 
-    caption={Outputtet fra PBT af Number typer, ved kørsel af Listing \ref{pbt:number}}
+    caption={Outputtet fra PBT af \texttt{Number} typer, ved kørsel af Listing \ref{pbt:number}}
     ]        
 Ok, passed 100 tests.
 Ok, passed 100 tests.
@@ -154,7 +154,7 @@ Dermed viser testen at alle egenskaberne fra \ref{egenskab:tal} holder.
 
 \subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
 
-Vi skal nu teste egenskaben fra \ref{prop:eval_homomorphism}. Testen er lavet i Listing \ref{pbt:eval_homomorphism}. Dette er gjort ved, at der genereres et tilfældigt miljø, hvori der samples to udtryk ud fra variablene i miljøet. For alle operatorer testes det, om de overholder egenskaben om homomorfisme.
+Vi skal nu teste egenskaben fra \ref{prop:eval_homomorphism}. Testen er lavet i Listing \ref{pbt:eval_homomorphism}. Dette er gjort ved, at der genereres et tilfældigt miljø, hvori der udstrækkes to udtryk ved brug af udtryks generatoren, hvori variablene er indeholdt i miljøet. For alle operatorer testes det, om de overholder egenskaben om homomorfisme.
 
 
 \begin{lstlisting}[

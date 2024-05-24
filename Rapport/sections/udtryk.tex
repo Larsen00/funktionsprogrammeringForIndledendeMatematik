@@ -88,18 +88,18 @@ Bortset fra division af to komplekse tal, ligner de resulterende overskrivninger
 
 
 \subsubsection{Tal modulet}
-Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er, at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type "Number" kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive valideret ved brug af PBT i sektion \ref{sec:PBT_number}.
+Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er, at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type \texttt{Number} kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive valideret ved brug af PBT i sektion \ref{sec:PBT_number}.
 
 \vspace{0.5cm}
-\begin{egenskab}[Egenskaber for Number-typen]\label{egenskab:tal}
-  Lad $a, b, c \in \text{Number}$, så gælder følgende\footcitetitle[se. Side 124 Definition 6.1]{mat1a}:
+\begin{egenskab}[Egenskaber for \texttt{Number}-typen]\label{egenskab:tal}
+  Lad $a, b, c \in \text{\texttt{Number}}$, så gælder følgende\footcitetitle[se. Side 124 Definition 6.1]{mat1a}:
   \begin{enumerate}
     \item Addition og multiplikation er \textbf{associative} \\ $a + (b + c) = (a + b) + c$ og $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
     \item Addition og multiplikation er \textbf{kommutative} \\ $a + b = b + a$ og $a \cdot b = b \cdot a$
     \item \textbf{Distributivitet} af multiplikation over addition \\ $a \cdot (b + c) = a \cdot b + a \cdot c$
     \item Addition og multiplikation har et \textbf{neutralt element} \\ $a + 0 = a$ og $a \cdot 1 = a$
     \item \textbf{Omvendt funktion} eksisterer til addition \\ $a + (-a) = 0$
-    \item \textbf{Omvendt funktion} eksisterer til multiplikation for $a \in \text{Number} \setminus \{0\}$ \\ $a \cdot a^{-1} = 1$
+    \item \textbf{Omvendt funktion} eksisterer til multiplikation for $a \in \text{\texttt{Number}} \setminus \{0\}$ \\ $a \cdot a^{-1} = 1$
 \end{enumerate}
 \end{egenskab}
   
@@ -109,20 +109,20 @@ Vi begynder med at definere typen for tal i Listing \ref{number_type}, som indeh
 \begin{lstlisting}[
     language={FSharp}, 
     label={number_type}, 
-    caption={Typen for Number}
+    caption={Typen for \texttt{\texttt{Number}}}
     ]
-    type Number = | Int of int | Rational of rational | Complex of complex
+    type \texttt{Number} = | Int of int | Rational of rational | Complex of complex
 \end{lstlisting}
 
-Typen Number er designet med henblik på, at den kan udvides med flere taltyper. Ved udvidelse er det et krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Den nye Number type skal derudover forsat opfylde egenskaberne \ref{egenskab:tal}. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
+Typen \texttt{Number} er designet med henblik på, at den kan udvides med flere taltyper. Ved udvidelse er det et krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Den nye \texttt{Number} type skal derudover forsat opfylde egenskaberne \ref{egenskab:tal}. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
 
 
-Betragtes signatur filen for Number modulet i Listing \ref{Number_fsi}, ses det at der igen er defineret overskrivning af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på Number typen. 
+Betragtes signatur filen for \texttt{Number} modulet i Listing \ref{Number_fsi}, ses det at der igen er defineret overskrivning af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på \texttt{Number} typen. 
 
 \lstinputlisting[
     language=FSharp,
     label={Number_fsi},
-    caption={Signatur filen for Number modulet}
+    caption={Signatur filen for \texttt{Number} modulet}
 ]{../modules/number.fsi}
 
 Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \textcolor{red}{operation} i Listing \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som argumenter. Funktionen konventere de to tal til vores komplekse tal type, hvortil den binære operation udføres på dem. 
@@ -368,7 +368,7 @@ type Expr<'a> =
     | Div of Expr<'a> * Expr<'a>
 \end{lstlisting}
 
-Expr\textless'a\textgreater{}  typen er dermed en polymorfisk type, hvor 'a er typen for den tal mængde hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en Expr\textless Number\textgreater{}  er givet i Listing \ref{lst:expr_example}. Her ses det at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres er det i prefix notation. 
+\texttt{Expr<'a>}  typen er dermed en polymorfisk type, hvor 'a er typen for den tal mængde hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en \texttt{Expr<Number>}  er givet i Listing \ref{lst:expr_example}. Her ses det at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres er det i prefix notation. 
 
 \begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen \textcolor{red}{tree} bliver beskrevet i \ref{sec:expression_generation}.}]
 > tree "-(3*x-5)*2";;
@@ -434,7 +434,7 @@ Derudover skal det om negation også gælde at:
 \end{egenskab}
 
 
-Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i Number modulet. 
+Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i \texttt{Number} modulet. 
 
 \begin{lstlisting}[
   language={FSharp}, 

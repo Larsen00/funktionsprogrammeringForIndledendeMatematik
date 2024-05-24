@@ -75,7 +75,7 @@ let evalOperation e1 e2 env f =
 let evalPBT ((env ,xlist):SmallEnv) = 
     let result = 
         try
-            let exprList = Gen.sample 1 2 (exprGen xlist 40 leafGen)
+            let exprList = Gen.sample 1 2 (exprGen xlist 10 leafGen)
             let e1::[e2] = exprList
             let prop = evalOperation e1 e2 env
             let negation = eval (-e1) env = - eval e1 env

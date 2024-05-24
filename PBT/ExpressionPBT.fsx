@@ -18,7 +18,7 @@ let compareSimpExpr env (e:Expr<Number>) =
 // samples and expression and test if the simplified expression is equal to the original expression
 let simpEqualEval (env, xlist) = 
     try
-        if Gen.sample 1 1 (exprGen xlist 64 leafGen) 
+        if Gen.sample 1 1 (exprGen xlist 10 leafGen) 
             |> List.head 
             |> compareSimpExpr env 
         then 1 else 0

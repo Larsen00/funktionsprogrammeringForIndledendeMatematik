@@ -1,20 +1,31 @@
-\section{Diskussion}
+\section{Konklusion}
+
 Vi begyndte rapporten med at informere læseren om, at Python er blevet indført som et hjælpemiddel i matematikkurserne på DTU. En af fordelene ved Python er, at det er et meget mere udbredt programmeringssprog, hvilket gør det nemmere at finde hjælp og vejledninger til opbygning af et program eller løsning af en opgave. Under 1\% af udviklere i 2023 anvender F\#, hvilket er markant mindre end de næsten 50\%, som bruger Python\footcitetitle{statista2023}. Derfor har det været en udfordring i udviklingen af dette program at finde vejledning på internettet til de problemstillinger, der er opstået undervejs.
 
-Derimod, eftersom F\# er et stærkt typet sprog, har det været markant nemmere at finde fejl i programmet inden det bliver kørt, hvilket er en af de store fordele ved F\# frem for Python. Python er dynamisk typet, hvilket tillader at kalde funktioner med argumenter uden at specificere, hvilken type argumentet skal have. Programmer virker derfor kun, hvis argumentet har de metoder, som funktionen forventer. Det medfører, at man ofte skal tjekke, om en metode er til stede på et objekt, hvilket vi ikke behøver i F\#. Derudover kan objekter få tilføjet metoder under kørslen, hvilket kan have sine fordele, men som udvikler medfører det flere problemstillinger, blandt andet at når et objekt ikke har den forventede metode, vil programmet først fejle under kørslen.
+Python er dynamisk-typet sprog, hvilket tillader at kalde funktioner med argumenter uden at specificere hvilken type argumentet skal have.
+Programmer virker derfor kun, hvis argumentet har de metoder, som funktionen forventer. Det medfører, at man ofte skal tjekke, om en metode er til stede på et objekt, hvilket vi ikke behøver i F\#.  Derudover kan objekter få tilføjet metoder under kørslen. Dette kan have sine fordele, men som udvikler medfører det flere problemstillinger, blandt andet at når et objekt ikke har den forventede metode, vil programmet først fejle under kørslen.
+Hvorimod F\# er et stærkt-typet sprog, har det været markant nemmere at opdage fejl i programmet inden det bliver kørt, hvilket er en af de store fordele ved F\# frem for Python. 
 
-Mangel på typer sammenlignet med F\# betyder også, at det tager længere tid og kræver flere kommentarer at forstå, hvad et program gør. Denne udfordring har man ikke med F\#, så længe funktionsnavnet er sigende for, hvad funktionen gør. Kombineret med at kunne se typen for funktionen, behøver man ofte ikke at læse selve koden for at forstå, hvad funktionen gør. Dette medfører, at man som udvikler kan være mere effektiv.
+Mangel på typer i Python, sammenlignet med F\# betyder også, at det tager længere tid og kræver flere kommentarer at forstå, hvad et program gør. Denne udfordring har man ikke med F\#, så længe funktionsnavnet er sigende for, hvad funktionen gør. Kombineret med at kunne se typen for funktionen, behøver man ofte ikke at læse selve koden for at forstå funktionens funktionalitet. Dette medfører, at man som udvikler kan være mere effektiv.
 
-Vedrørende syntaksen af F\# sammenlignet med Python, som er kendt for at have en mere læsbar syntaks, hvilket er en af årsagerne til, at det er et mere begyndervenligt sprog. Især da F\#'s syntaks er forholdsvis anderledes end klassiske imperative programmeringssprog. Dog ligger syntaksen for mange af funktionerne i dette program meget tæt op ad matematiske notationer, især grundet muligheden for nemt at kunne overskrive operatorer på egne typer. Netop det, at mange af funktionerne ligner de matematiske funktioner gør, at implementeringen af dem burde medføre en bedre forståelse af, hvorfor mange af de matematiske metoder, den studerende lærer at udføre i hånden, er korrekte. Dette inkluderer især matrixoperationer, og hvordan matrix-matrix produkt er bygget på matrix-vektor produkt, hvor vi har gennemgået en række funktioner, som ved implementering gennem funktionsprogrammering gavner forståelsen af at udføre matrix-matrix produkt i hånden. Sammenhængen mellem matematiske domæner og typerne i F\# gør, at man også kan forstå domæner fra et andet synspunkt, hvilket kan være med til at give en bedre forståelse herom.
+Python er kendt for at have en mere læsbar syntaks, som gør det til et mere begyndervenligt sprog at lære. F\#'s syntaks er forholdsvis anderledes end klassiske imperative programmeringssprog. Dog ligger syntaksen for mange af funktionerne i dette program meget tæt op ad matematiske notationer. Dette skyldes især muligheden for nemt at kunne overskrive operatorer på egne typer. Netop det, at mange at funktionerne ligner de matematiske funktioner gør, at implementeringen af dem burde medføre en bedre forståelse af, hvorfor mange af de matematiske metoder, den studerende lærer at udføre i hånden, er korrekte. Dette inkluderer især matrixoperationer, og hvordan matrix produkt er bygget på matrix-vektor produkt. Hertil har vi har gennemgået en række funktioner, som ved implementering gennem funktionsprogrammering gavner forståelsen af at udføre matrix produkt i hånden. Sammenhængen mellem matematiske domæner og typerne i F\# gør, at man også kan forstå domæner fra et andet synspunkt, hvilket kan være med til at give en bedre forståelse herom.
 
-Når det kommer til selve programmet, er der også både nogle udvidelser og forbedringer, der kunne laves. Først og fremmest, matricemodulet kunne være bygget med følgende typer som vist i Listing \ref{lst:matrix_types_expr}.
+Det primære fokuspunkt for rapporten er, at læseren skal opnå en bedre forståelse af matematiske koncepter gennem opbygning af et matematisk program ved hjælp af funktionsprogrammering. Flere almene studerende oplever, at rekursive funktioner generelt er et svært koncept, og derudover mangler nogle en forståelse for programdesign, for eksempel ved at genbruge kode frem for at ligge den i metoder. Ved at introducere de studerende til rekursivitet gennem et funktionelt programmeringssprog som F\#, bl.a. ved hjælp af matematiske koncepter, som de møder i kurserne "01001 Matematik 1a" og "01002 Matematik 1b", vil det gavne de studerendes forståelse af både matematikken og programmering. Derudover vil kendskabet til funktionsprogrammering forbedre de studerendes evne til at designe bedre programmer i andre sprog som Python.
+
+Selvom syntaksen for F\# kan være sværere at lære for nogle, er gevinsten ved at lære den markant. Implementeringen af dette program, fra hvordan man udfører operationer af komplekse tal til matrixmanipulation, vil gavne forståelsen af matematikken. De studerende vil forstå, hvorfor diverse funktioner virker, hvilket ikke altid er tilfældet i Python, hvor mange funktioner kan håndteres som en sort boks.
+
+Konklusionen er, at F\# måske ikke vil kunne erstatte Python i matematikkurserne på DTU, men det vil kunne være et godt supplement til at forbedre de studerendes forståelse af matematikken og programmering.
+
+
+\subsection{Fremtidige Forbedringer og Udvidelser}
+Når det kommer til selve programmet, er der nogle udvidelser og forbedringer, der kunne laves. Først og fremmest, matricemodulet kunne være bygget med følgende typer som vist i Listing \ref{lst:matrix_types_expr}.
 
 \begin{lstlisting}[language={FSharp}, label={lst:matrix_types_expr}, caption={Eksempel på alternative typer for matrixmodulet}]
 type Vector = V of list<Expr<Number>> * Order
 type Matrix = M of list<Vector> * Order
 \end{lstlisting}
 
-Dette ville ikke have betydet store ændringer i funktionerne for modulet uden at ændre på funktionaliteten. Desuden ville det have gjort det nemmere at implementere løsninger til et lineært ligningssystem.
+Dette ville ikke have betydet store ændringer i funktionerne for modulet uden at ændre på funktionaliteten. Desuden ville det have gjort det enklere at implementere løsninger til et lineært ligningssystem.
 
 Modulet for komplekse tal kunne også have haft en polymorfisk type som vist i Listing \ref{lst:complex_type2}.
 
@@ -22,7 +33,7 @@ Modulet for komplekse tal kunne også have haft en polymorfisk type som vist i L
 type Complex<'a, 'b> = C of 'a * 'b
 \end{lstlisting}
 
-Som ville medføre, at Number-typen ville blive:
+Dette ville medføre, at Number-typen ville blive:
 
 \begin{lstlisting}[language={FSharp}, label={lst:number_type2}, caption={Eksempel på alternative typer for Number-typen}]
 type Number = 
@@ -31,4 +42,8 @@ type Number =
   | Complex of Complex<Number, Number>
 \end{lstlisting}
 
-Denne ændring ville selvfølgelig medføre, at Number ville blive en rekursivt defineret type, hvilket skulle håndteres ansvarligt.
+Denne ændring ville selvfølgelig medføre, at \texttt{Number} ville blive en rekursivt defineret type, hvilket skulle håndteres ansvarligt.
+
+Generelt er programmet udviklet, med henblik på at kunne udvide det med flere tal typer samt matematiske operationer. Derudover er der som så ikke en grænse for implementeringer af nye funktioner, der bygger ovenpå og anvender programmet.
+
+

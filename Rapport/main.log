@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  24 MAY 2024 19:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  24 MAY 2024 21:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1077,7 +1077,8 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'danish'.
- (main.aux)
+
+No file main.aux.
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
@@ -1098,7 +1099,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+(C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count524
 \scratchdimen=\dimen340
@@ -1455,13 +1456,6 @@ LaTeX Warning: Reference `number_type' on page 16 undefined on input line 353.
 LaTeX Warning: Reference `sec:expression_as_trees' on page 16 undefined on input line 353.
 
 [16]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 371.
- (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
-File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 371.
-
 
 LaTeX Warning: Reference `lst:expr_example' on page 17 undefined on input line 371.
 
@@ -1623,20 +1617,20 @@ LaTeX Warning: Reference `vector_space_axioms' on page 26 undefined on input lin
 LaTeX Warning: Citation 'mat1a' on page 26 undefined on input line 65.
 
 
-LaTeX Warning: Reference `scale_matrix' on page 26 undefined on input line 84.
+LaTeX Warning: Reference `scale_matrix' on page 26 undefined on input line 83.
 
 
-LaTeX Warning: Citation 'list_comprehension' on page 26 undefined on input line 100.
+LaTeX Warning: Citation 'list_comprehension' on page 26 undefined on input line 99.
 
 [26]
 
-LaTeX Warning: Reference `add_matrix' on page 27 undefined on input line 131.
+LaTeX Warning: Reference `add_matrix' on page 27 undefined on input line 130.
 
 
-LaTeX Warning: Reference `sec:gram_schmidt' on page 27 undefined on input line 131.
+LaTeX Warning: Reference `sec:gram_schmidt' on page 27 undefined on input line 130.
 
 
-LaTeX Warning: Reference `sumRows' on page 27 undefined on input line 131.
+LaTeX Warning: Reference `sumRows' on page 27 undefined on input line 130.
 
 [27]
 
@@ -1652,17 +1646,17 @@ LaTeX Warning: Reference `matrix_vector_pro' on page 28 undefined on input line 
 LaTeX Warning: Reference `vecPro' on page 28 undefined on input line 238.
 
 
-LaTeX Warning: Citation 'mat1a' on page 28 undefined on input line 252.
+LaTeX Warning: Citation 'mat1a' on page 28 undefined on input line 251.
 
 [28]
 
-LaTeX Warning: Reference `def:matrix_matrix_pro' on page 29 undefined on input line 269.
+LaTeX Warning: Reference `def:matrix_matrix_pro' on page 29 undefined on input line 268.
 
 
-LaTeX Warning: Reference `pro_matrix' on page 29 undefined on input line 269.
+LaTeX Warning: Reference `pro_matrix' on page 29 undefined on input line 268.
 
 
-LaTeX Warning: Citation 'mat1b' on page 29 undefined on input line 285.
+LaTeX Warning: Citation 'mat1b' on page 29 undefined on input line 284.
 
 
 LaTeX Warning: Reference `def:proj' on page 29 undefined on input line 296.
@@ -1672,66 +1666,63 @@ LaTeX Warning: Reference `def:proj' on page 29 undefined on input line 296.
 LaTeX Warning: Reference `def:proj' on page 30 undefined on input line 323.
 
 
-LaTeX Warning: Reference `number_type' on page 30 undefined on input line 330.
+LaTeX Warning: Reference `number_type' on page 30 undefined on input line 331.
 
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 330.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 331.
 (C:\Users\jonas\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 330.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 331.
 
 
-LaTeX Warning: Reference `eg:gs' on page 30 undefined on input line 332.
+LaTeX Warning: Reference `eg:gs' on page 30 undefined on input line 350.
 
 
-LaTeX Warning: Reference `sec:pbt_gram_schmidt' on page 30 undefined on input line 332.
+LaTeX Warning: Reference `sec:pbt_gram_schmidt' on page 30 undefined on input line 350.
 
 
-Overfull \hbox (15.73872pt too wide) in paragraph at lines 335--337
-[]\OT1/cmr/m/it/10 Lad $\OML/cmm/m/it/10 w[]; w[]; [] ; w[]$ \OT1/cmr/m/it/10 v^^Zre de nye vek-to-re som er dan-nes ud-fra gram-schmidt pro-ces-sen p^^Wa $\OML/cmm/m/it/10 v[]; v[]; [] ; v[]$
+Overfull \hbox (22.91379pt too wide) in paragraph at lines 353--355
+[]\OT1/cmr/m/it/10 Lad $\OT1/cmr/bx/n/10 w[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 w[]\OML/cmm/m/it/10 ; [] ; \OT1/cmr/bx/n/10 w[]$ \OT1/cmr/m/it/10 v^^Zre de nye vek-to-rer som dan-nes ud fra Gram-Schmidt pro-ces-sen p^^Wa $\OT1/cmr/bx/n/10 v[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 v[]\OML/cmm/m/it/10 ; [] ; \OT1/cmr/bx/n/10 v[]$
  []
 
 [30]
 
-LaTeX Warning: Reference `gram_schmidt' on page 31 undefined on input line 375.
+LaTeX Warning: Reference `gram_schmidt' on page 31 undefined on input line 394.
 
 
-LaTeX Warning: Citation 'mat1b' on page 31 undefined on input line 375.
+LaTeX Warning: Citation 'mat1b' on page 31 undefined on input line 394.
 
 
-LaTeX Warning: Citation 'mat1a' on page 31 undefined on input line 384.
-
-
-LaTeX Warning: Reference `row_echelon' on page 31 undefined on input line 384.
+LaTeX Warning: Citation 'mat1a' on page 31 undefined on input line 403.
 
 [31]
 
-LaTeX Warning: Citation 'mat1a' on page 32 undefined on input line 420.
+LaTeX Warning: Reference `row_echelon' on page 32 undefined on input line 405.
 
 
-Overfull \hbox (1.95956pt too wide) in paragraph at lines 422--423
+LaTeX Warning: Citation 'mat1a' on page 32 undefined on input line 441.
+
+
+Overfull \hbox (1.95956pt too wide) in paragraph at lines 443--444
 []\OT1/cmr/m/n/10 Efter at ha-ve fo-re-ta-get r^^Zkke-echelon form p^^Wa to-tal-ma-tri-cen, skal vi ta-ge matrix-vektor-produktet
  []
 
 
-LaTeX Warning: Reference `expr_type' on page 32 undefined on input line 424.
+LaTeX Warning: Reference `expr_type' on page 32 undefined on input line 445.
 
 
-LaTeX Warning: Reference `expr_matric_type' on page 32 undefined on input line 424.
-
-
-LaTeX Warning: Reference `matrix' on page 32 undefined on input line 435.
-
-
-LaTeX Warning: Reference `vecPro' on page 32 undefined on input line 437.
-
-
-LaTeX Warning: Reference `lst:isolate' on page 32 undefined on input line 437.
+LaTeX Warning: Reference `expr_matric_type' on page 32 undefined on input line 445.
 
 [32]
 
-LaTeX Warning: Reference `sec:matrix.fs' on page 33 undefined on input line 439.
+LaTeX Warning: Reference `vecPro' on page 33 undefined on input line 458.
+
+
+LaTeX Warning: Reference `lst:isolate' on page 33 undefined on input line 458.
+
+
+LaTeX Warning: Reference `sec:matrix.fs' on page 33 undefined on input line 460.
 
 ) [33] [34
 
@@ -1982,11 +1973,11 @@ l.12 ....fs}]{../implamentations/TreeGenerator.fs}
 
  
 Here is how much of TeX's memory you used:
- 41124 strings out of 474457
- 759731 string characters out of 5742755
+ 41111 strings out of 474457
+ 759266 string characters out of 5742755
  2401190 words of memory out of 5000000
- 61606 multiletter control sequences out of 15000+600000
- 571565 words of font info for 87 fonts, out of 8000000 for 9000
+ 61595 multiletter control sequences out of 15000+600000
+ 572069 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,18n,134p,2333b,2305s stack positions out of 10000i,1000n,20000p,200000b,200000s
 sections/Appendiks.tex:12:  ==> Fatal error occurred, no output PDF file produced!

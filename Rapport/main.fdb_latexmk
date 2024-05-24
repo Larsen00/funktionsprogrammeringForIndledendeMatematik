@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1716572563.34996 -1
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1716579629.51918 -1
   "main.bcf" 0 -1 0 "pdflatex"
   "references.bib" 1716461246 5252 fdd71645f648ab1fd0b859de90a5c4aa ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1716572558.94939 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1716572563.35014 2
+["pdflatex"] 1716579623.50661 "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" "main.pdf" "main" 1716579629.51939 2
   "../PBT/diffPBT.fsx" 1715956451 1934 241ddc40f093c71a33da0fe0f2d3e103 ""
   "../PBT/numberPBT.fsx" 1715779819 1378 ca2adf91f8bb94bfc2e7e535930a586a ""
   "../modules/Expression.fsi" 1716572553 1116 838afe4831d95f08df4ba671b4f98316 ""
@@ -34,6 +34,7 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx9.tfm" 1136765053 1328 5442e22a7072966dbaf88ca900acf3f0 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbxti10.tfm" 1136765053 1532 9162035f4e7176612125649e348e2195 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmcsc10.tfm" 1136765053 1300 63a6111ee6274895728663cf4b4e7e81 ""
+  "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmitt10.tfm" 1136765053 768 2297ad2ac26f37e67f756dad27c77d68 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi6.tfm" 1136765053 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi8.tfm" 1136765053 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi9.tfm" 1136765053 1524 d89e2d087a9828407a196f428428ef4a ""
@@ -142,7 +143,6 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/base/atveryend-ltx.sty" 1705273579 2462 6bc53756156dbd71c1ad550d30a3b93f ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/base/ifthen.sty" 1705273578 5319 2b738d02ce36ada6dcdd9534940db0ee ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/base/inputenc.sty" 1705273578 5048 425739d70251273bf93e3d51f3c40048 ""
-  "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/base/omlcmr.fd" 1705273579 2470 ec0f30a4dee212b06d8724b94d7d4f9a ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/base/omscmr.fd" 1705273579 2469 74341109f164f230581718c66211c718 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/base/size10.clo" 1705273578 8448 dbc0dbf4156c0bb9ba01a1c685d3bad0 ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/biblatex/bbx/numeric.bbx" 1679055682 1818 9ed166ac0a9204a8ebe450ca09db5dde ""
@@ -255,7 +255,7 @@
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "C:/Users/jonas/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "Opsætning/DTULogo.png" 1709375398 71324 08d7a624ec2f9f1df696ed86b2d8893d ""
-  "Opsætning/Pakker.tex" 1716568064 9464 49e6ab89460505051a3a8f72224627e3 ""
+  "Opsætning/Pakker.tex" 1716579614 9464 27451579688c481963922b335f94e812 ""
   "Opsætning/forside.tex" 1716382480 2212 ed8ef7cec4cddeef699c6936b8178146 ""
   "Opsætning/overblik.png" 1716383172 42736 84d9c881e996a4148622cc4c521af856 ""
   "c:/Users/jonas/OneDrive - Danmarks Tekniske Universitet/DTU/Bachelorprojekt/main/Rapport/main.tex" 1716538124 3278 d6e1b8ea90023207aab844e40581a9d0 ""
@@ -263,19 +263,19 @@
   "exampleCodes/MyInt.fsi" 1716311749 177 a79149d783c0deb2d2696d406b1a2453 ""
   "exampleCodes/MyInt.fsx" 1716311743 109 c8b91c84639cc5b2364d8ed4c62ba2d9 ""
   "exampleCodes/valid1.fsx" 1716195856 255 2982925071af7af7da0fe93c44655bac ""
-  "main.aux" 1716572563 31935 cd4cc52a391bb8002c75577c78cb2c42 "pdflatex"
+  "main.aux" 1716579629 32093 c1c6011c44b82833950d6116073d6ccd "pdflatex"
   "main.bbl" 0 -1 0 "biber main"
   "main.tex" 1716538124 3278 d6e1b8ea90023207aab844e40581a9d0 ""
-  "main.toc" 1716572560 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.toc" 1716579626 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "sections/Appendiks.tex" 1715430900 971 7f4859c72c29bcc0abeebd804eae273d ""
   "sections/Fundamentale_koncepter.tex" 1716538124 15878 077733e013903eba2cc217da13ffa558 ""
   "sections/Introduction.tex" 1716289131 4240 82fe08f44a9fbeacde70e789c4247c15 ""
   "sections/diskussion.tex" 1716383017 4459 0d4395e10ebbe74918f415808b2fc778 ""
   "sections/forord.tex" 1716382480 729 ef756bf32f8de5dfb3ca914a7fdb1d32 ""
   "sections/konklusion.tex" 1716382989 1492 622b4bd7266b20e2688c57e3fa006d0e ""
-  "sections/pbt.tex" 1716476144 41069 cb5d9e7aa61bb9fe3faf5069d4a424cb ""
-  "sections/udtryk.tex" 1716568064 42658 db0a01fffbd94e3f2bca1d2f6db69142 ""
-  "sections/vektorer_og_matricer.tex" 1716568064 22164 d0ba5b253dff85c224a7e30cd57526bf ""
+  "sections/pbt.tex" 1716579614 41116 6c0ffe4e2bb472ebfe70ac235b3671f1 ""
+  "sections/udtryk.tex" 1716579614 42748 a1addcfe1e1fc25f43a24db48f23ed85 ""
+  "sections/vektorer_og_matricer.tex" 1716579614 23674 b2a8c41c1c90e9954bf2a9cda0820a29 ""
   (generated)
   "main.aux"
   "main.bcf"

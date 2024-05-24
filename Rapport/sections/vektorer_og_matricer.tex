@@ -9,7 +9,7 @@ Vi vil nu betragte opbyggelsen af et modul for vektorer og matricer. Eftersom en
 type Order = | R | C
 \end{lstlisting}
 
-Typen Order, anvendes til at angive, om en matrix er i rækkefølge (row-major) eller kolonnefølge (column-major)\footcitetitle{major_order}. En vektor, der er lagret i rækkefølge, kan betragtes som den transponeret kolonnefølge vektor. Vi kan derfor nu definere en type for matricer, ved hjælp af en type for vektore i Listing \ref{matrix}.
+Typen Order, anvendes til at angive, om en matrix er i rækkefølge (row-major) eller kolonnefølge (column-major)\footcitetitle{major_order}. En vektor, der er lagret i rækkefølge, kan betragtes som den transponeret kolonnefølge vektor. Vi kan derfor nu definere en type for matricer, ved hjælp af en type for vektorer i Listing \ref{matrix}.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -20,7 +20,7 @@ type Vector = V of list<Number> * Order
 type Matrix = M of list<Vector> * Order
 \end{lstlisting}
 
-Derudover er det en fordel at kunne kende dimissionen af en matrix. Derfor er der også defineret en type for dimissionen se Listing \ref{dim}.
+Derudover er det en fordel at kunne kende dimissionen af en matrix. Derfor er der også defineret en type for dimensionen se Listing \ref{dim}.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -33,14 +33,14 @@ type Dimension = D of int * int
 
 
 \subsection{Matrix operationer}
-Der vil i denne sektion beskrives en række funktioner som er nødvendige før vi kan betragte nogle funktion for anvendelse af matricer. Da modulet indeholder mange hjælpe funktioner, vil der fokuseres på de funktioner med matematisk relevans.
+Der vil i denne sektion beskrives en række funktioner som er nødvendige, før vi kan betragte nogle matematiske metoder som anvender matricer. Da modulet indeholder mange hjælpe funktioner, vil der fokuseres på de funktioner med matematisk relevans.
 
-Det muligt at definere en funktion til at finde dimissionen af en matrix se Listing \ref{dim_func}. Funktionen laver et kald til \textcolor{red}{matrixValidMajor} som genere en fejl hvis ikke alle vektorer og matrien har samme lagringsordning. \textcolor{red}{matrixVectorLength} finder længden på vektor listen en i matricen.
+Det muligt at definere en funktion til at finde dimensionen af en matrix se Listing \ref{dim_func}. Funktionen laver et kald til \textcolor{red}{matrixValidMajor} som genere en fejl hvis ikke alle vektorer og matrien har samme lagringsordning. \textcolor{red}{matrixVectorLength} finder længden på vektorlisten i en matricen.
 
 \begin{lstlisting}[
     language={FSharp}, 
     label={dim_func}, 
-    caption={Funktion til at finde dimissionen af en matrix}
+    caption={Funktion til at finde dimensionen af en matrix}
     ]
     // dimMatrix : Matrix -> Dimension
 let dimMatrix (M(vl, o)) =
@@ -54,31 +54,30 @@ let dimMatrix (M(vl, o)) =
     | C -> D (d2, d1)
 \end{lstlisting}
 
-Hvis en matrix er gemt som rækkefølge, vil antallet af rækker være længden af Number listen i en vektorene og antallet af kolonner være længden af vektor listen, og omvendt for kolonnefølge.
+Hvis en matrix er gemt som rækkefølge, vil antallet af rækker være længden af Numberlisten i vektorene og antallet af kolonner være længden af vektorlisten, og omvendt for kolonnefølge.
 
 \subsection{Matematiske operationer}
 I denne sektion bør det bemærkes, at flere listings ikke inkluderer fejlhåndtering; dette er udeladt for at forbedre læsbarheden. De funktioner, der anvendes i det implementerede modul, har passende fejltjek, herunder dimensionstjek på matricerne. Den fulde implementering med fejlhåndtering kan findes i appendiks \ref{sec:matrix.fs}.
 
-Før vi implementere funktioner til at udføre de ønskede matematiske operationer, vil vi først definere nogle egenskaber matricerne skal opfylde i egenskab \ref{vector_space_axioms}.
+Før vi implementerer funktioner til at udføre de ønskede matematiske operationer, vil vi først definere nogle egenskaber matricerne skal opfylde i egenskab \ref{vector_space_axioms}.
 \vspace{0.5cm}
 \begin{egenskab}[Vektor Aksiomer]\label{vector_space_axioms}
-    Lad $c, d \in$ Numbers og $v_i \in $ Vectors af dimension $n \times 1$ for $i = 1 \dots m$ så gælder:\footcitetitle[Theorem 7.2 s. 155]{mat1a}
+    Lad $c, d \in$ Numbers og $\mathbf{v}_i \in $ Vectors af dimension $n \times 1$ for $i = 1 \dots m$ så gælder:\footcitetitle[Theorem 7.2 s. 155]{mat1a}
     \begin{enumerate}
-        \item $(v_1 + \dots + v_{m-1}) + v_m = v_1 + (v_2 + \dots + v_m)$
+        \item $(\mathbf{v}_1 + \dots + \mathbf{v}_{m-1}) + \mathbf{v}_m = \mathbf{v}_1 + (\mathbf{v}_2 + \dots + \mathbf{v}_m)$
         \item $c \cdot \left(d \cdot \begin{bmatrix}
             | &        & | \\
-            v_{1} & \cdots & v_{m} \\
+            \mathbf{v}_{1} & \cdots & \mathbf{v}_{m} \\
             | &        & | \\
         \end{bmatrix}\right) = (c \cdot d) \cdot \begin{bmatrix}
             | &        & | \\
-            v_{1} & \cdots & v_{m} \\
+            \mathbf{v}_{1} & \cdots & \mathbf{v}_{m} \\
             | &        & | \\
         \end{bmatrix}$
         
-        \item $c \cdot (v_1 + \dots +v_m) = c \cdot v_1 + \dots +c \cdot v_m$
+        \item $c \cdot (\mathbf{v}_1 + \dots +\mathbf{v}_m) = c \cdot \mathbf{v}_1 + \dots + c \cdot \mathbf{v}_m$
     \end{enumerate}
 \end{egenskab}
-
 
 \subsubsection{Skalering af en matrix}
 Vi begynder med at betragte en funktion til at skalere en matrix se Listing \ref{scale_matrix}. 
@@ -97,7 +96,7 @@ let scalarMatrix (M (vl, o)) n =
     M ((List.map (fun x -> scalarVector n x) vl), o)
 \end{lstlisting}
 
-Det at skalere en matrice er svare til at skalere hvert element i matricen. Derfor ved at have en funktion \textcolor{red}{scalarVector}, der skalere hvert element i en givet vektor bliver \textcolor{red}{scalarMatrix} at skalere hver vektor i en givet matrice. List.\textcolor{red}{map} svare til at lave en list comprehension i Python\footcitetitle{list_comprehension}.
+Det at skalere en matrice er svarer til at skalere hvert element i matricen. Derfor ved at have en funktion \textcolor{red}{scalarVector}, der skalere hvert element i en givet vektor bliver \textcolor{red}{scalarMatrix} at skalere hver vektor i en givet matrice. List.\textcolor{red}{map} svare til at lave en list comprehension i Python\footcitetitle{list_comprehension}.
 
 
 \subsubsection{Addition af matricer}
@@ -146,7 +145,7 @@ Så gælder om \textcolor{red}{sumRows} at
 
 \[
 \textit{\textcolor{red}{sumRows}}(A) =
-v = \begin{bmatrix}
+\mathbf{v} = \begin{bmatrix}
 \sum_{j=1}^{n} a_{1j} \\
 \sum_{j=1}^{n} a_{2j} \\
 \vdots \\
@@ -154,7 +153,7 @@ v = \begin{bmatrix}
 \end{bmatrix}
 \]
 
-Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
+Dermed er $\mathbf{v_i} = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
 \end{definition}
 
 \subsubsection{Matrix produkt}
@@ -170,7 +169,7 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
     a_{m1} & a_{m2} & \cdots & a_{mn}
     \end{bmatrix}
     \]
-    og $v = (v_1, v_2, \ldots, v_n)^T$ være en vektor med $n$ elementer. Så er matrix-vektor $Av$ produktet defineret som
+    og $\mathbf{v} = (v_1, v_2, \ldots, v_n)^T$ være en vektor med $n$ elementer. Så er matrix-vektor $Av$ produktet defineret som
     \[
 \begin{bmatrix}
     a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -201,11 +200,11 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
 \end{definition}
 
 \begin{theorem}[Matrix-Vektor Produkt] \label{matrix_vector_pro}
-    Lad $A = [a_1\; a_2\; \hdots a_n]$ være en matrix med $m$ rækker og $n$ søjler, og lad $v$ være en vektor med $n$ elementer. Så gælder der
-    \[ Av = \textit{\textcolor{red}{sumRows}}
+    Lad $A = [\mathbf{a}_1\; \mathbf{a}_2\; \hdots \mathbf{a}_n]$ være en matrix med $m$ rækker og $n$ søjler, og lad $\mathbf{v}$ være en vektor med $n$ elementer. Så gælder der
+    \[ A\mathbf{v} = \textit{\textcolor{red}{sumRows}}
     \begin{bmatrix}
         | & | &        & | \\
-        a_{1}v_{1} & a_{2}v_{2} & \cdots & a_{n}v_{n} \\
+        \mathbf{a}_{1}v_{1} & \mathbf{a}_{2}v_{2} & \cdots & \mathbf{a}_{n}v_{n} \\
         | & | &        & | \\
     \end{bmatrix}
     \]
@@ -213,9 +212,10 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
 \begin{proof}
     Lad $B$ være resultatet af at skalere søjlerne i matrix $A$ med de tilsvarende elementer i vektoren $v$. Vi har
     \begin{alignat*}{2}
-    B &= \begin{bmatrix}
+    B &= 
+    \begin{bmatrix}
         | & | &        & | \\
-        a_{1}v_{1} & a_{2}v_{2} & \cdots & a_{n}v_{n} \\
+        \mathbf{a}_{1}v_{1} & \mathbf{a}_{2}v_{2} & \cdots & \mathbf{a}_{n}v_{n} \\
         | & | &        & | \\
     \end{bmatrix} \\
     &= \begin{bmatrix}
@@ -248,25 +248,24 @@ let rec matrixVectorProduct (M(vl, _)) (V(nl, _)) =
 \end{lstlisting}
 
 \begin{definition}[Matrix produkt]\label{def:matrix_matrix_pro}
-    Lad $A \in \mathbb{F}^{m \times n}$ og $B \in \mathbb{F}^{n \times \ell}$. Lad søjlerne i $B$ er være givet ved $b_1, \ldots, b_\ell \in \mathbb{F}^n$, dermed\footcitetitle[Definition 7.12
- s. 162]{mat1a}
+    Lad $A \in \mathbb{F}^{m \times n}$ og $B \in \mathbb{F}^{n \times \ell}$. Lad søjlerne i $B$ være givet ved $\mathbf{b}_1, \ldots, \mathbf{b}_\ell \in \mathbb{F}^n$, dermed\footcitetitle[Definition 7.12 s. 162]{mat1a}
     \[
         B = \begin{bmatrix}
-    | &  & | \\
-    b_1 & \cdots & b_\ell \\
-    | &  & | \\
-\end{bmatrix}.
-\]
-Så defineres matrixproduktet som
-\[
-    A \cdot B = \begin{bmatrix}
-        | &  & | \\
-        A \cdot b_1 & \cdots & A \cdot b_\ell \\
-        | &  & | \\
-    \end{bmatrix}.
+            | &  & | \\
+            \mathbf{b}_1 & \cdots & \mathbf{b}_\ell \\
+            | &  & | \\
+        \end{bmatrix}.
+    \]
+    Så defineres matrixproduktet som
+    \[
+        AB = \begin{bmatrix}
+            | &  & | \\
+            A \cdot \mathbf{b}_1 & \cdots & A \cdot \mathbf{b}_\ell \\
+            | &  & | \\
+        \end{bmatrix}.
     \]
 \end{definition}
-Ud fra definition \ref{def:matrix_matrix_pro} ses det, at funktionen \textcolor{red}{matrixProduct} i Listing \ref{pro_matrix} til at tage produktet af to matricer, ved at udfører matrix-vektor produkt på hver søjle i matricen. Da \textcolor{red}{matrixVectorProduct} evaluere til en matrix, skal der bruges en funktion til at konvertere matricen til en vektor, hvilket \textcolor{red}{matrixToVector} gør.
+Ud fra definition \ref{def:matrix_matrix_pro} ses det, at funktionen \textcolor{red}{matrixProduct} i Listing \ref{pro_matrix} til at tage produktet af to matricer. Funktionen opnår dette, ved at udfører matrix-vektor produkt på hver søjle i matricen. Da \textcolor{red}{matrixVectorProduct} evaluerer til en matrix, skal der bruges en funktion til at konvertere matricen til en vektor, hvilket \textcolor{red}{matrixToVector} gør.
 \begin{lstlisting}[
     language={FSharp}, 
     label={pro_matrix}, 
@@ -282,18 +281,19 @@ let rec matrixProduct a (M(vlb, _)) =
 \subsubsection{Projektion af en vektor}
 
 \begin{definition}[Projektion af en vektor]\label{def:proj}
-Projektionen af en vektor på en linje defineres i som følgende, hvor $Y = \text{span}\{y\}$\footcitetitle[s. 40]{mat1b}.
+Projektionen af en vektor på en linje defineres som følgende, hvor $Y = \text{span}\{\mathbf{y}\}$\footcitetitle[s. 40]{mat1b}.
 \begin{align}
-    \text{proj}_Y : V \rightarrow V, \quad \text{proj}_Y(x) = \frac{\langle x, y \rangle}{\langle y, y \rangle} y
+    \text{proj}_Y : V \rightarrow V, \quad \text{proj}_Y(\mathbf{x}) = \frac{\langle \mathbf{x}, \mathbf{y} \rangle}{\langle \mathbf{y}, \mathbf{y} \rangle} \mathbf{y}
 \end{align}
 hvor det standard indre produkt er defineret som:
 \begin{align}
-    \langle x, y \rangle = y^* x = \sum_{k=1}^{n} x_k \overline{y}_k
+    \langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{y}^* \mathbf{x} = \sum_{k=1}^{n} x_k \overline{y}_k
 \end{align}
 \end{definition}
+
     
 
-For at kunne projektere en vektor, som defineret i destination \ref{def:proj} skal vi først kunne konjugere en vektor. Funktionen \textcolor{red}{conjugateVector} konjugerer elementerne i en vektor. Derudover defineres en funktion til at multiplicere to vektorer elementvis (\textcolor{red}{vectorMulElementWise}).
+For at kunne projektere en vektor, som defineret i definition \ref{def:proj}, skal vi først kunne konjugere en vektor. Funktionen \textcolor{red}{conjugateVector} konjugerer elementerne i en vektor. Derudover defineres en funktion til at multiplicere to vektorer elementvis (\textcolor{red}{vectorMulElementWise}).
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -325,19 +325,38 @@ Til sidst kan funktionen \textcolor{red}{proj} skrives direkte som den er define
 
 
 \subsection{Gram-Schmidt}\label{sec:gram_schmidt}
-Vi kan nu betragte implementeringen af Gram-Schmidt processen. Denne proces kan anvendes rekursivt til at finde en ortonormal basis for et underrum udspændt af en liste af vektorer $v_1, v_2, \ldots, v_n$. Processen kan implementeres rekursivt idet de nye vektorer $w_k$ for $k = 2, 3, \ldots, n$ konstrueres baseret på alle de tidligere vektorer $w_1, \ldots, w_{k-1}$. 
+Vi kan nu betragte implementeringen af Gram-Schmidt processen. Denne proces kan anvendes rekursivt til at finde en ortonormal basis for et underrum udspændt af en liste af vektorer $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$. Processen kan implementeres rekursivt idet de nye vektorer $\mathbf{w}_k$ for $k = 2, 3, \ldots, n$ konstrueres baseret på alle de tidligere vektorer $\mathbf{w}_1, \ldots, \mathbf{w}_{k-1}$.
 
-Før vi implementerer Gram-Schmidt processen, er vi dog begrænset af vores Number type fra Listing \ref{number_type}, idet $x \in \text{\{Number\}} \centernot\implies \sqrt{x} \in \text{\{Number\}}$. Derfor vil vi ikke normalisere vektorerne, hvilket medfører, at vi kun vil finde en ortogonal basis, fremfor en ortonormal basis.
 
-Der er også 2 egenskaber \ref{eg:gs} som vi i sektion \ref{sec:pbt_gram_schmidt} vil teste for at sikre at vores implementering af Gram-Schmidt processen er korrekt.
+Før vi implementerer Gram-Schmidt processen, er vi dog begrænset af vores \texttt{Number} type fra Listing \ref{number_type}, idet $x \in \text{\{Number\}} \centernot\implies \sqrt{x} \in \text{\{Number\}}$. Derfor vil vi ikke normalisere vektorerne, hvilket medfører, at vi kun vil finde en ortogonal basis, fremfor en ortonormal basis. 
+
+\begin{definition}[Gram-Schmidt Proces]\label{def:gs}
+Givet en liste af lineært uafhængige vektorer $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$ i et indre produkt rum $V$. Målet med Gram-Schmidt proceduren er at generere en liste af ortogonale vektorer $\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n$, der udspænder det samme underrum. Processen er som følger:
+
+\vspace{0.5cm}
+\begin{enumerate}
+    \item \textbf{Initialisering}: Sæt $\mathbf{w}_1 = \mathbf{v}_1$.
+    
+    \item \textbf{Ortogonalisation}: For $k = 2, \ldots, n$ konstrueres $\mathbf{w}_k$ på følgende måde:
+        \[
+        \mathbf{w}_k := \mathbf{v}_k - \sum_{j=1}^{k-1} \text{proj}_{\mathbf{w}_j} (\mathbf{v}_k)
+        \]
+\end{enumerate}
+\end{definition}
+
+
+
+
+Om Gram-Schmidt processen er der egenskaberne \ref{eg:gs}, som vi i sektion \ref{sec:pbt_gram_schmidt} vil validere.
 \vspace{0.5cm}
 \begin{egenskab}[Gram-Schmidt]\label{eg:gs}
-    Lad $w_1, w_2, \ldots, w_n$ være de nye vektore som er dannes udfra gram-schmidt processen på $v_1, v_2, \ldots, v_n$ som er lineært uafhængige vektorer. Så gælder der:
+    Lad $\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n$ være de nye vektorer som dannes ud fra Gram-Schmidt processen på $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$ som er lineært uafhængige vektorer. Så gælder der:
     \begin{enumerate}
-        \item $w_1, w_2, \ldots, w_n$ er ortogonale.
-        \item $w_1, w_2, \ldots, w_n$ udspænder det samme underrum som $v_1, v_2, \ldots, v_n$. dvs. \\$\text{span}\{v_1, v_2, \ldots, v_n\} = \text{span}\{w_1, w_2, \ldots, w_n\}$.
+        \item $\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n$ er ortogonale.
+        \item $\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n$ udspænder det samme underrum som $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$. dvs. \\$\text{span}\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\} = \text{span}\{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n\}$.
     \end{enumerate}
 \end{egenskab}
+
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -374,14 +393,16 @@ let orthogonalBacis m =
 
 Listing \ref{gram_schmidt} viser implementeringen af Gram-Schmidt processen. Lavet udfra beskrivelse side 45 i 'Mathematics 1b'\footcitetitle[s. 45]{mat1b}.
 
-Funktionen \textcolor{red}{\texttt{sumProj}} tager en liste med vektorer \(w\), som i Gram-Schmidt-processen er de tidligere behandlede vektorer \(w_1, \ldots, w_{k-1}\), og en vektor \(v_k\) som er den \(k\)'te vektor. $v_k$ projiceres på alle vektorerne i \(w\), hvorefter der tages summen af disse projektioner.
+Funktionen \textcolor{red}{\texttt{sumProj}} tager en liste med vektorer \(w\), som i Gram-Schmidt-processen er de tidligere behandlede vektorer \(\mathbf{w_1}, \ldots, \mathbf{w_{k-1}}\), og en vektor \(v_k\) som er den \(k\)'te vektor. $\mathbf{v_k}$ projekteres på alle vektorerne i \(w\), hvorefter der tages summen af disse projektioner.
 
-Funktionen \textcolor{red}{Gram\_Schmidt}, tager en matrix hvor søjlerne er de vektore som ønskes at finde en ortogonal basis for. Der udover tager den en akkumulerende funktion som indeholder de behandlede vektorer. Hvis der ikke er flere vektorer i matricen, gives den akkumulerede funktion. Hvis der ikke er nogle vektorer i akkumulatoren, tages den første vektor fra matricen og tilføjes til akkumulatoren. Hvis der er vektorer i både akkumulatoren og matricen, kaldes \textcolor{red}{sumProj} på den akkumulerede liste og den første vektor i matricen. Resultatet trækkes fra den første vektor i matricen, og dette bliver den nye vektor som tilføjes til akkumulatoren. 
+Funktionen \textcolor{red}{Gram\_Schmidt}, tager en matrix hvor søjlerne er de vektorer som ønskes at finde en ortogonal basis for. Der udover tager den en akkumulerende funktion som indeholder de behandlede vektorer. Hvis der ikke er flere vektorer i matricen, gives den akkumulerede funktion. Hvis der ikke er nogle vektorer i akkumulatoren, tages den første vektor fra matricen og tilføjes til akkumulatoren. Hvis der er vektorer i både akkumulatoren og matricen, kaldes \textcolor{red}{sumProj} på den akkumulerede liste og den første vektor i matricen. Resultatet trækkes fra den første vektor i matricen, og dette bliver den nye vektor som tilføjes til akkumulatoren. 
 
 Funktionen \textcolor{red}{orthogonalBacis} tager en matrix og tjekker om matricen er i kolonnefølge, hvis ikke kalder funktionen sig selv, med den korrekte lagringsordning. Ellers kaldes \textcolor{red}{Gram\_Schmidt} med matricen og en tom akkumulator. Resultatet bliver derfor en matrix med en ortogonal basis for underrummet udspændt af de givne vektorer, givet at vektorerne er lineært uafhængige.
 
 \subsection{Række-echelon form}
-I forbindelse med udførelsen af PBT til Gram-Schmidt metoden vil vi blandt andet anvende række-echelon form til at sikre os, at et sæt af vektorer er lineært uafhængige. Derfor vil vi i denne sektion betragte implementeringen af række-echelon form, ud fra "Algorithm 9 for computing a row echelon form of a matrix" angivet på side 142 af noterne til "01001 Mathematics 1a"\footcitetitle[s. 142]{mat1a}. Efter at have udført PBT af Gram-Schmidt metoden, slog den i første omgang fejl, hvilket efter nærmere undersøgelse viste sig at være grundet en mindre fejl i Algorithm 9. Linje 14 burde være "b ← the j'th entry of the i-th row of B".  Listing \ref{row_echelon} viser implementeringen af række-echelon form, lavet ud fra psudokoden "Algorithm 9".
+I forbindelse med udførelsen af PBT til Gram-Schmidt metoden vil vi blandt andet anvende række-echelon form (ref) til at sikre os, at et sæt af vektorer er lineært uafhængige. Derfor vil vi i denne sektion betragte implementeringen af række-echelon form, ud fra "Algorithm 9 for computing a row echelon form of a matrix" angivet på side 142 af noterne til "01001 Mathematics 1a"\footcitetitle[s. 142]{mat1a}. 
+
+Efter at have udført PBT af Gram-Schmidt metoden, slog den i første omgang fejl, hvilket efter nærmere undersøgelse viste sig at være grundet en mindre fejl i "Algorithm 9". Linje 14 burde være "b ← the j'th entry of the i-th row of B".  Listing \ref{row_echelon} viser implementeringen af række-echelon form, lavet ud fra pseudokoden "Algorithm 9".
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -417,7 +438,7 @@ and rowOps coloumn i nrows R1 acc_m  =
 \end{lstlisting}
 
 \subsection{Lineært ligningssystem}\label{sec:lin_eq}
-Som den sidste del i anvendelsen af matricer vil vi beskrive, hvordan vi kan løse et lineært ligningssystem af formen \(A \mathbf{x} = \mathbf{b}\). Ved at foretage række-echelon form på totalmatricen \(\left[ A \mid \mathbf{b} \right]\) kan vi finde en løsning til ligningssystemet, hvis ranken af \(A\) er forskellig fra ranken af den totale matrix\footcitetitle[Corollary 6.27 s. 146]{mat1a}. 
+Som den sidste del i anvendelsen af matricer vil vi beskrive, hvordan vi kan løse et lineært ligningssystem af formen \(A \mathbf{x} = \mathbf{b}\). Ved at foretage række-echelon form på totalmatricen \(\left[ A \mid \mathbf{b} \right]\) kan vi finde en løsning til ligningssystemet, hvis rangen af \(A\) er forskellig fra rangen af den totale matrix\footcitetitle[Corollary 6.27 s. 146]{mat1a}. 
 
 Efter at have foretaget række-echelon form på totalmatricen, skal vi tage matrix-vektor-produktet af \(\text{ref}(A)\) og \(\mathbf{x}\) for at kunne have \(m\) ligninger med \(n\) ubekendte, hvis vi antager, at \(A \in \mathbb{F}^{m \times n}\).
 
@@ -432,11 +453,11 @@ type ExprVector = list<Expr<Number>>
 type ExprMatrix = list<ExprVector>
 \end{lstlisting}
 
-Det er her undladt at definere lagringsordningen for matricerne af udtryk, da vi ikke bruger dem til mere end en mellemregning i løsningen af ligningssystemet. Men alle funktioner, vi har lavet i Listing \ref{matrix}, ville man også kunne lave for udtryksmatricer, hvis man anvender en lagringsordning.
+Det er her undladt at definere lagringsordningen for matricerne af udtryk, da vi ikke bruger dem til mere end en mellemregning i løsningen af ligningssystemet. Men alle funktioner, vi har lavet i matrix modulet, ville man også kunne lave for udtryksmatricer, hvis man anvender en lagringsordning.
 
 Ved at have udtryksmatricer defineret som en liste af udtryk, kan vi anvende den samme teknik til at foretage matrix-vektor-produktet mellem \(\text{ref}(A)\) og \(\mathbf{x}\), som vi benyttede i Listing \ref{vecPro}. Dette vil resultere i en liste af udtryk, som vi ved hjælp af funktionen \textcolor{red}{isolateX} i Listing \ref{lst:isolate} kan bruge til at isolere \(x_i\) i den \(i\)'te ligning ved at sætte den lig med $b_i$ og indsætte det i ligningerne \(1\) til \(i - 1\).
 
-Den fulde implementering er at finde i appendiks \ref{sec:matrix.fs}. Det er værd at bemærke, at denne implementering vil resultere i en vektor af \texttt{Number}. Derfor vil den fejle, hvis der er flere ubekendte end ligninger, hvilket betyder, at koefficientmatricen $A$ skal have fuld rank.
+Den fulde implementering er at finde i appendiks \ref{sec:matrix.fs}. Det er værd at bemærke, at denne implementering vil resultere i en vektor af \texttt{Number}. Derfor vil den fejle, hvis der er flere ubekendte end ligninger, hvilket betyder, at koefficientmatricen $A$ skal have fuld rang.
 
 
 

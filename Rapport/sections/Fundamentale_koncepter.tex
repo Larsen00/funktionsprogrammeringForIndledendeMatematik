@@ -4,8 +4,8 @@ F\# er en del af ML (Meta Language) familien af funktionsprogrammeringssprog, so
 
 Det forventes, at læseren har kendskab til programmering. Der gives derfor kun en kort beskrivelse af syntaks og notation, så læsere, der ikke er bekendt med F\#, kan forstå de eksempler, der løbende vil forekomme i rapporten. 
 
-\subsection{Introduktion til Funktions Programmering}
-Vi begynder med at betragte funktionen for fakultet Ligning \eqref{Fakultet}.
+\subsection{Introduktion til Funktionsprogrammering}
+Vi begynder med at betragte funktionen for fakultet i Ligning \eqref{Fakultet}.
 
 \begin{equation}
     \label{Fakultet}
@@ -167,13 +167,13 @@ I nogle tilfælde vil det være en fordel at opskrive en PBT før implementering
 I F\# er det muligt at overskrive standardoperatorer, så de kan anvendes på egne typer. Denne teknik vil blive benyttet igennem rapporten til at definere matematiske operationer for de typer, vi udvikler. Et eksempel på overskrivning af operatorer er givet i næste del-sektion.
 
 \subsection{Signaturfiler og implementeringsfiler}
-En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en tilhørende signaturfil med .fsi extension. Denne fil indeholder en beskrivelse af de typer og funktioner der befinder sig i implementeringsfilen, og er tilgængelige for andre filer. En signaturfil kan derfor bruges som en arbejdstegning for andre, der ønsker at anvende eller replicere implementeringsfilen. Til sidst er der scriptfiler med .fsx extension, som kan bruges til at køre F\# kode uden at skulle kompilere den.
+En implementeringsfil i F\# er lavet med .fs extension. Implementeringsfilen kan have en tilhørende signaturfil med .fsi extension. Denne fil indeholder en beskrivelse af de typer og funktioner der befinder sig i implementeringsfilen, og er tilgængelige for andre filer. En signaturfil kan derfor bruges som en arbejdstegning for andre, der ønsker at anvende eller replikere implementeringsfilen. Til sidst er der scriptfiler med .fsx extension, som kan bruges til at køre F\# kode uden at skulle kompilere den.
 
 Som et eksempel på de forskellige filtyper kan vi se signaturfilen i Listing \ref{lst:signatur_implementation}.
 \newpage
 \lstinputlisting[language={FSharp}, label={lst:signatur_implementation}, caption={Eksempel på en signaturfil \textit{MyInt.fsi}}]{exampleCodes/MyInt.fsi}
 
-Ud fra signaturfilen kan vi se, at implementeringsfilen i Listing \ref{lst:MyInt_fs} indeholder en type \textit{MyInt}, hvor der er defineret overskrivning af operatorerne multiplication og subtraction. Derudover er der defineret en funktion \textcolor{red}{factorial}. 
+Ud fra signaturfilen kan vi se, at implementeringsfilen i Listing \ref{lst:MyInt_fs} indeholder en type \textit{MyInt}, hvor der er defineret overskrivning af operatorerne multiplikation og subtraktion. Derudover er der defineret en funktion \textcolor{red}{factorial}. 
 
 \lstinputlisting[language={FSharp}, label={lst:MyInt_fs}, caption={Eksempel på en implementeringsfil \textit{MyInt.fs}}]{exampleCodes/MyInt.fs}
 
@@ -190,9 +190,9 @@ I 720
 \end{lstlisting}
 
 \subsection{Ræsonnering omkring korrekthed}
-Ræsonnering omkring korrekthed i funktionel programmering indebærer flere begreber, der hjælper med at sikre, at programmer opfører sig som forventet. Et program "virker" først, når det er korrekt med hensyn til dens specifikationer\footcitetitle[Kapitel 6]{ML_reason}.
+Ræsonnering omkring korrekthed i funktionel programmering indebærer flere begreber, der hjælper med at sikre, at programmer opfører sig som forventet. Et program "virker" først, når det er korrekt med hensyn til dets specifikationer\footcitetitle[Kapitel 6]{ML_reason}.
 
-Funktionsprogrammering har \textbf{Referential Transparency}, hvilket betyder, at en funktioner altid vil producere det samme output givet det samme input uden bivirkninger. Dette gør koden mere forudsigelig og lettere at teste, da udtryk kan erstattes af deres værdier uden at ændre programmets adfærd\footcitetitle{Referential_transparency}. \textbf{Lambda calculus} er blandt andet med til at give funktionsprogrammering "Referential Transparency".
+Funktionsprogrammering har \textbf{Referential Transparency}, hvilket betyder, at en funktion altid vil producere det samme output givet det samme input uden bivirkninger. Dette gør koden mere forudsigelig og lettere at teste, da udtryk kan erstattes af deres værdier uden at ændre programmets adfærd\footcitetitle{Referential_transparency}. \textbf{Lambda calculus} er blandt andet med til at give funktionsprogrammering "Referential Transparency".
 
 F\# har et \textbf{stærkt typesystem} som sikrer, at funktioner ikke kan kaldes med argumenter af forkerte typer. Dette bliver håndteret på oversættelsestidspunktet og reducerer dermed mængden af køretidsfejl.
 

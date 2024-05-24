@@ -1,26 +1,25 @@
 \section{Symbolske udtryk}
-Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktioner som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun float og int som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her at gennemgå en opbygning af en måde at kunne repræsentere udtryk samt reducere dem. Vi begrænser os selv til at kun anvende matematiske operationer som addition, subtraktion, negation, multiplikation og division.
+Det ønskes at kunne repræsentere simple udtryk som en type i F\#. Vi skal derfor gennemgå en del teori og funktioner som er nødvendige for at kunne dette. Det vil give os et grundlæggende fundament for at kunne udføre matematiske evalueringer som differentiering i F\#. Som de fleste andre programmer har F\# kun \texttt{float} og \texttt{int} som kan repræsentere tal. Derfor vil vi begynde med at definere et modul som indeholder en type for tal. Tankegangen her, er at gennemgå en opbygning af en repræsentation af udtryk, samt at kunne reducere dem. Vi begrænser os selv til at kun anvende matematiske operationer som addition, subtraktion, negation, multiplikation og division.
 
 \subsection{Tal mængder}
 Vi begynder med opbygningen af et modul, der kan repræsentere en talmængde. Typen for tal består af tre konstruktører, henholdsvis for heltal, rationale tal og komplekse tal hvor real- og imaginærdelen er rationale. 
 
-\subsubsection{Rationelle tal modul}\label{sec:rational}
+\subsubsection{Rationale tal modul}\label{sec:rational}
 Repræsentationen af rationale tal kan laves ved hjælp af et heltals talpar. Hvor det ene heltal er tælleren, og det andet er nævneren.
-
 
 \begin{lstlisting}[language={FSharp}, 
     label={type_rationel},
-    caption={Typen for rationelle tal}]
+    caption={Typen for rationale tal}]
 type rational = R of int * int
 \end{lstlisting}
-Nedenfor er der givet en signaturfil for rational modulet Listing \ref{rational_fsi}. I implementeringsfilen overskrives de matematiske operatorer ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}.
+Nedenfor er der givet en signaturfil for \texttt{rational} modulet Listing \ref{rational_fsi}. I implementeringsfilen overskrives de matematiske operatorer ved hjælp af de klassiske regneregler for brøker\footcitetitle{Rational_number}.
 
 \lstinputlisting[
     language=FSharp,
     label={rational_fsi},
     caption={Signaturfilen for rational-modulet}
 ]{../modules/rational.fsi}
-For at kunne sammenligne og også for nemmere at undgå for store brøker, vil alle rationelle tal blive reduceret til deres simplest form. Dette gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Derudover er det vigtigt at være opmærksom på ikke at foretage nul division. Derfor vil implementeringsfilen kaste en "System.DivideByZeroException", hvis nævneren er eller bliver nul. Signaturfilen indeholder en række funktioner, som anvendes af andre filer. Det vil desuden være nødvendigt at kunne håndtere overflow. Idet heltallene der repræsenterer de rationelle tal, under eller efter operationen kan blive for store til korrekt at blive repræsenteret af 32-bit. Da denne rapport fokuserer på implementeringen af matematiske koncepters og ikke numeriske algoritmer, vil modulet blot slå en fejl, hvis der opstår overflow.
+For at kunne sammenligne, samt for nemmere at undgå for store brøker, vil alle rationale tal blive reduceret til deres simpleste form. Dette gøres ved at finde den største fælles divisor (GCD) \footcitetitle{gcd}. Derudover er det vigtigt at være opmærksom på ikke at foretage nul division. Derfor vil implementeringsfilen kaste en "System.DivideByZeroException", hvis nævneren er eller bliver nul. Signaturfilen indeholder en række funktioner, som anvendes af andre filer. Det vil desuden være nødvendigt at kunne håndtere overflow. Idet heltallene, der repræsenterer de rationale tal, under eller efter operationen kan blive for store til korrekt at blive repræsenteret af 32-bit. Da denne rapport fokuserer på implementeringen af matematiske koncepter og ikke numeriske algoritmer, vil modulet blot slå en fejl, hvis der opstår overflow.
  
 
 
@@ -38,7 +37,7 @@ type complex = C of rational * rational
 Der kan opskrives en række regneregler i Definition \ref{def:complex} for operationer på komplekse tal. 
 \vspace{0.5cm}
 \begin{definition}[Regneregler for komplekse tal]\label{def:complex}
-  Lad $a, b, c, d \in \mathbb{Q}$ så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
+  Lad $a, b, c, d \in \mathbb{Q}$, så er følgende defineret omkring komplekse tal\footcitetitle[se. Definition 3.3 s. 54, Definition 3.5 s. 56, Definition 3.8 s. 57, ligning 3-2 s. 58]{mat1a}:
   \begin{enumerate}
     \item \textbf{Addition} \\ $(a + bi) + (c + di) = (a + c) + (b + d)i$
     \item \textbf{Subtraktion} \\ $(a + bi) - (c + di) = (a - c) + (b - d)i$
@@ -49,8 +48,7 @@ Der kan opskrives en række regneregler i Definition \ref{def:complex} for opera
   \end{enumerate}
 \end{definition}
 
-Ved implementeringen, se Listing \ref{complex_operations}, af addition, subtraktion, multiplikation samt skalering med et rationelt tal. Skaleringen af et rationelt tal, kan udledes fra multiplikation, ved at lade den imaginære del være $0$. Disse er simple operationer, som ikke behøver at defineres i særskilte funktioner. De kan defineres direkte på overskrivningen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion, da den skal anvendes af divisionsfunktionen. 
-
+For implementeringen af addition, subtraktion, multiplikation samt skalering med et rationelt tal, se Listing \ref{complex_operations}. Skaleringen af et rationelt tal, kan udledes fra multiplikation, ved at lade den imaginære del være $0$. Er det simple operationer, som ikke behøver at defineres i særskilte funktioner. De kan defineres direkte på overskrivningen af deres respektive operatorer. Dog er det nødvendigt at definere multiplikation som en funktion, da den skal anvendes af divisionsfunktionen. 
 \begin{lstlisting}[language={FSharp}, 
     label={complex_operations},
     caption={Overskrivning af operationer på komplekse tal}]
@@ -84,11 +82,11 @@ type complex with
     static member (~-) (C(a, b))          =  C(-a, -b)
 \end{lstlisting}    
 
-Bortset fra division af to komplekse tal, ligner de resulterende overskrivninger på operationerne deres respektive matematiske definitioner. Men når vi nærmere studerer divisionen af to komplekse tal, ser vi, at der blot er brug for få funktioner til at kunne udføre divisionen. Først konjugeres nævneren, derefter multiplikeres resultatet med tælleren. Til sidst divideres resultatet af multiplikationen med kvadratet af nævneren. Da komplekse tal som en talmængde indeholder heltal og rationale tal, vil vi i det følgende afsnit omkring tal modulet anvende komplekse tal til udføre de matematiske operationer i modulet.
+Bortset fra division af to komplekse tal, ligner de resulterende overskrivninger på operationerne deres respektive matematiske definitioner. Men når vi nærmere studerer divisionen af to komplekse tal, ser vi, at der blot er brug for få funktioner til at kunne udføre divisionen. Først konjugeres nævneren, derefter multiplikeres resultatet med tælleren. Til sidst divideres resultatet af multiplikationen med kvadratet af nævneren. Da komplekse tal som en talmængde indeholder heltal og rationale tal, vil vi i det følgende afsnit omkring tal-modulet anvende komplekse tal til udføre de matematiske operationer i modulet.
 
 
-\subsubsection{Tal modulet}
-Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal vi ønsker at kunne anvende i de matematiske udtryk vi er ved at opbygge. Fordelen ved at samle dem til en type er, at vi kan lave en række funktioner blandt andet matematiske operationer som kan anvendes på alle type tal. Ved at samle dem til en type \texttt{Number} kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive valideret ved brug af PBT i sektion \ref{sec:PBT_number}.
+\subsubsection{Tal-modulet}
+Vi har nu beskrevet en måde at kunne repræsentere brugerdefinerede tal på ved brug af typer i F\#. Det vil derfor være oplagt at have en type som indeholder alle de typer tal, vi ønsker at kunne anvende i de matematiske udtryk, vi er ved at opbygge. Fordelen ved at samle dem til en type er, at vi kan lave en række funktioner. Dette inkluderer blandt andet matematiske operationer, som kan anvendes på  vores typer for tal. Ved at samle dem til en type \texttt{Number} kan vi også opskrive en række egenskaber i \ref{egenskab:tal} som vi ønsker at de skal opfylde. Egenskaberne vil blive valideret ved brug af PBT i sektion \ref{sec:PBT_number}.
 
 \vspace{0.5cm}
 \begin{egenskab}[Egenskaber for \texttt{Number}-typen]\label{egenskab:tal}
@@ -104,17 +102,17 @@ Vi har nu beskrevet en måde at kunne repræsentere bruger definere tal på ved 
 \end{egenskab}
   
 
-Vi begynder med at definere typen for tal i Listing \ref{number_type}, som indeholder konstruktører for de tal typer vi har definerede samt en for heltal. 
+Vi begynder med at definere typen for tal i Listing \ref{number_type}, som indeholder konstruktører for de taltyper vi har defineret samt en for heltal. 
 
 \begin{lstlisting}[
     language={FSharp}, 
     label={number_type}, 
-    caption={Typen for \texttt{\texttt{Number}}}
+    caption={Typen for \texttt{Number}}
     ]
-    type \texttt{Number} = | Int of int | Rational of rational | Complex of complex
+type Number = | Int of int | Rational of rational | Complex of complex
 \end{lstlisting}
 
-Typen \texttt{Number} er designet med henblik på, at den kan udvides med flere taltyper. Ved udvidelse er det et krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Den nye \texttt{Number} type skal derudover forsat opfylde egenskaberne \ref{egenskab:tal}. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimal tal.
+Typen \texttt{Number} er designet med henblik på, at den kan udvides med flere taltyper. Ved udvidelse er det et krav til den nye talmængde, at der er definerede matematiske operationer i form af addition, subtraktion, negation, multiplikation og division. Den nye \texttt{Number} type skal derudover forsat opfylde egenskaberne \ref{egenskab:tal}. En udvidelse kunne være for reelle tal, som kan håndtere "floating point errors"\footcitetitle{fpe}, men for at undgå at komplicere programmet yderligere vil vi i denne opgave ikke inkludere decimaltal.
 
 
 Betragtes signatur filen for \texttt{Number} modulet i Listing \ref{Number_fsi}, ses det at der igen er defineret overskrivning af de anvendte matematiske operationer. Derudover er der defineret en række funktioner som kan anvendes på \texttt{Number} typen. 
@@ -125,12 +123,12 @@ Betragtes signatur filen for \texttt{Number} modulet i Listing \ref{Number_fsi},
     caption={Signatur filen for \texttt{Number} modulet}
 ]{../modules/number.fsi}
 
-Ved implementeringen af de matematiske operationer, hvis der eksistere en konstruktør i Number, der repræsentere en tal mængde hvor alle andre konstruktører er delmængder af denne mængde. Er det muligt at definere en enkelt funktion som kan udføre alle binærer operationer. Som et eksempel er funktionen \textcolor{red}{operation} i Listing \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binærer operation som argumenter. Funktionen konventere de to tal til vores komplekse tal type, hvortil den binære operation udføres på dem. 
+Ved eksistens af en talmængde i \texttt{Number} $S$, hvorom det gælder at alle andre talmængder i \texttt{Number} er delmængder af $S$, kan en enkelt funktion der udfører alle binære operationer defineres. Som et eksempel er funktionen \textcolor{red}{operation} i Listing \ref{operation} givet, som tager to tal og en funktion i form af den ønskede binære operation som argumenter. Funktionen konventerer de to tal til vores komplekse taltype, hvortil den binære operation udføres på dem. 
 
 \begin{lstlisting}[
     language={FSharp},
     label={operation}, 
-    caption={Funktionen \textcolor{red}{operation} til udførelse af matematiske operationer på Numbers}
+    caption={Funktionen \textcolor{red}{operation} til udførelse af matematiske operationer på \texttt{Numbers}}
     ]
 // makeComplex: Number -> complex
 let makeComplex n =
@@ -145,12 +143,12 @@ let operation a b f =
 
 \end{lstlisting}
 
-Det vil her til være oplagt, at have en funktion til at reducere tallet efter den matematiske operation, til den simpleste tal type. Den simpleste tal type er i vores tilfælde er heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryReduce} på alle de matematiske operationers overskrivninger i Listing \ref{overloads_number}. 
+Det vil her til være oplagt, at have en funktion til at reducere tallet efter den matematiske operation, til den simpleste taltype. Den simpleste taltype er i vores tilfælde et heltal. Dette er gjort ved at anvende funktionen \textcolor{red}{tryReduce} på alle de matematiske operationers overskrivninger i Listing \ref{overloads_number}. 
 
 \begin{lstlisting}[
     language={FSharp},
     label={overloads_number}, 
-    caption={Overloadnings funktionerne for Number}
+    caption={Overloadnings funktionerne for \texttt{Number}}
     ]
 // tryReduce: Number -> Number
 let rec tryReduce n =
@@ -167,15 +165,15 @@ type Number with
     static member (~-) (a)    = neg a |> tryReduce
 \end{lstlisting}
 
-Ved at have implementeret de matematiske operationer på denne måde, er det blandt andet muligt at fortage heltales division, da det vil resulterer i et rationalt tal.
+Ved at have implementeret de matematiske operationer på denne måde, er det blandt andet muligt at foretage heltalsdivision, da det vil resultere i et rationalt tal.
 
-Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte hvordan vi kan anvende den i et matematisk udtryk.
+Dermed har vi et modul som kan repræsentere tal, samt udføre matematiske operationer på dem. Vi vil nu begynde at betragte, hvordan vi kan anvende den i et matematisk udtryk.
 
 \subsection{Matematiske udtryk}
-Efter udviklingen af et modul til repræsentation af talmængder er vi nu klar til at udvide programmet med et modul for matematiske udtryk. Vi begynder med en gennemgang omkring matematisk notation, samt hvordan vi kan anvende dem til at repræsentere udtryk i funktionsprogrammering. 
+Efter udviklingen af et modul til repræsentation af talmængder, er vi nu klar til at udvide programmet med et modul for matematiske udtryk. Vi begynder med en gennemgang omkring matematisk notation, samt hvordan vi kan anvende dem til at repræsentere udtryk i funktionsprogrammering. 
 
 \subsubsection{Matematisk notation}
-Matematiske udtryk som vi normalt kender dem er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generalt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) istedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. Følgende er der givet et simpelt eksempel på de 3 notationer. 
+Matematiske udtryk, som vi normalt kender dem, er skrevet med infix notation. I infix notation skrives en binær operator mellem to operandere, kende tegnet for sproget er at det indeholder parenteser samt præcedens regler. Dette gør det generelt kompliceret at evaluere og håndtere matematiske udtryk i et programmeringssprog. Derfor er det mere oplagt at kunne anvende polsk notation (prefix) i stedet, hvor operatoren skrives før operandere eller omvendt polsk notation (postfix). Da de hverken indeholder parenteser eller præcedens regler \footcitetitle{Polsk_notation}. Følgende er der givet et simpelt eksempel på de 3 notationer. 
 
 \begin{align*}
     \text{Infix Notation:} \quad & (A + B) \cdot C \\
@@ -224,7 +222,7 @@ Et matematisk udtryk kan repræsenteres som et binært træ (en træstruktur, hv
 \caption{Et binært træ der repræsenterer udtrykket $-(3 \cdot x - 5) \cdot 2$}
 \label{fig:expression_tree}
 \end{figure}
-Det skal bemærkes der er forskel på den unære og binære operator "$-$" i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for et matematisk udtryk, vil det være muligt at omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footcitetitle{tree_algo}, algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
+Det skal bemærkes, at der er forskel på den unære og binære operator "$-$" i træet, den unære betyder negation og den binære er subtraktion. Givet et binært træ for et matematisk udtryk, vil det være muligt at omdanne dem til infix, prefix eller postfix notation. Dette kan gøres ved at anvende modificeret Inorder, Preorder eller Postorder Traversal \footcitetitle{tree_algo}. Algorithmerne er illustreret i Figur \ref{fig:expression_tree_traversal}.
 
 
 \begin{figure}[H]
@@ -343,10 +341,10 @@ Det skal bemærkes der er forskel på den unære og binære operator "$-$" i tr�
 \end{figure}
 
 
-Vi vil i sektion \ref{sec:expression_module} betragte hvordan vi kan implementere et modul som kan repræsentere udtryk ved brug af prefix notation.
+Vi vil i sektion \ref{sec:expression_module} betragte hvordan vi kan implementere et modul, som kan repræsentere udtryk ved brug af prefix notation.
 Postorder Traversal bliver blandt andet anvendt til at kunne rekursivt reducere og evaluere udtryk.
 
-Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificeret Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
+Grundet præcedens regler i infix notation, er det nødvendigt at modificere Inorder Traversal, da unære noder altid skal håndteres før dens børn. Desuden vil det også være nødvendigt at implementere regler for at håndtere parenteser, hvis der ønskes et symbolsk udtryk. Den modificerede Inorder Traversal anvendes til at kunne visualisere udtrykket i infix notation.
 
 
 \subsubsection{Udtryksmodulet}\label{sec:expression_module}
@@ -368,7 +366,7 @@ type Expr<'a> =
     | Div of Expr<'a> * Expr<'a>
 \end{lstlisting}
 
-\texttt{Expr<'a>}  typen er dermed en polymorfisk type, hvor 'a er typen for den tal mængde hvor vi kan lave brugerdefinerede matematiske operationer. Et exemplar på en \texttt{Expr<Number>}  er givet i Listing \ref{lst:expr_example}. Her ses det at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres er det i prefix notation. 
+\texttt{Expr<'a>}  typen er dermed en polymorfisk type, hvor 'a er typen for den talmængde, hvor vi kan lave brugerdefinerede matematiske operationer. Et eksemplar på en \texttt{Expr<Number>}  er givet i Listing \ref{lst:expr_example}. Her ses det, at når udtrykket $-(3 \cdot x - 5) \cdot 2$ visualiseres, er det i prefix notation. 
 
 \begin{lstlisting}[style=output, label={lst:expr_example}, caption={$-(3 \cdot x - 5) \cdot 2$ som et udtryks træ. Funktionen \textcolor{red}{tree} bliver beskrevet i \ref{sec:expression_generation}.}]
 > tree "-(3*x-5)*2";;
@@ -376,7 +374,7 @@ val it: Expr<Number> =
   Mul (Neg (Sub (Mul (N (Int 3), X 'x'), N (Int 5))), N (Int 2))
 \end{lstlisting}
 
-Signatur filen indeholder overskrivninger på de matematiske operationer, så de kan anvendes på udtryk. Samt en funktion \textcolor{red}{eval} til at evaluere et udtryk beskrevet i sektion \ref{sec:eval}. 
+Signatur filen indeholder overskrivninger på de matematiske operationer, så de kan anvendes på udtryk, samt en funktion \textcolor{red}{eval} til at evaluere et udtryk beskrevet i sektion \ref{sec:eval}. 
 \lstinputlisting[
     language=FSharp,
     label={Expression.fsi},
@@ -385,7 +383,7 @@ Signatur filen indeholder overskrivninger på de matematiske operationer, så de
 
 
 
-De overskrevne matematiske operatorer i implementeringsfilen for udtryk laver overflade evalueringer samt reduceringer på deres respektive argumenter. Overfalde evaluering vil sige at de individuelle funktioner kun betragter de to øverste niveauer på de udtryks træer de tager som argumenter, implementeringerne af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
+De overskrevne matematiske operatorer i implementeringsfilen for udtryk, laver overfladeevalueringer samt reduceringer på deres respektive argumenter. Overfladeevaluering vil sige, at de individuelle funktioner kun betragter de to øverste niveauer på de udtrykstræer, de tager som argumenter. Implementeringerne af addition og multiplikation er givet i Listing \ref{lst:mul_expr}. Lignende funktioner er implementeret for de andre operationer.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -420,10 +418,11 @@ let rec add e1 e2:Expr<Number>  =
 \end{lstlisting}
 
 \subsection{Evaluering af udtryk}\label{sec:eval}
-Vi vil nu betragte hvordan vi kan evaluere et udtryk, ved hjælp af et miljø som indeholder værdier for variable som er indeholdt i udtrykket. Evalueringen af udtryk skal kunne opfylde følgende homomorfiske egenskaber \ref{prop:eval_homomorphism}. Egenskaben vil blive valideret i sektion \ref{sec:PBT_eval_homomorphism}.
+Vi begynder med at definere et miljø, som værende en samling af variable og deres tilhørende værdier. 
+Vi vil nu betragte, hvordan vi kan evaluere et udtryk, ved hjælp af et miljø. Evalueringen af udtryk skal kunne opfylde følgende homomorfiske egenskaber \ref{prop:eval_homomorphism}. Egenskaben vil blive valideret i sektion \ref{sec:PBT_eval_homomorphism}.
 \vspace{0.5cm}
 \begin{egenskab}[Homomorfisme af evaluering]\label{prop:eval_homomorphism}
-Lad $\oplus \in \{+, -, \times, /\}$ sættet af binære operationer, $e1$ og $e2$ være udtryk, samt "env" være et miljø som indeholder værdier for de variable, der er indeholdt i $e1$ og $e2$ så gælder følgende:
+Lad $\oplus \in \{+, -, \times, /\}$ sættet af binære operationer, $e1$ og $e2$ være udtryk, samt "env" være et miljø, som indeholder værdier for de variable, der er indeholdt i $e1$ og $e2$, så gælder følgende:
 \begin{align*}
     \text{eval}(e1 \oplus e2, \text{env}) = \text{eval}(e1, \text{env}) \oplus \text{eval}(e2, \text{env})
 \end{align*}
@@ -434,7 +433,7 @@ Derudover skal det om negation også gælde at:
 \end{egenskab}
 
 
-Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluere udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i \texttt{Number} modulet. 
+Funktionen \textcolor{red}{eval} i Listing \ref{lst:eval_expr} tager et udtryk og et miljø som input og evaluerer udtrykket til en numerisk værdi. Funktionen kører en Postorder Traversal på udtrykket og evaluerer dermed udtrykket nedefra og op, ved at foretage matematiske operationer defineret i \texttt{Number} modulet. 
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -454,7 +453,7 @@ let rec eval (e:Expr<Number>) (env) =
 \end{lstlisting}
 
 \subsection{Konventering mellem udtryksformer}\label{sec:expression_generation}
-Det er ønskes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og den standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverse. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver valideret i sektion \ref{sec:PBT_infix_prefix}.
+Det ønskes at kunne konvertere udtryk frem og tilbage mellem prefix notation, repræsenteret af Expression-typen, og standard infix notation. Dette ønske skyldes, at infix notation er lettere for os at læse og skrive. Derfor er det essentielt, at de to konverteringsfunktioner fungerer som hinandens inverse. Dette krav er yderligere uddybet i egenskab \ref{egenskab:infix_prefix}. Egenskaben bliver valideret i sektion \ref{sec:PBT_infix_prefix}.
 
 \vspace{0.5cm}
 \begin{egenskab}[Invers morphism\footcitetitle{Inverse_function} mellem infix og prefix]\label{egenskab:infix_prefix}
@@ -471,7 +470,7 @@ Det er ønskes at kunne konvertere udtryk frem og tilbage mellem prefix notation
     Hvor $id_{x}$ er identitetsfunktionen på mængden $x$.
 \end{egenskab}
 
-Vi begynder med at betragte den inverse funktion, som konverterer et udtryk til infix notation. Funktionen \textcolor{red}{etf} i Listing \ref{lst:expression_to_infix} fortager denne konvertering ved at lave den modificeret Inorder Traversal på udtrykket, som blev beskrevet i sektion \ref{sec:expression_as_trees}. Den modificeret del er at håndtere parenteser samt negation. Ved at betragte negation som en node i træet, hvor det venstre barn er et tomt udtryk.
+Vi begynder med at betragte den inverse funktion, som konverterer et udtryk til infix notation. Funktionen \textcolor{red}{etf} i Listing \ref{lst:expression_to_infix} fortager denne konvertering ved at lave den modificerede Inorder Traversal på udtrykket, som blev beskrevet i sektion \ref{sec:expression_as_trees}. Den modificerede del er at håndtere parenteser samt negation. Dette gøres ved at betragte negation som en node i træet, hvor det venstre barn er et tomt udtryk.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -518,7 +517,7 @@ type OperatorList = Operator list
 
 
 \subsection{Reducering af udtryk} \label{sec:simplification_expression}
-Vi skal nu betragte en systematisk metode til at kunne reducere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykkene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som reduceringen skal overholde. Egenskaben \ref{egenskab:simplification} vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter reduktion, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
+Vi skal nu betragte en systematisk metode til at kunne reducere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne, for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykkene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som reduceringen skal overholde. Egenskaben \ref{egenskab:simplification} vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter reduktion, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
 \vspace{0.5cm}
 \begin{egenskab}[Reducering af udtryk]\label{egenskab:simplification}
 Lad $e$ være et udtryk samt "env" være det miljø som indeholder værdier for variable i $e$, så gælder følgende:
@@ -527,7 +526,7 @@ Lad $e$ være et udtryk samt "env" være det miljø som indeholder værdier for 
 \end{align*}
 \end{egenskab}  
 
-Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som reducere et udtryk ved at foretage en Postorder Traversal på udtrykket. Hvilket betyder når en node i udtrykstræet skal reduceres, vil dens børn allerede være reduceret. 
+Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som reducerer et udtryk ved at foretage en Postorder Traversal på udtrykket. Hvilket betyder, at når en node i udtrykstræet skal reduceres, vil dens børn allerede være reduceret. 
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -563,7 +562,7 @@ let rec simplifyExpr e =
   | _ -> e 
 \end{lstlisting}
 
-Det er \textcolor{red}{simplifyOperation}, som foretager selve reduceringen af et givet udtryk. Funktionen tager som argumenter to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk reducering, som blev beskrevet i sektion \ref{sec:expression_module}, udføres. Hvis overfladisk reducering resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk reducering ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere reducering af de to udtryk. Denne dybere reducering udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk simplifikation når træet gendannes. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationsreducering på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
+Det er \textcolor{red}{simplifyOperation}, som foretager selve reduceringen af et givet udtryk. Funktionen tager som argumenter to udtryk, samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk reducering, som blev beskrevet i sektion \ref{sec:expression_module}, udføres. Hvis overfladisk reducering resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk reducering ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere reducering af de to udtryk. Denne dybere reducering udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk simplifikation når træet gendannes. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationsreducering på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
 
 
 \begin{figure}[H]
@@ -707,7 +706,7 @@ Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, 
   \end{enumerate}
 \end{egenskab}
 
-Funktionen for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, som tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionelt programmeringssprog, da det ses hvordan reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte, som de er beskrevet.
+Funktionen for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionelt programmeringssprog, da det ses hvordan reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte, som de er beskrevet.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -731,7 +730,7 @@ At differentiere et udtryk vil blandt andet resultere i mange nul værdier i det
 
 
 \subsection{Multivariable polynomier af første grad}
-Da vi senere i projektet skal betragte matricer, vil vi i den forbindelse også lave en løsning af lineære ligningssystemer i sektion \ref{sec:lin_eq}. Det kræver derfor, at vi kan isolere variable i et multivariabelt polynomium af første grad. Vi betragter derfor nu to simple funktioner til at udføre denne isolation, se Listing \ref{lst:isolate}. Funktionen \textcolor{red}{isolateX} undersøger først, om den variabel, som skal isoleres, befinder sig på højre eller venstre side, derefter kaldes funktionen \textcolor{red}{expressionOnX}, som fungerer ved at evaluere til en funktion, der giver den omvendte operation af den operation, som variablen er involveret i. Dertil anvendes den omvendte funktion på begge sider af ligningen, hvor hvis variablen er isoleret, gives et udtrykspar, hvor det første udtryk er den isolerede variabel. Hvis variablen ikke er isoleret, kaldes funktionen rekursivt med de nye højre og venstre sider.
+Da vi senere i projektet skal betragte matricer, vil vi i den forbindelse også lave en løsning af lineære ligningssystemer i sektion \ref{sec:lin_eq}. Det kræver derfor, at vi kan isolere variable i et multivariabelt polynomium af første grad. Vi betragter derfor nu to simple funktioner til at udføre denne isolation, se Listing \ref{lst:isolate}. Funktionen \textcolor{red}{isolateX} undersøger først, om den variabel, som skal isoleres, befinder sig på højre eller venstre side. Derefter kaldes funktionen \textcolor{red}{expressionOnX}, som fungerer ved at evaluere til en funktion, der giver den omvendte operation af den operation, som variablen er involveret i. Dertil anvendes den omvendte funktion på begge sider af ligningen, hvor hvis variablen er isoleret, gives et udtrykspar, hvor det første udtryk er den isolerede variabel. Hvis variablen ikke er isoleret, kaldes funktionen rekursivt med de nye højre og venstre sider.
 
 \begin{lstlisting}[
   language={FSharp}, 

@@ -1,8 +1,10 @@
 \section{PBT af programmet}
-Vi skal nu validere vores program ved hjælp af PBT, ved at lave funktioner, som kan undersøge de egenskaber der løbende er blevet beskrevet i rapporten. 
+Vi skal nu validere vores program ved hjælp af PBT. Dette opnåes ved at lave funktioner, som kan undersøge de egenskaber, der løbende er blevet beskrevet i rapporten. 
 
 \subsection{PBT af udtryk}
-Før vi begynder at udføre PBT på alle egenskaberne vedrørende udtryk, skal vi først bygge en generator for vores talmængde og udtryk. Da vi ikke altid kan sammenligne, om to udtrykstræer er ækvivalente, vil vi i alle vores PBT, hvor vi ønsker at sammenligne træer, gøre dette ved brug af et miljø, som indeholder værdier for variablene, og derefter evaluere udtrykene ved brug af \textcolor{red}{eval}-funktionen.
+Før vi begynder at udføre PBT på alle egenskaberne vedrørende udtryk, skal vi først bygge en generator for vores talmængde og udtryk.
+
+Da vi ikke kan sammenligne, om to udtrykstræer er ækvivalente, vil vi gøre brug af et miljø, som indeholder værdier for variablene og derefter evaluere udtrykene ved brug af \textcolor{red}{eval}-funktionen. Dette gøres for alle vores PBT, hvor vi ønsker at sammenligne træer.
 
 Vi begynder med at definere en række generatorer, som kan generere blade i vores udtrykstræer i Listing \ref{generator1}.
 
@@ -99,12 +101,12 @@ static member Number() =
         override _.Shrinker _ = Seq.empty}    
 \end{lstlisting}
 
-Først defineres to variable, som alle funktioner har til rådighed, \texttt{max} og \texttt{min}, som sætter intervallet for de heltal, der kan anvendes i genereringen af Numbers. 
+Først defineres to variable, som alle funktioner har til rådighed, \texttt{max} og \texttt{min}, som sætter intervallet for de heltal, der kan anvendes i genereringen af "Numbers". 
 Den første funktion, \textcolor{red}{noneZeroGen}, er en generator for et tilfældigt heltal fra sættet $S_1$:
 \begin{gather*}
     S_1 = \{ x \mid x \in \mathbb{Z} \setminus \{0\}, \quad \texttt{min} \leq x \leq \texttt{max} \}.
 \end{gather*}
-Vi kan dermed bruge \textcolor{red}{noneZeroGen}, da vi ikke ønsker at generere rationale tal med nævneren 0. For at definere en generator for Numbers i form af \textcolor{red}{numberGen}, som genererer et gyldigt Number fra sættet $S_5$:
+Vi kan dermed bruge \textcolor{red}{noneZeroGen}, da vi ikke ønsker at generere rationale tal med nævneren 0. For at definere en generator for Numbers i form af \textcolor{red}{numberGen}, som genererer et gyldigt \texttt{Number} fra sættet $S_5$:
 \begin{align*}
     S_2 &= \left\{ x \mid x \in \mathbb{Z}, \quad \texttt{min} \leq x \leq \texttt{max} \right\} \\
     S_3 &= \left\{ \frac{x}{y} \mid x \in S_1, y \in S_2 \right\} \\
@@ -126,15 +128,15 @@ Til sidst defineres tre typer, hvor \texttt{SmallEnvGen} og \texttt{NumberGen} g
 
 Vi har dermed nu lavet fundamentet, til at kunne teste vores egenskaber vedrørende udtryk.
 
-\subsubsection{Tal modulet}\label{sec:PBT_number}
-De 6 egenskaber fra \ref{egenskab:tal} kan nu testes med PBT. Egenskaberne kan oversættes direkte til funktioner, grundet de overskrivninger vi har lavet på number typen i Listing \ref{pbt:number}. 
+\subsubsection{Talmodulet}\label{sec:PBT_number}
+De 6 egenskaber fra \ref{egenskab:tal} kan nu testes med PBT. Egenskaberne kan oversættes direkte til funktioner, grundet de overskrivninger vi har lavet på \texttt{Number} typen i Listing \ref{pbt:number}. 
 
 \lstinputlisting[
     language=FSharp, 
     caption={\textit{numberPBT.fsx} - funktioner til test af egenskaberne i \ref{egenskab:tal}},
     label={pbt:number}
     ]{../PBT/numberPBT.fsx}
-I \textcolor{red}{inverseMultiplicative} anvender vi "Prop.classify" til at tillade, at egenskaben kan slå bestemte fejl. I dette tilfælde tillades det, at der opstår en "DivideByZeroException". Dette sker, fordi generatoren godt kan generere 0, som der ikke kan tages en invers af. For at teste ovensånde funktioner, køres \textit{.fsx} filen, og outputtet kan ses i Listing \ref{output:number}.
+I \textcolor{red}{inverseMultiplicative} anvender vi "Prop.classify" til at tillade, at egenskaben kan slå bestemte fejl. I dette tilfælde tillades det, at der opstår en "DivideByZeroException". Dette sker, fordi generatoren godt kan generere 0, som der ikke kan tages en invers af. For at teste ovenstående funktioner, køres \textit{.fsx} filen, og outputtet kan ses i Listing \ref{output:number}.
 \begin{lstlisting}[
     style=output, 
     label={output:number}, 
@@ -154,7 +156,7 @@ Dermed viser testen at alle egenskaberne fra \ref{egenskab:tal} holder.
 
 \subsubsection{Homomorfisme af evaluering}\label{sec:PBT_eval_homomorphism}
 
-Vi skal nu teste egenskaben fra \ref{prop:eval_homomorphism}. Testen er lavet i Listing \ref{pbt:eval_homomorphism}. Dette er gjort ved, at der genereres et tilfældigt miljø, hvori der udstrækkes to udtryk ved brug af udtryks generatoren, hvori variablene er indeholdt i miljøet. For alle operatorer testes det, om de overholder egenskaben om homomorfisme.
+Vi skal nu validere egenskab\ref{prop:eval_homomorphism}. Testen er givet i Listing \ref{pbt:eval_homomorphism}. Dette er gjort ved, at der genereres et tilfældigt miljø. Fra dette miljø udstrækkes der to udtryk ved brug af udtryks generatoren, hvori variablene er indeholdt i miljøet. For alle operatorer testes det, om de overholder egenskaben om homomorfisme.
 
 
 \begin{lstlisting}[
@@ -169,7 +171,7 @@ eval (f e1 e2) env = (getNumber <| f (eval e1 env |> N) (eval e2 env |> N))
 let evalPBT ((env ,xlist):SmallEnv) = 
     let result = 
         try
-            let exprList = Gen.sample 1 2 (exprGen xlist 10 leafGen)
+            let exprList = Gen.sample 1 2 (exprGen xlist 64 leafGen)
             let e1::[e2] = exprList
             let prop = evalOperation e1 e2 env
             let negation = eval (-e1) env = - eval e1 env
@@ -197,7 +199,7 @@ Ok, passed 100 tests.
 18% DivideByZeroExceptions.
 6% OverflowException.
 \end{lstlisting}
-Vi ser her en større mængde af tests, som bliver klassificeret som "DivideByZeroExceptions". Dette skyldes, at vores generator godt kan generere udtryk som \(1/(0 \cdot X)\) og lignende, hvilket ikke er et lovligt udtryk. Derudover forekommer der også "OverflowExceptions", hvilket skyldes, at ved evaluering af udtryk kan vi godt ende med en kombination af operationer, som giver rationale tal, der, som beskrevet i sektion \ref{sec:rational}, kan resultere i en overflow. Samme form for klassificeringer vil vi løbende se i de kommende tests.
+Vi ser her en større mængde af tests, som bliver klassificeret som "DivideByZeroExceptions". Dette skyldes, at vores generator godt kan generere udtryk som \(1/(0 \cdot X)\) og lignende, hvilket ikke er et lovligt udtryk. Derudover forekommer der også "OverflowExceptions", hvilket skyldes, at ved evaluering af udtryk kan vi godt ende med en kombination af operationer, som giver rationale tal, der, som beskrevet i sektion \ref{sec:rational}, kan resultere i overflow. Samme form for klassificeringer vil vi løbende se i de kommende PBT.
 
 
 
@@ -212,7 +214,7 @@ let compareSimpExpr env (e:Expr<Number>) =
 // simpEqualEval: SmallEnv -> int
 let simpEqualEval (env, xlist) = 
     try
-        if Gen.sample 1 1 (exprGen xlist 10 leafGen) 
+        if Gen.sample 1 1 (exprGen xlist 64 leafGen) 
             |> List.head 
             |> compareSimpExpr env 
         then 1 else 0
@@ -259,7 +261,7 @@ let generatesCorrectTree env (e:Expr<Number>) =
 // treeEqualEval: SmallEnv -> int
 let treeEqualEval (env, xlist) =
     try 
-        if Gen.sample 1 1 (exprGen xlist 10 onlyIntleafGen) 
+        if Gen.sample 1 1 (exprGen xlist 64 onlyIntleafGen) 
             |> List.head 
             |> generatesCorrectTree env 
         then 1 else 0
@@ -277,13 +279,10 @@ let treePBT (se:SmallEnv) =
 \end{lstlisting}
 
 Funktionen \textcolor{red}{generatesCorrectTree} tager et miljø samt et udtryk og undersøger, om:
-\begin{gather}
-    \text{eval}(e) = \text{eval}(\text{tree}(\text{tree}^{-1}(\text{tree}(\text{tree}^{-1}(\text{simplifyExpr}(e))))))
-\end{gather}
-Det er gjort på denne måde, da det ikke er muligt igennem vores program at generere matematiske udtryk i infix-notation, som med sikkerhed har gyldig notation. I stedet vil vi anvende vores udtryksgenerator til at generere et udtryk, som vi så ved hjælp af et miljø kan tjekke, at egenskaben \ref{egenskab:infix_prefix} holder for alle \( x \in \texttt{Expr<Number>} \). 
-
-Udtrykket bliver simplificeret, før det konverteres til infix-notation, da der er valgt ikke at placere parenteser rundt om tal i udtrykket, for visualiseringens skyld. Dette betyder, at hvis udtrykket ikke simplificeres, kan der skabes udtryk som \texttt{Neg(N -1)}, som i infix-notation er \(--1\), hvilket ikke er en gyldig notation uden parenteser. Simplifikationen sørger for, at negative tal repræsenteres ved negationen af et positivt tal.
- 
+\begin{gather*}
+    \text{eval}(e, \text{env}) = \text{eval}(\text{tree}(\text{tree}^{-1}(\text{tree}(\text{tree}^{-1}(\text{simplifyExpr}(e))))), \text{env})
+\end{gather*}
+Det er gjort på denne måde, da det ikke er muligt igennem vores program at generere matematiske udtryk i infix-notation, som med sikkerhed har gyldig notation. I stedet vil vi anvende vores udtryksgenerator til at generere et udtryk ud fra et miljø. Hvortil udtrykket kan verificere, at egenskab \ref{egenskab:infix_prefix} holder.
 
 Outputtet fra kørsel af testen kan ses i Listing \ref{output:infix_prefix}. Testen viser som forventet, at egenskaben holder for alle udtryk.
 \begin{lstlisting}[
@@ -344,15 +343,10 @@ type MatrixGen =
             override _.Shrinker _ = Seq.empty}
 \end{lstlisting}
 
-Først defineres \textcolor{red}{vectorGen}, som laver en liste ved hjælp af den tidligere definerede funktion \textcolor{red}{numberGen}. Den laver en liste med en given længde af tilfældige tal fra vores talmængde. Dernæst passes listen videre til \textcolor{red}{vector}-funktionen, som laver en søjlelagret vektor ud fra listen. Funktionen \textcolor{red}{matrixGen} genererer en matrix af tilfældig størrelse, hvor antallet af rækker og kolonner er mellem 1 og 6 ved hjælp af \textcolor{red}{vectorGen}. Til sidst kan vi definere en type for matrixgeneratorerne, som gør det muligt at registrere dem før kørsel af PBT.
+Først defineres \textcolor{red}{vectorGen}, som laver en \texttt{Number}-liste ved hjælp af den tidligere definerede funktion \textcolor{red}{numberGen}. Dernæst passes listen videre til \textcolor{red}{vector}-funktionen, som laver en søjlelagret vektor ud fra listen. Funktionen \textcolor{red}{matrixGen} genererer en matrix af tilfældig størrelse, hvor antallet af rækker og kolonner er mellem 1 og 6 ved hjælp af \textcolor{red}{vectorGen}. Til sidst defineres typen \texttt{MatrixGen}, som gør det muligt at registrere matrixgeneratorerne før kørsel af PBT.
 
 \subsubsection{PBT af matrix operationer}
-Det er nu muligt at opstille nogle PBT af der sikre at matricerne overholder matematiske egenskaber i sætning \ref{vector_space_axioms}. 
-
-
-
-
-Vi kan dermed nu lave definere egenskaberne fra \ref{vector_space_axioms} som nogle funktioner i Listing \ref{lst:vector_space_axioms}.
+Vi kan dermed nu definere egenskaberne fra \ref{vector_space_axioms} som nogle funktioner i Listing \ref{lst:vector_space_axioms}.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -372,7 +366,7 @@ let vectorAssCom m (c:Number) =
     c * (sumRows m) = sumRows (c * m)
 \end{lstlisting}
 
-Listing \ref{lst:vector_space_axioms_pbt} viser outputtet fra kørsel af testene. Testene viser, at egenskaberne holder for alle matricer.
+Listing \ref{lst:vector_space_axioms_pbt} viser outputtet fra kørsel af testene og egenskaberne dermed holder.
 
 \begin{lstlisting}[
     style=output, 
@@ -389,7 +383,7 @@ Ok, passed 100 tests.
 \end{lstlisting}
 
 \subsubsection{PBT af Gram-Schmidt}\label{sec:pbt_gram_schmidt}
-Udfordringen ved at lave en PBT af Gram-Schmidt er, at vektorsættet skal være lineært uafhængigt. Derfor laves der en generator, som ved at udføre tilfældige rækkeoperationer på en diagonal matrix med \( m \) rækker og \( n \) søjler, hvorom det gælder, at \( n \geq m \). Dette sikrer os, at rækkerne i matricen er lineært uafhængige. Hertil vil den transponerede matrix have lineært uafhængige søjler, som vi kan bruge til at teste Gram-Schmidt processen\footcitetitle{rank}. Listing \ref{generators_gram_schmidt} viser de forskellige generatorer, som anvendes til PBT af Gram-Schmidt-processen.
+Udfordringen ved at lave en PBT af Gram-Schmidt er, at vektorsættet skal være lineært uafhængigt. Derfor laves der en generator, som ved at udføre tilfældige rækkeoperationer på en diagonal matrix med \( m \) rækker og \( n \) søjler, hvorom det gælder, at \( n \geq m \), beholder rækkernes lineære uafhængighed. Hertil vil den transponerede matrix have lineært uafhængige søjler, som vi kan bruge til at teste Gram-Schmidt processen\footcitetitle{rank}. Listing \ref{generators_gram_schmidt} viser de forskellige generatorer, som anvendes til PBT af Gram-Schmidt-processen.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -440,44 +434,32 @@ type IndependentBasisMatrixGen =
             override _.Shrinker _ = Seq.empty}
 \end{lstlisting}
 
-Funktionen \textcolor{red}{performRowOperationGen} tager en matrix, hvori der udvælges to tilfældige rækker, \(i\) og \(j\), hvorefter der udføres en rækkeoperation på \(R_j\), således at \(R_j \leftarrow R_j - aR_i\), hvor \(a\) er et tilfældigt tal. \textcolor{red}{multipleRowOperationsGen} gentager denne proces et givet antal gange. Funktionen \textcolor{red}{getDiagonalMatrixGen} laver en diagonal matrix med \(m\) rækker og \(n\) søjler, hvor \(n \geq m\). \textcolor{red}{getIndependentBasisGen} genererer en matrix, hvis søjler er lineært uafhængige. Vi kan dermed definere en funktionen til at undersøge om en matrix er en ortogonal basis, som vist i Listing \ref{check_orthogonal_basis}.
+Funktionen \textcolor{red}{performRowOperationGen} tager en matrix, hvori der udvælges to tilfældige rækker, \(i\) og \(j\). Herefter udføres en rækkeoperation på \(R_j\), således at \(R_j \leftarrow R_j - aR_i\), hvor \(a\) er et tilfældigt tal. \textcolor{red}{multipleRowOperationsGen} gentager denne proces et givet antal gange. Funktionen \textcolor{red}{getDiagonalMatrixGen} laver en diagonal matrix med \(m\) rækker og \(n\) søjler, hvor \(n \geq m\). \textcolor{red}{getIndependentBasisGen} genererer en matrix, hvis søjler er lineært uafhængige. 
 
-\begin{lstlisting}[
-    language={FSharp}, 
-    label={check_orthogonal_basis}, 
-    caption={Funktion til at tjekke om søjlerne i en matrix er en ortogonal basis}
-    ]
-// isOrthogonalBacis : Matrix -> bool
-let rec isOrthogonalBacis m =
-    (transposeMatrix m |> conjugateMatrix) * m |> isDiagonalMatrix
-\end{lstlisting}
-
-
-
-Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal basis. \textcolor{red}{isOrthogonalBacis} i Listing \ref{check_orthogonal_basis} tjekker, om alle vektorerne i en matrix er ortogonale med hinanden. Dette kan gøres ved hjælp af følgende sætning:
+Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal basis. \textcolor{red}{isOrthogonalBacis} i Listing \ref{check_orthogonal_basis} tjekkes, om alle vektorerne i en matrix er ortogonale med hinanden. Dette kan gøres ved hjælp af følgende sætning:
 
 \vspace{0.5cm}
 \begin{theorem}
     Lad \( A \) have søjlerne \( v_1, v_2, \ldots, v_n \), som udgør en ortogonal basis. Per definition gælder det, at det indre produkt mellem to ortogonale vektorer \( v_i \) og \( v_j \) er:
-    \begin{gather}
+    \begin{gather*}
         \langle v_i, v_j \rangle = 0 \quad \text{for} \quad i \neq j
-    \end{gather}
+    \end{gather*}
     Lad så \( D \) være en kvadratisk diagonal matrix. Da gælder det, at:
-    \begin{gather}
+    \begin{gather*}
         D = A^* A
-    \end{gather}
+    \end{gather*}
 \begin{proof}
     Fra definitionen af matrixprodukt \ref{def:matrix_matrix_pro} ved vi, at:
-    \begin{gather}
+    \begin{gather*}
         A^*A = 
         \begin{bmatrix}
             | &  & | \\
             A^* \cdot v_1 & \cdots & A^* \cdot v_n \\
             | &  & | \\
         \end{bmatrix}
-    \end{gather}
+    \end{gather*}
     Fra definitionen af matrix-vektorprodukt \ref{def:matrix_vector_pro} ved vi, at:
-    \begin{gather}
+    \begin{gather*}
         A^* v_i = 
         \begin{bmatrix}
             - & \overline{v}_{1} & - \\ 
@@ -494,9 +476,9 @@ Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal b
             \vdots \\
             \sum_{j=1}^{m} \overline{v}_{jn}v_{ji}
         \end{bmatrix}
-    \end{gather}
+    \end{gather*}
     Hvilket ifølge definitionen af indre produkt \ref{def:proj} betyder 
-    \begin{gather}
+    \begin{gather*}
         A^* v_i = 
         \begin{bmatrix}
             \langle v_i, v_1 \rangle \\
@@ -504,9 +486,9 @@ Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal b
             \vdots \\
             \langle v_i, v_n \rangle
         \end{bmatrix}
-    \end{gather}
+    \end{gather*}
     Hvilket betyder, at:
-    \begin{gather}
+    \begin{gather*}
         A^*A = 
         \begin{bmatrix}
             \langle v_1, v_1 \rangle & \langle v_2, v_1 \rangle & \cdots & \langle v_n, v_1 \rangle \\
@@ -514,10 +496,20 @@ Dernæst skal vi bruge en funktion til at tjekke, om en matrix er en ortogonal b
             \vdots & \vdots & \ddots & \vdots \\
             \langle v_1, v_n \rangle & \langle v_2, v_n \rangle & \cdots & \langle v_n, v_n \rangle
         \end{bmatrix}
-    \end{gather}
+    \end{gather*}
     Derfor, hvis \( m \geq n \), så gælder det, at \( A^*A = D \), da hvis \( m < n \), ville $v_1, v_2 \cdots v_n$ ikke være lineært uafhængige vektorer.
 \end{proof}
 \end{theorem}
+\begin{lstlisting}[
+    language={FSharp}, 
+    label={check_orthogonal_basis}, 
+    caption={Funktion til at tjekke om søjlerne i en matrix er en ortogonal basis}
+    ]
+// isOrthogonalBacis : Matrix -> bool
+let rec isOrthogonalBacis m =
+    (transposeMatrix m |> conjugateMatrix) * m |> isDiagonalMatrix
+\end{lstlisting}
+
 
 Derudover skal vi også undersøge, om spannet før og efter Gram-Schmidt processen forbliver det samme. Dette gøres ved brug af sætning \ref{span_theorem}.
 
@@ -751,7 +743,7 @@ Derudover skal vi også undersøge, om spannet før og efter Gram-Schmidt proces
 \end{proof}
 
 
-I beviset til sætning \ref{span_theorem} viste vi at man vil kunne bruge de samme række operationer til at bringe \(W\) og \(V\) i række-echelon form. Dog da vi ikke gemmer rækkeoperation i vores implamentation vil vi nøjes med at lave en funktion \textcolor{red}{hasSameSpanGS} i Listing \ref{same_span}, som undersøger om at \(\Phi(W)\) og \(\Theta(V)\) er øvre trekantsmatricer med 1-taller i diagonalerne. 
+I beviset til sætning \ref{span_theorem} viste vi at man vil kunne bruge de samme række operationer til at bringe \(W\) og \(V\) i række-echelon form. Dog da vi ikke gemmer rækkeoperation i vores implementering vil vi nøjes med at lave en funktion \textcolor{red}{hasSameSpanGS} i Listing \ref{same_span}, som undersøger om at \(\Phi(W)\) og \(\Theta(V)\) er øvre trekantsmatricer med 1-taller i diagonalerne. 
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -814,7 +806,7 @@ Ok, passed 100 tests.
 
 Outputtet fra PBT af Gram-Schmidt processen kan ses i Listing \ref{output_gram_schmidt}. Som sædvanligt indikerer testen kun korrekthed, men medfører ikke garanti for det.
 
-Som nævnt i sektion \ref{sec:gram_schmidt} var der en slåfejl i Algorithm 9 for echelonform i noterne til "01001 Mathematics 1a"\footcitetitle{mat1a}. I forbindelse med at finde frem til denne fejl blev der lavet en PBT af echelonform af generatoren for lineært uafhængige vektorsæt. Egenskaben i \ref{eg:independtent} skal sikre, at både generatorens implementering er korrekt, og at funktionen til at finde echelonformen er det.
+Som nævnt i sektion \ref{sec:gram_schmidt} var der en slåfejl i "Algorithm 9" for række-echelon formen i noterne til "01001 Mathematics 1a"\footcitetitle{mat1a}. I forbindelse med at finde frem til denne fejl blev der lavet en PBT af generatoren for lineært uafhængige vektorsæt. Egenskaben i \ref{eg:independtent} skal sikre, at både generatorens implementering er korrekt, og at funktionen til at finde række-echelon formen er det.
 
 \vspace{0.5cm}
 \begin{egenskab}\label{eg:independtent}

@@ -1,5 +1,5 @@
 \section{Vektorer og Matricer}
-Vi vil nu betragte opbyggelsen af et modul for vektorer og matricer. Eftersom en vektor også kan opfattes som en matrix, vil vi i det følgende, når begge dele omtales, udelukkende referere til matricer. For systematik at kunne håndtere matricer, starter vi med at definere en type for lagringsordning Listing \ref{Order}.
+Vi vil nu betragte opbyggelsen af et modul for vektorer og matricer. Eftersom en vektor også kan opfattes som en matrix, vil vi i det følgende, når begge omtales, udelukkende referere til matricer. For systematisk at kunne håndtere matricer, starter vi med at definere en type for lagringsordning Listing \ref{Order}.
 
 \begin{lstlisting}[
     language={FSharp}, 
@@ -54,7 +54,7 @@ let dimMatrix (M(vl, o)) =
     | C -> D (d2, d1)
 \end{lstlisting}
 
-Hvis en matrix er gemt som rækkefølge, vil antallet af rækker være længden af en vektor og antallet af kolonner være længden af vektor listen, og omvendt for kolonnefølge.
+Hvis en matrix er gemt som rækkefølge, vil antallet af rækker være længden af Number listen i en vektorene og antallet af kolonner være længden af vektor listen, og omvendt for kolonnefølge.
 
 \subsection{Matematiske operationer}
 I denne sektion bør det bemærkes, at flere listings ikke inkluderer fejlhåndtering; dette er udeladt for at forbedre læsbarheden. De funktioner, der anvendes i det implementerede modul, har passende fejltjek, herunder dimensionstjek på matricerne. Den fulde implementering med fejlhåndtering kan findes i appendiks \ref{sec:matrix.fs}.
@@ -62,7 +62,7 @@ I denne sektion bør det bemærkes, at flere listings ikke inkluderer fejlhåndt
 Før vi implementere funktioner til at udføre de ønskede matematiske operationer, vil vi først definere nogle egenskaber matricerne skal opfylde i egenskab \ref{vector_space_axioms}.
 \vspace{0.5cm}
 \begin{egenskab}[Vektor Aksiomer]\label{vector_space_axioms}
-    Lad $c, d \in \mathbb{F}$ og $v_i \in \mathbb{F}^n$ for $i = 1 \dots m$ så gælder:\footcitetitle[Theorem 7.2 s. 155]{mat1a}
+    Lad $c, d \in$ Numbers og $v_i \in $ Vectors af dimension $n \times 1$ for $i = 1 \dots m$ så gælder:\footcitetitle[Theorem 7.2 s. 155]{mat1a}
     \begin{enumerate}
         \item $(v_1 + \dots + v_{m-1}) + v_m = v_1 + (v_2 + \dots + v_m)$
         \item $c \cdot \left(d \cdot \begin{bmatrix}
@@ -170,7 +170,7 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
     a_{m1} & a_{m2} & \cdots & a_{mn}
     \end{bmatrix}
     \]
-    og $\mathbf{v} = (v_1, v_2, \ldots, v_n)^T$ være en vektor med $n$ elementer. Så er matrix-vektor $Av$ produktet defineret som
+    og $v = (v_1, v_2, \ldots, v_n)^T$ være en vektor med $n$ elementer. Så er matrix-vektor $Av$ produktet defineret som
     \[
 \begin{bmatrix}
     a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -201,7 +201,7 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
 \end{definition}
 
 \begin{theorem}[Matrix-Vektor Produkt] \label{matrix_vector_pro}
-    Lad $A$ være en matrix med $m$ rækker og $n$ søjler, og lad $\mathbf{v}$ være en vektor med $n$ elementer. Så gælder der
+    Lad $A = [a_1\; a_2\; \hdots a_n]$ være en matrix med $m$ rækker og $n$ søjler, og lad $v$ være en vektor med $n$ elementer. Så gælder der
     \[ Av = \textit{\textcolor{red}{sumRows}}
     \begin{bmatrix}
         | & | &        & | \\
@@ -211,7 +211,7 @@ Dermed er $v_i = \sum_{j=1}^{n} a_{ij}$ for $i = 1, 2, \ldots, m$.
     \]
 \end{theorem}
 \begin{proof}
-    Lad $B$ være resultatet af at skalere søjlerne i matrix $A$ med de tilsvarende elementer i vektoren $\mathbf{v}$. Vi har
+    Lad $B$ være resultatet af at skalere søjlerne i matrix $A$ med de tilsvarende elementer i vektoren $v$. Vi har
     \begin{alignat*}{2}
     B &= \begin{bmatrix}
         | & | &        & | \\

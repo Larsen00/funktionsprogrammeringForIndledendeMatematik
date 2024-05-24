@@ -493,12 +493,11 @@ let rec etf e p =
     | Mul(a, b) -> etf a true  + "*" + etf b true |> parenthesis p
     | Div(a, b) -> etf a true  + "/" + etf b true |> parenthesis p
 
-
 // infixExpression: Expr<Number> -> string
 let infixExpression e = etf e false
 \end{lstlisting}
 
-Funktionen \textcolor{red}{\texttt{tree}}, som foretager konverteringen fra infix notation til et udtrykstræ, er baseret på algoritmen beskrevet i \cite{convert_expression}\footcitetitle{convert_expression}. Først konverteres en udtryksstreng til en liste af tokens. Disse tokens beskriver, om en karakter i udtrykket er en operand, en operator, eller en konstant, hvor en operator også indeholder information om præcedens og associativitet\footcitetitle{precedens_associativity}. Typen for disse tokens kan ses i Listing \ref{lst:infix_to_expression_types}. Herefter anvendes to stacks: én for operatorer og én for udtryk. Der anvendes en række regler, som beskrevet i \cite{convert_expression}, for hvornår der skal udføres pop og push på disse to stacks. Det skal bemærkes, at når en operator pushes til udtryksstacken, da navnet på operatorkonstruktøren på udtrykket står skrevet fra venstre mod højre, vil udtryksstacken være i prefix notation og ikke postfix notation som beskrevet i kilden. Funktionen \textcolor{red}{\texttt{tree}} er at finde i Appendiks \ref{sec:treeGenerator.fs}.
+Funktionen \textcolor{red}{\texttt{tree}}, som foretager konverteringen fra infix notation til et udtrykstræ, er baseret på algoritmen beskrevet i \cite{convert_expression}\footcitetitle{convert_expression}. Først konverteres en udtryksstreng til en liste af tokens. Disse tokens beskriver, om en karakter i udtrykket er en operand, en operator, eller en konstant, hvor en operator også indeholder information om præcedens og associativitet\footcitetitle{precedens_associativity}. Typen for disse tokens kan ses i Listing \ref{lst:infix_to_expression_types}. Herefter anvendes to stacks: en for operatorer og en for udtryk. Der anvendes en række regler, som beskrevet i \cite{convert_expression}, for hvornår der skal udføres pop og push på disse to stacks. Det skal bemærkes, at når en operator pushes til udtryksstacken, da navnet på operatorkonstruktøren på udtrykket står skrevet fra venstre mod højre, vil udtryksstacken være i prefix notation og ikke postfix notation som beskrevet i kilden. Funktionen \textcolor{red}{\texttt{tree}} er at finde i Appendiks \ref{sec:treeGenerator.fs}.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -519,14 +518,14 @@ type OperatorList = Operator list
 
 
 \subsection{Reducering af udtryk} \label{sec:simplification_expression}
-Vi skal nu betragte en systematisk metode til at kunne reducere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykkene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som reduceringen skal overholde. Egenskaben vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter reduktion, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
+Vi skal nu betragte en systematisk metode til at kunne reducere matematiske udtryk, ved hjælp af simple algebraiske regler. Dette er en nødvendighed at kunne for at bruge udtrykkene i en matematisk sammenhæng, da det vil kunne medføre både en reduktion i kompleksitet og en forbedring i læsbarhed når udtrykkene visualiseres. Før vi betragter metoden, kan vi opskrive en egenskab som reduceringen skal overholde. Egenskaben \ref{egenskab:simplification} vil blive valideret i sektion \ref{sec:PBT_simplification}, det er en nødvendighed at evaluere udtrykket før og efter reduktion, da det er en kompleks opgave at skulle sammenligne om to udtryk er ækvivalente.
 \vspace{0.5cm}
 \begin{egenskab}[Reducering af udtryk]\label{egenskab:simplification}
-Lad $e$ være et udtryk, så gælder følgende:
+Lad $e$ være et udtryk samt "env" være det miljø som indeholder værdier for variable i $e$, så gælder følgende:
 \begin{align*}
-  \text{eval}(e) = \text{eval}(\text{simplifyExpr}(e))
+  \text{eval}(e, \text{env}) = \text{eval}(\text{simplifyExpr}(e), \text{env})
 \end{align*}
-\end{egenskab}
+\end{egenskab}  
 
 Vi begynder med at betragte funktionen \textcolor{red}{\texttt{simplifyExpr}} i Listing \ref{lst:simplify_expr}, som reducere et udtryk ved at foretage en Postorder Traversal på udtrykket. Hvilket betyder når en node i udtrykstræet skal reduceres, vil dens børn allerede være reduceret. 
 
@@ -564,7 +563,7 @@ let rec simplifyExpr e =
   | _ -> e 
 \end{lstlisting}
 
-Det er \textcolor{red}{simplifyOperation}, som foretager selve reduceringen af et givet udtryk. Funktionen tager som argumenter to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk reducering, som blev beskrevet i \ref{sec:expression_module}, udføres. Hvis overfladisk reducering resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk reducering ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere reducering af de to udtryk. Denne dybere reducering udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk når ved at gendanne træet. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationsreducering på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
+Det er \textcolor{red}{simplifyOperation}, som foretager selve reduceringen af et givet udtryk. Funktionen tager som argumenter to udtryk samt den binære operation, der skal anvendes på disse. Funktionen anvendes på udtrykkene, hvorefter overfladisk reducering, som blev beskrevet i sektion \ref{sec:expression_module}, udføres. Hvis overfladisk reducering resulterer i en ændring af den anvendte operation, kalder funktionen sig selv rekursivt med de to udtryk og den nye operation. Hvis overfladisk reducering ikke resulterer i ændringer i operationen, vil funktionen foretage en dybere reducering af de to udtryk. Denne dybere reducering udføres af funktionerne \textcolor{red}{applyCommutative} fra filerne \textit{CommutativeAddSub.fs} og \textit{CommutativeMulDiv.fs}, som findes i Appendiks \ref{sec:commutativeAddSub.fs} og \ref{sec:commutativeMulDiv.fs}. Disse funktioner arbejder efter samme princip, hvor de starter med at flade udtrykstræerne ud ifølge de kommutative regler for henholdsvis addition og multiplikation. Derefter sorterer de udtrykstræet, hvilket muliggør at foretage overfladisk simplifikation når træet gendannes. For multiplikation anvendes samme metode i nævneren for division, og der undersøges, om der er fælles udtryk i det udfladede træ, som fremtræder i nævneren af en division og i det udfladede træ, der indeholder divisionen. Et eksempel på anvendelse af den kommutative multiplikationsreducering på et udtryk er givet i Figur \ref{fig:expression-trees}, som viser det visuelle input og det resulterende svar fra funktionen, samt Figur \ref{fig:trees}, der viser det udfladede træ og sorteringen af det fladede træ.
 
 
 \begin{figure}[H]
@@ -689,7 +688,7 @@ Det er \textcolor{red}{simplifyOperation}, som foretager selve reduceringen af e
 Generelt, når det gælder reducering af udtryk, skal man være opmærksom på ikke at ende i et uendeligt loop. Derfor er det vigtigt ikke at definere nogle overfladiske reduceringer, som er hinandens inverse funktioner. Desuden forsøger funktionerne i dette program altid at skubbe negation af udtryk så langt ud som muligt i håb om, at de kan ophæve hinanden. Dette illustreres blandt andet i figur \ref{fig:trees}, hvor ved udfladning af træet, hvis et af de kommutative udtryk for multiplikation er negativt, fjernes negationen, og der tilføjes i stedet en negation af tallet 1, som ved sortering skubbes til venstre.
 
 
-\subsection{Differentiering af udtryk}
+\subsection{Differentiation af udtryk}
 Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, som samtidig vil understrege vigtigheden af at kunne reducere udtryk. Vi begynder igen med at opskrive nogle algebraiske linearitetsegenskaber, som differentieringen skal overholde. Disse egenskaber vil blive testet i sektion \ref{sec:PBT_differentiation}.
 \vspace{0.5cm}
 \begin{egenskab}[Linearitetsbetingelserne\footcitetitle{diff}]\label{egenskab:differentiation}
@@ -708,7 +707,7 @@ Vi kan nu betragte den første implementering, der benytter vores udtryksmodul, 
   \end{enumerate}
 \end{egenskab}
 
-Funktionen for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, som tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionelt programmeringssprog, da det ses, hvordan fire af reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte, som de er beskrevet.
+Funktionen for differentiering \textcolor{red}{diff} i Listing \ref{lst:diff_expr}, som tager et udtryk og en variabel som input og differentierer udtrykket med hensyn til variablen. Dette er en af de store fordele ved at anvende et funktionelt programmeringssprog, da det ses hvordan reglerne fra egenskab \ref{egenskab:differentiation} er implementeret direkte, som de er beskrevet.
 
 \begin{lstlisting}[
   language={FSharp}, 
@@ -721,12 +720,14 @@ let rec diff e dx =
     | X f when f = dx -> N (Int 1)
     | X _ -> N (Int 0)
     | N _ -> N (Int 0)
-    | Neg f -> diff (Mul (N (Int -1), f)) dx
+    | Neg f -> Neg (diff f dx)
     | Add(f, g) -> Add(diff f dx, diff g dx)
     | Sub(f, g) -> Sub(diff f dx, diff g dx)
     | Mul(f, g) -> Add(Mul(diff f dx, g), Mul(f, diff g dx))
     | Div(f, g) -> Div(Sub(Mul(diff f dx, g), Mul(f, diff g dx)), Mul(g, g))
 \end{lstlisting}
+
+At differentiere et udtryk vil blandt andet resultere i mange nul værdier i det resulterende udtryk, hvortil simplifikation efter differentiering vil være en fordel.
 
 
 \subsection{Multivariable polynomier af første grad}
